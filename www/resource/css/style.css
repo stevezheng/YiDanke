@@ -4641,3 +4641,12 @@ tr.odd.gradeX td.sorting_1, tr.even.gradeX td.sorting_1, table.display tr.even.g
 .modal-header {
     background: #58c9f3;
 }
+
+.panel-reg.blue-bg {
+    background: #58C9F3;
+    color: #ffffff;
+}
+
+.checkbox-inline .userType {
+    margin-right: 10px;
+}
