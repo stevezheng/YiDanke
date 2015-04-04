@@ -8,4 +8,7 @@ module.exports = {
   db_user: 'root', // 用户名
   db_pwd: '', // 密码
   db_prefix: 'yi_', // 数据库表前缀
+  url_route_on: true,
+  url_resource_on: true,  //是否监听静态资源类请求
+  url_resource_reg: /^(resource\/|static\/|assets\/|views\/|bower_components\/|styles\/|scripts\/|images\/|favicon\.ico|fonts\/|i18n\/|lib\/)/, //判断是否是静态资源的正则
 };

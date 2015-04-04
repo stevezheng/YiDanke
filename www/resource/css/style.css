@@ -5,9 +5,6 @@ Author: Mosaddek Hossain
 Website: http://thevectorlab.net/
 */
 
-/* Import fonts */
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic);
-
 body {
     color: #797979;
     background: #f1f2f7;
@@ -53,12 +50,19 @@ a, a:hover, a:focus {
     border-radius: 5px;
     -webkit-border-radius: 5px;
 }
+.form-signin .checkbox {
+    padding-left: 0px;
+}
+
+.form-signin .checkbox a {
+    color: #58c9f3;
+}
 
 .form-signin h2.form-signin-heading {
     margin: 0;
     padding:20px 15px;
     text-align: center;
-    background: #41cac0;
+    background: #58c9f3;
     border-radius: 5px 5px 0 0;
     -webkit-border-radius: 5px 5px 0 0;
     color: #fff;
@@ -99,12 +103,12 @@ a, a:hover, a:focus {
 }
 
 .form-signin .btn-login {
-    background: #f67a6e;
+    background: #58c9f3;
     color: #fff;
     text-transform: uppercase;
     font-weight: 300;
     font-family: 'Open Sans', sans-serif;
-    box-shadow: 0 4px #e56b60;
+    box-shadow: 0 4px #58c9f3;
     margin-bottom: 20px;
 }
 
@@ -367,7 +371,7 @@ a.logo:hover, a.logo:focus {
 }
 
 a.logo span {
-    color: #FF6C60;
+    color: #58c9f3;
 }
 
 
@@ -4632,4 +4636,8 @@ tr.odd.gradeX td.sorting_1, tr.even.gradeX td.sorting_1, table.display tr.even.g
 
 .site-min-height {
     min-height: 900px;
+}
+
+.modal-header {
+    background: #58c9f3;
 }
