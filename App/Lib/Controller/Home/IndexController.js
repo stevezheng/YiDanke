@@ -11,6 +11,19 @@ module.exports = Controller("Home/BaseController", function(){
 
     regAction: function(){
       this.display();
-    }
+    },
+    
+    checkAction: function() {
+      var self = this;
+      self.assign('title', '');
+    
+      if (self.isGet()) {
+
+      }
+      
+      if (self.isPost()) {
+        return self.success();
+      }
+    },
   };
 });

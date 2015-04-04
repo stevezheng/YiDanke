@@ -20,41 +20,74 @@
                             感谢您注册一家网
                         </header>
                         <div class="panel-body">
-                            <form class="form-horizontal" role="form">
+                            <form class="form-horizontal register-form" role="form" autocomplete="off">
                                 <div class="form-group">
                                     <label class="col-lg-2 col-sm-2 control-label">用户名</label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control" id="inputEmail1" placeholder="必填">
+                                        <div class="inp">
+                                            <em class="inpbox">
+                                                <i class="icon-U"></i>
+                                                <input type="text" cname="one" placeholder="请输入用户名" warn="用户名4-15个字符，一个汉字为2个字符 "  checkurl="ture" name="username" class="txt form-control" id="username" regname="username" emptyerr="用户名不能为空"/>
+                                            </em>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-lg-2 col-sm-2 control-label">密码</label>
                                     <div class="col-lg-6">
-                                        <input type="password" class="form-control" id="password1" placeholder="必填">
+                                        <div class="inp">
+                                            <em class="inpbox">
+                                                <i class="icon-P"></i>
+                                                <input type="password" autocomplete="off" placeholder="请输入密码" warn="长度6~16位数字、字母、字符包含两种 " cname="one" class="txt form-control" confirmationpass="password" id="password" name="password" regname="loginpassword" emptyerr="密码不能为空" />
+                                            </em>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-lg-2 col-sm-2 control-label">确认密码</label>
                                     <div class="col-lg-6">
-                                        <input type="password" class="form-control" id="password2" placeholder="必填">
+                                        <div class="inp">
+                                            <em class="inpbox">
+                                                <i class="icon-P"></i>
+                                                <input type="password" placeholder="请输入确认密码" cname="one" class="txt form-control"  name="confirmationpassword" confirmation="password"  emptyerr="确认密码不能为空" confirmationerr="输入密码不一致,请重新填写" />
+                                            </em>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-lg-2 col-sm-2 control-label">邮箱</label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control" id="email" placeholder="必填">
+                                        <div class="inp">
+                                            <em class="inpbox">
+                                                <i class="icon-E"></i>
+                                                <input type="text" warn="请填写您的常用邮箱" cname="one" checkurl="ture" placeholder="请输入邮箱地址" name="useremail" id="useremail" class="txt form-control"  regname="email" emptyerr="邮箱地址不能为空"/>
+                                            </em>
+                                            <!--                                        <span class="warn">请填写您的常用邮箱</span>  -->
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-lg-2 col-sm-2 control-label">QQ号</label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control" id="qq" placeholder="必填">
+                                        <div class="inp">
+                                            <em class="inpbox">
+                                                <i class="icon-Q"></i>
+                                                <input type="text" warn="便于买手和商家联系" cname="one" checkurl="ture" placeholder="请输入qq号" name="userqq" class="txt form-control" id="userqq" regname="qq" emptyerr="QQ号不能为空"/>
+                                            </em>
+                                            <!--                                        <span class="warn">便于买手与你联系</span>   -->
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-lg-2 col-sm-2 control-label">手机</label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control" id="phone" placeholder="必填">
+                                        <div class="inp">
+                                            <em class="inpbox">
+                                                <i class="icon-M"></i>
+                                                <input type="text" warn="便于客服与你联系" cname="one" checkurl="ture" placeholder="请输入手机号" name="usermoblie" class="txt form-control" id="usermoblie" regname="mobile" emptyerr="手机号不能为空"/>
+                                            </em>
+                                            <!--                                        <span class="warn">便于买手与你联系</span>   -->
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -72,8 +105,8 @@
                                     <label class="col-lg-2 col-sm-2 control-label">选择地区</label>
                                     <div class="col-lg-10 control-label">
                                         <em>
-                                            <!--<input style="width: 80px" type="text" placeholder="请输入省名" name="position_sheng" class="txt placebox" id="position_sheng"/>-->
-                                            <!--<input style="width: 80px" type="text" placeholder="请输入市名" name="position_shi" class="txt placebox" id="position_shi"/>-->
+                                            <!--<input style="width: 80px" type="text" placeholder="请输入省名" name="position_sheng" class="txt form-control" id="position_sheng"/>-->
+                                            <!--<input style="width: 80px" type="text" placeholder="请输入市名" name="position_shi" class="txt form-control" id="position_shi"/>-->
                                             <select id="province" name="province">
                                                 <option value="">--请选择省份--</option>
                                                 <option value="北京">北京</option>
@@ -131,7 +164,7 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-lg-offset-2 col-lg-10">
-                                        <button type="submit" class="btn btn-info">立即注册</button>
+                                        <button type="submit" class="btn btn-info login-btn">立即注册</button>
                                     </div>
                                 </div>
                             </form>
@@ -157,3 +190,8 @@
     <!--main content end-->
 </section>
 <% include ./index_footer.html %>
+<script src="/resource/js/location.js"></script>
+<script src="/resource/js/register.js"></script>
+<script>
+    new PCAS("province","city","area","","","");
+</script>

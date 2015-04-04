@@ -4650,3 +4650,7 @@ tr.odd.gradeX td.sorting_1, tr.even.gradeX td.sorting_1, table.display tr.even.g
 .checkbox-inline .userType {
     margin-right: 10px;
 }
+
+span.error {
+    color: #ff0000;
+}
