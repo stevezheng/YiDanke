@@ -1,0 +1,175 @@
+<% include ../common_header.html %>
+<% include ./buyer_nav.html %>
+<section id="container">
+    <!--header start-->
+    <header class="header white-bg">
+        <div class="sidebar-toggle-box">
+            <div data-original-title="隐藏/显示导航栏" data-placement="right"
+                 class="icon-reorder tooltips"></div>
+        </div>
+        <!--logo start-->
+        <a href="/buyer" class="logo">一家<span>网</span></a>
+        <!--logo end-->
+        <div class="nav notify-row" id="top_menu">
+            <!--  notification start -->
+            <ul class="nav top-menu">
+                <li><a href="/buyer/tasklist">任务列表</a></li>
+                <li><a href="http://bbs.yijia09.com" target="_blank">论坛</a></li>
+            </ul>
+            <!--  notification end -->
+        </div>
+        <div class="nav notify-row pull-right " style="margin-left: 0;">
+            <a class="btn btn-info" href="/index/logout">退出</a>
+        </div>
+        <div class="nav notify-row pull-right">
+            <ul class="nav top-menu">
+                <li><a href="#">zhengmiao9</a></li>
+                <li><a href="#">本金: 0.00</a></li>
+                <li><a href="#">金币: 8.00</a></li>
+                <li><a href="/buyer/money" style="color: #58c9f3">[充值]</a></li>
+                <li><a href="#">经验: 0</a></li>
+                <li><a href="#">会员到期时间: 2015-05-02</a></li>
+                <li><a href="/buyer/money" style="color: #58c9f3">[续费]</a></li>
+            </ul>
+        </div>
+    </header>
+    <!--header end-->
+    <!--sidebar start-->
+    <aside>
+        <div id="sidebar" class="nav-collapse ">
+            <!-- sidebar menu start-->
+            <ul class="sidebar-menu" id="nav-accordion">
+                <li>
+                    <a class="active" href="/buyer">
+                        <i class="icon-user"></i>
+                        <span>个人中心</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a class="" href="/buyer">
+                        <i class="icon-calendar"></i>
+                        <span>我的任务</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a class="" href="/buyer">
+                        <i class="icon-building"></i>
+                        <span>绑定账号</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a class="" href="/buyer">
+                        <i class="icon-yen"></i>
+                        <span>资金管理</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a class="" href="/buyer">
+                        <i class="icon-dollar"></i>
+                        <span>提现管理</span>
+                    </a>
+                </li>
+            </ul>
+            <!-- sidebar menu end-->
+        </div>
+    </aside>
+    <!--sidebar end-->
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+                <section class="panel">
+                    <header class="panel-heading">
+                        个人信息
+                    </header>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <span>登陆密码</span>
+                                &nbsp;
+                                &nbsp;
+                                <span class="success"><i class="icon-ok-sign"></i>已设置</span>
+                                &nbsp;
+                                &nbsp;
+                                <span><a href="">修改</a></span>
+                            </div>
+                            <div class="col-lg-3">
+                                <span>支付密码</span>
+                                &nbsp;
+                                &nbsp;
+                                <span class="error"><i class="icon-exclamation-sign"></i>未设置</span>
+                                &nbsp;
+                                &nbsp;
+                                <span><a href="">添加</a></span>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 30px">
+                            <div class="col-lg-3">
+                                <span>QQ:</span>
+                                <span>308864973</span>
+                                &nbsp;
+                                &nbsp;
+                                <span><a href="">[修改]</a></span>
+                            </div>
+                            <div class="col-lg-3">
+                                <span>手机:</span>
+                                <span>18650186805</span>
+                                &nbsp;
+                                &nbsp;
+                                <span><a href="">[修改]</a></span>
+                            </div>
+                            <div class="col-lg-3">
+                                <span>邮箱:</span>
+                                <span>308864973@qq.com</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            <section class="panel">
+                <header class="panel-heading">
+                    我的财务情况
+                </header>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            拥有金币： <span class="error">8.00</span> 个= <span class="error">7.60</span> 元 （做任务金币不够，可充值购买）
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 30px;">
+                        <div class="col-lg-12">
+                            待返还笔数： <span class="error">0</span> 笔 待商家发放佣金： <span class="error">0.00</span> 金币 冻结金币： <span class="error">0.00</span> 个 | 经验值： <span class="error">0.00</span> 点
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 30px;">
+                        <div class="col-lg-12">
+                            垫付本金： <span class="error">0.00</span> 元 | 可提现： <span class="error">0.00</span> 元
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="panel">
+                <header class="panel-heading">
+                    网站公告
+                </header>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <ul>
+                                <li style="margin-top: 10px;"><a href="">封号/扣金币通知 <span class="pull-right">2015-03-16 15:46:49</span></a></li>
+                                <li style="margin-top: 10px;"><a href="">最给力的福利来了，邀请会员做任务返金币，做的多返得多，快来参与吧！【新增邀请商家任务奖励<span class="pull-right">2015-03-16 15:46:49</span></a></li>
+                                <li style="margin-top: 10px;"><a href="">买手清洗新规则-必读<span class="pull-right">2015-03-16 15:46:49</span></a></li>
+                                <li style="margin-top: 10px;"><a href="">“第一季挖顾客会员拓展大赛”活动正式开启<span class="pull-right">2015-03-16 15:46:49</span></a></li>
+                                <li style="margin-top: 10px;"><a href="">好消息，成功邀请买手,商家开通会员，邀请者可返80%会员费。<span class="pull-right">2015-03-16 15:46:49</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </section>
+    <!--main content end-->
+</section>
+<% include ../common_footer.html %>
