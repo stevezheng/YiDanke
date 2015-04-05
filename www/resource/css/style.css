@@ -4695,3 +4695,55 @@ span.success {
     padding-bottom: 10px;
     border-bottom: 1px dashed #aeb2b7;
 }
+
+.box-money {
+    margin-right: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+    padding: 30px 10px;
+    border: solid 2px transparent;
+    cursor: pointer;
+    border-color: #cbcbcb;
+}
+
+.box-money.active {
+    border-color: #FA7456;
+    background: url(../img/arrow-down.png) no-repeat 100% 100%;
+}
+
+.title-money {
+    font-size: 14px;
+    height: 30px;
+}
+
+.content-money {
+    font-size: 18px;
+    height: 30px;
+    color: #64696E;
+}
+
+.box-pay {
+    margin-right: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+    padding: 10px 10px;
+    border: solid 2px transparent;
+    cursor: pointer;
+    border-color: #cbcbcb;
+}
+
+.box-pay.active {
+    border-color: #FA7456;
+    background: url(../img/arrow-down.png) no-repeat 100% 100%;
+}
+
+.title-pay {
+    font-size: 14px;
+    height: 30px;
+}
+
+.content-pay {
+    font-size: 18px;
+    height: 30px;
+    color: #64696E;
+}
