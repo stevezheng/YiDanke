@@ -7,7 +7,7 @@ module.exports = Controller("Buyer/BaseController", function(){
   return {
     indexAction: function() {
       var self = this;
-      self.assign('title', '个人中心');
+      self.assign('title', '提现管理');
 
       if (self.isGet()) {
         self.display();

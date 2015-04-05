@@ -1,0 +1,112 @@
+<!--header start-->
+<header class="header white-bg">
+    <div class="sidebar-toggle-box">
+        <div data-original-title="隐藏/显示导航栏" data-placement="right"
+             class="icon-reorder tooltips"></div>
+    </div>
+    <!--logo start-->
+    <a href="/buyer" class="logo">一家<span>网</span></a>
+    <!--logo end-->
+    <div class="nav notify-row" id="top_menu">
+        <!--  notification start -->
+        <ul class="nav top-menu">
+            <li><a href="/buyer/tasklist">任务列表</a></li>
+            <li><a href="http://bbs.yijia09.com" target="_blank">论坛</a></li>
+        </ul>
+        <!--  notification end -->
+    </div>
+    <div class="nav notify-row pull-right " style="margin-left: 0;">
+        <a class="btn btn-info" href="/index/logout">退出</a>
+    </div>
+    <div class="nav notify-row pull-right">
+        <ul class="nav top-menu">
+            <li><a href="#">zhengmiao9</a></li>
+            <li><a href="#">本金: 0.00</a></li>
+            <li><a href="#">金币: 8.00</a></li>
+            <li><a href="/buyer/money" style="color: #58c9f3">[充值]</a></li>
+            <li><a href="#">经验: 0</a></li>
+            <li><a href="#">会员到期时间: 2015-05-02</a></li>
+            <li><a href="/buyer/money" style="color: #58c9f3">[续费]</a></li>
+        </ul>
+    </div>
+</header>
+<!--header end-->
+<!--sidebar start-->
+<aside>
+    <div id="sidebar" class="nav-collapse ">
+        <!-- sidebar menu start-->
+        <ul class="sidebar-menu" id="nav-accordion">
+            <li>
+                <% if (http.pathname == 'buyer') { %>
+                <a class="active" href="/buyer">
+                    <i class="icon-user"></i>
+                    <span>个人中心</span>
+                </a>
+                <% } else { %>
+                <a href="/buyer">
+                    <i class="icon-user"></i>
+                    <span>个人中心</span>
+                </a>
+                <% } %>
+            </li>
+
+            <li>
+                <% if (http.pathname == 'buyer/tasks') { %>
+                <a class="active" href="/buyer/tasks">
+                    <i class="icon-calendar"></i>
+                    <span>我的任务</span>
+                </a>
+                <% } else { %>
+                <a class="" href="/buyer/tasks">
+                    <i class="icon-calendar"></i>
+                    <span>我的任务</span>
+                </a>
+                <% } %>
+            </li>
+
+            <li>
+                <% if (http.pathname == 'buyer/account') { %>
+                <a class="active" href="/buyer/account">
+                    <i class="icon-building"></i>
+                    <span>绑定账号</span>
+                </a>
+                <% } else { %>
+                <a class="" href="/buyer/account">
+                    <i class="icon-building"></i>
+                    <span>绑定账号</span>
+                </a>
+                <% } %>
+            </li>
+
+            <li>
+                <% if (http.pathname == 'buyer/money') { %>
+                <a class="active" href="/buyer/money">
+                    <i class="icon-yen"></i>
+                    <span>资金管理</span>
+                </a>
+                <% } else { %>
+                <a class="" href="/buyer/money">
+                    <i class="icon-yen"></i>
+                    <span>资金管理</span>
+                </a>
+                <% } %>
+            </li>
+
+            <li>
+                <% if (http.pathname == 'buyer/withdraw') { %>
+                <a class="active" href="/buyer/withdraw">
+                    <i class="icon-dollar"></i>
+                    <span>提现管理</span>
+                </a>
+                <% } else { %>
+                <a class="" href="/buyer/withdraw">
+                    <i class="icon-dollar"></i>
+                    <span>提现管理</span>
+                </a>
+                <% } %>
+            </li>
+        </ul>
+        <!-- sidebar menu end-->
+    </div>
+</aside>
+<!--sidebar end-->

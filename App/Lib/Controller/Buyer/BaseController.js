@@ -3,7 +3,7 @@ module.exports = Controller(function(){
   return {
     init: function(http){
       this.super("init", http);
-      //其他的通用逻辑
+      console.log(http.pathname);
     }
   }
-})
+});
