@@ -37,7 +37,34 @@ function PCAS() {
   this.SelP.PCA = this;
   this.SelC.PCA = this;
   this.SelP.onchange = function () {
-    PCAS.SetC(this.PCA)
+    PCAS.SetC(this.PCA);
+    try {
+      if (!$('#province').val()) {
+        $('#position-error').show();
+        $('#position-error').text('请选择省份');
+        return false;
+      } else {
+        $('#position-error').hide();
+      }
+
+      if (!$('#city').val()) {
+        $('#position-error').show();
+        $('#position-error').text('请选择城市');
+        return false;
+      } else {
+        $('#position-error').hide();
+      }
+
+      if (!$('#area').val()) {
+        $('#position-error').show();
+        $('#position-error').text('请选择城市');
+        return false;
+      } else {
+        $('#position-error').hide();
+      }
+    } catch(ex) {
+
+    }
   };
   if (this.SelA) {
     this.SelC.onchange = function () {

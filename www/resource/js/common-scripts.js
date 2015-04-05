@@ -1,3 +1,7 @@
+var Yi = {};
+
+
+
 /*---LEFT BAR ACCORDION----*/
 $(function() {
     $('#nav-accordion').dcAccordion({
@@ -111,6 +115,7 @@ var Script = function () {
             }, 2000)
         })
     }
+
 
 
 }();

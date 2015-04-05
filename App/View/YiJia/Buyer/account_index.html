@@ -1,98 +1,490 @@
 <% include ../common_header.html %>
+<link rel="stylesheet" type="text/css" href="/resource/assets/gritter/css/jquery.gritter.css" />
 <section id="container">
     <% include ./buyer_nav.html %>
     <!--main content start-->
     <section id="main-content">
         <section class="wrapper">
-                <section class="panel">
-                    <header class="panel-heading">
-                        个人信息
-                    </header>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-lg-3">
-                                <span>登陆密码</span>
-                                &nbsp;
-                                &nbsp;
-                                <span class="success"><i class="icon-ok-sign"></i>已设置</span>
-                                &nbsp;
-                                &nbsp;
-                                <span><a href="">修改</a></span>
-                            </div>
-                            <div class="col-lg-3">
-                                <span>支付密码</span>
-                                &nbsp;
-                                &nbsp;
-                                <span class="error"><i class="icon-exclamation-sign"></i>未设置</span>
-                                &nbsp;
-                                &nbsp;
-                                <span><a href="">添加</a></span>
-                            </div>
-                        </div>
-                        <div class="row" style="margin-top: 30px">
-                            <div class="col-lg-3">
-                                <span>QQ:</span>
-                                <span>308864973</span>
-                                &nbsp;
-                                &nbsp;
-                                <span><a href="">[修改]</a></span>
-                            </div>
-                            <div class="col-lg-3">
-                                <span>手机:</span>
-                                <span>18650186805</span>
-                                &nbsp;
-                                &nbsp;
-                                <span><a href="">[修改]</a></span>
-                            </div>
-                            <div class="col-lg-3">
-                                <span>邮箱:</span>
-                                <span>308864973@qq.com</span>
-                            </div>
-                        </div>
-                    </div>
-                </section>
             <section class="panel">
                 <header class="panel-heading">
-                    我的财务情况
+                    选择平坦
                 </header>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-lg-12">
-                            拥有金币： <span class="error">8.00</span> 个= <span class="error">7.60</span> 元 （做任务金币不够，可充值购买）
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top: 30px;">
-                        <div class="col-lg-12">
-                            待返还笔数： <span class="error">0</span> 笔 待商家发放佣金： <span class="error">0.00</span> 金币 冻结金币： <span class="error">0.00</span> 个 | 经验值： <span class="error">0.00</span> 点
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top: 30px;">
-                        <div class="col-lg-12">
-                            垫付本金： <span class="error">0.00</span> 元 | 可提现： <span class="error">0.00</span> 元
+                        <div class="col-lg-12" id="select-platform">
+                            <button class="btn btn-info" id="btn-taobao">淘宝
+                            </button>
+                            <button class="btn btn-default" id="btn-tmall">天猫
+                            </button>
+                            <button class="btn btn-default" id="btn-jd">京东
+                            </button>
                         </div>
                     </div>
                 </div>
             </section>
             <section class="panel">
                 <header class="panel-heading">
-                    网站公告
+                    已绑定的账号
+                    <span class="pull-right"><a data-toggle="modal"
+                                                href="#modal-account"><span
+                            class="error"><i class="icon-ok-circle"></i>&nbsp;绑定买号</span></a><span
+                            style="font-size: 12px">(绑定买号及对应的收货信息，才可以接手任务)</span></span>
                 </header>
                 <div class="panel-body">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <ul>
-                                <li style="margin-top: 10px;"><a href="">封号/扣金币通知 <span class="pull-right">2015-03-16 15:46:49</span></a></li>
-                                <li style="margin-top: 10px;"><a href="">最给力的福利来了，邀请会员做任务返金币，做的多返得多，快来参与吧！【新增邀请商家任务奖励<span class="pull-right">2015-03-16 15:46:49</span></a></li>
-                                <li style="margin-top: 10px;"><a href="">买手清洗新规则-必读<span class="pull-right">2015-03-16 15:46:49</span></a></li>
-                                <li style="margin-top: 10px;"><a href="">“第一季挖顾客会员拓展大赛”活动正式开启<span class="pull-right">2015-03-16 15:46:49</span></a></li>
-                                <li style="margin-top: 10px;"><a href="">好消息，成功邀请买手,商家开通会员，邀请者可返80%会员费。<span class="pull-right">2015-03-16 15:46:49</span></a></li>
-                            </ul>
-                        </div>
-                    </div>
+                    <table class="table" id="accounts-taobao">
+                        <thead>
+                        <tr>
+                            <th>买号</th>
+                            <th>收货信息</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                            <th>备注</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td colspan="5">
+                                <div class="alert alert-warning fade in">
+                                    <strong><i
+                                            class="icon-warning-sign"></i></strong>
+                                    没有数据
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <table class="table" id="accounts-tmall"
+                           style="display: none;">
+                        <thead>
+                        <tr>
+                            <th>买号</th>
+                            <th>收货信息</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                            <th>备注</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <table class="table" id="accounts-jd"
+                           style="display: none;">
+                        <thead>
+                        <tr>
+                            <th>买号</th>
+                            <th>收货信息</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                            <th>备注</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </section>
         </section>
     </section>
     <!--main content end-->
 </section>
+<!-- Modal -->
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog"
+     tabindex="-1" id="modal-account" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">&times;</button>
+                <h4 class="modal-title">绑定新号码</h4>
+            </div>
+            <form class="modal-body form-horizontal cmxform tasi-form" id="bind-account">
+                <div class="form-group">
+                    <label for="account-name" class="control-label col-lg-3">用户昵称</label>
+                    <div class="col-lg-4">
+                        <input type="text" class="form-control valid" id="account-name" name="account-name"/>
+                    </div>
+                    <p style="font-size: 12px;"> 淘宝平台：买号信用需大于11点，两心以上，不能填写手机号</p>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-lg-3">收货人姓名</label>
+                    <div class="col-lg-4"><input type="text"
+                                                 class="form-control valid"
+                                                 name="buyer-name"
+                                                 id="buyer-name"/></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 form-label">所在地区</label>
+                    <div class="col-lg-8">
+                        <em>
+                            <select id="province" name="province">
+                                <option value="">--请选择省份--</option>
+                                <option value="北京">北京</option>
+                                <option value="天津">天津</option>
+                                <option value="河北省">河北省</option>
+                                <option value="山西省">山西省</option>
+                                <option value="内蒙古自治区">内蒙古自治区</option>
+                                <option value="辽宁省">辽宁省</option>
+                                <option value="吉林省">吉林省</option>
+                                <option value="黑龙江省">黑龙江省</option>
+                                <option value="上海">上海</option>
+                                <option value="江苏省">江苏省</option>
+                                <option value="浙江省">浙江省</option>
+                                <option value="安徽省">安徽省</option>
+                                <option value="福建省">福建省</option>
+                                <option value="江西省">江西省</option>
+                                <option value="山东省">山东省</option>
+                                <option value="河南省">河南省</option>
+                                <option value="湖北省">湖北省</option>
+                                <option value="湖南省">湖南省</option>
+                                <option value="广东省">广东省</option>
+                                <option value="广西壮族自治区">广西壮族自治区</option>
+                                <option value="海南省">海南省</option>
+                                <option value="重庆">重庆</option>
+                                <option value="四川省">四川省</option>
+                                <option value="贵州省">贵州省</option>
+                                <option value="云南省">云南省</option>
+                                <option value="西藏自治区">西藏自治区</option>
+                                <option value="陕西省">陕西省</option>
+                                <option value="甘肃省">甘肃省</option>
+                                <option value="青海省">青海省</option>
+                                <option value="宁夏回族自治区">宁夏回族自治区</option>
+                                <option value="新疆维吾尔自治区">新疆维吾尔自治区</option>
+                                <option value="香港特别行政区">香港特别行政区</option>
+                                <option value="澳门特别行政区">澳门特别行政区</option>
+                                <option value="台湾省">台湾省</option>
+                                <option value="其它">其它</option>
+                                <option value="">--请选择省份--</option>
+                                <option value="北京">北京</option>
+                                <option value="天津">天津</option>
+                                <option value="河北省">河北省</option>
+                                <option value="山西省">山西省</option>
+                                <option value="内蒙古自治区">内蒙古自治区</option>
+                                <option value="辽宁省">辽宁省</option>
+                                <option value="吉林省">吉林省</option>
+                                <option value="黑龙江省">黑龙江省</option>
+                                <option value="上海">上海</option>
+                                <option value="江苏省">江苏省</option>
+                                <option value="浙江省">浙江省</option>
+                                <option value="安徽省">安徽省</option>
+                                <option value="福建省">福建省</option>
+                                <option value="江西省">江西省</option>
+                                <option value="山东省">山东省</option>
+                                <option value="河南省">河南省</option>
+                                <option value="湖北省">湖北省</option>
+                                <option value="湖南省">湖南省</option>
+                                <option value="广东省">广东省</option>
+                                <option value="广西壮族自治区">广西壮族自治区</option>
+                                <option value="海南省">海南省</option>
+                                <option value="重庆">重庆</option>
+                                <option value="四川省">四川省</option>
+                                <option value="贵州省">贵州省</option>
+                                <option value="云南省">云南省</option>
+                                <option value="西藏自治区">西藏自治区</option>
+                                <option value="陕西省">陕西省</option>
+                                <option value="甘肃省">甘肃省</option>
+                                <option value="青海省">青海省</option>
+                                <option value="宁夏回族自治区">宁夏回族自治区</option>
+                                <option value="新疆维吾尔自治区">新疆维吾尔自治区</option>
+                                <option value="香港特别行政区">香港特别行政区</option>
+                                <option value="澳门特别行政区">澳门特别行政区</option>
+                                <option value="台湾省">台湾省</option>
+                                <option value="其它">其它</option>
+                            </select>
+                            <select id="city" name="city">
+
+                                <option value="">--请选择城市--</option>
+                            </select>
+                            <select id="area" name="area">
+
+                                <option value="">--请选择地区--</option>
+                            </select>
+                        </em>
+                        <label id="position-error" class="error" style="display: none;">请选择所在地</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 form-label">街道地址</label>
+                    <div class="col-lg-4"><input type="text"
+                                                 class="form-control valid"
+                                                 name="address" id="address"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label col-lg-3">收货人手机</label>
+                    <div class="col-lg-4"><input type="text"
+                                                 class="form-control valid"
+                                                 name="phone" id="phone"/></div>
+                </div>
+            </form>
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn btn-default"
+                        type="button" id="btn-cancel">取消
+                </button>
+                <button class="btn btn-info" type="button" id="btn-confirm">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal -->
 <% include ../common_footer.html %>
+<script src="/resource/js/location.js"></script>
+<script src="/resource/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/resource/assets/gritter/js/jquery.gritter.js"></script>
+<script>
+    Yi.regs = {
+        nick: /^[\u4e00-\u9fa5a-zA-Z0-9]{4,15}$/,
+        loginPass: ['6nb16', [4, /^\d+$/],
+            [4, /^[A-Za-z]+$/],
+            [4, /^[^A-Za-z0-9]+$/]
+        ],
+        payPass: ['6nb16', [4, /^\d+$/],
+            [4, /^[A-Za-z]+$/],
+            [4, /^[^A-Za-z0-9]+$/]
+        ],
+        email: /^([a-zA-Z0-9]+[_|\-|\.]?)*[a-zA-Z0-9]+@(vip.qq|qq|163|126)\.com/,
+        qq: /^[1-9]{1}[0-9]{4,10}$/,
+        mobile: /^0{0,1}(13[0-9]|14[6|7]|15[0-3]|15[5-9]|18[0-9]|17[0-9])[0-9]{8}$/,
+        captcha:/^\d{6}$/,
+        khmname: [
+            [3, /[\u4e00-\u9fa5]/]
+        ],
+        bankforlast: [],
+        bank: /^\d{16,19}$/,
+        alipay: /^(0{0,1}(13[0-9]|14[6|7]|15[0-3]|15[5-9]|18[0-9])[0-9]{8}||([a-zA-Z0-9]+[_|\_|\-|\.]?)*@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3})$/,
+        tenpay: /^(0{0,1}(13[0-9]|14[6|7]|15[0-3]|15[5-9]|18[0-9])[0-9]{8}||([a-zA-Z0-9]+[_|\_|\-|\.]?)*@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}||[1-9]{1}[0-9]{4,10})$/,
+        url: /^http:\/\/[a-z0-9-]+\.[a-z0-9-]{1,}/,
+        num: /^(([1-9])|([1-9][0-9]{1,}))$/,
+        price: /^(([1-9][0-9]{1,}\.[0-9][1-9]{1,})|([1-9][0-9]{1,}\.[0-9]{1,2})|([1-9][0-9]{1,})|([0-9]{1,})|([0-9]\.[0-9]{1,}))$/,
+        lgprice: /^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$/,
+        keyword: /^(([\u4E00-\u9FA5\x00-\xff]+)|([\u4E00-\u9FA5\x00-\xff]+\s+[\u4E00-\u9FA5\x00-\xff]+))$/,
+        num09: /^[0-9]$/,
+        name: /^[\u4E00-\u9FA5\x00-\xffa-zA-Z0-9-_]+$/,
+        empty: /^\S+$/,
+        every: function(val) {
+            if (val && $.trim(val) != '')
+            {
+                return true;
+            }
+            return false;
+        },
+        gt100: function(val) {
+            if (val > 100) {
+                return true;
+            }
+            return false;
+        },
+        lt300: function(val) {
+            if (val < 300) {
+                return true;
+            }
+            return false;
+        }
+    };
+
+    Yi.countWords = function(text) {
+        var count = 0;
+        var uFF61 = parseInt("FF61", 16);
+        var uFF9F = parseInt("FF9F", 16);
+        var uFFE8 = parseInt("FFE8", 16);
+        var uFFEE = parseInt("FFEE", 16);
+        for (var i = 0; i < text.length; i++) {
+            var c = parseInt(text.charCodeAt(i));
+            if (c <= 255) {
+                count++;
+                continue;
+            }
+            if ((uFF61 <= c) && (c <= uFF9F)) {
+                count++;
+                continue;
+            }
+            if ((uFFE8 <= c) && (c <= uFFEE)) {
+                count++;
+                continue;
+            }
+            count = count + 2;
+        }
+        return Math.round(count / 2);
+    };
+    /* 增加额外校验方法 */
+    // 平台注册昵称
+    $.validator.methods.nick = function(value, element, param) {
+        return Yi.regs.nick.test(value);
+    };
+    $.validator.methods.qq = function(value, element, param) {
+        return Yi.regs.qq.test(value);
+    };
+    $.validator.methods.mobile = function(value, element, param) {
+        return Yi.regs.mobile.test(value);
+    };
+    $.validator.methods.maxwords = function(value, element, param) {
+        return Yi.countWords(value) <= param;
+    };
+    $.validator.methods.minwords = function(value, element, param) {
+        return Yi.countWords(value) >= param;
+    };
+    $.validator.methods.price = function(value, element, param) {
+        return Yi.regs.price.test(value);
+    };
+        // 校验规则
+        var options = {
+            onkeyup: false,
+            rules: {
+                'account-name': {
+                    required: true
+                },
+                'buyer-name': {
+                    minlength: 2,
+                    maxwords: 6,
+                    required: true
+                },
+                'address': {
+                    minlength: 5,
+                    maxwords: 50,
+                    required: true
+                },
+                'phone': {
+                    mobile: true,
+                    required: true
+                }
+            },
+
+            messages: {
+                'account-name': {
+                    required:"请输入用户昵称"
+                },
+                'buyer-name': {
+                    required:"请输入收货人姓名",
+                    minlength: '收货人姓名至少2个字符',
+                    maxwords: '收货人姓名最多6个字符'
+                },
+                'address': {
+                    required: "请输入街道地址",
+                    minlength: "街道地址至少5个字符",
+                    maxwords: '收货人姓名最多50个字符'
+                },
+                'phone': {
+                    mobile: '请输入正确的手机号',
+                    required: "请输入手机"
+                }
+            }
+        };
+
+    $(document).ready(function () {
+        $('#select-platform button').click(function () {
+            var self = $(this);
+            var id = self.attr('id').split('-')[1];
+
+            $('#select-platform button').removeClass('btn-info').addClass('btn-default');
+            self.removeClass('btn-default').addClass('btn-info');
+
+            $('table').hide();
+            $('#accounts-' + id).show();
+        });
+        new PCAS("province", "city", "area", "", "", "");
+        var bindAccount = $('#bind-account').validate(options);
+
+        $('#btn-confirm').click(function() {
+
+            if(bindAccount.form()) {
+                if (!$('#province').val()) {
+                    $('#position-error').show();
+                    $('#position-error').text('请选择省份');
+                    return false;
+                } else {
+                    $('#position-error').hide();
+                }
+
+                if (!$('#city').val()) {
+                    $('#position-error').show();
+                    $('#position-error').text('请选择城市');
+                    return false;
+                } else {
+                    $('#position-error').hide();
+                }
+
+                if (!$('#area').val()) {
+                    $('#position-error').show();
+                    $('#position-error').text('请选择城市');
+                    return false;
+                } else {
+                    $('#position-error').hide();
+                }
+                $.gritter.add({
+                    // (string | mandatory) the heading of the notification
+                    title: '用户添加成功',
+                    // (string | mandatory) the text inside the notification
+                    text: '请耐心等待审核',
+                    // (string | optional) the image to display on the left
+                    // (bool | optional) if you want it to fade out on its own or just sit there
+                    sticky: false,
+                    // (int | optional) the time you want it to be alive for before fading out
+                    time: ''
+                });
+
+                $('#btn-cancel').click();
+                $('#account-name').val('');
+                $('#buyer-name').val('');
+                $('#address').val('');
+                $('#phone').val('');
+
+                return false;
+            }
+        })
+    });
+</script>
