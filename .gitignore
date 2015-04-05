@@ -5,3 +5,4 @@ output/
 output.tar.gz
 sftp-config.json
 www/flatadmin
+www/resource/uploads

@@ -8,7 +8,7 @@ Website: http://thevectorlab.net/
 body {
     color: #797979;
     background: #f1f2f7;
-    font-family: 'Open Sans', sans-serif;
+    font-family: '微软雅黑', sans-serif;
     padding: 0px !important;
     margin: 0px !important;
     font-size:13px;
@@ -2906,6 +2906,13 @@ ul.amounts li {
     border-bottom: none;
 }
 
+.tab-bg-blue {
+    background: #58c9f3;
+    border-radius: 5px 5px 0 0;
+    -webkit-border-radius: 5px 5px 0 0;
+    border-bottom: none;
+}
+
 .panel-heading .nav > li > a,
 .panel-heading .nav > li.active > a, .panel-heading .nav > li.active > a:hover, .panel-heading .nav > li.active > a:focus {
     border-width: 0;
@@ -2917,8 +2924,8 @@ ul.amounts li {
 }
 
 .panel-heading .nav > li.active > a, .panel-heading .nav > li > a:hover {
-    color: #47596f;
-    background: #fff;
+    color: #ffffff;
+    background: #59ace2;
 }
 
 .panel-heading .nav > li:first-child.active > a, .panel-heading .nav > li:first-child > a:hover {
@@ -3647,8 +3654,16 @@ table.sliders tr td {
     background: #aec785;
 }
 
+.alt.blue-bg {
+    background: #58c9f3;
+}
+
 .profile-nav.alt.green-border ul > li > a:hover, .profile-nav.alt.green-border ul > li > a:focus, .profile-nav.alt.green-border ul li.active a {
     border-left: 5px solid #aec785;
+}
+
+.profile-nav.alt.blue-border ul > li > a:hover, .profile-nav.alt.green-border ul > li > a:focus, .profile-nav.alt.green-border ul li.active a {
+    border-left: 5px solid #58c9f3;
 }
 
 .user-heading.alt a {
@@ -4674,4 +4689,9 @@ span.error {
 
 span.success {
     color: #41cac0;
+}
+
+.box {
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #aeb2b7;
 }
