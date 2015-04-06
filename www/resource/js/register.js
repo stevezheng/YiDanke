@@ -893,7 +893,7 @@ Number.prototype.toFixed = function(s)
 $(function () {
   //第一步
   $('.register-form').Validform({
-    btncls: '.login-btn',
+    btncls: '.btn-reg',
     ifok: true,
     disbtncls: 'disabled',
     regback: {

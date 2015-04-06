@@ -1,5 +1,7 @@
 <% include ./index_header.html %>
-<section id="container" >
+<link rel="stylesheet" type="text/css"
+      href="/resource/assets/gritter/css/jquery.gritter.css"/>
+<section id="container">
     <!--header start-->
     <header class="header white-bg">
         <!--logo start-->
@@ -20,47 +22,86 @@
                             感谢您注册一家网
                         </header>
                         <div class="panel-body">
-                            <form class="form-horizontal register-form" role="form" autocomplete="off">
+                            <div class="form-horizontal register-form"
+                                 role="form" autocomplete="off">
                                 <div class="form-group">
                                     <label class="col-lg-2 col-sm-2 control-label">用户名</label>
+
                                     <div class="col-lg-6">
                                         <div class="inp">
                                             <em class="inpbox">
                                                 <i class="icon-U"></i>
-                                                <input type="text" cname="one" placeholder="请输入用户名" warn="用户名4-15个字符，一个汉字为2个字符 "  checkurl="ture" name="username" class="txt form-control" id="username" regname="username" emptyerr="用户名不能为空"/>
+                                                <input type="text" cname="one"
+                                                       placeholder="请输入用户名"
+                                                       warn="用户名4-15个字符，一个汉字为2个字符 "
+                                                       checkurl="ture"
+                                                       name="username"
+                                                       class="txt form-control"
+                                                       id="username"
+                                                       regname="username"
+                                                       emptyerr="用户名不能为空"/>
                                             </em>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-lg-2 col-sm-2 control-label">密码</label>
+
                                     <div class="col-lg-6">
                                         <div class="inp">
                                             <em class="inpbox">
                                                 <i class="icon-P"></i>
-                                                <input type="password" autocomplete="off" placeholder="请输入密码" warn="长度6~16位数字、字母、字符包含两种 " cname="one" class="txt form-control" confirmationpass="password" id="password" name="password" regname="loginpassword" emptyerr="密码不能为空" />
+                                                <input type="password"
+                                                       autocomplete="off"
+                                                       placeholder="请输入密码"
+                                                       warn="长度6~16位数字、字母、字符包含两种 "
+                                                       cname="one"
+                                                       class="txt form-control"
+                                                       confirmationpass="password"
+                                                       id="password"
+                                                       name="password"
+                                                       regname="loginpassword"
+                                                       emptyerr="密码不能为空"/>
                                             </em>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-lg-2 col-sm-2 control-label">确认密码</label>
+
                                     <div class="col-lg-6">
                                         <div class="inp">
                                             <em class="inpbox">
                                                 <i class="icon-P"></i>
-                                                <input type="password" placeholder="请输入确认密码" cname="one" class="txt form-control"  name="confirmationpassword" confirmation="password"  emptyerr="确认密码不能为空" confirmationerr="输入密码不一致,请重新填写" />
+                                                <input type="password"
+                                                       placeholder="请输入确认密码"
+                                                       cname="one"
+                                                       class="txt form-control"
+                                                       name="confirmationpassword"
+                                                       confirmation="password"
+                                                       emptyerr="确认密码不能为空"
+                                                       confirmationerr="输入密码不一致,请重新填写"/>
                                             </em>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-lg-2 col-sm-2 control-label">邮箱</label>
+
                                     <div class="col-lg-6">
                                         <div class="inp">
                                             <em class="inpbox">
                                                 <i class="icon-E"></i>
-                                                <input type="text" warn="请填写您的常用邮箱" cname="one" checkurl="ture" placeholder="请输入邮箱地址" name="useremail" id="useremail" class="txt form-control"  regname="email" emptyerr="邮箱地址不能为空"/>
+                                                <input type="text"
+                                                       warn="请填写您的常用邮箱"
+                                                       cname="one"
+                                                       checkurl="ture"
+                                                       placeholder="请输入邮箱地址"
+                                                       name="useremail"
+                                                       id="useremail"
+                                                       class="txt form-control"
+                                                       regname="email"
+                                                       emptyerr="邮箱地址不能为空"/>
                                             </em>
                                             <!--                                        <span class="warn">请填写您的常用邮箱</span>  -->
                                         </div>
@@ -68,11 +109,20 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="col-lg-2 col-sm-2 control-label">QQ号</label>
+
                                     <div class="col-lg-6">
                                         <div class="inp">
                                             <em class="inpbox">
                                                 <i class="icon-Q"></i>
-                                                <input type="text" warn="便于买手和商家联系" cname="one" checkurl="ture" placeholder="请输入qq号" name="userqq" class="txt form-control" id="userqq" regname="qq" emptyerr="QQ号不能为空"/>
+                                                <input type="text"
+                                                       warn="便于买手和商家联系"
+                                                       cname="one"
+                                                       checkurl="ture"
+                                                       placeholder="请输入qq号"
+                                                       name="userqq"
+                                                       class="txt form-control"
+                                                       id="userqq" regname="qq"
+                                                       emptyerr="QQ号不能为空"/>
                                             </em>
                                             <!--                                        <span class="warn">便于买手与你联系</span>   -->
                                         </div>
@@ -80,11 +130,21 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="col-lg-2 col-sm-2 control-label">手机</label>
+
                                     <div class="col-lg-6">
                                         <div class="inp">
                                             <em class="inpbox">
                                                 <i class="icon-M"></i>
-                                                <input type="text" warn="便于客服与你联系" cname="one" checkurl="ture" placeholder="请输入手机号" name="usermoblie" class="txt form-control" id="usermoblie" regname="mobile" emptyerr="手机号不能为空"/>
+                                                <input type="text"
+                                                       warn="便于客服与你联系"
+                                                       cname="one"
+                                                       checkurl="ture"
+                                                       placeholder="请输入手机号"
+                                                       name="usermoblie"
+                                                       class="txt form-control"
+                                                       id="usermobile"
+                                                       regname="mobile"
+                                                       emptyerr="手机号不能为空"/>
                                             </em>
                                             <!--                                        <span class="warn">便于买手与你联系</span>   -->
                                         </div>
@@ -92,31 +152,41 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="col-lg-2 col-sm-2 control-label">选择角色</label>
+
                                     <div class="col-lg-6">
                                         <label class="checkbox-inline">
-                                            <input name="userType" class="userType" type="radio" value="1">商家
+                                            <input name="userType"
+                                                   class="userType" type="radio"
+                                                   value="1">商家
                                         </label>
                                         <label class="checkbox-inline">
-                                            <input name="userType" class="userType" type="radio" value="0">买手
+                                            <input name="userType"
+                                                   class="userType" type="radio"
+                                                   value="0">买手
                                         </label>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-lg-2 col-sm-2 control-label">选择地区</label>
+
                                     <div class="col-lg-10 control-label">
                                         <em>
                                             <!--<input style="width: 80px" type="text" placeholder="请输入省名" name="position_sheng" class="txt form-control" id="position_sheng"/>-->
                                             <!--<input style="width: 80px" type="text" placeholder="请输入市名" name="position_shi" class="txt form-control" id="position_shi"/>-->
-                                            <select id="province" name="province">
-                                                <option value="">--请选择省份--</option>
+                                            <select id="province"
+                                                    name="province">
+                                                <option value="">--请选择省份--
+                                                </option>
                                                 <option value="北京">北京</option>
                                                 <option value="天津">天津</option>
                                                 <option value="河北省">河北省</option>
                                                 <option value="山西省">山西省</option>
-                                                <option value="内蒙古自治区">内蒙古自治区</option>
+                                                <option value="内蒙古自治区">内蒙古自治区
+                                                </option>
                                                 <option value="辽宁省">辽宁省</option>
                                                 <option value="吉林省">吉林省</option>
-                                                <option value="黑龙江省">黑龙江省</option>
+                                                <option value="黑龙江省">黑龙江省
+                                                </option>
                                                 <option value="上海">上海</option>
                                                 <option value="江苏省">江苏省</option>
                                                 <option value="浙江省">浙江省</option>
@@ -128,47 +198,120 @@
                                                 <option value="湖北省">湖北省</option>
                                                 <option value="湖南省">湖南省</option>
                                                 <option value="广东省">广东省</option>
-                                                <option value="广西壮族自治区">广西壮族自治区</option>
+                                                <option value="广西壮族自治区">
+                                                    广西壮族自治区
+                                                </option>
                                                 <option value="海南省">海南省</option>
                                                 <option value="重庆">重庆</option>
                                                 <option value="四川省">四川省</option>
                                                 <option value="贵州省">贵州省</option>
                                                 <option value="云南省">云南省</option>
-                                                <option value="西藏自治区">西藏自治区</option>
+                                                <option value="西藏自治区">西藏自治区
+                                                </option>
                                                 <option value="陕西省">陕西省</option>
                                                 <option value="甘肃省">甘肃省</option>
                                                 <option value="青海省">青海省</option>
-                                                <option value="宁夏回族自治区">宁夏回族自治区</option>
-                                                <option value="新疆维吾尔自治区">新疆维吾尔自治区</option>
-                                                <option value="香港特别行政区">香港特别行政区</option>
-                                                <option value="澳门特别行政区">澳门特别行政区</option>
+                                                <option value="宁夏回族自治区">
+                                                    宁夏回族自治区
+                                                </option>
+                                                <option value="新疆维吾尔自治区">
+                                                    新疆维吾尔自治区
+                                                </option>
+                                                <option value="香港特别行政区">
+                                                    香港特别行政区
+                                                </option>
+                                                <option value="澳门特别行政区">
+                                                    澳门特别行政区
+                                                </option>
                                                 <option value="台湾省">台湾省</option>
                                                 <option value="其它">其它</option>
-                                                <option value="">--请选择省份--</option><option value="北京">北京</option><option value="天津">天津</option><option value="河北省">河北省</option><option value="山西省">山西省</option><option value="内蒙古自治区">内蒙古自治区</option><option value="辽宁省">辽宁省</option><option value="吉林省">吉林省</option><option value="黑龙江省">黑龙江省</option><option value="上海">上海</option><option value="江苏省">江苏省</option><option value="浙江省">浙江省</option><option value="安徽省">安徽省</option><option value="福建省">福建省</option><option value="江西省">江西省</option><option value="山东省">山东省</option><option value="河南省">河南省</option><option value="湖北省">湖北省</option><option value="湖南省">湖南省</option><option value="广东省">广东省</option><option value="广西壮族自治区">广西壮族自治区</option><option value="海南省">海南省</option><option value="重庆">重庆</option><option value="四川省">四川省</option><option value="贵州省">贵州省</option><option value="云南省">云南省</option><option value="西藏自治区">西藏自治区</option><option value="陕西省">陕西省</option><option value="甘肃省">甘肃省</option><option value="青海省">青海省</option><option value="宁夏回族自治区">宁夏回族自治区</option><option value="新疆维吾尔自治区">新疆维吾尔自治区</option><option value="香港特别行政区">香港特别行政区</option><option value="澳门特别行政区">澳门特别行政区</option><option value="台湾省">台湾省</option><option value="其它">其它</option></select>
+                                                <option value="">--请选择省份--
+                                                </option>
+                                                <option value="北京">北京</option>
+                                                <option value="天津">天津</option>
+                                                <option value="河北省">河北省</option>
+                                                <option value="山西省">山西省</option>
+                                                <option value="内蒙古自治区">内蒙古自治区
+                                                </option>
+                                                <option value="辽宁省">辽宁省</option>
+                                                <option value="吉林省">吉林省</option>
+                                                <option value="黑龙江省">黑龙江省
+                                                </option>
+                                                <option value="上海">上海</option>
+                                                <option value="江苏省">江苏省</option>
+                                                <option value="浙江省">浙江省</option>
+                                                <option value="安徽省">安徽省</option>
+                                                <option value="福建省">福建省</option>
+                                                <option value="江西省">江西省</option>
+                                                <option value="山东省">山东省</option>
+                                                <option value="河南省">河南省</option>
+                                                <option value="湖北省">湖北省</option>
+                                                <option value="湖南省">湖南省</option>
+                                                <option value="广东省">广东省</option>
+                                                <option value="广西壮族自治区">
+                                                    广西壮族自治区
+                                                </option>
+                                                <option value="海南省">海南省</option>
+                                                <option value="重庆">重庆</option>
+                                                <option value="四川省">四川省</option>
+                                                <option value="贵州省">贵州省</option>
+                                                <option value="云南省">云南省</option>
+                                                <option value="西藏自治区">西藏自治区
+                                                </option>
+                                                <option value="陕西省">陕西省</option>
+                                                <option value="甘肃省">甘肃省</option>
+                                                <option value="青海省">青海省</option>
+                                                <option value="宁夏回族自治区">
+                                                    宁夏回族自治区
+                                                </option>
+                                                <option value="新疆维吾尔自治区">
+                                                    新疆维吾尔自治区
+                                                </option>
+                                                <option value="香港特别行政区">
+                                                    香港特别行政区
+                                                </option>
+                                                <option value="澳门特别行政区">
+                                                    澳门特别行政区
+                                                </option>
+                                                <option value="台湾省">台湾省</option>
+                                                <option value="其它">其它</option>
+                                            </select>
                                             <select id="city" name="city">
 
-                                                <option value="">--请选择城市--</option></select>
+                                                <option value="">--请选择城市--
+                                                </option>
+                                            </select>
                                             <select id="area" name="area">
 
-                                                <option value="">--请选择地区--</option></select>
+                                                <option value="">--请选择地区--
+                                                </option>
+                                            </select>
                                         </em>
-                                        <label id="position-error" class="error"></label>
+                                        <label id="position-error"
+                                               class="error"></label>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-lg-offset-2 col-lg-10">
                                         <label class="checkbox-inline">
-                                            <input type="checkbox" id="agree" value="agree">
+                                            <input type="checkbox" id="agree"
+                                                   value="agree">
                                             <a href="/index/protocol">我同意一家服务协议</a>
                                         </label>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-lg-offset-2 col-lg-10">
-                                        <button type="submit" class="btn btn-info login-btn">立即注册</button>
+                                        <button class="btn btn-info btn-reg">
+                                            立即注册
+                                        </button>
+                                        <a data-toggle="modal"
+                                           href="#myModal"
+                                           style="display: none;"
+                                           id="btn-success">注册成功</a>
                                     </div>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </section>
                 </div>
@@ -178,6 +321,7 @@
                             <p>
                                 一家是一个担保式安全刷单平台，支持淘宝，天猫，京东，亚马逊，1号店，当当等各大平台；
                             </p>
+
                             <p>
                                 一家通过发起在全国各地的买家会员按照真实购物流程下单，并提供真实的快递信息来保证交易的安全性
                             </p>
@@ -189,10 +333,84 @@
         </section>
     </section>
     <!--main content end-->
+    <!-- Modal -->
+    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog"
+         tabindex="-1" id="myModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">欢迎您注册一家网</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            您的账号为: <span class="error modal-username"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            会员类型: <span class="error modal-type"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-info" type="button" href="/">去登陆</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal -->
 </section>
 <% include ./index_footer.html %>
 <script src="/resource/js/location.js"></script>
 <script src="/resource/js/register.js"></script>
+<script type="text/javascript"
+        src="/resource/assets/gritter/js/jquery.gritter.js"></script>
 <script>
-    new PCAS("province","city","area","","","");
+    new PCAS("province", "city", "area", "", "", "");
+
+    $('.btn-reg').click(function () {
+        var agree = $('#agree').attr('checked');
+        if (!agree) {
+            $.gritter.add({
+                title: '抱歉',
+                text: '您需要同意一家服务协议方可注册',
+                sticky: false,
+                time: ''
+            });
+        }
+
+        var data = {
+            username: $('#username').val()
+            , password: $('#password').val()
+            , email: $('#useremail').val()
+            , qq: $('#userqq').val()
+            , phone: $('#usermobile').val()
+            , type: $('input[name="userType"]').val()
+            , province: $('#province').val()
+            , city: $('#city').val()
+            , area: $('#area').val()
+        };
+
+        $.post('/index/reg', data, function (res) {
+            if (res.errno == 0) {
+                $('.modal-username').text(data.username);
+                $('.modal-type').text(data.type == 0 ? '买手' : '商家');
+                $('#btn-success').click();
+//                setTimeout(function () {
+//                    location.href = '/';
+//                }, 3000);
+            } else {
+                var msg = JSON.parse(res.errmsg.json_message);
+                $.gritter.add({
+                    title: '抱歉',
+                    text: _.values(msg),
+                    sticky: false,
+                    time: ''
+                });
+            }
+        });
+    });
 </script>
