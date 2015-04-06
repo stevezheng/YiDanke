@@ -9,3 +9,5 @@ create table if not exists `yi_admin` (
     `lastIP` varchar(32) not null default '',
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+--insert into `yi_admin` (`id`, `username`, `password`) values (1, 'admin', '5c224162363cd3fa624b37da0028b90f');
