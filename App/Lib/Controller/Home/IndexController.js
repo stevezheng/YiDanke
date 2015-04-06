@@ -95,7 +95,90 @@ module.exports = Controller("Home/BaseController", function () {
       }
 
       if (self.isPost()) {
-        return self.success();
+        var type = self.post('type');
+
+        if (type == 'qq') {
+          var qq = self.post('qq');
+
+          return D('user')
+            .where({'qq': qq})
+            .find()
+            .then(function (data) {
+              if (!isEmpty(data)) {
+                return false;
+              } else {
+                return true;
+              }
+            })
+            .then(function (result) {
+              if (result) {
+                return self.success();
+              } else {
+                return self.error(300, '该QQ已存在');
+              }
+            })
+        }
+        if (type == 'useremail') {
+          var email = self.post('useremail');
+          return D('user')
+            .where({'email': email})
+            .find()
+            .then(function (data) {
+              if (!isEmpty(data)) {
+                return false;
+              } else {
+                return true;
+              }
+            })
+            .then(function (result) {
+              if (result) {
+                return self.success();
+              } else {
+                return self.error(300, '该邮箱已存在');
+              }
+            })
+        }
+
+        if (type == 'phone') {
+          var phone = self.post('phone');
+          return D('user')
+            .where({'phone': phone})
+            .find()
+            .then(function (data) {
+              if (!isEmpty(data)) {
+                return false;
+              } else {
+                return true;
+              }
+            })
+            .then(function (result) {
+              if (result) {
+                return self.success();
+              } else {
+                return self.error(300, '该手机已存在');
+              }
+            })
+        }
+        if (type == 'username') {
+          var username = self.post('username');
+          return D('user')
+            .where({'username': username})
+            .find()
+            .then(function (data) {
+              if (!isEmpty(data)) {
+                return false;
+              } else {
+                return true;
+              }
+            })
+            .then(function (result) {
+              if (result) {
+                return self.success();
+              } else {
+                return self.error(300, '该用户名已存在');
+              }
+            })
+        }
       }
     },
   };
