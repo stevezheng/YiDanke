@@ -1,0 +1,41 @@
+<% include ./index_header.html %>
+<link rel="stylesheet" type="text/css"
+      href="/resource/assets/gritter/css/jquery.gritter.css"/>
+<section id="container">
+    <!--header start-->
+    <header class="header white-bg">
+        <!--logo start-->
+        <a href="/" class="logo">一家<span>网</span></a>
+        <!--logo end-->
+        <div class="nav notify-row pull-right " style="margin-left: 0;">
+            <button class="pull-right btn btn-info btn-back"><i
+                    class="icon-ok-sign"></i>&nbsp;返回</button>
+        </div>
+    </header>
+    <!--header end-->
+    <!--main content start-->
+    <section id="content">
+        <section class="wrapper">
+            <section class="panel">
+                <header class="panel-heading">
+                    温馨提示
+                </header>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <%= warning %>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </section>
+
+    <!--main content end-->
+</section>
+<% include ./index_footer.html %>
+<script>
+    $('.btn-back').click(function() {
+        window.history.back();
+    });
+</script>

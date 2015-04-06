@@ -84,7 +84,14 @@ module.exports = Model(function() {
 
     login: function(username, password) {
       var self = this;
-      console.log(self);
+      var args = {
+        username: username
+        , password: md5(password)
+      };
+
+      return self
+        .where(args)
+        .find()
     }
   }
 });

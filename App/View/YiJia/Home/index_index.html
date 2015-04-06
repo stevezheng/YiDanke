@@ -16,8 +16,8 @@
             <div class="form-signin">
                 <h2 class="form-signin-heading">用户登陆</h2>
                 <div class="login-wrap">
-                    <input type="text" class="form-control" placeholder="用户名" autofocus="">
-                    <input type="password" class="form-control" placeholder="密码">
+                    <input type="text" class="form-control" placeholder="用户名" autofocus="" id="username">
+                    <input type="password" class="form-control" placeholder="密码" id="password">
                     <label class="checkbox">
                         <a href="/index/reg">立即注册</a>
                         <span class="pull-right">
@@ -54,3 +54,26 @@
     <!--main content end-->
 </section>
 <% include ./index_footer.html %>
+<script>
+    $('.btn-login').click(function() {
+        var username = $('#username').val()
+                , password = $('#password').val();
+        if (username == '') {
+            alert('请填写用户名');
+            return false;
+        }
+
+        if (password == '') {
+            alert('请填写密码');
+            return false;
+        }
+
+        $.post('/', {username: username, password: password}, function(res) {
+            if (res.errno == 0) {
+                location.href = res.data;
+            } else {
+                alert(res.errmsg);
+            }
+        });
+    });
+</script>
