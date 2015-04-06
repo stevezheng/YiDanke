@@ -20,13 +20,18 @@
     </div>
     <div class="nav notify-row pull-right">
         <ul class="nav top-menu">
-            <li><a href="#">zhengmiao9</a></li>
-            <li><a href="#">本金: 0.00</a></li>
-            <li><a href="#">金币: 8.00</a></li>
+            <li><a href="#"><%= cUser.username %></a></li>
+            <li><a href="#">本金: <span class="error"><%= cUser.money %></span>&nbsp;元</a></li>
+            <li><a href="#">金币: <span class="error"><%= cUser.coin %></span>&nbsp;枚</a></li>
             <li><a href="/buyer/money" style="color: #58c9f3">[充值]</a></li>
-            <li><a href="#">经验: 0</a></li>
+            <li><a href="#">经验: <span class="error"><%= cUser.exp %></span>&nbsp;点</a></li>
+            <% if (cUser.status == 2) { %>
             <li><a href="#">会员到期时间: 2015-05-02</a></li>
-            <li><a href="/buyer/money" style="color: #58c9f3">[续费]</a></li>
+            <li><a href="/buyer/member" style="color: #58c9f3">[续费]</a></li>
+            <% } else { %>
+            <li><a href="#"><%= StatusService.user.status[cUser.status] %></a></li>
+            <li><a href="/buyer/member" style="color: #58c9f3">[升级会员]</a></li>
+            <% } %>
         </ul>
     </div>
 </header>

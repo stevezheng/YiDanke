@@ -1,3 +1,4 @@
+var StatusService = thinkRequire('StatusService');
 module.exports = Controller(function(){
   'use strict';
   return {
@@ -25,6 +26,11 @@ module.exports = Controller(function(){
               return self.display("Home:index:warning");
             }
           }
+
+          //用户已经登录
+          self.cUser = cUser;
+          self.assign("StatusService", StatusService);
+          self.assign("cUser", cUser);
         }
       })
     }
