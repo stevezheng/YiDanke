@@ -61,6 +61,14 @@ module.exports = Model(function() {
       }
     },
 
+    getUser: function(id) {
+      var self = this;
+
+      return self
+        .where({id: id})
+        .find()
+    },
+
     reg: function(username, password, email, qq, phone, type, province, city, area) {
       var self = this;
       return self
@@ -92,6 +100,25 @@ module.exports = Model(function() {
       return self
         .where(args)
         .find()
+    },
+
+    editPassword: function(id, oldPassword, password) {
+      var self = this;
+
+      return self
+        .getUser(id)
+        .then(function(cUser) {
+          if (cUser.password != md5(oldPassword)) {
+            throw new Error('密码不正确');
+          } else {
+            return cUser;
+          }
+        })
+        .then(function(cUser) {
+          return self
+            .where({id: cUser.id})
+            .update({password: md5(password)})
+        })
     }
   }
 });
