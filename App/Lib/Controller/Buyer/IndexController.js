@@ -81,5 +81,47 @@ module.exports = Controller("Buyer/BaseController", function(){
           })
       }
     },
+
+    editQQAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {}
+
+      if (self.isPost()) {
+        var user = UserModel();
+        var qq = self.post('qq');
+
+        user
+          .editQQ(self.cUser.id, qq)
+          .then(function() {
+            return self.success('修改QQ成功');
+          })
+          .catch(function(err) {
+            return self.error(500, err.message);
+          })
+      }
+    },
+
+    editPhoneAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {}
+
+      if (self.isPost()) {
+        var user = UserModel();
+        var phone = self.post('phone');
+
+        user
+          .editPhone(self.cUser.id, phone)
+          .then(function() {
+            return self.success('修改手机号成功');
+          })
+          .catch(function(err) {
+            return self.error(500, err.message);
+          })
+      }
+    },
   };
 });

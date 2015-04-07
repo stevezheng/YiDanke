@@ -143,6 +143,33 @@ module.exports = Model(function() {
     },
 
     /**
+     * 修改用户QQ
+     * @param id
+     * @param qq * @returns {*}
+     */
+    editQQ: function(id, qq) {
+      var self = this;
+
+      return self
+        .where({id: id})
+        .update({qq: qq})
+    },
+
+    /**
+     * 修改用户手机号
+     * @param id
+     * @param phone
+     * @returns {*}
+     */
+    editPhone: function(id, phone) {
+      var self = this;
+
+      return self
+        .where({id: id})
+        .update({phone: phone})
+    },
+
+    /**
      * 编辑登陆密码
      * @param id
      * @param oldPassword

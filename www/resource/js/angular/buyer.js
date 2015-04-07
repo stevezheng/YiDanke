@@ -14,6 +14,50 @@
     $scope.tradePassword = '';
     $scope.tradePassword1 = '';
 
+    $scope.editBox = '';
+    $scope.qq = '';
+    $scope.phone = '';
+
+    $scope.editQQ = function() {
+      if ($scope.qq.length < 5) {
+        alert('请填写正确的QQ号');
+        return false;
+      }
+
+      $http.post('/buyer/index/editQQ', {qq: $scope.qq})
+        .success(function(res) {
+          if (res.errno == 0) {
+            alert(res.data);
+            $scope.qq = '';
+          }
+        })
+        .error(function(error) {
+          console.error(error);
+        });
+    };
+
+    $scope.editPhone = function() {
+      if ($scope.phone.length != 11) {
+        alert('请填写正确的手机号');
+        return false;
+      }
+
+      $http.post('/buyer/index/editPhone', {phone: $scope.phone})
+        .success(function(res) {
+          if (res.errno == 0) {
+            alert(res.data);
+            $scope.phone = '';
+          }
+        })
+        .error(function(error) {
+          console.error(error);
+        });
+    };
+
+    $scope.editPhone = function() {
+
+    };
+
     $scope.editPassword = function() {
       if ($scope.password != $scope.password1) {
         alert('两次输入的密码不一样');
