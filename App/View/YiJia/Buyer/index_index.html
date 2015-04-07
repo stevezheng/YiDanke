@@ -23,37 +23,47 @@
                                 <span>支付密码</span>
                                 &nbsp;
                                 &nbsp;
+                                <% if (cUser.tradePassword) { %>
+                                <span class="success"><i class="icon-ok-sign"></i>已设置</span>
+                                &nbsp;
+                                &nbsp;
+                                <span><a href="#" ng-click="toggleEditTradePassword()">修改</a></span>
+                                <% } else { %>
                                 <span class="error"><i class="icon-exclamation-sign"></i>未设置</span>
                                 &nbsp;
                                 &nbsp;
                                 <span><a href="#" ng-click="toggleAddTradePassword()">添加</a></span>
+                                <% } %>
                             </div>
                         </div>
-                        <div class="row" ng-show="editPasswordBox || editTradePasswordBox || addTradePasswordBox" style="margin-top: 15px;">
-                            <div class="col-lg-4" ng-show="editPasswordBox">
-                                <div class="row">
+                        <div class="row edit-user-info" ng-show="editPasswordBox || editTradePasswordBox || addTradePasswordBox" style="margin-top: 15px;">
+                            <div class="col-lg-3">
+                                <div class="row" ng-show="editPasswordBox">
                                     <div class="col-lg-12">
                                         <div class="form-horizontal">
                                             <div class="form-group">
-                                                <label class="control-label col-lg-3">旧密码:</label>
-                                                <div class="col-lg-6">
+                                                <label class="label label-success col-lg-11">修改登陆密码</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-lg-4">旧密码:</label>
+                                                <div class="col-lg-7">
                                                     <input type="password" class="form-control" ng-model="oldPassword"/>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label col-lg-3">新密码:</label>
-                                                <div class="col-lg-6">
+                                                <label class="control-label col-lg-4">新密码:</label>
+                                                <div class="col-lg-7">
                                                     <input type="password" class="form-control" ng-model="password"/>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label col-lg-3">确认密码:</label>
-                                                <div class="col-lg-6">
+                                                <label class="control-label col-lg-4">确认密码:</label>
+                                                <div class="col-lg-7">
                                                     <input type="password" class="form-control" ng-model="password1"/>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <div class="col-lg-6 col-lg-offset-3">
+                                                <div class="col-lg-6 col-lg-offset-4">
                                                     <button class="btn btn-info" ng-click="editPassword()">确认</button>
                                                 </div>
                                             </div>
@@ -61,8 +71,68 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4" ng-show="editTradePasswordBox">修改支付密码</div>
-                            <div class="col-lg-4" ng-show="addTradePasswordBox">修改支付密码</div>
+                            <div class="col-lg-3" ng-show="editTradePasswordBox">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-horizontal">
+                                            <div class="form-group">
+                                                <label class="label label-success col-lg-11 ">修改支付密码</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-lg-4">旧密码:</label>
+                                                <div class="col-lg-7">
+                                                    <input type="password" class="form-control" ng-model="oldTradePassword"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-lg-4">新密码:</label>
+                                                <div class="col-lg-7">
+                                                    <input type="password" class="form-control" ng-model="tradePassword"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-lg-4">确认密码:</label>
+                                                <div class="col-lg-7">
+                                                    <input type="password" class="form-control" ng-model="tradePassword1"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-lg-6 col-lg-offset-4">
+                                                    <button class="btn btn-info" ng-click="editTradePassword()">确认</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3" ng-show="addTradePasswordBox">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-horizontal">
+                                            <div class="form-group">
+                                                <label class="label label-success col-lg-11 ">添加支付密码</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-lg-4">密码:</label>
+                                                <div class="col-lg-7">
+                                                    <input type="password" class="form-control" ng-model="tradePassword"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-lg-4">确认密码:</label>
+                                                <div class="col-lg-7">
+                                                    <input type="password" class="form-control" ng-model="tradePassword1"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-lg-6 col-lg-offset-4">
+                                                    <button class="btn btn-info" ng-click="addTradePassword()">确认</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="row" style="margin-top: 30px">
                             <div class="col-lg-3">

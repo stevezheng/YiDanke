@@ -4747,3 +4747,7 @@ span.success {
     height: 30px;
     color: #64696E;
 }
+
+.edit-user-info label {
+    font-size: 12px !important;
+}

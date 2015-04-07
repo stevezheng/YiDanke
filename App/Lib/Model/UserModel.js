@@ -61,6 +61,11 @@ module.exports = Model(function() {
       }
     },
 
+    /**
+     * 获取用户信息
+     * @param id 用户id
+     * @returns {*}
+     */
     getUser: function(id) {
       var self = this;
 
@@ -69,6 +74,35 @@ module.exports = Model(function() {
         .find()
     },
 
+    /**
+     * 更新cUser的session
+     * @param scope action中的this
+     * @returns {*}
+     */
+    reloadCurrenUser: function(scope) {
+      var self = this;
+
+      return self
+        .getUser(scope.cUser.id)
+        .then(function(cUser) {
+          scope.assign("cUser", cUser);
+          return scope.session('cUser', cUser);
+        })
+    },
+
+    /**
+     * 注册用户
+     * @param username
+     * @param password
+     * @param email
+     * @param qq
+     * @param phone
+     * @param type
+     * @param province
+     * @param city
+     * @param area
+     * @returns {type[]}
+     */
     reg: function(username, password, email, qq, phone, type, province, city, area) {
       var self = this;
       return self
@@ -90,6 +124,12 @@ module.exports = Model(function() {
         }, true)
     },
 
+    /**
+     * 用户登陆
+     * @param username
+     * @param password
+     * @returns {*}
+     */
     login: function(username, password) {
       var self = this;
       var args = {
@@ -102,6 +142,13 @@ module.exports = Model(function() {
         .find()
     },
 
+    /**
+     * 编辑登陆密码
+     * @param id
+     * @param oldPassword
+     * @param password
+     * @returns {*}
+     */
     editPassword: function(id, oldPassword, password) {
       var self = this;
 
@@ -118,6 +165,50 @@ module.exports = Model(function() {
           return self
             .where({id: cUser.id})
             .update({password: md5(password)})
+        })
+    },
+
+    /**
+     * 编辑支付密码
+     * @param id
+     * @param oldPassword
+     * @param password
+     * @returns {*}
+     */
+    editTradePassword: function(id, oldPassword, password) {
+      var self = this;
+
+      return self
+        .getUser(id)
+        .then(function(cUser) {
+          if (cUser.tradePassword != md5(oldPassword)) {
+            throw new Error('密码不正确');
+          } else {
+            return cUser;
+          }
+        })
+        .then(function(cUser) {
+          return self
+            .where({id: cUser.id})
+            .update({tradePassword: md5(password)})
+        })
+    },
+
+    /**
+     * 添加支付密码
+     * @param id
+     * @param password
+     * @returns {*}
+     */
+    addTradePassword: function(id, password) {
+      var self = this;
+
+      return self
+        .getUser(id)
+        .then(function(cUser) {
+          return self
+            .where({id: cUser.id})
+            .update({tradePassword: md5(password)})
         })
     }
   }
