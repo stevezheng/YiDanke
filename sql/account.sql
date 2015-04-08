@@ -11,5 +11,6 @@ create table if not exists `yi_account` (
     `accountUserId` int(11) not null comment '用户id',
     `accountPlatform` varchar(11) not null comment '平台id',
     `accountComment` varchar(512) not null default '' comment '备注信息',
+    `accountCreateTime` timestamp not null default current_timestamp,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

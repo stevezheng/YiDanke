@@ -5,7 +5,7 @@ create table if not exists `yi_admin` (
     `status` tinyint(1) not null default '1' comment '0:禁用, 1:激活',
     `type` tinyint(1) not null default '0' comment '0:超级管理员, 1:运营, 2:财务',
     `regTime` timestamp not null default current_timestamp,
-    `loginTime` timestamp not null default current_timestamp,
+    `loginTime` timestamp not null default 0,
     `lastIP` varchar(32) not null default '',
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
