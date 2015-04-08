@@ -380,6 +380,12 @@
                 sticky: false,
                 time: ''
             });
+            return false;
+        }
+
+        if(!$('input[name="userType"]:checked').val()) {
+            alert('请先选择角色');
+            return false;
         }
 
         var data = {
@@ -404,12 +410,6 @@
 //                }, 3000);
             } else {
                 Yi.error(res);
-                $.gritter.add({
-                    title: '抱歉',
-                    text: _.values(msg),
-                    sticky: false,
-                    time: ''
-                });
             }
         });
     });

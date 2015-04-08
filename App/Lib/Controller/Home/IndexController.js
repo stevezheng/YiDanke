@@ -52,8 +52,6 @@ module.exports = Controller("Home/BaseController", function () {
           , city = self.post('city')
           , area = self.post('area');
 
-        console.log(username);
-
         var user = UserModel();
         user
           .reg(username, password, email, qq, phone, type, province, city, area)
@@ -65,7 +63,8 @@ module.exports = Controller("Home/BaseController", function () {
             }
           })
           .catch(function (err) {
-            self.error(err);
+            var data = JSON.parse(err.json_message);
+            return self.error(500, '注册失败', data);
           })
       }
     },
