@@ -5,6 +5,6 @@ create table if not exists `yi_shop` (
     `shopUrl` varchar(512) not null default '' comment '店铺网址',
     `shopAddress` varchar(512) not null default '' comment '店铺地址',
     `shopUserId` int(11) not null comment '用户id',
-    `shopPlatformId` int(11) not null comment '平台id',
+    `shopPlatform` varchar(11) not null comment '平台id',
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -12,11 +12,11 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12" id="select-platform">
-                            <button class="btn btn-info" id="btn-taobao">淘宝
+                            <button class="btn btn-info" id="btn-taobao" data-data="taobao">淘宝
                             </button>
-                            <button class="btn btn-default" id="btn-tmall">天猫
+                            <button class="btn btn-default" id="btn-tmall" data-data="tmall">天猫
                             </button>
-                            <button class="btn btn-default" id="btn-jd">京东
+                            <button class="btn btn-default" id="btn-jd" data-data="jd">京东
                             </button>
                         </div>
                     </div>
@@ -465,25 +465,43 @@
                 } else {
                     $('#position-error').hide();
                 }
-                $.gritter.add({
-                    // (string | mandatory) the heading of the notification
-                    title: '用户添加成功',
-                    // (string | mandatory) the text inside the notification
-                    text: '请耐心等待审核',
-                    // (string | optional) the image to display on the left
-                    // (bool | optional) if you want it to fade out on its own or just sit there
-                    sticky: false,
-                    // (int | optional) the time you want it to be alive for before fading out
-                    time: ''
+
+                var args = {
+                    accountName: $('#account-name').val()
+                    , accountRealName: $('#buyer-name').val()
+                    , accountProvince: $('#province').val()
+                    , accountCity: $('#city').val()
+                    , accountArea: $('#area').val()
+                    , accountAddress: $('#address').val()
+                    , accountPhone: $('#phone').val()
+                    , accountPlatform: $('#select-platform .btn-info').attr('data-data')
+                };
+
+                $.post('/buyer/account/add', args, function(res) {
+                    if (res.errno == 0) {
+
+                        $.gritter.add({
+                            // (string | mandatory) the heading of the notification
+                            title: '用户添加成功',
+                            // (string | mandatory) the text inside the notification
+                            text: '请耐心等待审核',
+                            // (string | optional) the image to display on the left
+                            // (bool | optional) if you want it to fade out on its own or just sit there
+                            sticky: false,
+                            // (int | optional) the time you want it to be alive for before fading out
+                            time: ''
+                        });
+
+                        $('#btn-cancel').click();
+                        $('#account-name').val('');
+                        $('#buyer-name').val('');
+                        $('#address').val('');
+                        $('#phone').val('');
+                    } else {
+                        alert(res.errmsg);
+                    }
                 });
 
-                $('#btn-cancel').click();
-                $('#account-name').val('');
-                $('#buyer-name').val('');
-                $('#address').val('');
-                $('#phone').val('');
-
-                return false;
             }
         })
     });

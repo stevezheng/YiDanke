@@ -1,4 +1,4 @@
-create table if not exists `yi_shop` (
+create table if not exists `yi_account` (
     `id` int(11) unsigned not null auto_increment,
     `accountName` varchar(32) not null default '' comment '买号名称',
     `accountRealName` varchar(32) not null default '' comment '收货人姓名',
@@ -9,7 +9,7 @@ create table if not exists `yi_shop` (
     `accountArea` varchar(512) not null default '' comment '地区',
     `accountAddress` varchar(512) not null default '' comment '地址',
     `accountUserId` int(11) not null comment '用户id',
-    `accountPlatformId` int(11) not null comment '平台id',
-    `accountComment` varchar(512) not null comment '备注信息',
+    `accountPlatform` varchar(11) not null comment '平台id',
+    `accountComment` varchar(512) not null default '' comment '备注信息',
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
