@@ -1,19 +1,50 @@
 module.exports = Model(function() {
   return {
     fields: {
-      'province': {
+      'accountUserId': {
+        valid: ['required']
+        , msg: {
+          required: '请先登录'
+        }
+      },
+      'accountPlatform': {
+        valid: ['required']
+        , msg: {
+          required: '平台不能为空'
+        }
+      },
+      'accountName': {
+        valid: ['required']
+        , msg: {
+          required: '账号不能为空'
+        }
+      },
+      'accountPhone': {
+        valid: ['required', 'mobile']
+        , msg: {
+          required: '手机号不能为空'
+          , mobile: '手机号格式不正确'
+        }
+      },
+      'accountRealName': {
+        valid: ['required']
+        , msg: {
+          required: '收货人不能为空'
+        }
+      },
+      'accountProvince': {
         valid: ['required']
         , msg: {
           required: '省份不能为空'
         }
       },
-      'city': {
+      'accountCity': {
         valid: ['required']
         , msg: {
           required: '城市不能为空'
         }
       },
-      'area': {
+      'accountArea': {
         valid: ['required']
         , msg: {
           required: '地区不能为空'
@@ -28,16 +59,18 @@ module.exports = Model(function() {
         .select()
     },
 
+    getOne: function(accountUserId, id) {
+      var self = this;
+
+      return self
+        .where({accountUserId: accountUserId, id: id})
+        .find()
+    },
+
     addOne: function(accountUserId, accountName, accountRealName, accountProvince, accountCity, accountArea, accountAddress, accountPhone, accountPlatform) {
       var self = this;
 
-      var deferred = getDefer();
-
-      if (!Yi.is.phone(accountPhone)) {
-        deferred.reject(new Error('手机号格式不正确'));
-      }
-
-      var p = self
+      return self
         .add({
           'accountUserId': accountUserId
           , 'accountName': accountName
@@ -49,10 +82,27 @@ module.exports = Model(function() {
           , 'accountPhone': accountPhone
           , 'accountPlatform': accountPlatform
         });
+    },
 
-      deferred.resolve(p);
+    editOne: function(accountUserId, id, accountName, accountRealName, accountProvince, accountCity, accountArea, accountAddress, accountPhone, accountPlatform) {
+      var self = this;
 
-      return deferred.promise;
+      return self
+        .where({
+          'accountUserId': accountUserId
+          , id: id
+        })
+        .update({
+          'accountName': accountName
+          , 'accountRealName': accountRealName
+          , 'accountProvince': accountProvince
+          , 'accountCity': accountCity
+          , 'accountArea': accountArea
+          , 'accountAddress': accountAddress
+          , 'accountPhone': accountPhone
+          , 'accountPlatform': accountPlatform
+          , 'accountStatus': 0
+        });
     }
   }
 });

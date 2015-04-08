@@ -31,6 +31,27 @@ module.exports = Controller("Buyer/BaseController", function(){
 
       if (self.isPost()) {}
     },
+    
+    getOneAction: function() {
+      var self = this;
+      self.assign('title', '');
+    
+      if (self.isGet()) {
+        var account = AccountModel();
+        var id = self.get('id');
+
+        account
+          .getOne(self.cUser.id, id)
+          .then(function(res) {
+            self.success(res);
+          })
+          .catch(function (err) {
+            self.error(500, err.message);
+          })
+      }
+      
+      if (self.isPost()) {}
+    },
 
     addAction: function() {
       var self = this;
@@ -55,10 +76,45 @@ module.exports = Controller("Buyer/BaseController", function(){
         account
           .addOne(self.cUser.id, accountName, accountRealName, accountProvince , accountCity, accountArea, accountAddress , accountPhone, accountPlatform)
           .then(function(res) {
-            self.success('添加账号成功');
+            return self.success('添加账号成功');
           })
           .catch(function(err) {
-            self.error(500, err.message);
+            var data = JSON.parse(err.json_message);
+            return self.error(500, '添加账号失败', data);
+          })
+      }
+    },
+
+    editAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+
+      }
+
+      if (self.isPost()) {
+
+        var accountName = self.post('accountName')
+          , accountRealName = self.post('accountRealName')
+          , accountProvince = self.post('accountProvince')
+          , accountCity = self.post('accountCity')
+          , accountArea = self.post('accountArea')
+          , accountAddress = self.post('accountAddress')
+          , accountPhone = self.post('accountPhone')
+          , accountPlatform = self.post('accountPlatform')
+          , id = self.post('id');
+
+        var account = AccountModel();
+
+        account
+          .editOne(self.cUser.id, id, accountName, accountRealName, accountProvince , accountCity, accountArea, accountAddress , accountPhone, accountPlatform)
+          .then(function(res) {
+            return self.success('编辑账号成功');
+          })
+          .catch(function(err) {
+            var data = JSON.parse(err.json_message);
+            return self.error(500, '编辑账号失败', data);
           })
       }
     },

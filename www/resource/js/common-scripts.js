@@ -1,6 +1,12 @@
-var Yi = {};
-
-
+var Yi = {
+  error: function(res) {
+    if (res.data) {
+      alert(_.values(res.data));
+    } else {
+      alert(res.errmsg);
+    }
+  }
+};
 
 /*---LEFT BAR ACCORDION----*/
 $(function() {

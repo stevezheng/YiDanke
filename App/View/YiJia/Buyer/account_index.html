@@ -65,7 +65,7 @@
                                         <%= account.accountAddress %>
                                     </th>
                                     <th><%= statusMap[account.accountStatus] %></th>
-                                    <th>[暂无]</th>
+                                    <th><a href="#modal-account" data-toggle="modal" data-data="<%= account.id %>" class="btn-edit">编辑</a></th>
                                     <th><%= account.accountComment || '[暂无]'%></th>
                                 </tr>
                             <% } %>
@@ -107,7 +107,7 @@
                                 <%= account.accountAddress %>
                             </th>
                             <th><%= statusMap[account.accountStatus] %></th>
-                            <th>[暂无]</th>
+                            <th><a href="#modal-account" data-toggle="modal" data-data="<%= account.id %>" class="btn-edit">编辑</a></th>
                             <th><%= account.accountComment || '[暂无]'%></th>
                         </tr>
                         <% } %>
@@ -149,7 +149,7 @@
                                 <%= account.accountAddress %>
                             </th>
                             <th><%= statusMap[account.accountStatus] %></th>
-                            <th>[暂无]</th>
+                            <th><a href="#modal-account" data-toggle="modal" data-data="<%= account.id %>" class="btn-edit">编辑</a></th>
                             <th><%= account.accountComment || '[暂无]'%></th>
                         </tr>
                         <% } %>
@@ -170,7 +170,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"
                         aria-hidden="true">&times;</button>
-                <h4 class="modal-title">绑定新号码</h4>
+                <h4 class="modal-title">绑定新账号</h4>
             </div>
             <form class="modal-body form-horizontal cmxform tasi-form" id="bind-account">
                 <div class="form-group">
@@ -295,7 +295,7 @@
                 <button data-dismiss="modal" class="btn btn-default"
                         type="button" id="btn-cancel">取消
                 </button>
-                <button class="btn btn-info" type="button" id="btn-confirm">确定</button>
+                <button class="btn btn-info" type="button" id="btn-confirm" data-data="add">确定</button>
             </div>
         </div>
     </div>
@@ -306,6 +306,7 @@
 <script src="/resource/js/jquery.validate.min.js"></script>
 <script type="text/javascript" src="/resource/assets/gritter/js/jquery.gritter.js"></script>
 <script>
+    var currentId = '';
     Yi.regs = {
         nick: /^[\u4e00-\u9fa5a-zA-Z0-9]{4,15}$/,
         loginPass: ['6nb16', [4, /^\d+$/],
@@ -459,11 +460,48 @@
         var bindAccount = $('#bind-account').validate(options);
 
         $('#btn-modal-account').click(function() {
+            //让Modal状态为添加
+            $('#btn-confirm').attr('data-data', 'add');
+            $('.modal-title').text('绑定新账号');
+
+            //清空Modal里面的数值
+            $('#account-name').val('');
+            $('#buyer-name').val('');
+//                    $('#province').val(data.accountProvince);
+//                    $('#city').val(data.accountCity);
+//                    $('#area').val(data.accountArea);
+            $('#address').val('');
+            $('#phone').val('');
+
             var accountCount = $('table:visible tbody tr').length;
             if (accountCount >= 3) {
                 alert('对不起，该平台您已经添加了三个账号了');
                 return false;
             }
+        });
+
+        $('.btn-edit').click(function() {
+            //让Modal状态为更新
+            $('#btn-confirm').attr('data-data', 'edit');
+            $('.modal-title').text('更新账号');
+
+            var id = $(this).attr('data-data');
+            currentId = id;
+
+            $.get('/buyer/account/getOne?id=' + id, function(res) {
+                if (res.errno == 0) {
+                    var data = res.data;
+                    $('#account-name').val(data.accountName);
+                    $('#buyer-name').val(data.accountRealName);
+//                    $('#province').val(data.accountProvince);
+//                    $('#city').val(data.accountCity);
+//                    $('#area').val(data.accountArea);
+                    $('#address').val(data.accountAddress);
+                    $('#phone').val(data.accountPhone);
+                } else {
+                    Yi.error(res);
+                }
+            })
         });
 
         $('#btn-confirm').click(function() {
@@ -503,13 +541,25 @@
                     , accountPlatform: $('#select-platform .btn-info').attr('data-data')
                 };
 
-                $.post('/buyer/account/add', args, function(res) {
-                    if (res.errno == 0) {
-                        location.reload();
-                    } else {
-                        alert(res.errmsg);
-                    }
-                });
+                if ($(this).attr('data-data') == 'add') {
+                    $.post('/buyer/account/add', args, function(res) {
+                        if (res.errno == 0) {
+                            location.reload();
+                        } else {
+                            Yi.error(res);
+                        }
+                    });
+                } else if ($(this).attr('data-data') == 'edit') {
+                    args.id = currentId;
+                    $.post('/buyer/account/edit', args, function(res) {
+                        if (res.errno == 0) {
+                            alert('编辑成功');
+                            location.reload();
+                        } else {
+                            Yi.error(res);
+                        }
+                    });
+                }
 
             }
         })

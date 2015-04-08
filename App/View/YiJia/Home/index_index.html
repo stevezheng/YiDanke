@@ -72,7 +72,7 @@
             if (res.errno == 0) {
                 location.href = res.data;
             } else {
-                alert(res.errmsg);
+                Yi.error(res);
             }
         });
     });
