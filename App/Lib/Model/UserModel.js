@@ -150,9 +150,19 @@ module.exports = Model(function() {
     editQQ: function(id, qq) {
       var self = this;
 
-      return self
+      var deferred = getDefer();
+
+      if (!Yi.is.QQ(qq)) {
+        deferred.reject(new Error('QQ号格式不正确'));
+      }
+
+      var p = self
         .where({id: id})
-        .update({qq: qq})
+        .update({qq: qq});
+
+      deferred.resolve(p);
+
+      return deferred.promise;
     },
 
     /**
@@ -164,9 +174,19 @@ module.exports = Model(function() {
     editPhone: function(id, phone) {
       var self = this;
 
-      return self
+      var deferred = getDefer();
+
+      if (!Yi.is.phone(phone)) {
+        deferred.reject(new Error('手机号格式不正确'));
+      }
+
+      var p = self
         .where({id: id})
-        .update({phone: phone})
+        .update({phone: phone});
+
+      deferred.resolve(p);
+
+      return deferred.promise;
     },
 
     /**

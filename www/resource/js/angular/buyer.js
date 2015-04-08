@@ -28,12 +28,11 @@
         .success(function(res) {
           if (res.errno == 0) {
             alert(res.data);
-            $scope.qq = '';
+            location.reload();
+          } else {
+            alert(res.errmsg);
           }
         })
-        .error(function(error) {
-          console.error(error);
-        });
     };
 
     $scope.editPhone = function() {
@@ -46,16 +45,11 @@
         .success(function(res) {
           if (res.errno == 0) {
             alert(res.data);
-            $scope.phone = '';
+            location.reload();
+          } else {
+            alert(res.errmsg);
           }
         })
-        .error(function(error) {
-          console.error(error);
-        });
-    };
-
-    $scope.editPhone = function() {
-
     };
 
     $scope.editPassword = function() {
