@@ -8,6 +8,6 @@ global.ROOT_PATH = __dirname;
 //开启调试模式，线上环境需要关闭调试功能
 global.APP_DEBUG = true;
 //配置模板路径
-global.VIEW_PATH = path.dirname(__dirname) + '/App/View/Yijia';
+global.VIEW_PATH = path.dirname(__dirname) + '/App/View/YiJia';
 //加载thinkjs启动服务
 require('thinkjs');
