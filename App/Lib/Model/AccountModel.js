@@ -21,6 +21,13 @@ module.exports = Model(function() {
       }
     },
 
+    all: function(accountUserId) {
+      var self = this;
+      return self
+        .where({accountUserId: accountUserId})
+        .select()
+    },
+
     addOne: function(accountUserId, accountName, accountRealName, accountProvince, accountCity, accountArea, accountAddress, accountPhone, accountPlatform) {
       var self = this;
 

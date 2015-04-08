@@ -1,4 +1,6 @@
 var AccountModel = thinkRequire('AccountModel');
+var _ = require('underscore');
+
 module.exports = Controller("Buyer/BaseController", function(){
   "use strict";
   return {
@@ -7,7 +9,24 @@ module.exports = Controller("Buyer/BaseController", function(){
       self.assign('title', '绑定账号');
 
       if (self.isGet()) {
-        self.display();
+        var account = AccountModel();
+
+        account
+          .all(self.cUser.id)
+          .then(function(res) {
+            var taobaoAccounts = _.where(res, {accountPlatform: 'taobao'});
+            var tmallAccounts = _.where(res, {accountPlatform: 'tmall'});
+            var jdAccounts = _.where(res, {accountPlatform: 'jd'});
+            self.assign('statusMap', {
+              '0': '待审核'
+              , '1': '已通过'
+              , '2': '已拒绝'
+            });
+            self.assign('taobaoAccounts', taobaoAccounts);
+            self.assign('tmallAccounts', tmallAccounts);
+            self.assign('jdAccounts', jdAccounts);
+            self.display();
+          });
       }
 
       if (self.isPost()) {}

@@ -7,7 +7,7 @@
         <section class="wrapper">
             <section class="panel">
                 <header class="panel-heading">
-                    选择平坦
+                    选择平台
                 </header>
                 <div class="panel-body">
                     <div class="row">
@@ -26,7 +26,7 @@
                 <header class="panel-heading">
                     已绑定的账号
                     <span class="pull-right"><a data-toggle="modal"
-                                                href="#modal-account"><span
+                                                href="#modal-account" id="btn-modal-account"><span
                             class="error"><i class="icon-ok-circle"></i>&nbsp;绑定买号</span></a><span
                             style="font-size: 12px">(绑定买号及对应的收货信息，才可以接手任务)</span></span>
                 </header>
@@ -42,15 +42,34 @@
                         </tr>
                         </thead>
                         <tbody>
+                        <% if (taobaoAccounts.length == 0) { %>
                         <tr>
                             <td colspan="5">
                                 <div class="alert alert-warning fade in">
-                                    <strong><i
-                                            class="icon-warning-sign"></i></strong>
+                                    <strong><i class="icon-warning-sign"></i></strong>
                                     没有数据
                                 </div>
                             </td>
                         </tr>
+                        <% } else { %>
+                            <% for (var i = 0; i < taobaoAccounts.length; i++) { %>
+                            <% var account = taobaoAccounts[i]; %>
+                                <tr>
+                                    <th><%= account.accountName %></th>
+                                    <th>
+                                        <%= account.accountRealName %>,
+                                        <%= account.accountPhone %>,
+                                        <%= account.accountProvince %>
+                                        <%= account.accountCity %>
+                                        <%= account.accountArea %>
+                                        <%= account.accountAddress %>
+                                    </th>
+                                    <th><%= statusMap[account.accountStatus] %></th>
+                                    <th>[暂无]</th>
+                                    <th><%= account.accountComment || '[暂无]'%></th>
+                                </tr>
+                            <% } %>
+                        <% } %>
                         </tbody>
                     </table>
                     <table class="table" id="accounts-tmall"
@@ -65,34 +84,34 @@
                         </tr>
                         </thead>
                         <tbody>
+                        <% if (tmallAccounts.length == 0) { %>
                         <tr>
-                            <td>1</td>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
+                            <td colspan="5">
+                                <div class="alert alert-warning fade in">
+                                    <strong><i class="icon-warning-sign"></i></strong>
+                                    没有数据
+                                </div>
+                            </td>
                         </tr>
+                        <% } else { %>
+                        <% for (var i = 0; i < tmallAccounts.length; i++) { %>
+                        <% var account = tmallAccounts[i]; %>
                         <tr>
-                            <td>1</td>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
+                            <th><%= account.accountName %></th>
+                            <th>
+                                <%= account.accountRealName %>,
+                                <%= account.accountPhone %>,
+                                <%= account.accountProvince %>
+                                <%= account.accountCity %>
+                                <%= account.accountArea %>
+                                <%= account.accountAddress %>
+                            </th>
+                            <th><%= statusMap[account.accountStatus] %></th>
+                            <th>[暂无]</th>
+                            <th><%= account.accountComment || '[暂无]'%></th>
                         </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                        </tr>
+                        <% } %>
+                        <% } %>
                         </tbody>
                     </table>
                     <table class="table" id="accounts-jd"
@@ -107,34 +126,34 @@
                         </tr>
                         </thead>
                         <tbody>
+                        <% if (jdAccounts.length == 0) { %>
                         <tr>
-                            <td>1</td>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
+                            <td colspan="5">
+                                <div class="alert alert-warning fade in">
+                                    <strong><i class="icon-warning-sign"></i></strong>
+                                    没有数据
+                                </div>
+                            </td>
                         </tr>
+                        <% } else { %>
+                        <% for (var i = 0; i < jdAccounts.length; i++) { %>
+                        <% var account = jdAccounts[i]; %>
                         <tr>
-                            <td>1</td>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
+                            <th><%= account.accountName %></th>
+                            <th>
+                                <%= account.accountRealName %>,
+                                <%= account.accountPhone %>,
+                                <%= account.accountProvince %>
+                                <%= account.accountCity %>
+                                <%= account.accountArea %>
+                                <%= account.accountAddress %>
+                            </th>
+                            <th><%= statusMap[account.accountStatus] %></th>
+                            <th>[暂无]</th>
+                            <th><%= account.accountComment || '[暂无]'%></th>
                         </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                        </tr>
+                        <% } %>
+                        <% } %>
                         </tbody>
                     </table>
                 </div>
@@ -439,8 +458,15 @@
         new PCAS("province", "city", "area", "", "", "");
         var bindAccount = $('#bind-account').validate(options);
 
-        $('#btn-confirm').click(function() {
+        $('#btn-modal-account').click(function() {
+            var accountCount = $('table:visible tbody tr').length;
+            if (accountCount >= 3) {
+                alert('对不起，该平台您已经添加了三个账号了');
+                return false;
+            }
+        });
 
+        $('#btn-confirm').click(function() {
             if(bindAccount.form()) {
                 if (!$('#province').val()) {
                     $('#position-error').show();
@@ -479,24 +505,7 @@
 
                 $.post('/buyer/account/add', args, function(res) {
                     if (res.errno == 0) {
-
-                        $.gritter.add({
-                            // (string | mandatory) the heading of the notification
-                            title: '用户添加成功',
-                            // (string | mandatory) the text inside the notification
-                            text: '请耐心等待审核',
-                            // (string | optional) the image to display on the left
-                            // (bool | optional) if you want it to fade out on its own or just sit there
-                            sticky: false,
-                            // (int | optional) the time you want it to be alive for before fading out
-                            time: ''
-                        });
-
-                        $('#btn-cancel').click();
-                        $('#account-name').val('');
-                        $('#buyer-name').val('');
-                        $('#address').val('');
-                        $('#phone').val('');
+                        location.reload();
                     } else {
                         alert(res.errmsg);
                     }
