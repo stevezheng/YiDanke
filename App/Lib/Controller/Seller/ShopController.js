@@ -1,4 +1,4 @@
-var AccountModel = thinkRequire('AccountModel');
+var ShopModel = thinkRequire('ShopModel');
 var _ = require('underscore');
 
 module.exports = Controller("Seller/BaseController", function(){
@@ -6,25 +6,25 @@ module.exports = Controller("Seller/BaseController", function(){
   return {
     indexAction: function() {
       var self = this;
-      self.assign('title', '绑定账号');
+      self.assign('title', '绑定店铺');
 
       if (self.isGet()) {
-        var account = AccountModel();
+        var shop = ShopModel();
 
-        account
+        shop
           .all(self.cUser.id)
           .then(function(res) {
-            var taobaoAccounts = _.where(res, {accountPlatform: 'taobao'});
-            var tmallAccounts = _.where(res, {accountPlatform: 'tmall'});
-            var jdAccounts = _.where(res, {accountPlatform: 'jd'});
+            var taobaoShops = _.where(res, {shopPlatform: 'taobao'});
+            var tmallShops = _.where(res, {shopPlatform: 'tmall'});
+            var jdShops = _.where(res, {shopPlatform: 'jd'});
             self.assign('statusMap', {
               '0': '待审核'
               , '1': '已通过'
               , '2': '已拒绝'
             });
-            self.assign('taobaoAccounts', taobaoAccounts);
-            self.assign('tmallAccounts', tmallAccounts);
-            self.assign('jdAccounts', jdAccounts);
+            self.assign('taobaoShops', taobaoShops);
+            self.assign('tmallShops', tmallShops);
+            self.assign('jdShops', jdShops);
             self.display();
           });
       }
@@ -37,10 +37,10 @@ module.exports = Controller("Seller/BaseController", function(){
       self.assign('title', '');
     
       if (self.isGet()) {
-        var account = AccountModel();
+        var shop = ShopModel();
         var id = self.get('id');
 
-        account
+        shop
           .getOne(self.cUser.id, id)
           .then(function(res) {
             self.success(res);
@@ -62,19 +62,17 @@ module.exports = Controller("Seller/BaseController", function(){
       }
 
       if (self.isPost()) {
-        var accountName = self.post('accountName')
-          , accountRealName = self.post('accountRealName')
-          , accountProvince = self.post('accountProvince')
-          , accountCity = self.post('accountCity')
-          , accountArea = self.post('accountArea')
-          , accountAddress = self.post('accountAddress')
-          , accountPhone = self.post('accountPhone')
-          , accountPlatform = self.post('accountPlatform');
+        var shopName = self.post('shopName')
+          , shopUrl = self.post('shopUrl')
+          , shopProvince = self.post('shopProvince')
+          , shopCity = self.post('shopCity')
+          , shopArea = self.post('shopArea')
+          , shopPlatform = self.post('shopPlatform');
 
-        var account = AccountModel();
+        var shop = ShopModel();
 
-        account
-          .addOne(self.cUser.id, accountName, accountRealName, accountProvince , accountCity, accountArea, accountAddress , accountPhone, accountPlatform)
+        shop
+          .addOne(self.cUser.id, shopName, shopUrl, shopProvince , shopCity, shopArea, shopPlatform)
           .then(function(res) {
             return self.success('添加账号成功');
           })
@@ -95,20 +93,18 @@ module.exports = Controller("Seller/BaseController", function(){
 
       if (self.isPost()) {
 
-        var accountName = self.post('accountName')
-          , accountRealName = self.post('accountRealName')
-          , accountProvince = self.post('accountProvince')
-          , accountCity = self.post('accountCity')
-          , accountArea = self.post('accountArea')
-          , accountAddress = self.post('accountAddress')
-          , accountPhone = self.post('accountPhone')
-          , accountPlatform = self.post('accountPlatform')
+        var shopName = self.post('shopName')
+          , shopUrl = self.post('shopUrl')
+          , shopProvince = self.post('shopProvince')
+          , shopCity = self.post('shopCity')
+          , shopArea = self.post('shopArea')
+          , shopPlatform = self.post('shopPlatform')
           , id = self.post('id');
 
-        var account = AccountModel();
+        var shop = ShopModel();
 
-        account
-          .editOne(self.cUser.id, id, accountName, accountRealName, accountProvince , accountCity, accountArea, accountAddress , accountPhone, accountPlatform)
+        shop
+          .editOne(self.cUser.id, id, shopName, shopUrl, shopProvince , shopCity, shopArea, shopPlatform)
           .then(function(res) {
             return self.success('编辑账号成功');
           })

@@ -24,25 +24,26 @@
             </section>
             <section class="panel">
                 <header class="panel-heading">
-                    已绑定的账号
+                    已绑定的店铺
                     <span class="pull-right"><a data-toggle="modal"
-                                                href="#modal-account" id="btn-modal-account"><span
-                            class="error"><i class="icon-ok-circle"></i>&nbsp;绑定买号</span></a><span
-                            style="font-size: 12px">(绑定买号及对应的收货信息，才可以接手任务)</span></span>
+                                                href="#modal-shop" id="btn-modal-shop"><span
+                            class="error"><i class="icon-ok-circle"></i>&nbsp;绑定店铺</span></a><span
+                            style="font-size: 12px">(仅任务对应的买手可见，不会被泄漏)</span></span>
                 </header>
                 <div class="panel-body">
-                    <table class="table" id="accounts-taobao">
+                    <table class="table" id="shops-taobao">
                         <thead>
                         <tr>
-                            <th>买号</th>
-                            <th>收货信息</th>
+                            <th>店铺账号</th>
+                            <th>发货地址</th>
+                            <th>店铺网址</th>
                             <th>状态</th>
                             <th>操作</th>
                             <th>备注</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <% if (taobaoAccounts.length == 0) { %>
+                        <% if (taobaoShops.length == 0) { %>
                         <tr>
                             <td colspan="5">
                                 <div class="alert alert-warning fade in">
@@ -52,39 +53,43 @@
                             </td>
                         </tr>
                         <% } else { %>
-                            <% for (var i = 0; i < taobaoAccounts.length; i++) { %>
-                            <% var account = taobaoAccounts[i]; %>
+                            <% for (var i = 0; i < taobaoShops.length; i++) { %>
+                            <% var shop = taobaoShops[i]; %>
                                 <tr>
-                                    <th><%= account.accountName %></th>
+                                    <th><%= shop.shopName %></th>
                                     <th>
-                                        <%= account.accountRealName %>,
-                                        <%= account.accountPhone %>,
-                                        <%= account.accountProvince %>
-                                        <%= account.accountCity %>
-                                        <%= account.accountArea %>
-                                        <%= account.accountAddress %>
+                                        <%= shop.shopProvince %>
+                                        -
+                                        <%= shop.shopCity %>
+                                        -
+                                        <%= shop.shopArea %>
                                     </th>
-                                    <th><%= statusMap[account.accountStatus] %></th>
-                                    <th><a href="#modal-account" data-toggle="modal" data-data="<%= account.id %>" class="btn-edit">编辑</a></th>
-                                    <th><%= account.accountComment || '[暂无]'%></th>
+                                    <th><%= shop.shopUrl %></th>
+                                    <th><%= statusMap[shop.shopStatus] %></th>
+                                    <% if (shop.shopStatus == 0) { %>
+                                    <th><a href="#modal-shop" data-toggle="modal" data-data="<%= shop.id %>" class="btn-edit">编辑</a></th>
+                                    <% } else { %>
+                                    <th>[暂无]</th>
+                                    <% } %>
+                                    <th><%= shop.shopComment || '[暂无]'%></th>
                                 </tr>
                             <% } %>
                         <% } %>
                         </tbody>
                     </table>
-                    <table class="table" id="accounts-tmall"
+                    <table class="table" id="shops-tmall"
                            style="display: none;">
                         <thead>
                         <tr>
-                            <th>买号</th>
-                            <th>收货信息</th>
+                            <th>店铺账号</th>
+                            <th>发货地址</th>
+                            <th>店铺网址</th>
                             <th>状态</th>
                             <th>操作</th>
-                            <th>备注</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <% if (tmallAccounts.length == 0) { %>
+                        <% if (tmallShops.length == 0) { %>
                         <tr>
                             <td colspan="5">
                                 <div class="alert alert-warning fade in">
@@ -94,39 +99,43 @@
                             </td>
                         </tr>
                         <% } else { %>
-                        <% for (var i = 0; i < tmallAccounts.length; i++) { %>
-                        <% var account = tmallAccounts[i]; %>
+                        <% for (var i = 0; i < tmallShops.length; i++) { %>
+                        <% var shop = tmallShops[i]; %>
                         <tr>
-                            <th><%= account.accountName %></th>
+                            <th><%= shop.shopName %></th>
                             <th>
-                                <%= account.accountRealName %>,
-                                <%= account.accountPhone %>,
-                                <%= account.accountProvince %>
-                                <%= account.accountCity %>
-                                <%= account.accountArea %>
-                                <%= account.accountAddress %>
+                                <%= shop.shopProvince %>
+                                -
+                                <%= shop.shopCity %>
+                                -
+                                <%= shop.shopArea %>
                             </th>
-                            <th><%= statusMap[account.accountStatus] %></th>
-                            <th><a href="#modal-account" data-toggle="modal" data-data="<%= account.id %>" class="btn-edit">编辑</a></th>
-                            <th><%= account.accountComment || '[暂无]'%></th>
+                            <th><%= shop.shopUrl %></th>
+                            <th><%= statusMap[shop.shopStatus] %></th>
+                            <% if (shop.shopStatus == 0) { %>
+                            <th><a href="#modal-shop" data-toggle="modal" data-data="<%= shop.id %>" class="btn-edit">编辑</a></th>
+                            <% } else { %>
+                            <th>[暂无]</th>
+                            <% } %>
+                            <th><%= shop.shopComment || '[暂无]'%></th>
                         </tr>
                         <% } %>
                         <% } %>
                         </tbody>
                     </table>
-                    <table class="table" id="accounts-jd"
+                    <table class="table" id="shops-jd"
                            style="display: none;">
                         <thead>
                         <tr>
-                            <th>买号</th>
-                            <th>收货信息</th>
+                            <th>店铺账号</th>
+                            <th>发货地址</th>
+                            <th>店铺网址</th>
                             <th>状态</th>
                             <th>操作</th>
-                            <th>备注</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <% if (jdAccounts.length == 0) { %>
+                        <% if (jdShops.length == 0) { %>
                         <tr>
                             <td colspan="5">
                                 <div class="alert alert-warning fade in">
@@ -136,21 +145,25 @@
                             </td>
                         </tr>
                         <% } else { %>
-                        <% for (var i = 0; i < jdAccounts.length; i++) { %>
-                        <% var account = jdAccounts[i]; %>
+                        <% for (var i = 0; i < jdShops.length; i++) { %>
+                        <% var shop = jdShops[i]; %>
                         <tr>
-                            <th><%= account.accountName %></th>
+                            <th><%= shop.shopName %></th>
                             <th>
-                                <%= account.accountRealName %>,
-                                <%= account.accountPhone %>,
-                                <%= account.accountProvince %>
-                                <%= account.accountCity %>
-                                <%= account.accountArea %>
-                                <%= account.accountAddress %>
+                                <%= shop.shopProvince %>
+                                -
+                                <%= shop.shopCity %>
+                                -
+                                <%= shop.shopArea %>
                             </th>
-                            <th><%= statusMap[account.accountStatus] %></th>
-                            <th><a href="#modal-account" data-toggle="modal" data-data="<%= account.id %>" class="btn-edit">编辑</a></th>
-                            <th><%= account.accountComment || '[暂无]'%></th>
+                            <th><%= shop.shopUrl %></th>
+                            <th><%= statusMap[shop.shopStatus] %></th>
+                            <% if (shop.shopStatus == 0) { %>
+                            <th><a href="#modal-shop" data-toggle="modal" data-data="<%= shop.id %>" class="btn-edit">编辑</a></th>
+                            <% } else { %>
+                            <th>[暂无]</th>
+                            <% } %>
+                            <th><%= shop.shopComment || '[暂无]'%></th>
                         </tr>
                         <% } %>
                         <% } %>
@@ -164,28 +177,29 @@
 </section>
 <!-- Modal -->
 <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog"
-     tabindex="-1" id="modal-account" class="modal fade">
+     tabindex="-1" id="modal-shop" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"
                         aria-hidden="true">&times;</button>
-                <h4 class="modal-title">绑定新账号</h4>
+                <h4 class="modal-title">绑定新店铺</h4>
             </div>
-            <form class="modal-body form-horizontal cmxform tasi-form" id="bind-account">
+            <form class="modal-body form-horizontal cmxform tasi-form" id="bind-shop">
                 <div class="form-group">
-                    <label for="account-name" class="control-label col-lg-3">用户昵称</label>
-                    <div class="col-lg-4">
-                        <input type="text" class="form-control valid" id="account-name" name="account-name"/>
-                    </div>
-                    <p style="font-size: 12px;"> 淘宝平台：买号信用需大于11点，两心以上，不能填写手机号</p>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-lg-3">收货人姓名</label>
+                    <label class="control-label col-lg-3">店铺首页地址</label>
                     <div class="col-lg-4"><input type="text"
                                                  class="form-control valid"
-                                                 name="seller-name"
-                                                 id="seller-name"/></div>
+                                                 name="shop-url"
+                                                 id="shop-url"/></div>
+                    <p style="font-size: 12px;">(店铺绑定后无法修改)</p>
+                </div>
+                <div class="form-group">
+                    <label for="shop-name" class="control-label col-lg-3">店铺账号</label>
+                    <div class="col-lg-4">
+                        <input type="text" class="form-control valid" id="shop-name" name="shop-name"/>
+                    </div>
+                    <p style="font-size: 12px;">(店铺绑定后无法修改)</p>
                 </div>
                 <div class="form-group">
                     <label class="col-lg-3 form-label">所在地区</label>
@@ -277,19 +291,6 @@
                         <label id="position-error" class="error" style="display: none;">请选择所在地</label>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-lg-3 form-label">街道地址</label>
-                    <div class="col-lg-4"><input type="text"
-                                                 class="form-control valid"
-                                                 name="address" id="address"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-label col-lg-3">收货人手机</label>
-                    <div class="col-lg-4"><input type="text"
-                                                 class="form-control valid"
-                                                 name="phone" id="phone"/></div>
-                </div>
             </form>
             <div class="modal-footer">
                 <button data-dismiss="modal" class="btn btn-default"
@@ -304,7 +305,6 @@
 <% include ../common_footer.html %>
 <script src="/resource/js/location.js"></script>
 <script src="/resource/js/jquery.validate.min.js"></script>
-<script type="text/javascript" src="/resource/assets/gritter/js/jquery.gritter.js"></script>
 <script>
     var currentId = '';
     Yi.regs = {
@@ -405,42 +405,14 @@
         var options = {
             onkeyup: false,
             rules: {
-                'account-name': {
-                    required: true
-                },
-                'seller-name': {
-                    minlength: 2,
-                    maxwords: 6,
-                    required: true
-                },
-                'address': {
-                    minlength: 5,
-                    maxwords: 50,
-                    required: true
-                },
-                'phone': {
-                    mobile: true,
+                'shop-name': {
                     required: true
                 }
             },
 
             messages: {
-                'account-name': {
-                    required:"请输入用户昵称"
-                },
-                'seller-name': {
-                    required:"请输入收货人姓名",
-                    minlength: '收货人姓名至少2个字符',
-                    maxwords: '收货人姓名最多6个字符'
-                },
-                'address': {
-                    required: "请输入街道地址",
-                    minlength: "街道地址至少5个字符",
-                    maxwords: '收货人姓名最多50个字符'
-                },
-                'phone': {
-                    mobile: '请输入正确的手机号',
-                    required: "请输入手机"
+                'shop-name': {
+                    required:"请输入店铺账号"
                 }
             }
         };
@@ -454,28 +426,23 @@
             self.removeClass('btn-default').addClass('btn-info');
 
             $('table').hide();
-            $('#accounts-' + id).show();
+            $('#shops-' + id).show();
         });
         new PCAS("province", "city", "area", "", "", "");
-        var bindAccount = $('#bind-account').validate(options);
+        var bindShop = $('#bind-shop').validate(options);
 
-        $('#btn-modal-account').click(function() {
+        $('#btn-modal-shop').click(function() {
             //让Modal状态为添加
             $('#btn-confirm').attr('data-data', 'add');
-            $('.modal-title').text('绑定新账号');
+            $('.modal-title').text('绑定新店铺');
 
             //清空Modal里面的数值
-            $('#account-name').val('');
-            $('#seller-name').val('');
-//                    $('#province').val(data.accountProvince);
-//                    $('#city').val(data.accountCity);
-//                    $('#area').val(data.accountArea);
-            $('#address').val('');
-            $('#phone').val('');
+            $('#shop-name').val('');
+            $('#shop-url').val('');
 
-            var accountCount = $('table:visible tbody tr').length;
-            if (accountCount >= 3) {
-                alert('对不起，该平台您已经添加了三个账号了');
+            var shopCount = $('table:visible tbody tr').length;
+            if (shopCount >= 3) {
+                alert('对不起，该平台您已经添加了三个店铺了');
                 return false;
             }
         });
@@ -488,16 +455,16 @@
             var id = $(this).attr('data-data');
             currentId = id;
 
-            $.get('/seller/account/getOne?id=' + id, function(res) {
+            $.get('/seller/shop/getOne?id=' + id, function(res) {
                 if (res.errno == 0) {
                     var data = res.data;
-                    $('#account-name').val(data.accountName);
-                    $('#seller-name').val(data.accountRealName);
-//                    $('#province').val(data.accountProvince);
-//                    $('#city').val(data.accountCity);
-//                    $('#area').val(data.accountArea);
-                    $('#address').val(data.accountAddress);
-                    $('#phone').val(data.accountPhone);
+                    if (data.status == 1) {
+                        alert('店铺绑定后无法进行修改');
+                        return false;
+                    }
+
+                    $('#shop-name').val(data.shopName);
+                    $('#shop-url').val(data.shopUrl);
                 } else {
                     Yi.error(res);
                 }
@@ -505,7 +472,7 @@
         });
 
         $('#btn-confirm').click(function() {
-            if(bindAccount.form()) {
+            if(bindShop.form()) {
                 if (!$('#province').val()) {
                     $('#position-error').show();
                     $('#position-error').text('请选择省份');
@@ -531,18 +498,16 @@
                 }
 
                 var args = {
-                    accountName: $('#account-name').val()
-                    , accountRealName: $('#seller-name').val()
-                    , accountProvince: $('#province').val()
-                    , accountCity: $('#city').val()
-                    , accountArea: $('#area').val()
-                    , accountAddress: $('#address').val()
-                    , accountPhone: $('#phone').val()
-                    , accountPlatform: $('#select-platform .btn-info').attr('data-data')
+                    shopName: $('#shop-name').val()
+                    , shopUrl: $('#shop-url').val()
+                    , shopProvince: $('#province').val()
+                    , shopCity: $('#city').val()
+                    , shopArea: $('#area').val()
+                    , shopPlatform: $('#select-platform .btn-info').attr('data-data')
                 };
 
                 if ($(this).attr('data-data') == 'add') {
-                    $.post('/seller/account/add', args, function(res) {
+                    $.post('/seller/shop/add', args, function(res) {
                         if (res.errno == 0) {
                             location.reload();
                         } else {
@@ -551,7 +516,7 @@
                     });
                 } else if ($(this).attr('data-data') == 'edit') {
                     args.id = currentId;
-                    $.post('/seller/account/edit', args, function(res) {
+                    $.post('/seller/shop/edit', args, function(res) {
                         if (res.errno == 0) {
                             alert('编辑成功');
                             location.reload();
