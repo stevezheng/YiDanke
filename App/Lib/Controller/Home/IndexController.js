@@ -1,4 +1,6 @@
 var UserModel = thinkRequire('UserModel');
+var LogUserModel = thinkRequire('LogUserModel');
+
 module.exports = Controller("Home/BaseController", function () {
   "use strict";
   return {
@@ -25,14 +27,25 @@ module.exports = Controller("Home/BaseController", function () {
               self.session('cUser', data);
               var route = data.type == 0 ? '/buyer' : '/seller';
 
+              var ip = self.ip();
+              console.log(ip);
+
+              //更新登陆信息
               user
-                .updateLoginData(data.id, self.ip())
+                .updateLoginData(data.id, ip)
                 .then(function() {
+                  //登陆日志
+                  var logUser = LogUserModel();
+                  return logUser.login(data.id, data.username, ip)
+                })
+                .then(function() {
+                  //登陆成功
                   return self.success(route);
                 });
             }
           })
           .catch(function(err) {
+            //登陆失败
             var data = JSON.parse(err.json_message);
             return self.error(500, '登陆失败', data);
           })
