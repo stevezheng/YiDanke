@@ -156,11 +156,21 @@ module.exports = Model(function() {
         deferred.reject(new Error('QQ号格式不正确'));
       }
 
-      var p = self
-        .where({id: id})
-        .update({qq: qq});
+      self
+        .where({qq: qq})
+        .find()
+        .then(function(res) {
+          if (!isEmpty(res)) {
+            deferred.reject(new Error('该QQ号已存在'));
+          } else {
+            var p = self
+              .where({id: id})
+              .update({qq: qq});
 
-      deferred.resolve(p);
+            deferred.resolve(p);
+          }
+        });
+
 
       return deferred.promise;
     },
@@ -180,11 +190,20 @@ module.exports = Model(function() {
         deferred.reject(new Error('手机号格式不正确'));
       }
 
-      var p = self
-        .where({id: id})
-        .update({phone: phone});
+      self
+        .where({phone: phone})
+        .find()
+        .then(function(res) {
+          if (!isEmpty(res)) {
+            deferred.reject(new Error('该手机号已存在'));
+          } else {
+            var p = self
+              .where({id: id})
+              .update({phone: phone});
 
-      deferred.resolve(p);
+            deferred.resolve(p);
+          }
+        });
 
       return deferred.promise;
     },
