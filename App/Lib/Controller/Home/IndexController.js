@@ -28,7 +28,6 @@ module.exports = Controller("Home/BaseController", function () {
               var route = data.type == 0 ? '/buyer' : '/seller';
 
               var ip = self.ip();
-              console.log(ip);
 
               //更新登陆信息
               user
@@ -36,9 +35,8 @@ module.exports = Controller("Home/BaseController", function () {
                 .then(function() {
                   //登陆日志
                   var logUser = LogUserModel();
-                  return logUser.login(data.id, data.username, ip)
-                })
-                .then(function() {
+                  logUser.login(data.id, data.username, ip);
+
                   //登陆成功
                   return self.success(route);
                 });

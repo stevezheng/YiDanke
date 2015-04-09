@@ -1,6 +1,6 @@
 create table if not exists `yi_log_user` (
     `id` int(11) unsigned not null auto_increment,
-    `logUserType` tinyint(1) not null default '0' comment '操作类型 -1：删除, 0：登陆, 1：注册, 2：更新',
+    `logUserType` tinyint(1) not null default '0' comment '操作类型 -1：删除, 0：登陆, 1：注册, 2：更新, 3:退出',
     `logUserId` int(11) not null comment '用户id',
     `logUserComment` varchar(512) not null default '' comment '日志内容',
     `logUserIP` varchar(32) not null default '' comment '操作用户IP',
