@@ -74,11 +74,16 @@ module.exports = Controller("Seller/BaseController", function(){
         shop
           .addOne(self.cUser.id, shopName, shopUrl, shopProvince , shopCity, shopArea, shopPlatform)
           .then(function(res) {
-            return self.success('添加账号成功');
+            console.log(res);
+            if (res.type == 'exist') {
+              return self.error(500, '该店铺地址已存在');
+            } else {
+              return self.success('添加店铺成功');
+            }
           })
           .catch(function(err) {
             var data = JSON.parse(err.json_message);
-            return self.error(500, '添加账号失败', data);
+            return self.error(500, '添加店铺失败', data);
           })
       }
     },
@@ -106,11 +111,11 @@ module.exports = Controller("Seller/BaseController", function(){
         shop
           .editOne(self.cUser.id, id, shopName, shopUrl, shopProvince , shopCity, shopArea, shopPlatform)
           .then(function(res) {
-            return self.success('编辑账号成功');
+            return self.success('编辑店铺成功');
           })
           .catch(function(err) {
             var data = JSON.parse(err.json_message);
-            return self.error(500, '编辑账号失败', data);
+            return self.error(500, '编辑店铺失败', data);
           })
       }
     },

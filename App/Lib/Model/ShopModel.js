@@ -20,9 +20,10 @@ module.exports = Model(function() {
         }
       },
       'shopUrl': {
-        valid: ['required']
+        valid: ['required', 'url']
         , msg: {
           required: '店铺名不能为空'
+          , url: '店铺名网址格式不正确'
         }
       },
       'shopProvince': {
@@ -63,8 +64,10 @@ module.exports = Model(function() {
     addOne: function(shopUserId, shopName, shopUrl, shopProvince, shopCity, shopArea, shopPlatform) {
       var self = this;
 
+      //todo:这里应该要根据shopPlatform判断shopUrl是否正确
+
       return self
-        .add({
+        .thenAdd({
           'shopUserId': shopUserId
           , 'shopName': shopName
           , 'shopUrl': shopUrl
@@ -72,7 +75,9 @@ module.exports = Model(function() {
           , 'shopCity': shopCity
           , 'shopArea': shopArea
           , 'shopPlatform': shopPlatform
-        });
+        }, {
+          'shopUrl': shopUrl
+        }, true);
     },
 
     editOne: function(shopUserId, id, shopName, shopUrl, shopProvince, shopCity, shopArea, shopPlatform) {
