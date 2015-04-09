@@ -1,3 +1,5 @@
+var moment = require('moment');
+
 module.exports = Model(function() {
   return {
     fields: {
@@ -140,6 +142,20 @@ module.exports = Model(function() {
       return self
         .where(args)
         .find()
+    },
+
+    /**
+     * 更新用户登陆信息
+     * @param id
+     * @param ip
+     * @returns {*}
+     */
+    updateLoginData: function(id, ip) {
+      var self = this;
+
+      return self
+        .where({id: id})
+        .update({loginTime: moment().unix(), lastIP: ip})
     },
 
     /**

@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "author": {},
   "dependencies": {
+    "moment": "^2.10.1",
     "thinkjs": "*",
     "underscore": "^1.8.3",
     "yi-utils": "^1.0.0"

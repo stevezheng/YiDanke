@@ -24,11 +24,17 @@ module.exports = Controller("Home/BaseController", function () {
             } else {
               self.session('cUser', data);
               var route = data.type == 0 ? '/buyer' : '/seller';
-              return self.success(route);
+
+              user
+                .updateLoginData(data.id, self.ip())
+                .then(function() {
+                  return self.success(route);
+                });
             }
           })
-          .then(function () {
-            return self.redirect('/index/login');
+          .catch(function(err) {
+            var data = JSON.parse(err.json_message);
+            return self.error(500, '登陆失败', data);
           })
       }
     },
