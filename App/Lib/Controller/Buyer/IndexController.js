@@ -1,4 +1,6 @@
 var UserModel = thinkRequire('UserModel');
+var LogUserModel = thinkRequire('LogUserModel');
+
 module.exports = Controller("Buyer/BaseController", function(){
   "use strict";
   return {
@@ -31,6 +33,10 @@ module.exports = Controller("Buyer/BaseController", function(){
         user
           .editPassword(self.cUser.id, oldPassword, password)
           .then(function() {
+            //用户更新日志
+            var logUser = LogUserModel();
+            logUser.update(self.cUser.id, self.cUser.username, {tradePassword: '******'}, self.ip());
+
             return self.success('修改密码成功');
           })
           .catch(function(err) {
@@ -53,6 +59,9 @@ module.exports = Controller("Buyer/BaseController", function(){
         user
           .editTradePassword(self.cUser.id, oldPassword, password)
           .then(function() {
+            //用户更新日志
+            var logUser = LogUserModel();
+            logUser.update(self.cUser.id, self.cUser.username, {tradePassword: '******'}, self.ip());
             return self.success('修改支付密码成功');
           })
           .catch(function(err) {
@@ -74,6 +83,10 @@ module.exports = Controller("Buyer/BaseController", function(){
         user
           .addTradePassword(self.cUser.id, password)
           .then(function() {
+            //用户更新日志
+            var logUser = LogUserModel();
+            logUser.update(self.cUser.id, self.cUser.username, {tradePassword: '******'}, self.ip());
+
             return self.success('添加支付密码成功');
           })
           .catch(function(err) {
@@ -95,6 +108,10 @@ module.exports = Controller("Buyer/BaseController", function(){
         user
           .editQQ(self.cUser.id, qq)
           .then(function() {
+            //用户更新日志
+            var logUser = LogUserModel();
+            logUser.update(self.cUser.id, self.cUser.username, {qq: qq}, self.ip());
+
             return self.success('修改QQ成功');
           })
           .catch(function(err) {
@@ -116,6 +133,10 @@ module.exports = Controller("Buyer/BaseController", function(){
         user
           .editPhone(self.cUser.id, phone)
           .then(function() {
+            //用户更新日志
+            var logUser = LogUserModel();
+            logUser.update(self.cUser.id, self.cUser.username, {phone: phone}, self.ip());
+
             return self.success('修改手机号成功');
           })
           .catch(function(err) {

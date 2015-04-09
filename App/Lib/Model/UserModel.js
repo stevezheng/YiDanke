@@ -107,6 +107,7 @@ module.exports = Model(function() {
      */
     reg: function(username, password, email, qq, phone, type, province, city, area) {
       var self = this;
+
       return self
         .thenAdd({
           username: username
@@ -170,22 +171,22 @@ module.exports = Model(function() {
 
       if (!Yi.is.QQ(qq)) {
         deferred.reject(new Error('QQ号格式不正确'));
+      } else {
+        self
+          .where({qq: qq})
+          .find()
+          .then(function(res) {
+            if (!isEmpty(res)) {
+              deferred.reject(new Error('该QQ号已存在'));
+            } else {
+              var p = self
+                .where({id: id})
+                .update({qq: qq});
+
+              deferred.resolve(p);
+            }
+          });
       }
-
-      self
-        .where({qq: qq})
-        .find()
-        .then(function(res) {
-          if (!isEmpty(res)) {
-            deferred.reject(new Error('该QQ号已存在'));
-          } else {
-            var p = self
-              .where({id: id})
-              .update({qq: qq});
-
-            deferred.resolve(p);
-          }
-        });
 
 
       return deferred.promise;
@@ -204,22 +205,22 @@ module.exports = Model(function() {
 
       if (!Yi.is.phone(phone)) {
         deferred.reject(new Error('手机号格式不正确'));
+      } else {
+        self
+          .where({phone: phone})
+          .find()
+          .then(function(res) {
+            if (!isEmpty(res)) {
+              deferred.reject(new Error('该手机号已存在'));
+            } else {
+              var p = self
+                .where({id: id})
+                .update({phone: phone});
+
+              deferred.resolve(p);
+            }
+          });
       }
-
-      self
-        .where({phone: phone})
-        .find()
-        .then(function(res) {
-          if (!isEmpty(res)) {
-            deferred.reject(new Error('该手机号已存在'));
-          } else {
-            var p = self
-              .where({id: id})
-              .update({phone: phone});
-
-            deferred.resolve(p);
-          }
-        });
 
       return deferred.promise;
     },
@@ -240,13 +241,10 @@ module.exports = Model(function() {
           if (cUser.password != md5(oldPassword)) {
             throw new Error('密码不正确');
           } else {
-            return cUser;
+            return self
+              .where({id: cUser.id})
+              .update({password: md5(password)})
           }
-        })
-        .then(function(cUser) {
-          return self
-            .where({id: cUser.id})
-            .update({password: md5(password)})
         })
     },
 

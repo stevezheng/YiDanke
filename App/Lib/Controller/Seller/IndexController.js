@@ -1,4 +1,6 @@
 var UserModel = thinkRequire('UserModel');
+var logUser = thinkRequire('LogUserModel')();
+
 module.exports = Controller("Seller/BaseController", function(){
   "use strict";
   return {
@@ -31,6 +33,7 @@ module.exports = Controller("Seller/BaseController", function(){
         user
           .editPassword(self.cUser.id, oldPassword, password)
           .then(function() {
+            logUser.update(self.cUser.id, self.cUser.username, {password: '******'}, self.ip());
             return self.success('修改密码成功');
           })
           .catch(function(err) {
@@ -53,6 +56,7 @@ module.exports = Controller("Seller/BaseController", function(){
         user
           .editTradePassword(self.cUser.id, oldPassword, password)
           .then(function() {
+            logUser.update(self.cUser.id, self.cUser.username, {tradePassword: '******'}, self.ip());
             return self.success('修改支付密码成功');
           })
           .catch(function(err) {
@@ -74,6 +78,7 @@ module.exports = Controller("Seller/BaseController", function(){
         user
           .addTradePassword(self.cUser.id, password)
           .then(function() {
+            logUser.update(self.cUser.id, self.cUser.username, {tradePassword: '******'}, self.ip());
             return self.success('添加支付密码成功');
           })
           .catch(function(err) {
@@ -95,6 +100,7 @@ module.exports = Controller("Seller/BaseController", function(){
         user
           .editQQ(self.cUser.id, qq)
           .then(function() {
+            logUser.update(self.cUser.id, self.cUser.username, {qq: qq}, self.ip());
             return self.success('修改QQ成功');
           })
           .catch(function(err) {
@@ -116,6 +122,7 @@ module.exports = Controller("Seller/BaseController", function(){
         user
           .editPhone(self.cUser.id, phone)
           .then(function() {
+            logUser.update(self.cUser.id, self.cUser.username, {phone: phone}, self.ip());
             return self.success('修改手机号成功');
           })
           .catch(function(err) {

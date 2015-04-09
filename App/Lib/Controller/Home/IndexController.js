@@ -76,6 +76,10 @@ module.exports = Controller("Home/BaseController", function () {
             if (res.type == 'exist') {
               self.success('exist');
             } else if (res.type == 'add') {
+              //注册日志
+              var logUser = LogUserModel();
+              logUser.reg(res.id, username, ip);
+
               self.success(res.id);
             }
           })
@@ -94,6 +98,10 @@ module.exports = Controller("Home/BaseController", function () {
         self
           .session()
           .then(function () {
+            //退出日志
+            var logUser = LogUserModel();
+            logUser.logout(self.cUser.id, self.cUser.username, ip);
+
             self.redirect('/');
           })
       }

@@ -70,7 +70,7 @@ module.exports = Model(function() {
      */
     update: function(userId, userUsername, userData, userIP) {
       var self = this;
-
+      
       return self
         .add({
           logUserId: userId
@@ -81,6 +81,9 @@ module.exports = Model(function() {
             moment().format('YYYY-MM-DD HH:mm:ss'),
             JSON.stringify(userData)
           )
+        })
+        .catch(function(err) {
+          console.error(err);
         })
     },
 
