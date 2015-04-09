@@ -1,0 +1,133 @@
+<!--header start-->
+<header class="header white-bg">
+    <div class="sidebar-toggle-box">
+        <div data-original-title="隐藏/显示导航栏" data-placement="right"
+             class="icon-reorder tooltips"></div>
+    </div>
+    <!--logo start-->
+    <a href="/seller" class="logo">一家<span>网</span></a>
+    <!--logo end-->
+    <div class="nav notify-row" id="top_menu">
+        <!--  notification start -->
+        <ul class="nav top-menu">
+            <li><a href="/seller/tasklist">任务列表</a></li>
+            <li><a href="http://bbs.yijia09.com" target="_blank">论坛</a></li>
+        </ul>
+        <!--  notification end -->
+    </div>
+    <div class="nav notify-row pull-right " style="margin-left: 0;">
+        <a class="btn btn-info" href="/index/logout">退出</a>
+    </div>
+    <div class="nav notify-row pull-right">
+        <ul class="nav top-menu">
+            <li><a href="#"><%= cUser.username %></a></li>
+            <li><a href="#">押金: <span class="error"><%= cUser.money %></span>&nbsp;元</a></li>
+            <li><a href="#">流量: <span class="error"><%= cUser.pv %></span>&nbsp;IP</a></li>
+            <li><a href="/seller/pv" style="color: #58c9f3">[充值]</a></li>
+            <li><a href="#">金币: <span class="error"><%= cUser.coin %></span>&nbsp;枚</a></li>
+            <li><a href="/seller/money" style="color: #58c9f3">[充值]</a></li>
+            <li><a href="#">经验: <span class="error"><%= cUser.exp %></span>&nbsp;点</a></li>
+            <% if (cUser.status == 2) { %>
+            <li><a href="#">会员到期时间: 2015-05-02</a></li>
+            <li><a href="/seller/member" style="color: #58c9f3">[续费]</a></li>
+            <% } else { %>
+            <li><a href="#"><%= StatusService.user.status[cUser.status] %></a></li>
+            <li><a href="/seller/member" style="color: #58c9f3">[升级会员]</a></li>
+            <% } %>
+        </ul>
+    </div>
+</header>
+<!--header end-->
+<!--sidebar start-->
+<aside>
+    <div id="sidebar" class="nav-collapse ">
+        <!-- sidebar menu start-->
+        <ul class="sidebar-menu" id="nav-accordion">
+            <li>
+                <% if (http.pathname == 'seller') { %>
+                <a class="active" href="/seller">
+                    <i class="icon-user"></i>
+                    <span>个人中心</span>
+                </a>
+                <% } else { %>
+                <a href="/seller">
+                    <i class="icon-user"></i>
+                    <span>个人中心</span>
+                </a>
+                <% } %>
+            </li>
+
+            <li>
+                <% if (http.pathname == 'seller/tasks') { %>
+                <a class="active" href="/seller/tasks">
+                    <i class="icon-calendar"></i>
+                    <span>我的任务</span>
+                </a>
+                <% } else { %>
+                <a class="" href="/seller/tasks">
+                    <i class="icon-calendar"></i>
+                    <span>我的任务</span>
+                </a>
+                <% } %>
+            </li>
+
+            <li>
+                <% if (http.pathname == 'seller/publish') { %>
+                <a class="active" href="/seller/publish">
+                    <i class="icon-calendar"></i>
+                    <span>发布任务</span>
+                </a>
+                <% } else { %>
+                <a class="" href="/seller/publish">
+                    <i class="icon-calendar"></i>
+                    <span>发布任务</span>
+                </a>
+                <% } %>
+            </li>
+
+            <li>
+                <% if (http.pathname == 'seller/shop') { %>
+                <a class="active" href="/seller/shop">
+                    <i class="icon-building"></i>
+                    <span>绑定店铺</span>
+                </a>
+                <% } else { %>
+                <a class="" href="/seller/shop">
+                    <i class="icon-building"></i>
+                    <span>绑定店铺</span>
+                </a>
+                <% } %>
+            </li>
+
+            <li>
+                <% if (http.pathname == 'seller/money') { %>
+                <a class="active" href="/seller/money">
+                    <i class="icon-yen"></i>
+                    <span>资金管理</span>
+                </a>
+                <% } else { %>
+                <a class="" href="/seller/money">
+                    <i class="icon-yen"></i>
+                    <span>资金管理</span>
+                </a>
+                <% } %>
+            </li>
+
+            <li>
+                <% if (http.pathname == 'seller/withdraw') { %>
+                <a class="active" href="/seller/withdraw">
+                    <i class="icon-dollar"></i>
+                    <span>提现管理</span>
+                </a>
+                <% } else { %>
+                <a class="" href="/seller/withdraw">
+                    <i class="icon-dollar"></i>
+                    <span>提现管理</span>
+                </a>
+                <% } %>
+            </li>
+        </ul>
+        <!-- sidebar menu end-->
+    </div>
+</aside>
+<!--sidebar end-->

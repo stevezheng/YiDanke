@@ -1,0 +1,152 @@
+<% include ../common_header.html %>
+<section id="container">
+    <% include ./seller_nav.html %>
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+                <section class="panel">
+                    <header class="panel-heading">
+                        提现设置
+                    </header>
+                    <div class="panel-body">
+                        <header class="panel-heading tab-bg-blue">
+                            <ul class="nav nav-tabs nav-justified ">
+                                <li class="active">
+                                    <a href="#account" data-toggle="tab">
+                                        提现/退款账号
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#coin" data-toggle="tab">
+                                        提现申请
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a href="#money" data-toggle="tab">
+                                        垫付本金提现
+                                    </a>
+                                </li>
+                            </ul>
+                        </header>
+                        <div class="panel-body">
+                            <div class="tab-content tasi-tab">
+                                <div class="tab-pane active" id="account">
+                                    <div class="row" style="margin-top: 30px">
+                                        <div class="col-lg-2">
+                                            <div class="box-money active" id="box-tenpay">
+                                                <div class="title-money">财付通</div>
+                                                <div class="content-money">未绑定</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="box-money" id="box-alipay">
+                                                <div class="title-money">支付宝</div>
+                                                <div class="content-money">未绑定</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="box-money" id="box-bank">
+                                                <div class="title-money">银行卡</div>
+                                                <div class="content-money">未绑定</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-horizontal" id="form-tenpay">
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-2">姓名</label>
+                                            <div class="col-lg-3">
+                                                <input type="text" id="tenpay-name" class="form-control"/>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                财付通姓名一般为真实姓名，请务必准确填写，否则将无法给你退款
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-2">财付通账号</label>
+                                            <div class="col-lg-3">
+                                                <input type="text" id="tenpay-account" class="form-control"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-3 col-lg-offset-2">
+                                                <button class="btn btn-info">确定</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-horizontal" id="form-alipay" style="display: none;">
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-2">姓名</label>
+                                            <div class="col-lg-3">
+                                                <input type="text" id="alipay-name" class="form-control"/>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                支付宝姓名一般为真实姓名，请务必准确填写，否则将无法给你退款
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-2">支付宝账号</label>
+                                            <div class="col-lg-3">
+                                                <input type="text" id="alipay-account" class="form-control"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-3 col-lg-offset-2">
+                                                <button class="btn btn-info">确定</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-horizontal" id="form-bank" style="display: none;">
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-2">姓名</label>
+                                            <div class="col-lg-3">
+                                                <input type="text" id="bank-name" class="form-control"/>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                银行姓名一般为真实姓名，请务必准确填写，否则将无法给你退款
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-2">银行名称</label>
+                                            <div class="col-lg-3">
+                                                <input type="text" id="bank-name" class="form-control"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-2">银行账号</label>
+                                            <div class="col-lg-3">
+                                                <input type="text" id="bank-account" class="form-control"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-3 col-lg-offset-2">
+                                                <button class="btn btn-info">确定</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="coin">
+                                </div>
+                                <div class="tab-pane " id="money">
+                                    Recent Item goes here
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+        </section>
+    </section>
+    <!--main content end-->
+</section>
+<% include ../common_footer.html %>
+<script>
+    $('#account .box-money').click(function() {
+        var self = $(this);
+        $('#account .box-money').removeClass('active');
+        self.addClass('active');
+        var id = self.attr('id').split('-')[1];
+        var form = $('#form-' + id);
+
+        $('#account .form-horizontal').hide();
+        form.show();
+    });
+</script>
