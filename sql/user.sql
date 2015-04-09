@@ -21,7 +21,7 @@ create table if not exists `yi_user` (
     `vipExprie` timestamp not null default 0,
     `qq` varchar(16) not null default '',
     `email` varchar(64) not null default '',
-    `pv` varchar(64) not null default '',
+    `pv` int(11) not null default 0,
     `exp` int(8) not null default '0' comment '经验',
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
