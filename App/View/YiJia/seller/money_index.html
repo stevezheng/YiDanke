@@ -32,7 +32,7 @@
                                     </div>
                                     <div class="row" style="margin-top: 30px;">
                                         <div class="col-lg-2">
-                                            <div class="box-pay active">
+                                            <div class="box-pay active" data-data="kuaiqian">
                                                 <div class="title-pay">快钱</div>
                                                 <div class="content-pay">
                                                     <img src="/resource/img/paycenter.gif" alt="" width="100%"/>
@@ -40,7 +40,7 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-2">
-                                            <div class="box-pay">
+                                            <div class="box-pay" data-data="alipay">
                                                 <div class="title-pay">支付宝</div>
                                                 <div class="content-pay">
                                                     <img src="/resource/img/paycenter.gif" alt="" width="100%"/>
@@ -56,7 +56,7 @@
                                         <div class="form-group">
                                             <label class="control-label col-lg-1">充值金额</label>
                                             <div class="col-lg-2">
-                                                <input type="text" class="form-control" value="500"/>
+                                                <input type="text" class="form-control" value="500" id="pay-money-value"/>
                                             </div>
                                             <label class="control-label col-lg-2">最低1元起充</label>
                                         </div>
@@ -112,7 +112,7 @@
                                     </div>
                                     <div class="row" style="margin-top: 30px;">
                                         <div class="col-lg-2">
-                                            <div class="box-pay active">
+                                            <div class="box-pay active" data-data="kuaiqian">
                                                 <div class="title-pay">快钱</div>
                                                 <div class="content-pay">
                                                     <img src="/resource/img/paycenter.gif" alt="" width="100%"/>
@@ -120,7 +120,7 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-2">
-                                            <div class="box-pay">
+                                            <div class="box-pay" data-data="alipay">
                                                 <div class="title-pay">支付宝</div>
                                                 <div class="content-pay">
                                                     <img src="/resource/img/paycenter.gif" alt="" width="100%"/>
@@ -458,4 +458,22 @@
         $('.box-pay').removeClass('active');
         self.addClass('active');
     });
+
+    //获取支付方式
+    function getPayMethod(element) {
+        return $(element).find('.box-pay.active').attr('data-data');
+    }
+
+    //押金充值
+    (function() {
+        $('#btn-pay-money').click(function() {
+            //支付方式
+            var payMethod = getPayMethod('#paymoney');
+
+            //支付金额
+            var payMoney = $('#pay-money-value').val();
+
+
+        })
+    })();
 </script>
