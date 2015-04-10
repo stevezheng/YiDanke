@@ -23,7 +23,7 @@ module.exports = Controller("Seller/BaseController", function () {
       self.assign('title', '');
 
       if (self.isGet()) {
-        var moneyType = self.get('payType');
+        var moneyType = self.get('type');
         var moneyValue = Math.ceil(self.get('value'));
         var orderAmount = Math.ceil(self.get('value')) * 100;
 
@@ -58,7 +58,7 @@ module.exports = Controller("Seller/BaseController", function () {
               productNum: "1",
               productId: insertId || "55558888",
               productDesc: 'seller' || "",
-              ext1: moneyType,
+              ext1: 'seller',
               ext2: insertId + ',seller',
               payType: "00",
               bankId: "",
@@ -116,6 +116,7 @@ module.exports = Controller("Seller/BaseController", function () {
       kq_check_all_para += kq_ck_null(self.get('errCode'), 'errCode');
 
       var signMsg = self.get('signMsg');
+      var ext1 = self.get('ext1');
       var moneyId = self.get('ext2').split(',')[0];
       var dealId = self.get('dealId');
 
@@ -143,22 +144,43 @@ module.exports = Controller("Seller/BaseController", function () {
                 if (res.moneyStatus == 0) {
                   var moneyUserId = res.moneyUserId;
                   var moneyValue = res.moneyValue;
+                  var moneyType = res.moneyType;
 
                   var user = UserModel();
-                  user
-                    .addMoney(moneyUserId, moneyValue)
-                    .then(function () {
-                      return money
-                        .pass(res.id, res.moneyUserId, dealId)
-                    })
-                    .then(function () {
-                      var r = '<result>1</result> <redirecturl>http://www.yijia09.com/home/money/success</redirecturl>'
-                      return self.end(r);
-                    })
-                    .catch(function(err) {
-                      console.error(err);
-                    })
 
+                  if (moneyType == 0) {
+                    user
+                      .addCoin(moneyUserId, moneyValue)
+                      .then(function () {
+                        return money
+                          .pass(res.id, res.moneyUserId, dealId)
+                      })
+                      .then(function () {
+                        var r = '<result>1</result> <redirecturl>http://baidu.com</redirecturl>';
+                        //var r = '<result>1</result> <redirecturl>http://bbs.yijia90.com/'+ext1+'</redirecturl>';
+                        console.log(r);
+                        return self.echo(r);
+                      })
+                      .catch(function(err) {
+                        console.error(err);
+                      })
+                  } else if (moneyType == 1) {
+                    user
+                      .addMoney(moneyUserId, moneyValue)
+                      .then(function () {
+                        return money
+                          .pass(res.id, res.moneyUserId, dealId)
+                      })
+                      .then(function () {
+                        var r = '<result>1</result> <redirecturl>http://baidu.com</redirecturl>';
+                        //var r = '<result>1</result> <redirecturl>http://bbs.yijia90.com/'+ext1+'</redirecturl>';
+                        console.log(r);
+                        return self.echo(r);
+                      })
+                      .catch(function(err) {
+                        console.error(err);
+                      })
+                  }
                 } else {
                   var r = '<result>0</result> <redirecturl>http://www.yijia09.com/home/money/error</redirecturl>'
                   return self.end(r);

@@ -488,9 +488,9 @@
             }
 
             if (payMethod == 'kuaiqian') {
-                location.href = '/seller/money/kuaiqian?type=money&value=' + payMoney;
+                window.open('/seller/money/kuaiqian?type=1&value=' + payMoney);
             } else if (payMethod == 'alipay') {
-                location.href = '/seller/money/alipay?type=money&value=' + payMoney;
+                location.href = '/seller/money/alipay?type=1&value=' + payMoney;
             }
         })
     })();

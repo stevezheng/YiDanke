@@ -298,6 +298,14 @@ module.exports = Model(function() {
       return self
         .where({id: id})
         .updateInc('money', value)
+    },
+
+    addCoin: function(id, value) {
+      var self = this;
+
+      return self
+        .where({id: id})
+        .updateInc('coin', value)
     }
   }
 });
