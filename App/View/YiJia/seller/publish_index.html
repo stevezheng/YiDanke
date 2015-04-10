@@ -1,0 +1,76 @@
+<% include ../common_header.html %>
+<link rel="stylesheet" href="/resource/css/tasks.css"/>
+<section id="container">
+    <% include ./seller_nav.html %>
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+            <section class="panel">
+                <header class="panel-heading">
+                    任务进度
+                </header>
+                <div class="panel-body">
+                    <div class="row" style="margin: 30px ;">
+                        <div class="col-lg-10 col-lg-offset-1">
+                            <div class="stepWrapper mt30">
+                                <div class="stepWaiting" style="position:absolute;top:0;left:-5px;"><div class="stepOn">1</div><div class="caption" style="width:72px;margin-left:-36px;">选择任务类型</div></div>
+                                <div class="stepWaiting" style="margin-left:22%;">2<div class="caption" style="width:72px;margin-left:-36px;">填写商品信息</div></div>
+                                <div class="stepWaiting" style="margin-left:22%;">
+                                    3
+                                    <div class="caption" style="width:72px;margin-left:-36px;">填写刷单数量</div>
+                                </div>
+                                <div class="stepWaiting" style="margin-left:22%;">
+                                    4
+                                    <div class="caption" style="width:60px;margin-left:-30px;">选增值服务</div>
+                                </div>
+                                <div class="stepWaiting" style="position:absolute;top:0;right:-5px;">
+                                    5
+                                    <div class="caption" style="width:48px;margin-left:-24px;">支付</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="panel">
+                <header class="panel-heading">
+                    第一步：选择任务类型
+                </header>
+                <div class="panel-body">
+                    <div class="row">
+                        <h4 class="col-lg-2">选择平台</h4>
+                        <div class="col-lg-4">
+                            <button class="btn btn-info">淘宝</button>
+                            <button class="btn btn-default">天猫</button>
+                            <button class="btn btn-default">京东</button>
+                            <button class="btn btn-default">蘑菇街</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h4 class="col-lg-2">选择店铺</h4>
+                        <div class="col-lg-4">
+                            <button class="btn btn-default">百度淘点点</button>
+                            <button class="btn btn-info">天猫淘金币</button>
+                            <button class="btn btn-default">疯狂地笑尿</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h4 class="col-lg-2">选择类型</h4>
+                        <div class="col-lg-4">
+                            <button class="btn btn-info">订单</button>
+                            <button class="btn btn-default">聚划算</button>
+                            <button class="btn btn-default">直通车</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2 col-lg-offset-2">
+                            <button class="btn btn-success">下一步</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </section>
+    <!--main content end-->
+</section>
+<% include ../common_footer.html %>
