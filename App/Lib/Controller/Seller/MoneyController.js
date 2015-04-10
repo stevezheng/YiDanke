@@ -230,5 +230,62 @@ module.exports = Controller("Seller/BaseController", function () {
           })
       }
     },
+    
+    pvAction: function() {
+      var self = this;
+      self.assign('title', '');
+    
+      if (self.isGet()) {}
+      
+      if (self.isPost()) {
+        var payMethod = self.post('payMethod')
+          , payPV = self.post('payPV');
+
+        if (payMethod == 'coin') {
+          var user = UserModel();
+
+          user
+            .getUser(self.cUser.id)
+            .then(function(res) {
+              if (payPV > res.coin) {
+                return self.error(500, '金币不足');
+              } else {
+                return user
+                  .subCoin(self.cUser.id, payPV)
+                  .then(function() {
+                    return user
+                      .addPV(self.cUser.id, payPV)
+                  })
+                  .then(function(res) {
+                    return self.success('支付成功');
+                  })
+              }
+            })
+        } else if (payMethod == 'money') {
+          var user = UserModel();
+
+          user
+            .getUser(self.cUser.id)
+            .then(function(res) {
+              if (payPV > res.money) {
+                return self.error(500, '押金不足');
+              } else {
+                return user
+                  .subMoney(self.cUser.id, payPV)
+                  .then(function() {
+                    return user
+                      .addPV(self.cUser.id, payPV)
+                  })
+                  .then(function(res) {
+                    return self.success('支付成功');
+                  })
+              }
+            })
+        } else if (payMethod == 'coin,money') {
+          //todo: 同时选择支付
+          return self.error(500, '暂时还不能两种支付方式同时选择');
+        }
+      }
+    },
   };
 });

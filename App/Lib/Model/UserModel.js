@@ -1,4 +1,11 @@
 var moment = require('moment');
+var pvMap = {
+  1000: 5000
+  , 2000: 11428
+  , 5000: 33333
+  , 10000: 80000
+  , 20000: 200000
+};
 
 module.exports = Model(function() {
   return {
@@ -292,6 +299,12 @@ module.exports = Model(function() {
         })
     },
 
+    /**
+     * 增加押金
+     * @param id
+     * @param value
+     * @returns {type[]|*}
+     */
     addMoney: function(id, value) {
       var self = this;
 
@@ -300,12 +313,75 @@ module.exports = Model(function() {
         .updateInc('money', value)
     },
 
+    /**
+     * 减少押金
+     * @param id
+     * @param value
+     * @returns {type[]|*}
+     */
+    subMoney: function(id, value) {
+      var self = this;
+
+      return self
+        .where({id: id})
+        .updateDec('money', value)
+    },
+
+    /**
+     * 增加金币
+     * @param id
+     * @param value
+     * @returns {type[]|*}
+     */
     addCoin: function(id, value) {
       var self = this;
 
       return self
         .where({id: id})
         .updateInc('coin', value)
+    },
+
+    /**
+     * 减少金币
+     * @param id
+     * @param value
+     * @returns {type[]|*}
+     */
+    subCoin: function(id, value) {
+      var self = this;
+
+      return self
+        .where({id: id})
+        .updateDec('coin', value)
+    },
+
+    /**
+     * 增加流量
+     * @param id
+     * @param payPV
+     * @returns {type[]|*}
+     */
+    addPV: function(id, payPV) {
+      var self = this;
+      var pv = pvMap[payPV];
+
+      return self
+        .where({id: id})
+        .updateInc('pv', pv)
+    },
+
+    /**
+     * 减少流量
+     * @param id
+     * @param pv
+     * @returns {type[]|*}
+     */
+    subPV: function(id, pv) {
+      var self = this;
+
+      return self
+        .where({id: id})
+        .updateDec('pv', pv)
     }
   }
 });

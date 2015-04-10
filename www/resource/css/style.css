@@ -4722,7 +4722,7 @@ span.success {
     color: #64696E;
 }
 
-.box-pay {
+.box-pay, .box-pv {
     margin-right: 15px;
     margin-bottom: 15px;
     text-align: center;
@@ -4732,7 +4732,7 @@ span.success {
     border-color: #cbcbcb;
 }
 
-.box-pay.active {
+.box-pay.active, .box-pv.active {
     border-color: #FA7456;
     background: url(../img/arrow-down.png) no-repeat 100% 100%;
 }
