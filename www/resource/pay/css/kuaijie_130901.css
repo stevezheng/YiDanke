@@ -1,0 +1,74 @@
+.cloneHere .shortcut dl{}
+.cloneHere .shortcut dt{border-bottom:1px solid #c9c6c1; margin-bottom:10px }
+
+dl,dt,dd{ padding:0; margin:0;}
+.closeHelpShow{ position:absolute; right:10px; top:10px;}
+.chooseStyle{ width:720px!important;}
+.chooseStyle a{margin:0 20px 0px 0; width:102px; text-align:center; height:39px; padding:2px 19px 0 1px; background:url(/jt/g/i/kuai.gif) no-repeat right; font-weight:bold; float:left; color:#7c7a7a}
+.chooseStyle a.now{background:url(/jt/g/i/kuai.gif) no-repeat left;color:#4e4848}
+
+
+
+
+.allDd a.bankOther{ background:url(/jt/g/i/morebank.gif) no-repeat 90px 10px; padding:0 15px; font-size:12px;}
+.bankId{ border:1px solid #b72a30; width:210px; display:inline-block; vertical-align:middle; cursor:text; background:#fff }
+.bankId .f18{line-height:40px!important; display:block; float:right; padding-right:10px;}
+
+.shortcut{ color:#5b5c57; padding:10px; clear:both; display:block}
+.shortcut dt{ padding-bottom:10px;}
+.shortcut dd{ float:left; margin:0 15px 0px 0;}
+.shortcut dd input{ width:23px;height:23px; vertical-align:middle;}
+.shortcut dd a{ width:152px; height:40px; display:block; padding:5px 0 0 5px}
+.shortcut dd a img{ border:1px solid #c9c6c1; margin:1px; vertical-align:middle;}
+.shortcut dd a:hover img{ border:#FF7E00 2px solid; margin:0;}
+.buttonLine{ padding:10px 30px}
+
+.creditQuick{ color:#5d5d61; clear:both; display:block; margin-bottom:10px;}
+.creditQuick dt, .creditQuick dd{ float:left; }
+.creditQuick dl{ display:block; clear:both; height:42px;}
+.creditQuick dt{width:132px; margin-right:10px; text-align:right; padding-top:10px;}
+.creditQuick dd{width:230px; height:46px; line-height:46px; position:relative;}
+.creditQuick dd.allDd{width:600px;}
+a.bankThis{  font-size:12px; }
+a.bankThis:link, a.bankOther:link,a.bankThis:visited,a.bankOther:visited{ color:#084A9C}
+a.bankThis:hover{ color:#FF3300}
+.bankThis img{ vertical-align:middle}
+
+.tipImg{ display:none; margin-left:120px;margin-top:20px;}
+.normalBank{ border:1px solid #efefef; background:#fefdf8; padding-top:15px}
+
+.tipTelstep{ background:#fffae4 url(/jt/g/i/step_tel.gif) no-repeat right;}
+input.mobile4{background:#faf9f9 url(/jt/g/i/3/button_gray.gif) repeat-x bottom; padding:0px; height:24px; border:1px solid #cfcfcf; color:#313131; font-size:12px; text-align:center; letter-spacing:-1px;}
+.tipAstepNo{ background-image:none; line-height:24px;}
+
+
+.telNum{border:1px solid #efefef; background:#fefdf8; margin:0 20px 20px 20px; padding-left:0;}
+
+#softkeyboard{ display:block; margin-left:100px; z-index:111; position:absolute}
+#softkeyboard table{ background:#fff;}
+
+
+
+#loginUp{z-index:600;height:100%; position:fixed; width:100%;  top:0; left:0; filter:Alpha(opacity=5);-moz-opacity:0.05;opacity:0.05;background:#000;}
+* html #loginUp { /* ie6 hack */ position: absolute;height: expression(document.body.scrollHeight > document.body.offsetHeight ? document.body.scrollHeight : document.body.offsetHeight + 'px');width: expression(document.body.scrollWidth > document.body.offsetWidth ? document.body.scrollWidth : document.body.offsetWidth + 'px')}
+#loadIng{position: fixed;z-index:750;color:#000000;text-align:left;top:50%;left:50%;background:#fff; border:#D7D7D7 2px solid; background:#FFFEE4;  margin-top:100px;margin-left:-200px; width:400px; height:50px; }
+* html #loadIng{ /* ie6 hack */ position: absolute; }
+#loadIng div{ margin:20px; font-size:14px; color:#666666}
+
+
+
+/*cmb FenQi 20130528*/
+.fenqiOut{ margin:10px; position:relative;z-index:11; margin-left:130px;  }
+.fenqiOut .text12{line-height:30px;clear:right}
+.fenqiYN{ display:inline-block;  width:100px;}
+.fenqi{   font-size:12px; background:#f6f6f6; color:#b5b5b5; padding:5px;}
+#didp{ display:inline-block; width:20px; height:22px; border:1px dashed #d7d7d7; margin-bottom:-8px; margin-right:5px; cursor:pointer}
+.didp{background:#f6f6f6 url(/jt/g/i/more_didp.gif) no-repeat 3px 4px;}
+.didp2{ background:#f6f6f6 url(/jt/g/i/more_didp2.gif) no-repeat 3px 4px; }
+
+.fenqiList{ background:#fff; color:#7f7f7f; position:absolute; top:29px; font-size:12px; left:100px; display:block; border:1px solid #cdd6df; padding:5px;  line-height:28px; display:none}
+.fenqiList li{padding-right:10px; cursor:pointer}
+.fenqiList li.hover{ background:#e6f2fe}
+.fenqiList span{text-align:right;}
+span.fenqiMonth{ width:28px; }
+.fenqiAlert{ font-size:12px; color:#F00; background:url(/jt/p/i/icons/GIF/alert16_16.gif) no-repeat 3px; margin-left:108px; padding-left:25px; line-height:30px;}

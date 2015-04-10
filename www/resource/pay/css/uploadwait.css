@@ -1,0 +1,4 @@
+.uploadwait{ border:#D7D7D7 2px solid; background:#FFFEE4; width:421px; position:absolute; z-index:900;zoom:1; line-height:33px; font-size:12px;margin-left:139px; margin-top:23px;}
+.uploadwait iframe{ border:0; top:0; left:0; position:absolute; width:421px; height:33px;background:#FFFEE4;z-index:-1;  }
+.uploadwait img{ vertical-align:text-bottom;}
+.uploadwait div{ background:#FFFEE4;padding:0px 15px; -padding-top:10px;  -height:23px; color:#7D7D7D; margin:auto }

@@ -464,6 +464,15 @@
         return $(element).find('.box-pay.active').attr('data-data');
     }
 
+    //快钱支付
+    function payKuaiqian(type) {
+        if (type == 'money') {
+
+        } else if (type == 'coin') {
+
+        }
+    }
+
     //押金充值
     (function() {
         $('#btn-pay-money').click(function() {
@@ -473,7 +482,16 @@
             //支付金额
             var payMoney = $('#pay-money-value').val();
 
+            if (payMoney < 1) {
+                alert('最低1元起充');
+                return false;
+            }
 
+            if (payMethod == 'kuaiqian') {
+                location.href = '/seller/money/kuaiqian?type=money&value=' + payMoney;
+            } else if (payMethod == 'alipay') {
+                location.href = '/seller/money/alipay?type=money&value=' + payMoney;
+            }
         })
     })();
 </script>

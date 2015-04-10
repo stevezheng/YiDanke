@@ -11,9 +11,9 @@ function kq_ck_null(kq_va, kq_na) {
   }
 }
 
-var KuaiqianPayService = function (config, basePath) {
+var KuaiqianPayService = function (config) {
   this.config = config || {};
-  this.basePath = basePath;
+  this.basePath = RESOURCE_PATH + '/resource/';
 };
 
 KuaiqianPayService.prototype = {
@@ -96,11 +96,12 @@ KuaiqianPayService.prototype = {
     kq_all_para += kq_ck_null(pid, 'pid');
 
     kq_all_para = php.substr(kq_all_para,0, kq_all_para.length - 1);
-    //kq_all_para = 'inputCharset=1&bgUrl=http://127.0.0.1:8360/pay/kuaiqian/recieve&version=v2.0&language=1&signType=4&merchantAcctId=1001213884201&payerContactType=1&payerContact=2532987@qq.com&orderId=Y3242i58&orderAmount=1&orderTime=20150402023258&productName=hehe&productNum=5&productId=55558888&payType=00';
-    //kq_all_para = 'inputCharset=1&bgUrl=http://127.0.0.1:8360/pay/kuaiqian/recieve&version=v2.0&language=1&signType=4&merchantAcctId=1001213884201&payerContactType=1&payerContact=2532987@qq.com&orderId=20150401203856&orderAmount=1&orderTime=20150401203856&productName=hehe&productNum=5&productId=55558888&payType=00';
-    console.log(kq_all_para);
 
-    var private_key = fs.readFileSync(self.basePath + '/99bill-rsa.pem');
+    //正式版
+    //var private_key = fs.readFileSync(self.basePath + '/key/99bill-rsa.pem');
+
+    //测试版
+    var private_key = fs.readFileSync(self.basePath + '/keybak/99bill-rsa.pem');
 
     var signer = crypto.createSign('RSA-SHA1');
     signer.update(kq_all_para);
@@ -114,14 +115,18 @@ KuaiqianPayService.prototype = {
   }
 };
 
-function checkSignature(data, sig, basePath) {
-  var keyPath = basePath + '/99bill.cert.rsa.20340630.cer';
+function checkSignature(data, sig) {
+  var basePath = RESOURCE_PATH + '/resource/';
+  //正式版
+  //var keyPath = basePath + '/key/99bill.cert.rsa.20340630.cer';
+
+  //测试版
+  var keyPath = basePath + '/keybak/99bill[1].cert.rsa.20140803.cer';
   var key = fs.readFileSync(keyPath);
 
   var verifier = crypto.createVerify('RSA-SHA1');
   verifier.update(data);
   var res = verifier.verify(key, sig, 'base64');
-  console.log(res);
 
   if (res) {
     return true;
@@ -130,16 +135,10 @@ function checkSignature(data, sig, basePath) {
   }
 }
 
-KuaiqianPayService.ok = function(kq_all_para, signMsg, basePath) {
+KuaiqianPayService.ok = function(kq_all_para, signMsg) {
     kq_all_para = php.substr(kq_all_para,0, kq_all_para.length - 1);
 
-    return checkSignature(kq_all_para, signMsg, basePath);
+    return checkSignature(kq_all_para, signMsg);
 };
-
-//var basePath = '/Users/stevezheng/Node/yijia/www/key';
-//
-//var pay = new KuaiqianPayService({}, basePath);
-//var sign = pay.getSign();
-//console.log(sign);
 
 module.exports = KuaiqianPayService;

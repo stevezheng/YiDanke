@@ -1,0 +1,88 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>支付中心</title>
+    <link href="/resource/pay/css/uploadwait.css" rel="stylesheet" type="text/css" />
+    <link href="/resource/pay/css/gateway131119.css" rel="stylesheet" type="text/css" />
+    <link href="/resource/pay/css/thickbox.css" rel="stylesheet" type="text/css" />
+    <link href="/resource/pay/css/kuaijie_130901.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div id="head"></div>
+
+<div class="orderOut">
+    <div class="orderMid">
+        <div class="logoBill"><img src="/resource/pay/images/paycenter.gif"/></div>
+        <div class="orderIn" style="display: none;">
+            <ul>
+                <li><span style="float:left">商户名称：</span><strong class="text16" style="float:left">南京栗子树网络科技有限公司</strong></li>
+                <li>商品名称：<span title="P142789988306">P142789988306</span></li>
+                <div class="moreOrder lineGary"></div>
+                <li class="moreOrder">订单编号：<span class="accNo">P142789988306</span></li>
+                <li class="moreOrder">订单时间：<span>2015.04.01 22:51:23</span></li>
+
+            </ul>
+        </div>
+        <div class="billSum">
+            <strong class="text16">金额</strong><br />
+            <span class="orderMoney" id="payAmount"><%= (data.orderAmount / 100).toFixed(2) %></span></span>元</span>
+
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+<div id="special" class="clearfix">
+
+
+    <!-- 订单信息开始 -->
+
+
+    <!-- 订单信息结束 -->
+    <div id="payinfo">
+        <!-- 支付信息开始 -->
+        <form name="kqPay" id="doPay" action="https://sandbox.99bill.com/gateway/recvMerchantInfoAction.htm" method="post" style="display: none;">
+            <input type="hidden" name="inputCharset" value="<%= data.inputCharset %>" />
+            <input type="hidden" name="pageUrl" value="<%= data.pageUrl %>" />
+            <input type="hidden" name="bgUrl" value="<%= data.bgUrl %>" />
+            <input type="hidden" name="version" value="<%= data.version %>" />
+            <input type="hidden" name="language" value="<%= data.language %>" />
+            <input type="hidden" name="signType" value="<%= data.signType %>" />
+            <input type="hidden" name="signMsg" value="<%= data.signMsg %>" />
+            <input type="hidden" name="merchantAcctId" value="<%= data.merchantAcctId %>" />
+            <input type="hidden" name="payerName" value="<%= data.payerName %>" />
+            <input type="hidden" name="payerContactType" value="<%= data.payerContactType %>" />
+            <input type="hidden" name="payerContact" value="<%= data.payerContact %>" />
+            <input type="hidden" name="orderId" value="<%= data.orderId %>" />
+            <input type="hidden" name="orderAmount" value="<%= data.orderAmount %>" />
+            <input type="hidden" name="orderTime" value="<%= data.orderTime %>" />
+            <input type="hidden" name="productName" value="<%= data.productName %>" />
+            <input type="hidden" name="productNum" value="<%= data.productNum %>" />
+            <input type="hidden" name="productId" value="<%= data.productId %>" />
+            <input type="hidden" name="productDesc" value="<%= data.productDesc %>" />
+            <input type="hidden" name="ext1" value="<%= data.ext1 %>" />
+            <input type="hidden" name="ext2" value="<%= data.ext2 %>" />
+            <input type="hidden" name="payType" value="<%= data.payType %>" />
+            <input type="hidden" name="bankId" value="<%= data.bankId %>" />
+            <input type="hidden" name="redoFlag" value="<%= data.redoFlag %>" />
+            <input type="hidden" name="pid" value="<%= data.pid %>" />
+            <input type="submit" id="btnSubmit" name="submit" value="提交到快钱">
+        </form>
+        <input type="button" id="next" class="ButtonThreeNext" value="订单处理中...">
+    </div>
+    <div id="footer" style="margin-top: 500px;">
+        <div><img src="https://img.99bill.com/jt/g/i/3/foot.jpg" /></div>
+    </div>
+</div>
+</body>
+</html><!-- 具体的支付方式结束 -->
+<script>
+    setTimeout(function() {
+        document.getElementById('btnSubmit').click();
+    }, 1000)
+</script>
+
+
