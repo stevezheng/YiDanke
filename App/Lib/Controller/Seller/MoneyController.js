@@ -1,11 +1,12 @@
 var MoneyModel = thinkRequire('MoneyModel');
+var UserModel = thinkRequire('UserModel');
 var Kuaiqian = thinkRequire('KuaiqianPayService');
 var moment = require('moment');
 
-module.exports = Controller("Seller/BaseController", function(){
+module.exports = Controller("Seller/BaseController", function () {
   "use strict";
   return {
-    indexAction: function() {
+    indexAction: function () {
       var self = this;
       self.assign('title', '资金管理');
 
@@ -13,10 +14,11 @@ module.exports = Controller("Seller/BaseController", function(){
         self.display();
       }
 
-      if (self.isPost()) {}
+      if (self.isPost()) {
+      }
     },
 
-    kuaiqianAction: function() {
+    kuaiqianAction: function () {
       var self = this;
       self.assign('title', '');
 
@@ -67,14 +69,13 @@ module.exports = Controller("Seller/BaseController", function(){
             var kuaiqian = new Kuaiqian(config);
             var sign = kuaiqian.getSign();
 
-            console.log(sign);
             config.signMsg = sign;
 
             self.assign('money', moneyValue);
             self.assign('data', config);
             return self.display();
           })
-          .catch(function(err) {
+          .catch(function (err) {
             self.assign('warning', err);
             self.display('Home:index:warning')
           })
@@ -95,58 +96,86 @@ module.exports = Controller("Seller/BaseController", function(){
         }
       }
 
-        var kq_check_all_para = kq_ck_null(self.get('merchantAcctId'), 'merchantAcctId');
-        kq_check_all_para += kq_ck_null(self.get('version'), 'version');
-        kq_check_all_para += kq_ck_null(self.get('language'), 'language');
-        kq_check_all_para += kq_ck_null(self.get('signType'), 'signType');
-        kq_check_all_para += kq_ck_null(self.get('payType'), 'payType');
-        kq_check_all_para += kq_ck_null(self.get('bankId'), 'bankId');
-        kq_check_all_para += kq_ck_null(self.get('orderId'), 'orderId');
-        kq_check_all_para += kq_ck_null(self.get('orderTime'), 'orderTime');
-        kq_check_all_para += kq_ck_null(self.get('orderAmount'), 'orderAmount');
-        kq_check_all_para += kq_ck_null(self.get('dealId'), 'dealId');
-        kq_check_all_para += kq_ck_null(self.get('bankDealId'), 'bankDealId');
-        kq_check_all_para += kq_ck_null(self.get('dealTime'), 'dealTime');
-        kq_check_all_para += kq_ck_null(self.get('payAmount'), 'payAmount');
-        kq_check_all_para += kq_ck_null(self.get('fee'), 'fee');
-        kq_check_all_para += kq_ck_null(self.get('ext1'), 'ext1');
-        kq_check_all_para += kq_ck_null(self.get('ext2'), 'ext2');
-        kq_check_all_para += kq_ck_null(self.get('payResult'), 'payResult');
-        kq_check_all_para += kq_ck_null(self.get('errCode'), 'errCode');
+      var kq_check_all_para = kq_ck_null(self.get('merchantAcctId'), 'merchantAcctId');
+      kq_check_all_para += kq_ck_null(self.get('version'), 'version');
+      kq_check_all_para += kq_ck_null(self.get('language'), 'language');
+      kq_check_all_para += kq_ck_null(self.get('signType'), 'signType');
+      kq_check_all_para += kq_ck_null(self.get('payType'), 'payType');
+      kq_check_all_para += kq_ck_null(self.get('bankId'), 'bankId');
+      kq_check_all_para += kq_ck_null(self.get('orderId'), 'orderId');
+      kq_check_all_para += kq_ck_null(self.get('orderTime'), 'orderTime');
+      kq_check_all_para += kq_ck_null(self.get('orderAmount'), 'orderAmount');
+      kq_check_all_para += kq_ck_null(self.get('dealId'), 'dealId');
+      kq_check_all_para += kq_ck_null(self.get('bankDealId'), 'bankDealId');
+      kq_check_all_para += kq_ck_null(self.get('dealTime'), 'dealTime');
+      kq_check_all_para += kq_ck_null(self.get('payAmount'), 'payAmount');
+      kq_check_all_para += kq_ck_null(self.get('fee'), 'fee');
+      kq_check_all_para += kq_ck_null(self.get('ext1'), 'ext1');
+      kq_check_all_para += kq_ck_null(self.get('ext2'), 'ext2');
+      kq_check_all_para += kq_ck_null(self.get('payResult'), 'payResult');
+      kq_check_all_para += kq_ck_null(self.get('errCode'), 'errCode');
 
-        var signMsg = self.get('signMsg');
+      var signMsg = self.get('signMsg');
+      var moneyId = self.get('ext2').split(',')[0];
+      var dealId = self.get('dealId');
 
-        var ok = Kuaiqian.ok(kq_check_all_para, signMsg);
+      var ok = Kuaiqian.ok(kq_check_all_para, signMsg);
 
-        if (ok == 1) {
-          switch (self.get('payResult')) {
-            case '10':
-              //此处做商户逻辑处理
-              console.log('处理逻辑');
-              var r = '<result>1</result> <redirecturl>http://baidu.com</redirecturl>'
-              return self.end(r);
-              break;
-            default:
-              var r = '<result>0</result> <redirecturl>http://weibo.com</redirecturl>'
-              return self.end(r);
-              //self.assign('rtnOK', 0);
-              //self.assign('rtnUrl', 'http://www.yijia.com/pay/kuaiqian/error');
-              //return self.display();
-              //以下是我们快钱设置的show页面，商户需要自己定义该页面。
-              break;
+      if (ok == 1) {
+        switch (self.get('payResult')) {
+          case '10':
+            /**
+             * 此处做商户逻辑处理
+             * 1.获取订单id
+             * 2.判断该订单是否有更新过
+             *  2.11 没有更新过
+             *  2.12 给用户加钱
+             *  2.13 更新订单状态
+             *
+             *  2.01 更新过
+             *  2.02 判断为重复订单
+             */
+            var money = MoneyModel();
+            money
+              .where({id: moneyId})
+              .find()
+              .then(function (res) {
+                if (res.moneyStatus == 0) {
+                  var moneyUserId = res.moneyUserId;
+                  var moneyValue = res.moneyValue;
 
-          }
-        } else {
-          var r = '<result>0</result> <redirecturl>http://weibo.com</redirecturl>'
-          return self.end(r);
-          //self.assign('rtnOK', 0);
-          //self.assign('rtnUrl', 'http://www.yijia.com/pay/kuaiqian/error');
-          //return self.display();
-          //以下是我们快钱设置的show页面，商户需要自己定义该页面。
+                  var user = UserModel();
+                  user
+                    .addMoney(moneyUserId, moneyValue)
+                    .then(function () {
+                      return money
+                        .pass(res.id, res.moneyUserId, dealId)
+                    })
+                    .then(function () {
+                      var r = '<result>1</result> <redirecturl>http://www.yijia09.com/home/money/success</redirecturl>'
+                      return self.end(r);
+                    })
+                    .catch(function(err) {
+                      console.error(err);
+                    })
+
+                } else {
+                  var r = '<result>0</result> <redirecturl>http://www.yijia09.com/home/money/error</redirecturl>'
+                  return self.end(r);
+                }
+              });
+          default:
+            var r = '<result>0</result> <redirecturl>http://www.yijia09.com/home/money/error</redirecturl>'
+            return self.end(r);
+
         }
+      } else {
+        var r = '<result>0</result> <redirecturl>http://www.yijia09.com/home/money/error</redirecturl>'
+        return self.end(r);
+      }
     },
 
-    alipayAction: function() {
+    alipayAction: function () {
       var self = this;
       self.assign('title', '');
 
@@ -170,10 +199,10 @@ module.exports = Controller("Seller/BaseController", function(){
 
         money
           .addOne(moneyType, 'alipay', self.cUser.id, moneyValue, moneyOrder)
-          .then(function() {
+          .then(function () {
             return self.success('支付成功，请耐心等待审核');
           })
-          .catch(function(err) {
+          .catch(function (err) {
             console.log(err);
             return self.error(500, '支付失败', err);
           })

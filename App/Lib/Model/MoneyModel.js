@@ -48,8 +48,8 @@ module.exports = Model(function() {
       var self = this;
 
       return self
-        .where({id: id, moneyUserId: moneyUserId, moneyOrder: moneyOrder})
-        .update({moneyStatus: 1})
+        .where({id: id, moneyUserId: moneyUserId})
+        .update({moneyStatus: 1, moneyOrder: moneyOrder})
     },
 
     /**
@@ -60,7 +60,7 @@ module.exports = Model(function() {
      */
     unpass: function(id, moneyUserId) {
       return self
-        .where({id: id, moneyUserId: moneyUserId, moneyOrder: moneyOrder})
+        .where({id: id, moneyUserId: moneyUserId})
         .update({moneyStatus: -1})
     }
   }

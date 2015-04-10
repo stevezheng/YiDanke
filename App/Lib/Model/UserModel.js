@@ -290,6 +290,14 @@ module.exports = Model(function() {
             .where({id: cUser.id})
             .update({tradePassword: md5(password)})
         })
+    },
+
+    addMoney: function(id, value) {
+      var self = this;
+
+      return self
+        .where({id: id})
+        .updateInc('money', value)
     }
   }
 });
