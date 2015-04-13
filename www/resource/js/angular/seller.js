@@ -1,7 +1,7 @@
 (function() {
-  var BuyerModule = angular.module('YiApp', []);
+  var SellerModule = angular.module('YiApp.Seller', []);
 
-  BuyerModule.controller('sellerCtrl', function($scope, $http) {
+  SellerModule.controller('sellerCtrl', function($scope, $http) {
     $scope.editPasswordBox = false;
     $scope.editTradePasswordBox = false;
     $scope.addTradePasswordBox = false;

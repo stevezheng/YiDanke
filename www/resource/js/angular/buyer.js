@@ -1,5 +1,5 @@
 (function() {
-  var BuyerModule = angular.module('YiApp', []);
+  var BuyerModule = angular.module('YiApp.Buyer', []);
 
   BuyerModule.controller('buyerCtrl', function($scope, $http) {
     $scope.editPasswordBox = false;
