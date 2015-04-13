@@ -212,5 +212,54 @@ module.exports = Controller("Home/BaseController", function () {
         }
       }
     },
+
+    uploadAction: function () {
+      this.header("Content-Type", "text/html");
+      var _this = this;
+      var maxsize = 1024 * 1024 * 3; //文件大小限制
+      var file = this.file("file"); //三个重要属性 originalFilename,path,size
+      var fs = thinkRequire('fs'); //引入fs处理文件
+      var ext = file.path.split('.');
+      ext = ext[ext.length - 1];
+      if (!isImg(ext)) {
+        fs.unlinkSync(file.path); //不是图片文件的从临时目录删除
+        return this.json({
+          code: 0,
+          msg: '请上传图片文件!'
+        });
+      }
+      if (file.size > maxsize) {
+        fs.unlinkSync(file.path); //超过大小的文件从临时目录删除
+        return this.json({
+          code: 0,
+          msg: '请上传' + maxsize + 'bytes大小内的文件!'
+        });
+      }
+
+      var filename = md5(file.originalFilename).substr(0, 5) + '_' + guid() + '.' + ext;
+
+      var dir = RESOURCE_PATH + '/resource/uploads/' + new Date().getFullYear() + (new Date().getMonth() + 1);
+      if (!isDir(dir)) {
+        mkdir(dir, '0755');
+      }
+      var targetfile = dir + '/' + filename;
+      fs.rename(file.path, targetfile, function (err) {
+        if (err) {
+          _this.json({
+            code: 0,
+            msg: '上传失败'
+          });
+        } else {
+          _this.json({
+            code: 1,
+            msg: '上传成功',
+            filename: targetfile.replace(RESOURCE_PATH, ''),
+            fileext: ext,
+            filesize: file.size
+          });
+        }
+      });
+      return false;
+    },
   };
 });

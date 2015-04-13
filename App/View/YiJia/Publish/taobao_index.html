@@ -70,7 +70,7 @@
                                 <label class="col-md-2 control-label">商品名称</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" ng-model="item.name">
                                 </div>
                                 <label class="col-md-1 control-label"><span
                                         class="error">必填</span></label>
@@ -79,7 +79,7 @@
                                 <label class="col-md-2 control-label">商品链接</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" ng-model="item.url">
                                 </div>
                                 <label class="col-md-1 control-label"><span
                                         class="error">必填</span></label>
@@ -88,11 +88,11 @@
                                 <label class="col-md-2 control-label">规格</label>
 
                                 <div class="col-md-2">
-                                    <input type="text" class="form-control"
+                                    <input type="text" class="form-control" ng-model="item.tag1"
                                            placeholder="如：颜色"/>
                                 </div>
                                 <div class="col-md-2">
-                                    <input type="text" class="form-control"
+                                    <input type="text" class="form-control" ng-model="item.tag2"
                                            placeholder="如：尺码"/>
                                 </div>
                                 <label class="col-md-1 control-label"><span
@@ -102,7 +102,7 @@
                                 <label class="col-md-2 control-label">单品售价</label>
 
                                 <div class="col-md-2">
-                                    <input type="text" class="form-control"
+                                    <input type="text" class="form-control" ng-model="item.money"
                                            placeholder="元"/>
                                 </div>
                                 <label class="col-md-1 control-label"><span
@@ -112,19 +112,19 @@
                                 <label class="col-md-2 control-label">每单拍</label>
 
                                 <div class="col-md-2">
-                                    <input type="text" class="form-control"
+                                    <input type="text" class="form-control" ng-model="item.count"
                                            placeholder="件"/>
                                 </div>
                                 <label class="col-md-1 control-label"><span
                                         class="error">必填</span></label>
                                 <label class="col-md-3 control-label">下单总金额
-                                    <span class="error">0</span>元</label>
+                                    <span class="error">{{item.money * item.count}}</span>元</label>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label">搜索页面展示价格</label>
 
                                 <div class="col-md-2">
-                                    <input type="text" class="form-control"
+                                    <input type="text" class="form-control" ng-model="item.searchMoney"
                                            placeholder="元"/>
                                 </div>
                                 <label class="col-md-6 control-label"><span
@@ -137,17 +137,20 @@
                         如何找到您的商品：请添加几个订单来源方式，任务发布时系统将会随机安排买手通过不同的方式模拟真实购物流程
                     </div>
                     <div class="alert alert-info">
-                        <input type="checkbox" ng-model="taobao.searchBoxFlag"/>使用“淘宝搜索框”查找商品
+                        <input type="checkbox" ng-model="taobao.searchBox"/>使用“淘宝搜索框”查找商品
                     </div>
                     <div class="form form-horizontal"
-                         ng-show="taobao.searchBoxFlag">
+                         ng-show="taobao.searchBox">
                         <div class="form-body">
                             <div class="form-group">
                                 <label class="col-md-5 control-label">请上传 <span
                                         class="error">“淘宝商品主图”</span>，以便于买手快速找到任务商品</label>
 
-                                <div class="col-md-4"><input type="file"
-                                                             class="control-label"/>
+                                <div class="col-md-4">
+                                    <button class="btn btn-info" ng-file-select ng-model="taobao.image">上传淘宝商品主图</button>
+                                </div>
+                                <div class="col-md-1">
+                                    <a ng-href="{{taobao.imagefile}}" target="_blank" ng-show="taobao.imagefile">[查看图片]</a>
                                 </div>
                             </div>
                         </div>
@@ -157,20 +160,20 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label">让买手在 <span
                                         class="error">taobao.com</span>搜索关键字进入“搜索列表”</label>
-                                <input type="text"
+                                <input type="text" ng-model="taobao.key1"
                                        class="col-md-4 control-label"/>
                                 <label class="col-md-1 control-label"><span
                                         class="error">必填</span></label>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
-                                <input type="text"
+                                <input type="text" ng-model="taobao.key1extend1"
                                        class="col-md-1 control-label"/>
-                                <input type="text"
+                                <input type="text" ng-model="taobao.key1extend2"
                                        class="col-md-1 control-label"/>
-                                <input type="text"
+                                <input type="text" ng-model="taobao.key1extend3"
                                        class="col-md-1 control-label"/>
-                                <input type="text"
+                                <input type="text" ng-model="taobao.key1extend4"
                                        class="col-md-1 control-label"/>
                                 <label class="col-md-2 control-label"><span
                                         class="small">最多四个分类 非必填</span></label>
@@ -185,20 +188,20 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label">让买手在 <span
                                         class="error">taobao.com</span>搜索关键字进入“搜索列表”</label>
-                                <input type="text"
+                                <input type="text" ng-model="taobao.key2"
                                        class="col-md-4 control-label"/>
                                 <label class="col-md-1 control-label"><span
                                         class="error">必填</span></label>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
-                                <input type="text"
+                                <input type="text" ng-model="taobao.key2extend1"
                                        class="col-md-1 control-label"/>
-                                <input type="text"
+                                <input type="text" ng-model="taobao.key2extend2"
                                        class="col-md-1 control-label"/>
-                                <input type="text"
+                                <input type="text" ng-model="taobao.key2extend3"
                                        class="col-md-1 control-label"/>
-                                <input type="text"
+                                <input type="text" ng-model="taobao.key2extend4"
                                        class="col-md-1 control-label"/>
                                 <label class="col-md-2 control-label"><span
                                         class="small">最多四个分类 非必填</span></label>
@@ -213,20 +216,20 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label">让买手在 <span
                                         class="error">taobao.com</span>搜索关键字进入“搜索列表”</label>
-                                <input type="text"
+                                <input type="text" ng-model="taobao.key3"
                                        class="col-md-4 control-label"/>
                                 <label class="col-md-1 control-label"><span
                                         class="error">必填</span></label>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
-                                <input type="text"
+                                <input type="text" ng-model="taobao.key3extend1"
                                        class="col-md-1 control-label"/>
-                                <input type="text"
+                                <input type="text" ng-model="taobao.key3extend2"
                                        class="col-md-1 control-label"/>
-                                <input type="text"
+                                <input type="text" ng-model="taobao.key3extend3"
                                        class="col-md-1 control-label"/>
-                                <input type="text"
+                                <input type="text" ng-model="taobao.key3extend4"
                                        class="col-md-1 control-label"/>
                                 <label class="col-md-2 control-label"><span
                                         class="small">最多四个分类 非必填</span></label>
@@ -241,20 +244,20 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label">让买手在 <span
                                         class="error">taobao.com</span>搜索关键字进入“搜索列表”</label>
-                                <input type="text"
+                                <input type="text" ng-model="taobao.key4"
                                        class="col-md-4 control-label"/>
                                 <label class="col-md-1 control-label"><span
                                         class="error">必填</span></label>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
-                                <input type="text"
+                                <input type="text" ng-model="taobao.key4extend1"
                                        class="col-md-1 control-label"/>
-                                <input type="text"
+                                <input type="text" ng-model="taobao.key4extend2"
                                        class="col-md-1 control-label"/>
-                                <input type="text"
+                                <input type="text" ng-model="taobao.key4extend3"
                                        class="col-md-1 control-label"/>
-                                <input type="text"
+                                <input type="text" ng-model="taobao.key4extend4"
                                        class="col-md-1 control-label"/>
                                 <label class="col-md-2 control-label"><span
                                         class="small">最多四个分类 非必填</span></label>
@@ -269,20 +272,20 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label">让买手在 <span
                                         class="error">taobao.com</span>搜索关键字进入“搜索列表”</label>
-                                <input type="text"
+                                <input type="text" ng-model="taobao.key5"
                                        class="col-md-4 control-label"/>
                                 <label class="col-md-1 control-label"><span
                                         class="error">必填</span></label>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
-                                <input type="text"
+                                <input type="text" ng-model="taobao.key5extend1"
                                        class="col-md-1 control-label"/>
-                                <input type="text"
+                                <input type="text" ng-model="taobao.key5extend2"
                                        class="col-md-1 control-label"/>
-                                <input type="text"
+                                <input type="text" ng-model="taobao.key5extend3"
                                        class="col-md-1 control-label"/>
-                                <input type="text"
+                                <input type="text" ng-model="taobao.key5extend4"
                                        class="col-md-1 control-label"/>
                                 <label class="col-md-2 control-label"><span
                                         class="small">最多四个分类 非必填</span></label>
@@ -298,17 +301,20 @@
                         </div>
                     </div>
                     <div class="alert alert-info">
-                        <input type="checkbox" ng-model="tmall.searchBoxFlag"/>使用“天猫搜索框”查找商品
+                        <input type="checkbox" ng-model="tmall.searchBox"/>使用“天猫搜索框”查找商品
                     </div>
                     <div class="form form-horizontal"
-                         ng-show="tmall.searchBoxFlag">
+                         ng-show="tmall.searchBox">
                         <div class="form-body">
                             <div class="form-group">
                                 <label class="col-md-5 control-label">请上传 <span
                                         class="error">“天猫商品主图”</span>，以便于买手快速找到任务商品</label>
 
-                                <div class="col-md-4"><input type="file"
-                                                             class="control-label"/>
+                                <div class="col-md-4">
+                                    <button class="btn btn-info" ng-file-select ng-model="tmall.image">上传天猫商品主图</button>
+                                </div>
+                                <div class="col-md-1">
+                                    <a ng-href="{{tmall.imagefile}}" target="_blank" ng-show="tmall.imagefile">[查看图片]</a>
                                 </div>
                             </div>
                         </div>
@@ -318,20 +324,20 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label">让买手在 <span
                                         class="error">tmall.com</span>搜索关键字进入“搜索列表”</label>
-                                <input type="text"
+                                <input type="text" ng-model="tmall.key1"
                                        class="col-md-4 control-label"/>
                                 <label class="col-md-1 control-label"><span
                                         class="error">必填</span></label>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
-                                <input type="text"
+                                <input type="text" ng-model="tmall.key1extend1"
                                        class="col-md-1 control-label"/>
-                                <input type="text"
+                                <input type="text" ng-model="tmall.key1extend2"
                                        class="col-md-1 control-label"/>
-                                <input type="text"
+                                <input type="text" ng-model="tmall.key1extend3"
                                        class="col-md-1 control-label"/>
-                                <input type="text"
+                                <input type="text" ng-model="tmall.key1extend4"
                                        class="col-md-1 control-label"/>
                                 <label class="col-md-2 control-label"><span
                                         class="small">最多四个分类 非必填</span></label>
@@ -346,20 +352,20 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label">让买手在 <span
                                         class="error">tmall.com</span>搜索关键字进入“搜索列表”</label>
-                                <input type="text"
+                                <input type="text" ng-model="tmall.key2"
                                        class="col-md-4 control-label"/>
                                 <label class="col-md-1 control-label"><span
                                         class="error">必填</span></label>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
-                                <input type="text"
+                                <input type="text" ng-model="tmall.key2extend1"
                                        class="col-md-1 control-label"/>
-                                <input type="text"
+                                <input type="text" ng-model="tmall.key2extend2"
                                        class="col-md-1 control-label"/>
-                                <input type="text"
+                                <input type="text" ng-model="tmall.key2extend3"
                                        class="col-md-1 control-label"/>
-                                <input type="text"
+                                <input type="text" ng-model="tmall.key2extend4"
                                        class="col-md-1 control-label"/>
                                 <label class="col-md-2 control-label"><span
                                         class="small">最多四个分类 非必填</span></label>
@@ -381,13 +387,13 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
-                                <input type="text"
+                                <input type="text" ng-model="tmall.key3extend1"
                                        class="col-md-1 control-label"/>
-                                <input type="text"
+                                <input type="text" ng-model="tmall.key3extend2"
                                        class="col-md-1 control-label"/>
-                                <input type="text"
+                                <input type="text" ng-model="tmall.key3extend3"
                                        class="col-md-1 control-label"/>
-                                <input type="text"
+                                <input type="text" ng-model="tmall.key3extend4"
                                        class="col-md-1 control-label"/>
                                 <label class="col-md-2 control-label"><span
                                         class="small">最多四个分类 非必填</span></label>
@@ -409,13 +415,13 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
-                                <input type="text"
+                                <input type="text" ng-model="tmall.key4extend1"
                                        class="col-md-1 control-label"/>
-                                <input type="text"
+                                <input type="text" ng-model="tmall.key4extend2"
                                        class="col-md-1 control-label"/>
-                                <input type="text"
+                                <input type="text" ng-model="tmall.key4extend3"
                                        class="col-md-1 control-label"/>
-                                <input type="text"
+                                <input type="text" ng-model="tmall.key4extend4"
                                        class="col-md-1 control-label"/>
                                 <label class="col-md-2 control-label"><span
                                         class="small">最多四个分类 非必填</span></label>
@@ -437,13 +443,13 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
-                                <input type="text"
+                                <input type="text" ng-model="tmall.key5extend1"
                                        class="col-md-1 control-label"/>
-                                <input type="text"
+                                <input type="text" ng-model="tmall.key5extend2"
                                        class="col-md-1 control-label"/>
-                                <input type="text"
+                                <input type="text" ng-model="tmall.key5extend3"
                                        class="col-md-1 control-label"/>
-                                <input type="text"
+                                <input type="text" ng-model="tmall.key5extend4"
                                        class="col-md-1 control-label"/>
                                 <label class="col-md-2 control-label"><span
                                         class="small">最多四个分类 非必填</span></label>
@@ -472,11 +478,11 @@
                                 <label class="col-md-1 control-label">价格</label>
 
                                 <div class="col-md-1">
-                                    <input type="text" class="form-control"
+                                    <input type="text" class="form-control" ng-model="item.priceStart"
                                            placeholder="最低"/>
                                 </div>
                                 <div class="col-md-1">
-                                    <input type="text" class="form-control"
+                                    <input type="text" class="form-control" ng-model="item.priceEnd"
                                            placeholder="最高"/>
                                 </div>
                                 <label class="col-md-1 control-label">
@@ -493,7 +499,7 @@
                                                                                            </s>
                                                                                        </s>
                                                                                        <input type="hidden" name="position" class="position"
-                                                                                              value="全国"/>
+                                                                                              value="全国" ng-model="item.position"/>
                                                                                        <a href="javascript:;" data-value="全国" data-nogo="true">
                                                                                            全国</a>
                                                                                    </li>
@@ -752,19 +758,19 @@
                 <div class="panel-body">
                     <div class="radio">
                         <label>
-                            <input type="radio" name="optionsRadios" value="option1" checked="">
+                            <input type="radio" name="optionsRadios" ng-click="transport = 'baoyou'" checked="">
                             商品本身包邮 <span class="small">买手按照商品实际金额下单</span>
                         </label>
                     </div>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="optionsRadios" value="option1">
+                            <input type="radio" name="optionsRadios" ng-click="transport = 'bubaoyou'">
                             商品不包邮 <span class="small">无需买手联系客服。商家每单额外支出 <span class="error">10</span>元作为运费押金，任务完成后运费押金将全部退还给商家</span>
                         </label>
                     </div>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="optionsRadios" value="option1">
+                            <input type="radio" name="optionsRadios" ng-click="transport = 'zixuan'">
                             自选快递 <span class="small">商家自选快递发货，平台收取 <span class="error">2</span>元作为服务费用</span>
                         </label>
                     </div>

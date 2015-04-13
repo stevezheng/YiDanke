@@ -27,12 +27,13 @@
     <script src="/resource/js/respond.min.js"></script>
     <![endif]-->
     <script src="/resource/js/angular.min.js"></script>
+    <script src="/resource/js/angular/angular-file-upload.min.js"></script>
     <script src="/resource/js/angular/buyer.js"></script>
     <script src="/resource/js/angular/seller.js"></script>
     <script src="/resource/js/angular/publish.js"></script>
     <script src="/resource/js/angular/taobao.index.js"></script>
     <script>
-        angular.module('YiApp', ['YiApp.Buyer', 'YiApp.Seller', 'YiApp.Publish', 'YiApp.TaobaoIndex']);
+        angular.module('YiApp', ['angularFileUpload', 'YiApp.Buyer', 'YiApp.Seller', 'YiApp.Publish', 'YiApp.TaobaoIndex']);
     </script>
 </head>
 
