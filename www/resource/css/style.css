@@ -4751,3 +4751,144 @@ span.success {
 .edit-user-info label {
     font-size: 12px !important;
 }
+
+.border-bottom {
+    border-bottom: 1px dashed #f0f0f0;
+    margin: 5px 0;
+}
+
+.sel-loc-box{display:inline-block;width:85px;font-size: 12px;}
+.sel-loc-box a{cursor: pointer;}
+.fake-select { position: relative;top: 5px;vertical-align: text-top;}
+.fake-select ul.selected {
+    /*border: 1px solid #BBBBBB;*/
+    float: left; height: 18px;min-width: 2em;overflow: hidden;}
+.toselect {
+    background-color: #FFFFFF;
+    border: 1px solid #A6A6A6;
+    box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.2);
+    display: none;
+    left: 0;
+    margin-top: -1px;
+    position: absolute;
+    top: 20px;
+}
+.sel_dropdown {
+    border-left: 1px solid #CCCCCC;
+    height: 18px;
+    position: absolute;
+    right: 0;
+    top: 1px;
+    width: 15px;
+    z-index: 100;
+}
+.fake-select .selected a, .fake-select ul.toselect a {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-color: #FFFFFF;
+    border-image: none;
+    border-style: solid;
+    border-width: 1px 1px 0;
+    color: #404040;
+    display: block;
+    font-size: 12px;
+    height: 19px;
+    line-height: 16px;
+    padding: 0 4px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+.fake-select .selected a {
+    padding-right: 20px;
+    width: 50px;
+    overflow: hidden;
+}
+.sel_dropdown .i {
+    border-color: #A6A6A6 #F3F3F3 #FFFFFF;
+    border-style: solid dashed dashed;
+    border-width: 4px 4px 0;
+    height: 0;
+    left: 49%;
+    line-height: 0;
+    margin-left: -4px;
+    margin-top: -1px;
+    position: absolute;
+    top: 50%;
+    width: 0;
+}
+.sel-loc {
+    height: 20px;
+    margin-right: 20px;
+    position: relative;
+    z-index: 102;
+}
+.sel-loc div.toselect {
+    background: none repeat scroll 0 0 #FFFFFF;
+    width: 200px;
+}
+.fake-select .hover .toselect {
+    display: block;
+    left: auto;
+    position: absolute;
+    right: 0;
+    z-index: 999;
+}
+.sel-loc .toselect li {
+    clear: none;
+    display: inline;
+    float: left;
+    height: auto;
+    margin: 0 3px;
+    border-bottom:0;
+    padding:0px;
+    width:auto;
+}
+.sel-loc .toselect li a {
+    color: #404040;
+    padding: 2px;
+    white-space: nowrap;
+}
+.sel-loc .toselect li a:visited {
+    color: #404040;
+}
+.sel-loc .toselect li a:hover {
+    background-image: none;
+    text-decoration: underline;
+}
+.sel-loc .toselect li.checked a, .sel-loc .toselect li.checked a:visited {
+    background: none repeat scroll 0 0 #FF5500 !important;
+    color: #FFFFFF;
+}
+.sel-loc .loc1, .sel-loc .loc3, .sel-loc .split {
+    clear: left;
+    float: left;
+    line-height: 1.8;
+    padding: 6px;
+    width: 185px;
+}
+.sel-loc .loc3 {
+    padding-top: 0;
+}
+.sel-loc .split {
+    border-top: 1px dotted #808080;
+}
+.sel-loc .userdefine {
+    height: 19px;
+    padding: 8px;
+}
+.sel-loc .userdefine input {
+    border: 1px solid #949494;
+    float: left;
+    font-size: 12px;
+    height: 12px;
+    line-height: 12px;
+    padding: 3px 2px 2px;
+    width: 115px;
+}
+.sel-loc .userdefine .btn {
+    float: left;
+    margin-left: 4px;
+}

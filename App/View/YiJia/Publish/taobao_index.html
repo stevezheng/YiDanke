@@ -14,19 +14,45 @@
                     <div class="row" style="margin: 30px ;">
                         <div class="col-lg-10 col-lg-offset-1">
                             <div class="stepWrapper mt30">
-                                <div class="stepWaiting" style="position:absolute;top:0;left:-5px;"><div class="">1</div><div class="caption" style="width:72px;margin-left:-36px;">选择任务类型</div></div>
-                                <div class="stepWaiting" style="margin-left:22%;"><div ng-class="step==2?'stepOn':''">2</div><div class="caption" style="width:72px;margin-left:-36px;">填写商品信息</div></div>
-                                <div class="stepWaiting" style="margin-left:22%;">
+                                <div class="stepWaiting"
+                                     style="position:absolute;top:0;left:-5px;">
+                                    <div class="">1</div>
+                                    <div class="caption"
+                                         style="width:72px;margin-left:-36px;">
+                                        选择任务类型
+                                    </div>
+                                </div>
+                                <div class="stepWaiting"
+                                     style="margin-left:22%;">
+                                    <div ng-class="step==2?'stepOn':''">2</div>
+                                    <div class="caption"
+                                         style="width:72px;margin-left:-36px;">
+                                        填写商品信息
+                                    </div>
+                                </div>
+                                <div class="stepWaiting"
+                                     style="margin-left:22%;">
                                     <div ng-class="step==3?'stepOn':''">3</div>
-                                    <div class="caption" style="width:72px;margin-left:-36px;">填写刷单数量</div>
+                                    <div class="caption"
+                                         style="width:72px;margin-left:-36px;">
+                                        填写刷单数量
+                                    </div>
                                 </div>
-                                <div class="stepWaiting" style="margin-left:22%;">
+                                <div class="stepWaiting"
+                                     style="margin-left:22%;">
                                     <div ng-class="step==4?'stepOn':''">4</div>
-                                    <div class="caption" style="width:60px;margin-left:-30px;">选增值服务</div>
+                                    <div class="caption"
+                                         style="width:60px;margin-left:-30px;">
+                                        选增值服务
+                                    </div>
                                 </div>
-                                <div class="stepWaiting" style="position:absolute;top:0;right:-5px;">
+                                <div class="stepWaiting"
+                                     style="position:absolute;top:0;right:-5px;">
                                     <div ng-class="step==5?'stepOn':''">5</div>
-                                    <div class="caption" style="width:48px;margin-left:-24px;">支付</div>
+                                    <div class="caption"
+                                         style="width:48px;margin-left:-24px;">
+                                        支付
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -42,142 +68,716 @@
                         <div class="form-body">
                             <div class="form-group">
                                 <label class="col-md-2 control-label">商品名称</label>
+
                                 <div class="col-md-6">
                                     <input type="text" class="form-control">
                                 </div>
-                                <label class="col-md-1 control-label"><span class="error">必填</span></label>
+                                <label class="col-md-1 control-label"><span
+                                        class="error">必填</span></label>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label">商品链接</label>
+
                                 <div class="col-md-6">
                                     <input type="text" class="form-control">
                                 </div>
-                                <label class="col-md-1 control-label"><span class="error">必填</span></label>
+                                <label class="col-md-1 control-label"><span
+                                        class="error">必填</span></label>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label">规格</label>
+
                                 <div class="col-md-2">
-                                    <input type="text" class="form-control" placeholder="如：颜色"/>
+                                    <input type="text" class="form-control"
+                                           placeholder="如：颜色"/>
                                 </div>
                                 <div class="col-md-2">
-                                    <input type="text" class="form-control" placeholder="如：尺码"/>
+                                    <input type="text" class="form-control"
+                                           placeholder="如：尺码"/>
                                 </div>
-                                <label class="col-md-1 control-label"><span class="">非必填</span></label>
+                                <label class="col-md-1 control-label"><span
+                                        class="">非必填</span></label>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label">单品售价</label>
+
                                 <div class="col-md-2">
-                                    <input type="text" class="form-control" placeholder="元"/>
+                                    <input type="text" class="form-control"
+                                           placeholder="元"/>
                                 </div>
-                                <label class="col-md-1 control-label"><span class="error">必填</span></label>
+                                <label class="col-md-1 control-label"><span
+                                        class="error">必填</span></label>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label">每单拍</label>
+
                                 <div class="col-md-2">
-                                    <input type="text" class="form-control" placeholder="件"/>
+                                    <input type="text" class="form-control"
+                                           placeholder="件"/>
                                 </div>
-                                <label class="col-md-1 control-label"><span class="error">必填</span></label>
-                                <label class="col-md-3 control-label">下单总金额 <span class="error">0</span>元</label>
+                                <label class="col-md-1 control-label"><span
+                                        class="error">必填</span></label>
+                                <label class="col-md-3 control-label">下单总金额
+                                    <span class="error">0</span>元</label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">搜索页面展示价格</label>
+
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control"
+                                           placeholder="元"/>
+                                </div>
+                                <label class="col-md-6 control-label"><span
+                                        class="small">非必填，如该商品有满减、促销、多规格等情况，请填写此金额</span>
+                                </label>
                             </div>
                         </div>
                     </div>
-                    <div class="alert alert-success">如何找到您的商品：请添加几个订单来源方式，任务发布时系统将会随机安排买手通过不同的方式模拟真实购物流程</div>
+                    <div class="alert alert-success">
+                        如何找到您的商品：请添加几个订单来源方式，任务发布时系统将会随机安排买手通过不同的方式模拟真实购物流程
+                    </div>
                     <div class="alert alert-info">
                         <input type="checkbox" ng-model="taobao.searchBoxFlag"/>使用“淘宝搜索框”查找商品
                     </div>
-                    <div class="form form-horizontal" ng-show="taobao.searchBoxFlag">
+                    <div class="form form-horizontal"
+                         ng-show="taobao.searchBoxFlag">
                         <div class="form-body">
                             <div class="form-group">
-                                <label class="col-md-5 control-label">请上传 <span class="error">“淘宝商品主图”</span>，以便于买手快速找到任务商品</label>
-                                <div class="col-md-4"><input type="file" class="control-label"/></div>
+                                <label class="col-md-5 control-label">请上传 <span
+                                        class="error">“淘宝商品主图”</span>，以便于买手快速找到任务商品</label>
+
+                                <div class="col-md-4"><input type="file"
+                                                             class="control-label"/>
+                                </div>
                             </div>
                         </div>
                         <div class="form-body">
                             <strong>关键词来源1:</strong>
+
                             <div class="form-group">
-                                <label class="col-md-4 control-label">让买手在 <span class="error">taobao.com</span>搜索关键字进入“搜索列表”</label>
-                                <input type="text" class="col-md-4 control-label"/>
-                                <label class="col-md-1 control-label"><span class="error">必填</span></label>
+                                <label class="col-md-4 control-label">让买手在 <span
+                                        class="error">taobao.com</span>搜索关键字进入“搜索列表”</label>
+                                <input type="text"
+                                       class="col-md-4 control-label"/>
+                                <label class="col-md-1 control-label"><span
+                                        class="error">必填</span></label>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
-                                <input type="text" class="col-md-1 control-label"/>
-                                <input type="text" class="col-md-1 control-label"/>
-                                <input type="text" class="col-md-1 control-label"/>
-                                <input type="text" class="col-md-1 control-label"/>
-                                <label class="col-md-2 control-label"><span class="small">最多四个分类 非必填</span></label>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <label class="col-md-2 control-label"><span
+                                        class="small">最多四个分类 非必填</span></label>
                             </div>
+                            <div class="border-bottom"></div>
                         </div>
-                        <div class="form-body" ng-show="taobao.keywordsCount > 1">
-                            <strong>关键词来源2: <span class="pull-right" ng-click="subTaobaoKeywordCount()">删除</span></strong>
+                        <div class="form-body"
+                             ng-show="taobao.keywordsCount > 1">
+                            <strong>关键词来源2: <span class="pull-right"
+                                                  ng-click="subTaobaoKeywordCount()">删除</span></strong>
+
                             <div class="form-group">
-                                <label class="col-md-4 control-label">让买手在 <span class="error">taobao.com</span>搜索关键字进入“搜索列表”</label>
-                                <input type="text" class="col-md-4 control-label"/>
-                                <label class="col-md-1 control-label"><span class="error">必填</span></label>
+                                <label class="col-md-4 control-label">让买手在 <span
+                                        class="error">taobao.com</span>搜索关键字进入“搜索列表”</label>
+                                <input type="text"
+                                       class="col-md-4 control-label"/>
+                                <label class="col-md-1 control-label"><span
+                                        class="error">必填</span></label>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
-                                <input type="text" class="col-md-1 control-label"/>
-                                <input type="text" class="col-md-1 control-label"/>
-                                <input type="text" class="col-md-1 control-label"/>
-                                <input type="text" class="col-md-1 control-label"/>
-                                <label class="col-md-2 control-label"><span class="small">最多四个分类 非必填</span></label>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <label class="col-md-2 control-label"><span
+                                        class="small">最多四个分类 非必填</span></label>
                             </div>
+                            <div class="border-bottom"></div>
                         </div>
-                        <div class="form-body" ng-show="taobao.keywordsCount > 2">
-                            <strong>关键词来源3: <span class="pull-right" ng-click="subTaobaoKeywordCount()">删除</span></strong>
+                        <div class="form-body"
+                             ng-show="taobao.keywordsCount > 2">
+                            <strong>关键词来源3: <span class="pull-right"
+                                                  ng-click="subTaobaoKeywordCount()">删除</span></strong>
+
                             <div class="form-group">
-                                <label class="col-md-4 control-label">让买手在 <span class="error">taobao.com</span>搜索关键字进入“搜索列表”</label>
-                                <input type="text" class="col-md-4 control-label"/>
-                                <label class="col-md-1 control-label"><span class="error">必填</span></label>
+                                <label class="col-md-4 control-label">让买手在 <span
+                                        class="error">taobao.com</span>搜索关键字进入“搜索列表”</label>
+                                <input type="text"
+                                       class="col-md-4 control-label"/>
+                                <label class="col-md-1 control-label"><span
+                                        class="error">必填</span></label>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
-                                <input type="text" class="col-md-1 control-label"/>
-                                <input type="text" class="col-md-1 control-label"/>
-                                <input type="text" class="col-md-1 control-label"/>
-                                <input type="text" class="col-md-1 control-label"/>
-                                <label class="col-md-2 control-label"><span class="small">最多四个分类 非必填</span></label>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <label class="col-md-2 control-label"><span
+                                        class="small">最多四个分类 非必填</span></label>
                             </div>
+                            <div class="border-bottom"></div>
                         </div>
-                        <div class="form-body" ng-show="taobao.keywordsCount > 3">
-                            <strong>关键词来源4: <span class="pull-right" ng-click="subTaobaoKeywordCount()">删除</span></strong>
+                        <div class="form-body"
+                             ng-show="taobao.keywordsCount > 3">
+                            <strong>关键词来源4: <span class="pull-right"
+                                                  ng-click="subTaobaoKeywordCount()">删除</span></strong>
+
                             <div class="form-group">
-                                <label class="col-md-4 control-label">让买手在 <span class="error">taobao.com</span>搜索关键字进入“搜索列表”</label>
-                                <input type="text" class="col-md-4 control-label"/>
-                                <label class="col-md-1 control-label"><span class="error">必填</span></label>
+                                <label class="col-md-4 control-label">让买手在 <span
+                                        class="error">taobao.com</span>搜索关键字进入“搜索列表”</label>
+                                <input type="text"
+                                       class="col-md-4 control-label"/>
+                                <label class="col-md-1 control-label"><span
+                                        class="error">必填</span></label>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
-                                <input type="text" class="col-md-1 control-label"/>
-                                <input type="text" class="col-md-1 control-label"/>
-                                <input type="text" class="col-md-1 control-label"/>
-                                <input type="text" class="col-md-1 control-label"/>
-                                <label class="col-md-2 control-label"><span class="small">最多四个分类 非必填</span></label>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <label class="col-md-2 control-label"><span
+                                        class="small">最多四个分类 非必填</span></label>
                             </div>
+                            <div class="border-bottom"></div>
                         </div>
-                        <div class="form-body" ng-show="taobao.keywordsCount > 4">
-                            <strong>关键词来源5: <span class="pull-right" ng-click="subTaobaoKeywordCount()">删除</span></strong>
+                        <div class="form-body"
+                             ng-show="taobao.keywordsCount > 4">
+                            <strong>关键词来源5: <span class="pull-right"
+                                                  ng-click="subTaobaoKeywordCount()">删除</span></strong>
+
                             <div class="form-group">
-                                <label class="col-md-4 control-label">让买手在 <span class="error">taobao.com</span>搜索关键字进入“搜索列表”</label>
-                                <input type="text" class="col-md-4 control-label"/>
-                                <label class="col-md-1 control-label"><span class="error">必填</span></label>
+                                <label class="col-md-4 control-label">让买手在 <span
+                                        class="error">taobao.com</span>搜索关键字进入“搜索列表”</label>
+                                <input type="text"
+                                       class="col-md-4 control-label"/>
+                                <label class="col-md-1 control-label"><span
+                                        class="error">必填</span></label>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
-                                <input type="text" class="col-md-1 control-label"/>
-                                <input type="text" class="col-md-1 control-label"/>
-                                <input type="text" class="col-md-1 control-label"/>
-                                <input type="text" class="col-md-1 control-label"/>
-                                <label class="col-md-2 control-label"><span class="small">最多四个分类 非必填</span></label>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <label class="col-md-2 control-label"><span
+                                        class="small">最多四个分类 非必填</span></label>
                             </div>
+                            <div class="border-bottom"></div>
                         </div>
-                        <div class="form-body" ng-hide="taobao.keywordsCount == 5">
-                            <p><a href="javascript:;;;" ng-click="addTaobaoKeywordCount()">+ 可多添加1个淘宝搜索关键字方案</a>（最多可添加4个方案）<span class="pull-right">可提高任务安全保障</span></p>
+                        <div class="form-body"
+                             ng-hide="taobao.keywordsCount == 5">
+                            <p><a href="javascript:;;;"
+                                  ng-click="addTaobaoKeywordCount()">+
+                                可多添加1个淘宝搜索关键字方案</a>（最多可添加4个方案）<span
+                                    class="pull-right">可提高任务安全保障</span></p>
                         </div>
                     </div>
                     <div class="alert alert-info">
                         <input type="checkbox" ng-model="tmall.searchBoxFlag"/>使用“天猫搜索框”查找商品
+                    </div>
+                    <div class="form form-horizontal"
+                         ng-show="tmall.searchBoxFlag">
+                        <div class="form-body">
+                            <div class="form-group">
+                                <label class="col-md-5 control-label">请上传 <span
+                                        class="error">“天猫商品主图”</span>，以便于买手快速找到任务商品</label>
+
+                                <div class="col-md-4"><input type="file"
+                                                             class="control-label"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-body">
+                            <strong>关键词来源1:</strong>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">让买手在 <span
+                                        class="error">tmall.com</span>搜索关键字进入“搜索列表”</label>
+                                <input type="text"
+                                       class="col-md-4 control-label"/>
+                                <label class="col-md-1 control-label"><span
+                                        class="error">必填</span></label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <label class="col-md-2 control-label"><span
+                                        class="small">最多四个分类 非必填</span></label>
+                            </div>
+                            <div class="border-bottom"></div>
+                        </div>
+                        <div class="form-body"
+                             ng-show="tmall.keywordsCount > 1">
+                            <strong>关键词来源2: <span class="pull-right"
+                                                  ng-click="subTmallKeywordCount()">删除</span></strong>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">让买手在 <span
+                                        class="error">tmall.com</span>搜索关键字进入“搜索列表”</label>
+                                <input type="text"
+                                       class="col-md-4 control-label"/>
+                                <label class="col-md-1 control-label"><span
+                                        class="error">必填</span></label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <label class="col-md-2 control-label"><span
+                                        class="small">最多四个分类 非必填</span></label>
+                            </div>
+                            <div class="border-bottom"></div>
+                        </div>
+                        <div class="form-body"
+                             ng-show="tmall.keywordsCount > 2">
+                            <strong>关键词来源3: <span class="pull-right"
+                                                  ng-click="subTmallKeywordCount()">删除</span></strong>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">让买手在 <span
+                                        class="error">tmall.com</span>搜索关键字进入“搜索列表”</label>
+                                <input type="text"
+                                       class="col-md-4 control-label"/>
+                                <label class="col-md-1 control-label"><span
+                                        class="error">必填</span></label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <label class="col-md-2 control-label"><span
+                                        class="small">最多四个分类 非必填</span></label>
+                            </div>
+                            <div class="border-bottom"></div>
+                        </div>
+                        <div class="form-body"
+                             ng-show="tmall.keywordsCount > 3">
+                            <strong>关键词来源4: <span class="pull-right"
+                                                  ng-click="subTmallKeywordCount()">删除</span></strong>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">让买手在 <span
+                                        class="error">tmall.com</span>搜索关键字进入“搜索列表”</label>
+                                <input type="text"
+                                       class="col-md-4 control-label"/>
+                                <label class="col-md-1 control-label"><span
+                                        class="error">必填</span></label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <label class="col-md-2 control-label"><span
+                                        class="small">最多四个分类 非必填</span></label>
+                            </div>
+                            <div class="border-bottom"></div>
+                        </div>
+                        <div class="form-body"
+                             ng-show="tmall.keywordsCount > 4">
+                            <strong>关键词来源5: <span class="pull-right"
+                                                  ng-click="subTmallKeywordCount()">删除</span></strong>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">让买手在 <span
+                                        class="error">tmall.com</span>搜索关键字进入“搜索列表”</label>
+                                <input type="text"
+                                       class="col-md-4 control-label"/>
+                                <label class="col-md-1 control-label"><span
+                                        class="error">必填</span></label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <input type="text"
+                                       class="col-md-1 control-label"/>
+                                <label class="col-md-2 control-label"><span
+                                        class="small">最多四个分类 非必填</span></label>
+                            </div>
+                            <div class="border-bottom"></div>
+                        </div>
+                        <div class="form-body"
+                             ng-hide="tmall.keywordsCount == 5">
+                            <p><a href="javascript:;;;"
+                                  ng-click="addTmallKeywordCount()">+
+                                可多添加1个天猫搜索关键字方案</a>（最多可添加4个方案）<span
+                                    class="pull-right">可提高任务安全保障</span></p>
+                        </div>
+                    </div>
+                    <div class="border-bottom"></div>
+                    <div class="form-horizontal">
+                        <div class="alert">缩小搜索范围</div>
+                        <div class="col-lg-12">
+                            <span class="small">
+                            让买手用列表筛选中 <span class="error">“价格筛选”</span>、 <span
+                                    class="error">“商品所在地”</span>缩小范围 非必填，买手可通过筛选价格或所在地更方便的找到您的商品
+                            </span>
+                        </div>
+                        <div class="form-body">
+                            <div class="form-group">
+                                <label class="col-md-1 control-label">价格</label>
+
+                                <div class="col-md-1">
+                                    <input type="text" class="form-control"
+                                           placeholder="最低"/>
+                                </div>
+                                <div class="col-md-1">
+                                    <input type="text" class="form-control"
+                                           placeholder="最高"/>
+                                </div>
+                                <label class="col-md-1 control-label">
+                                    所在地</label>
+
+                                <div class="col-md-3">
+                                    <span class="ie7_areaHack_area">
+                                                                       <div class="sel-loc-box" style="border: 1px solid #f0f0f0">
+                                                                           <div class="fake-select sel-loc">
+                                                                               <ul class="selected">
+                                                                                   <li>
+                                                                                       <s class="sel_dropdown">
+                                                                                           <s class="i">
+                                                                                           </s>
+                                                                                       </s>
+                                                                                       <input type="hidden" name="position" class="position"
+                                                                                              value="全国"/>
+                                                                                       <a href="javascript:;" data-value="全国" data-nogo="true">
+                                                                                           全国</a>
+                                                                                   </li>
+                                                                               </ul>
+                                                                               <div style="display: none;" class="toselect">
+                                                                                   <ul class="loc1">
+                                                                                       <li class="checked"><a _val="全国" href="javascript:;">全国</a></li>
+                                                                                   </ul>
+                                                                                   <ul class="loc2 split">
+                                                                                       <li><a trace="location" _val="江苏,浙江,上海">江浙沪</a></li>
+                                                                                       <li><a trace="location" _val="广州,深圳,中山,珠海,佛山,东莞,惠州">珠三角</a></li>
+                                                                                       <li><a trace="location" _val="香港,澳门,台湾">港澳台</a></li>
+                                                                                       <li><a trace="location"
+                                                                                              _val="美国,英国,法国,瑞士,澳洲,新西兰,加拿大,奥地利,韩国,日本,德国,意大利,西班牙,俄罗斯,泰国,印度,荷兰,新加坡,其它国家">海外</a>
+                                                                                       </li>
+                                                                                       <li><a trace="location">北京</a></li>
+                                                                                       <li><a trace="location">上海</a></li>
+                                                                                       <li><a trace="location">广州</a></li>
+                                                                                       <li><a trace="location">深圳</a></li>
+                                                                                       <li><a trace="location" _val="北京,天津">京津</a></li>
+                                                                                   </ul>
+                                                                                   <ul class="loc3">
+                                                                                       <li><a trace="location">杭州</a></li>
+                                                                                       <li><a trace="location">温州</a></li>
+                                                                                       <li><a trace="location">宁波</a></li>
+                                                                                       <li><a trace="location">南京</a></li>
+                                                                                       <li><a trace="location">苏州</a></li>
+                                                                                       <li><a trace="location">济南</a></li>
+                                                                                       <li><a trace="location">青岛</a></li>
+                                                                                       <li><a trace="location">大连</a></li>
+                                                                                       <li><a trace="location">无锡</a></li>
+                                                                                       <li><a trace="location">合肥</a></li>
+                                                                                       <li><a trace="location">天津</a></li>
+                                                                                       <li><a trace="location">长沙</a></li>
+                                                                                       <li><a trace="location">武汉</a></li>
+                                                                                       <li><a trace="location">石家庄</a></li>
+                                                                                       <li><a trace="location">郑州</a></li>
+                                                                                       <li><a trace="location">成都</a></li>
+                                                                                       <li><a trace="location">重庆</a></li>
+                                                                                       <li><a trace="location">西安</a></li>
+                                                                                       <li><a trace="location">昆明</a></li>
+                                                                                       <li><a trace="location">南宁</a></li>
+                                                                                       <li><a trace="location">福州</a></li>
+                                                                                       <li><a trace="location">厦门</a></li>
+                                                                                       <li><a trace="location">南昌</a></li>
+                                                                                       <li><a trace="location">东莞</a></li>
+                                                                                       <li><a trace="location">沈阳</a></li>
+                                                                                       <li><a trace="location">长春</a></li>
+                                                                                       <li><a trace="location">哈尔滨</a></li>
+                                                                                   </ul>
+                                                                                   <ul class="loc4 split">
+                                                                                       <li><a trace="location">河北</a></li>
+                                                                                       <li><a trace="location">河南</a></li>
+                                                                                       <li><a trace="location">湖北</a></li>
+                                                                                       <li><a trace="location">湖南</a>
+                                                                                       <li><a trace="location">福建</a>
+                                                                                       <li><a trace="location">江苏</a>
+                                                                                       <li><a trace="location">江西</a>
+                                                                                       <li><a trace="location">广东</a>
+                                                                                       <li><a trace="location">广西</a>
+                                                                                       <li><a trace="location">海南</a>
+                                                                                       <li><a trace="location">浙江</a>
+                                                                                       <li><a trace="location">安徽</a>
+                                                                                       <li><a trace="location">吉林</a>
+                                                                                       <li><a trace="location">辽宁</a>
+                                                                                       <li><a trace="location">黑龙江</a>
+                                                                                       <li><a trace="location">山东</a>
+
+                                                                                       <li><a trace="location">山西</a>
+                                                                                       <li><a trace="location">陕西</a>
+                                                                                       <li><a trace="location">新疆</a>
+                                                                                       <li><a trace="location">云南</a>
+                                                                                       <li><a trace="location">贵州</a>
+
+                                                                                       <li><a trace="location">四川</a>
+                                                                                       <li><a trace="location">甘肃</a>
+                                                                                       <li><a trace="location">宁夏</a>
+                                                                                       <li><a trace="location">西藏</a>
+                                                                                       <li><a trace="location">香港</a>
+                                                                                       <li><a trace="location">澳门</a>
+                                                                                       <li><a trace="location">台湾</a>
+                                                                                       <li><a trace="location">内蒙古</a>
+                                                                                   </ul>
+                                                                               </div>
+                                                                           </div>
+                                                                       </div></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border-bottom"></div>
+                    <div class="form-horizontal">
+                        <div class="alert alert-warning">选择发布多个商品，只收取一个商品的服务费，且买手会用一笔订单同时购买你发布的所有商品，即发布一次任务可提升多个信誉</div>
+                        <div class="form-body" style="margin-top: -30px" ng-show="extendCount > 1">
+                            <div class="alert alert-info">商品2<span class="pull-right" ng-click="subExtendCount()">删除</span></div>
+                            <div class="form-group">
+                                <label class="col-lg-1 control-label">
+                                    商品名称
+                                </label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control"/>
+                                </div>
+                                <label class="col-lg-1 control-label"><span class="error">必填</span></label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-1 control-label">
+                                    商品链接
+                                </label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control"/>
+                                </div>
+                                <label class="col-lg-1 control-label"><span class="error">必填</span></label>
+                            </div>
+                            <div class="border-bottom"></div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">规格</label>
+
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control"
+                                           placeholder="如：颜色"/>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control"
+                                           placeholder="如：尺码"/>
+                                </div>
+                                <label class="col-md-1 control-label"><span
+                                        class="">非必填</span></label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">单品售价</label>
+
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control"
+                                           placeholder="元"/>
+                                </div>
+                                <label class="col-md-1 control-label"><span
+                                        class="error">必填</span></label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">每单拍</label>
+
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control"
+                                           placeholder="件"/>
+                                </div>
+                                <label class="col-md-1 control-label"><span
+                                        class="error">必填</span></label>
+                                <label class="col-md-3 control-label">下单总金额
+                                    <span class="error">0</span>元</label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">搜索页面展示价格</label>
+
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control"
+                                           placeholder="元"/>
+                                </div>
+                                <label class="col-md-6 control-label"><span
+                                        class="small">非必填，如该商品有满减、促销、多规格等情况，请填写此金额</span>
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">上传商品主图</label>
+                                <div class="col-md-2">
+                                    <input type="file"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-body" style="margin-top: -30px" ng-show="extendCount > 2">
+                            <div class="alert alert-info">商品3 <span class="pull-right" ng-click="subExtendCount()">删除</span></div>
+                            <div class="form-group">
+                                <label class="col-lg-1 control-label">
+                                    商品名称
+                                </label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control"/>
+                                </div>
+                                <label class="col-lg-1 control-label"><span class="error">必填</span></label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-1 control-label">
+                                    商品链接
+                                </label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control"/>
+                                </div>
+                                <label class="col-lg-1 control-label"><span class="error">必填</span></label>
+                            </div>
+                            <div class="border-bottom"></div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">规格</label>
+
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control"
+                                           placeholder="如：颜色"/>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control"
+                                           placeholder="如：尺码"/>
+                                </div>
+                                <label class="col-md-1 control-label"><span
+                                        class="">非必填</span></label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">单品售价</label>
+
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control"
+                                           placeholder="元"/>
+                                </div>
+                                <label class="col-md-1 control-label"><span
+                                        class="error">必填</span></label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">每单拍</label>
+
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control"
+                                           placeholder="件"/>
+                                </div>
+                                <label class="col-md-1 control-label"><span
+                                        class="error">必填</span></label>
+                                <label class="col-md-3 control-label">下单总金额
+                                    <span class="error">0</span>元</label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">搜索页面展示价格</label>
+
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control"
+                                           placeholder="元"/>
+                                </div>
+                                <label class="col-md-6 control-label"><span
+                                        class="small">非必填，如该商品有满减、促销、多规格等情况，请填写此金额</span>
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">上传商品主图</label>
+                                <div class="col-md-2">
+                                    <input type="file"/>
+                                </div>
+                            </div>
+                        </div>
+                        <p ng-show="extendCount < 3"><a href="" ng-click="addExtendCount()">+支付2元可多添加1个商品</a><span class="small">（最多可添加2个商品）</span></p>
+                    </div>
+                </div>
+                <div class="border-bottom"></div>
+                    <div class="col-lg-12">
+                        <button class="btn btn-warning" ng-click="confirmItem()">确认提交信息</button>
+                    </div>
+            </section>
+            <section class="panel">
+                <header class="panel-heading">
+                    2.设置商品收取运费的方式 <span class="error small">必选</span>
+                </header>
+                <div class="panel-body">
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="optionsRadios" value="option1" checked="">
+                            商品本身包邮 <span class="small">买手按照商品实际金额下单</span>
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="optionsRadios" value="option1">
+                            商品不包邮 <span class="small">无需买手联系客服。商家每单额外支出 <span class="error">10</span>元作为运费押金，任务完成后运费押金将全部退还给商家</span>
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="optionsRadios" value="option1">
+                            自选快递 <span class="small">商家自选快递发货，平台收取 <span class="error">2</span>元作为服务费用</span>
+                        </label>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <button class="btn btn-warning" ng-click="confirmTransport()">确认提交信息</button>
+                        </div>
+                    </div>
+                    <div class="border-bottom"></div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                    <span class="error">为了经营安全，请商家在店铺详情页，旺旺自动快捷回复语等关于店铺发货默认快递的说明中</span>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -186,3 +786,33 @@
     <!--main content end-->
 </section>
 <% include ../common_footer.html %>
+<script>
+    //所在地
+    $('ul.selected').click(function(e){
+        e.stopPropagation();
+        var $pr = $(this).parents('.sel-loc-box').find('.toselect');
+        if($pr.is(':visible')){
+            $pr.hide();
+        }else{
+            $pr.show();
+        }
+
+    });
+    $('.toselect a').click(function(e){
+        e.stopPropagation();
+        e.preventDefault();
+        var set = $(this).parents('.sel-loc-box').find('ul.selected a');
+        var _val = $(this).text();
+        set.html($(this).text())
+        set.attr('data-value',_val);
+        $(this).parents('.sel-loc-box').find('.position').val(_val);
+
+        /*if($.trim(_val) !="所在地"){
+         $(set.attr('checkfor')).val(_val);
+         }else{
+         $(set.attr('checkfor')).val(_val);
+         }
+         regForm($(set.attr('checkfor')));*/
+        $('div.toselect').hide();
+    })
+</script>
