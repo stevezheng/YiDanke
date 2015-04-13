@@ -53,6 +53,32 @@ module.exports = Model(function() {
         .select()
     },
 
+    /**
+     * 获取当前用户的店铺
+     * @param shopUserId
+     * @returns {*}
+     */
+    getOwn: function(shopUserId) {
+      var self = this;
+
+      return self
+        .where({shopUserId: shopUserId})
+        .select()
+    },
+
+    /**
+     * 获取当前用户通过审核的店铺
+     * @param shopUserId
+     * @returns {*}
+     */
+    getOwnPass: function(shopUserId) {
+      var self = this;
+
+      return self
+        .where({shopUserId: shopUserId, shopStatus: 1})
+        .select()
+    },
+
     getOne: function(shopUserId, id) {
       var self = this;
 

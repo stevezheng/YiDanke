@@ -1,6 +1,7 @@
 <% include ../common_header.html %>
 <link rel="stylesheet" href="/resource/css/tasks.css"/>
-<section id="container" ng-controller="publishCtrl">
+<script src="/resource/js/angular/taobao.index.js"></script>
+<section id="container" ng-controller="taobaoIndexCtrl">
     <% include ./seller_nav.html %>
     <!--main content start-->
     <section id="main-content">
@@ -37,34 +38,34 @@
                     第一步：选择任务类型
                 </header>
                 <div class="panel-body">
-                    <div class="row" id="platform">
+                    <div class="row">
                         <h4 class="col-lg-2">选择平台</h4>
                         <div class="col-lg-4">
-                            <button class="btn" ng-class="platform=='taobao'?'btn-info':'btn-default'" ng-click="platform='taobao'">淘宝</button>
-                            <button class="btn" ng-class="platform=='tmall'?'btn-info':'btn-default'" ng-click="platform='tmall'">天猫</button>
-                            <button class="btn" ng-class="platform=='jd'?'btn-info':'btn-default'" ng-click="platform='jd'">京东</button>
-                            <button class="btn" ng-class="platform=='mogujie'?'btn-info':'btn-default'" ng-click="platform='mogujie'">蘑菇街</button>
+                            <button class="btn btn-info">淘宝</button>
+                            <button class="btn btn-default">天猫</button>
+                            <button class="btn btn-default">京东</button>
+                            <button class="btn btn-default">蘑菇街</button>
                         </div>
                     </div>
-                    <div class="row" id="shop">
+                    <div class="row">
                         <h4 class="col-lg-2">选择店铺</h4>
                         <div class="col-lg-4">
-                            <button ng-click="changeShopId(shop.id)" class="btn" ng-class="shopId==shop.id?'btn-info':'btn-default'" ng-repeat="shop in shops" ng-show="shop.shopPlatform == platform">
-                                {{shop.shopName}}
-                            </button>
+                            <button class="btn btn-default">百度淘点点</button>
+                            <button class="btn btn-info">天猫淘金币</button>
+                            <button class="btn btn-default">疯狂地笑尿</button>
                         </div>
                     </div>
                     <div class="row">
                         <h4 class="col-lg-2">选择类型</h4>
                         <div class="col-lg-4">
-                            <button class="btn" ng-click="publishType='index'" ng-class="publishType=='index'?'btn-info':'btn-default'" >订单</button>
-                            <button class="btn" ng-click="publishType='juhuasuan'"  ng-show="platform=='taobao'||platform=='tmall'"ng-class="publishType=='juhuasuan'?'btn-info':'btn-default'">聚划算</button>
-                            <button class="btn" ng-click="publishType='zhitongche'" ng-show="platform=='taobao'||platform=='tmall'" ng-class="publishType=='zhitongche'?'btn-info':'btn-default'">直通车</button>
+                            <button class="btn btn-info">订单</button>
+                            <button class="btn btn-default">聚划算</button>
+                            <button class="btn btn-default">直通车</button>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-2 col-lg-offset-2">
-                            <button class="btn btn-success" ng-click="next()">下一步</button>
+                            <button class="btn btn-success">下一步</button>
                         </div>
                     </div>
                 </div>
