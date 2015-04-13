@@ -15,7 +15,7 @@ module.exports = Controller(function(){
             return self.error(403, '登陆超时，请先登陆');
           } else {
             //跳转到登录页
-            return self.redirect("/index/login");
+            return self.redirect("/");
           }
         } else {
           if (cUser.type != 0) {

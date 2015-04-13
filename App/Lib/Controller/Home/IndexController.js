@@ -95,14 +95,21 @@ module.exports = Controller("Home/BaseController", function () {
       self.assign('title', '');
 
       if (self.isGet()) {
-        self
+        return self
           .session()
           .then(function () {
             //退出日志
             var logUser = LogUserModel();
-            logUser.logout(self.cUser.id, self.cUser.username, ip);
 
-            self.redirect('/');
+            if (self.cUser) {
+              logUser.logout(self.cUser.id, self.cUser.username, ip);
+            }
+
+            return self.redirect('/');
+          })
+          .catch(function(err) {
+            console.error(err.message);
+            console.error(err.stack);
           })
       }
 
