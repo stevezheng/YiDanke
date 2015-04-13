@@ -5,7 +5,8 @@
     $scope.platform = 'taobao';
     $scope.shopId = 0;
     $scope.publishType = 'index';
-    
+
+
     $scope.changeShopId = function(id) {
       $scope.shopId = id;
     };
