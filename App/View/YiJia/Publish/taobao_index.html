@@ -1067,7 +1067,7 @@
                         <span style="font-weight: bolder; margin: 15px 0">2.加赏任务佣金：</span>
                         <span class="small">增加符点数越多，买手完成任务的积极性越大，买手会优先做此类任务</span>
                         <p>
-                            <input type="checkbox" ng-model="item.isExtendFee"/>
+                            <input type="checkbox" ng-model="cost.isExtendFee"/>
                             每单加赏佣金
                             <input type="text" ng-model="cost.extendFee"/>
                             人气符点，共计：{{cost.totalCount}}单 x {{cost.extendFee}} 金币 = {{cost.totalCount * cost.extendFee | number:2}} 金币(最低为2金币)
@@ -1278,34 +1278,35 @@
                                     <p ng-if="extendItem1.money">商品2: {{extendItem1.money}}元 x {{extendItem1.count}}单</p>
                                     <p ng-if="extendItem2.money">商品3: {{extendItem2.money}}元 x {{extendItem2.count}}单</p>
                                     <p ng-if="cost.promise">运费保证金：10元/单</p>
-                                    <p>退款保障金: {{cost.payback | number: 2}}元</p>
+                                    <p>退款保障金: {{cost.totalMoney * 0.05 | number: 2}}元</p>
                                 </td>
-                                <td>{{cost.totalMoney + cost.payback + cost.promise | number: 2}}</td>
-                                <td>{{cost.totalMoney + cost.payback + cost.promise | number: 2}} x {{cost.totalCount}} = {{(cost.totalMoney + cost.payback + cost.promise) * cost.totalCount | number: 2}}元</td>
+                                <td>{{cost.totalMoney * 1.05 + cost.promise | number: 2}}元</td>
+                                <td>{{cost.totalMoney * 1.05 + cost.promise | number: 2}} x {{cost.totalCount}} = {{(cost.totalMoney * 1.05 + cost.promise) * cost.totalCount | number: 2}}元</td>
                             </tr>
                             <tr>
                                 <td>一家币</td>
-                                <td>套餐服务费：{{cost.fee}}金币</td>
-                                <td>{{cost.fee}}金币</td>
-                                <td>{{cost.fee}} x {{cost.totalCount}} = {{cost.totalFee | number:2}}金币</td>
+                                <td>套餐服务费：{{cost.fee * 1 + cost.transport * 1 | number: 2}}金币</td>
+                                <td>{{cost.fee * 1 + cost.transport * 1 | number: 2}}金币</td>
+                                <td>{{cost.fee * 1 + cost.transport * 1 | number: 2}} x {{cost.totalCount}} = {{cost.totalFee + cost.transport * cost.totalCount | number:2}}金币</td>
                             </tr>
                             <tr>
                                 <td>增值服务</td>
                                 <td>
+                                    <p ng-show="cost.payback">押金直接返款: {{cost.payback}}金币</p>
                                     <p ng-show="cost.speed">提升完成任务速度: {{cost.speed}}金币</p>
-                                    <p ng-show="cost.totalExtendFee">加赏任务佣金: {{cost.totalExtendFee}}金币</p>
+                                    <p ng-show="cost.isExtendFee">加赏任务佣金: {{cost.extendFee * cost.totalCount}}金币</p>
                                     <p ng-show="cost.isInterval">任务发布间隔: {{cost.interval}}金币</p>
                                     <p ng-show="cost.cycleTime">延长买家购物周期: {{cost.cycleTime * cost.totalCount}}金币</p>
                                     <p ng-show="cost.isGoodComment">优质好评: {{cost.goodCommentFee}}金币</p>
                                     <p ng-show="cost.phone">手机端加成: {{cost.phone}}金币</p>
                                 </td>
                                 <td>--</td>
-                                <td>{{cost.speed + cost.totalExtendFee + cost.interval + cost.cycleTime * cost.totalCount + cost.goodCommentFee + cost.phone}}金币</td>
+                                <td>{{cost.payback * 1 + cost.speed * 1 + (cost.isExtendFee?cost.extendFee * cost.totalCount:0) + (cost.isInterval?cost.interval:0) * 1 + (cost.cycleTime * 1) * (cost.totalCount * 1) + (cost.isGoodComment?cost.goodCommentFee * 1: 0) + cost.phone * 1 | number:2}}金币</td>
                             </tr>
                             <tr>
                                 <td colspan="4"><span class="pull-right">
-                                    费用合计 押金: {{(cost.totalMoney + cost.payback) * cost.totalCount | number:2}}
-                                    一家币:  {{cost.totalFee + cost.speed + cost.totalExtendFee + cost.interval + cost.cycleTime + cost.goodCommentFee + cost.phone | number:2}}金币
+                                    费用合计 押金: {{(cost.totalMoney + cost.payback) * cost.totalCount | number:2}} 元
+                                    一家币: {{(cost.totalFee * 1 + cost.transport * cost.totalCount) + cost.payback * 1 + cost.speed * 1 + (cost.isExtendFee?cost.extendFee * cost.totalCount:0) + (cost.isInterval?cost.interval:0) * 1 + (cost.cycleTime * 1) * (cost.totalCount * 1) + (cost.isGoodComment?cost.goodCommentFee * 1: 0) + cost.phone * 1 | number:2}}金币
                                 </span></td>
                             </tr>
                             </tbody>

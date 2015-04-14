@@ -53,7 +53,8 @@
       totalCount: 0 //最终刷单数
       , totalMoney: 0 //最终商品1、商品2、商品3的总价格
 
-      , transport: 0 //快递费
+      //, transport: 0 //快递费
+
       , promise: 0 //退款保证金
       , totalPromise: 0 //总退款保证金
 
@@ -69,7 +70,6 @@
 
       , isExtendFee: false //是否平台加赏任务佣金
       , extendFee: 2 //加赏单任务佣金
-      , totalExtendFee: 0 //加赏任务总佣金
 
       , isInterval: false //是否任务发布间隔
       , intervalTime: 10 //每隔多久发布
@@ -116,6 +116,7 @@
       //需要检查第二步里面的数据是否正确
       if (step == 3) {
         $scope.confirmItem();
+        $scope.confirmTransport();
       }
 
       //需要检查第三步里面的数据是否正确
@@ -159,9 +160,24 @@
         }
 
         $scope.cost.totalFee = $scope.cost.fee * $scope.cost.totalCount;
-        $scope.cost.payback = $scope.cost.totalCount * $scope.cost.totalMoney * 0.06;
+        $scope.cost.payback = $scope.cost.totalCount * $scope.cost.totalMoney * 0.006;
         $scope.cost.phone = $scope.item.phoneCount * 0.5;
         $scope.cost.totalPromise = $scope.cost.promise * $scope.cost.totalCount;
+
+      }
+
+      if (step == 5) {
+        $http.post('/publish/taobao', {
+          cost: $scope.cost
+          , item: $scope.item
+          , taobao: $scope.taobao
+          , tmall: $scope.tmall
+          , extendItem1: $scope.extendItem1
+          , extendItem2: $scope.extendItem2
+          , transport: $scope.transport
+        }).success(function(res) {
+          console.log(res);
+        })
       }
 
       $scope.step = step;

@@ -21,7 +21,26 @@ module.exports = Controller("Publish/BaseController", function(){
           });
       }
 
-      if (self.isPost()) {}
+      if (self.isPost()) {
+        var item = self.post('item')
+          , taobao = self.post('taobao')
+          , cost = self.post('cost')
+          , tmall = self.post('tmall')
+          , extendItem1 = self.post('extendItem1')
+          , extendItem2 = self.post('extendItem2')
+          , transport = self.post('transport');
+
+        //todo:这里需要重新计算一下费用
+
+        self.success({
+          cost: cost,
+          item: item,
+          taobao:taobao,
+          tmall: tmall,
+          extendItem1: extendItem1,
+          extendItem2: extendItem2,
+          transport: transport});
+      }
     },
   };
 });
