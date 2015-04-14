@@ -76,6 +76,33 @@
 
       , cycleTime: 0
       , totalCycle: 0
+
+      , isGoodComment: false
+      , goodCommentCount: 3
+      , goodComment: [
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        ''
+      ]
+    };
+
+    $scope.addGoodComment = function() {
+      if ($scope.cost.goodCommentCount < 10) {
+        $scope.cost.goodCommentCount++;
+      }
+    };
+
+    $scope.subGoodComment = function() {
+      if ($scope.cost.goodCommentCount > 3) {
+        $scope.cost.goodCommentCount--;
+      }
     };
 
     $scope.nextStep = function(step) {
@@ -173,12 +200,31 @@
         })
     });
 
-    $scope.$watch('cost.extendFee', function() {
-      if ($scope.cost.extendFee < 2 || !angular.isNumber($scope.cost.extendFee)) {
-        $scope.cost.extendFee = 2;
+    //$scope.$watch('cost.extendFee', function() {
+    //  if ($scope.cost.extendFee < 2 || !angular.isNumber($scope.cost.extendFee)) {
+    //    $scope.cost.extendFee = 2;
+    //  }
+    //});
+
+    $scope.$watch('cost.selectPV', function() {
+      if ($scope.cost.selectPV == 0) {
+        $scope.cost.pv = $scope.cost.freePV;
+      } else {
+        $scope.cost.pv = $scope.cost.selectPV;
       }
     });
 
+    $scope.$watch('cost.freePV', function() {
+      //if (parseInt($scope.cost.freePV) < 30 || !angular.isNumber($scope.cost.freePV)) {
+      //  $scope.cost.freePV = 30;
+      //}
+
+      if ($scope.cost.selectPV == 0) {
+        $scope.cost.pv = $scope.cost.freePV;
+      } else {
+        $scope.cost.pv = $scope.cost.selectPV;
+      }
+    });
 
     //step2 start
     $scope.extendCount = 1;
