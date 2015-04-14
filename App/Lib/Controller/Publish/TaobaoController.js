@@ -15,6 +15,10 @@ module.exports = Controller("Publish/BaseController", function(){
         shop
           .getOne(self.cUser.id, shopId)
           .then(function(res) {
+            if (isEmpty(res)) {
+              self.assign('warning', '请检查该店铺是否属于您');
+              return self.display('Home:index:warning')
+            }
             self.assign('shopId', shopId);
             self.assign('shopName', res.shopName);
             return self.display();
