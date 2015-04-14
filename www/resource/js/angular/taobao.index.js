@@ -53,6 +53,10 @@
       totalCount: 0 //最终刷单数
       , totalMoney: 0 //最终商品1、商品2、商品3的总价格
 
+      , transport: 0 //快递费
+      , promise: 0 //退款保证金
+      , totalPromise: 0 //总退款保证金
+
       , fee: 0 //刷单一单的费用
       , totalFee: 0 //刷单总的费用
 
@@ -157,10 +161,41 @@
         $scope.cost.totalFee = $scope.cost.fee * $scope.cost.totalCount;
         $scope.cost.payback = $scope.cost.totalCount * $scope.cost.totalMoney * 0.06;
         $scope.cost.phone = $scope.item.phoneCount * 0.5;
+        $scope.cost.totalPromise = $scope.cost.promise * $scope.cost.totalCount;
       }
 
       $scope.step = step;
     };
+
+    $scope.$watch('item.url', function () {
+      var val = $scope.item.url;
+      if (val.slice(0, 18) != 'http://item.taobao'
+        && val.slice(0, 19) != 'http://detail.tmall') {
+        $scope.item.urlFlag = false;
+      } else {
+        $scope.item.urlFlag = true;
+      }
+    });
+
+    $scope.$watch('extendItem1.url', function () {
+      var val = $scope.extendItem1.url;
+      if (val.slice(0, 18) != 'http://item.taobao'
+        && val.slice(0, 19) != 'http://detail.tmall') {
+        $scope.extendItem1.urlFlag = false;
+      } else {
+        $scope.extendItem1.urlFlag = true;
+      }
+    });
+
+    $scope.$watch('extendItem2.url', function () {
+      var val = $scope.extendItem2.url;
+      if (val.slice(0, 18) != 'http://item.taobao'
+        && val.slice(0, 19) != 'http://detail.tmall') {
+        $scope.extendItem2.urlFlag = false;
+      } else {
+        $scope.extendItem2.urlFlag = true;
+      }
+    });
 
     $scope.$watch('taobao.image', function () {
       if (!$scope.taobao.image) {
@@ -240,6 +275,7 @@
     $scope.item = {
       name: '' //商品名称
       , url: '' //商品链接
+      , urlFlag: '' //商品链接是否正确
       , tag1: '' //规格1
       , tag2: '' //规格2
       , money: null //购买价格
@@ -258,6 +294,7 @@
     $scope.extendItem1 = {
       name: ''
       , url: ''
+      , urlFlag: '' //商品链接是否正确
       , image: ''
       , imagefile: ''
       , tag1: ''
@@ -270,6 +307,7 @@
     $scope.extendItem2 = {
       name: ''
       , url: ''
+      , urlFlag: '' //商品链接是否正确
       , image: ''
       , imagefile: ''
       , tag1: ''
@@ -392,7 +430,7 @@
         return false;
       }
 
-      if (!$scope.item.url) {
+      if (!$scope.item.url || !$scope.item.urlFlag) {
         alert('请检查商品链接是否正确');
         return false;
       }
@@ -551,6 +589,61 @@
         }
       }
 
+      if ($scope.extendCount > 1) {
+
+        if (!$scope.extendItem1.name) {
+          alert('请检查商品2,名称是否正确');
+          return false;
+        }
+
+        if (!$scope.extendItem1.url || !$scope.extendItem1.urlFlag) {
+          alert('请检查商品2,链接是否正确');
+          return false;
+        }
+
+        if (!$scope.extendItem1.money) {
+          alert('请检查单品2,售价是否正确');
+          return false;
+        }
+
+        if (!$scope.extendItem1.count) {
+          alert('请检查商品2,每单拍是否正确');
+          return false;
+        }
+
+        if ($scope.extendItem1.count * $scope.extendItem1.money <= 0) {
+          alert('请检查商品2,金额是否正确');
+          return false;
+        }
+      }
+
+      if ($scope.extendCount > 2) {
+
+        if (!$scope.extendItem2.name) {
+          alert('请检查商品3,名称是否正确');
+          return false;
+        }
+
+        if (!$scope.extendItem2.url || !$scope.extendItem2.urlFlag) {
+          alert('请检查商品3,链接是否正确');
+          return false;
+        }
+
+        if (!$scope.extendItem2.money) {
+          alert('请检查单品3,售价是否正确');
+          return false;
+        }
+
+        if (!$scope.extendItem2.count) {
+          alert('请检查商品3,每单拍是否正确');
+          return false;
+        }
+
+        if ($scope.extendItem2.count * $scope.extendItem2.money <= 0) {
+          alert('请检查商品3,金额是否正确');
+          return false;
+        }
+      }
 
       var price = $scope.item.money * $scope.item.count;
 
@@ -572,6 +665,14 @@
 
     $scope.confirmTransport = function() {
       $scope.transportFlag = true;
+      if ($scope.transport == 'baoyou') {
+        $scope.cost.transport = 5;
+      } else if ($scope.transport == 'bubaoyou') {
+        $scope.cost.transport = 5;
+        $scope.cost.promise = 10;
+      } else if ($scope.transport == 'zixuan') {
+        $scope.cost.transport = 2;
+      }
     };
     //step2 end
 

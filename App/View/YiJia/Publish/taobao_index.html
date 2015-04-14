@@ -83,7 +83,7 @@
 
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" ng-model="item.url">
-                                    <p class="help-block error" ng-hide="item.url"><i class="icon-exclamation-sign"></i>商品链接不正确</p>
+                                    <p class="help-block error" ng-hide="item.url && item.urlFlag"><i class="icon-exclamation-sign"></i>商品链接不正确</p>
                                 </div>
                                 <label class="col-md-1 control-label"><span
                                         class="error">必填</span></label>
@@ -643,7 +643,8 @@
                                     商品名称
                                 </label>
                                 <div class="col-lg-6">
-                                    <input type="text" class="form-control"/>
+                                    <input type="text" class="form-control" ng-model="extendItem1.name"/>
+                                    <p class="help-block error" ng-hide="extendItem1.name"><i class="icon-exclamation-sign"></i>商品名称不正确</p>
                                 </div>
                                 <label class="col-lg-1 control-label"><span class="error">必填</span></label>
                             </div>
@@ -652,7 +653,8 @@
                                     商品链接
                                 </label>
                                 <div class="col-lg-6">
-                                    <input type="text" class="form-control"/>
+                                    <input type="text" class="form-control" ng-model="extendItem1.url"/>
+                                    <p class="help-block error" ng-hide="extendItem1.url && extendItem1.urlFlag"><i class="icon-exclamation-sign"></i>商品链接不正确</p>
                                 </div>
                                 <label class="col-lg-1 control-label"><span class="error">必填</span></label>
                             </div>
@@ -675,23 +677,26 @@
                                 <label class="col-md-2 control-label">单品售价</label>
 
                                 <div class="col-md-2">
-                                    <input type="text" class="form-control"
+                                    <input type="text" class="form-control" ng-model="extendItem1.money"
                                            placeholder="元"/>
                                 </div>
                                 <label class="col-md-1 control-label"><span
                                         class="error">必填</span></label>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-2 control-label">每单拍</label>
+                            <label class="col-md-2 control-label">每单拍</label>
 
-                                <div class="col-md-2">
-                                    <input type="text" class="form-control"
-                                           placeholder="件"/>
-                                </div>
-                                <label class="col-md-1 control-label"><span
-                                        class="error">必填</span></label>
-                                <label class="col-md-3 control-label">下单总金额
-                                    <span class="error">0</span>元</label>
+                            <div class="col-md-2">
+                                <input type="text" class="form-control" ng-model="extendItem1.count"
+                                       placeholder="件"/>
+                            </div>
+                            <label class="col-md-1 control-label"><span
+                                    class="error">必填</span></label>
+                            <label class="col-md-3 control-label">下单总金额
+                                <span class="error">{{extendItem1.money * extendItem1.count | number: 2}}</span>元</label>
+                            <div class="col-md-2">
+                                <p class="help-block error" ng-hide="(extendItem1.money * extendItem1.count) > 0"><i class="icon-exclamation-sign"></i>商品金额不正确</p>
+                            </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label">搜索页面展示价格</label>
@@ -724,7 +729,8 @@
                                     商品名称
                                 </label>
                                 <div class="col-lg-6">
-                                    <input type="text" class="form-control"/>
+                                    <input type="text" class="form-control" ng-model="extendItem2.name"/>
+                                    <p class="help-block error" ng-hide="extendItem2.name"><i class="icon-exclamation-sign"></i>商品名称不正确</p>
                                 </div>
                                 <label class="col-lg-1 control-label"><span class="error">必填</span></label>
                             </div>
@@ -733,7 +739,8 @@
                                     商品链接
                                 </label>
                                 <div class="col-lg-6">
-                                    <input type="text" class="form-control"/>
+                                    <input type="text" class="form-control" ng-model="extendItem2.url"/>
+                                    <p class="help-block error" ng-hide="extendItem2.url && extendItem2.urlFlag"><i class="icon-exclamation-sign"></i>商品链接不正确</p>
                                 </div>
                                 <label class="col-lg-1 control-label"><span class="error">必填</span></label>
                             </div>
@@ -756,7 +763,7 @@
                                 <label class="col-md-2 control-label">单品售价</label>
 
                                 <div class="col-md-2">
-                                    <input type="text" class="form-control"
+                                    <input type="text" class="form-control" ng-model="extendItem2.money"
                                            placeholder="元"/>
                                 </div>
                                 <label class="col-md-1 control-label"><span
@@ -766,13 +773,16 @@
                                 <label class="col-md-2 control-label">每单拍</label>
 
                                 <div class="col-md-2">
-                                    <input type="text" class="form-control"
+                                    <input type="text" class="form-control" ng-model="extendItem2.count"
                                            placeholder="件"/>
                                 </div>
                                 <label class="col-md-1 control-label"><span
                                         class="error">必填</span></label>
                                 <label class="col-md-3 control-label">下单总金额
-                                    <span class="error">0</span>元</label>
+                                    <span class="error">{{extendItem2.money * extendItem2.count | number: 2}}</span>元</label>
+                                <div class="col-md-2">
+                                    <p class="help-block error" ng-hide="(extendItem2.money * extendItem2.count) > 0"><i class="icon-exclamation-sign"></i>商品金额不正确</p>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label">搜索页面展示价格</label>
@@ -1264,13 +1274,14 @@
                             <tr>
                                 <td>押金</td>
                                 <td>
-                                    <p>商品1: {{item.money}}元 x {{item.count}}</p>
-                                    <p ng-if="extendItem1.money">商品2: {{extendItem1.money}}元 x {{extendItem1.count}}</p>
-                                    <p ng-if="extendItem2.money">商品3: {{extendItem2.money}}元 x {{extendItem2.count}}</p>
-                                    <p>退款保障金: {{cost.payback | number: 2}}</p>
+                                    <p>商品1: {{item.money}}元 x {{item.count}}单</p>
+                                    <p ng-if="extendItem1.money">商品2: {{extendItem1.money}}元 x {{extendItem1.count}}单</p>
+                                    <p ng-if="extendItem2.money">商品3: {{extendItem2.money}}元 x {{extendItem2.count}}单</p>
+                                    <p ng-if="cost.promise">运费保证金：10元/单</p>
+                                    <p>退款保障金: {{cost.payback | number: 2}}元</p>
                                 </td>
-                                <td>{{cost.totalMoney + cost.payback | number: 2}}</td>
-                                <td>{{cost.totalMoney + cost.payback | number: 2}} x {{cost.totalCount}} = {{(cost.totalMoney + cost.payback) * cost.totalCount | number: 2}}元</td>
+                                <td>{{cost.totalMoney + cost.payback + cost.promise | number: 2}}</td>
+                                <td>{{cost.totalMoney + cost.payback + cost.promise | number: 2}} x {{cost.totalCount}} = {{(cost.totalMoney + cost.payback + cost.promise) * cost.totalCount | number: 2}}元</td>
                             </tr>
                             <tr>
                                 <td>一家币</td>
@@ -1294,7 +1305,7 @@
                             <tr>
                                 <td colspan="4"><span class="pull-right">
                                     费用合计 押金: {{(cost.totalMoney + cost.payback) * cost.totalCount | number:2}}
-                                    一家币:  {{cost.totalFee + cost.speed + cost.totalExtendFee + cost.interval + cost.cycleTime + cost.goodCommentFee + cost.phone}}金币
+                                    一家币:  {{cost.totalFee + cost.speed + cost.totalExtendFee + cost.interval + cost.cycleTime + cost.goodCommentFee + cost.phone | number:2}}金币
                                 </span></td>
                             </tr>
                             </tbody>
