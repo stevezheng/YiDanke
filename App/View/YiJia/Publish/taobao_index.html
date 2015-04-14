@@ -60,7 +60,7 @@
                 </div>
             </section>
             <!--发布任务第二步开始-->
-            <div ng-show="step == 2">
+            <div ng-if="step == 2">
             <section class="panel">
                 <header class="panel-heading">
                     1.填写商品信息
@@ -850,7 +850,7 @@
             <!--发布任务第二步结束-->
 
             <!--发布任务第三步开始-->
-            <div ng-show="step==3">
+            <div ng-if="step==3">
                 <section class="panel">
                     <header class="panel-heading">
                         第三步：选择刷单数量<span class="pull-right">已选择: <span class="error">淘宝|<%= shopName %>|订单</span></span>
@@ -883,19 +883,18 @@
                                 <label class="checkbox-inline">
                                     <input type="radio" ng-model="item.totalCount" value="0"> 自定义
                                 </label>
-                                <label class="checkbox-inline">
-                                    <input type="text" ng-model="item._totalCount"> 单 <span class="small">(1-500单)</span>
-                                </label>
+                                <!--<label class="checkbox-inline">-->
+                                    <input type="text" ng-model="item.freeTotalCount"> 单 <span class="small">(1-500单)</span>
+                                <!--</label>-->
                             </div>
                             <div class="col-lg-12" style="margin: 20px 0 0 15px;">
                                 <p class="error">注意：请注意控制好店铺的转化率！不得超过3%！如果因转化率过高，导致商品降权，一家网概不负责！</p>
                             </div>
                         </div>
                         <div class="border-bottom"></div>
-                        <strong>2.请设置订单分布 <span class="small">注：电脑端、手机端/Pad端订单总数需要为 <span class="error" ng-bind="item.totalCount > 0?item.totalCount:item._totalCount"></span> 单，同时为了保证刷单安全，手机订单的数量至少要占据订单总数的50%</span></strong>
+                        <strong>2.请设置订单分布 <span class="small">注：电脑端、手机端/Pad端订单总数需要为 <span class="error" ng-bind="item.totalCount > 0?item.totalCount:item.freeTotalCount"></span> 单，同时为了保证刷单安全，手机订单的数量至少要占据订单总数的50%</span></strong>
                         <div class="row">
                             <div class="col-lg-12" style="margin-top: 10px">
-                                <label class="checkbox-inline">
                                     电脑端 <input type="text" ng-model="item.pcCount"> 单
                                     &nbsp;
                                     &nbsp;
@@ -903,13 +902,268 @@
                                     &nbsp;
                                     &nbsp;
                                     手机|Pad客户端 <input type="text" ng-model="item.phoneCount"> 单 (手机订单，每单多加0.5金币)
-                                </label>
+                            </div>
+                        </div>
+                        <div class="border-bottom"></div>
+                        <strong>3.请设置成交关键词分布<span class="small">注：各关键词订单总数需要为 <span class="error" ng-bind="item.totalCount > 0?item.totalCount:item.freeTotalCount"></span> 单</span></strong>
+                        <div class="form-horizontal">
+                            <div class="form-group" ng-if="taobao.key1">
+                                <label class="col-lg-2 control-label">淘宝关键词1:{{taobao.key1}}</label>
+                                <div class="col-lg-1">
+                                    <input type="text" ng-model="taobao.key1Count" class="form-control"/>
+                                </div>
+                                <div class="col-lg-1 control-label">单</div>
+                            </div>
+                            <div class="form-group" ng-if="taobao.key2">
+                                <label class="col-lg-2 control-label">淘宝关键词2:{{taobao.key2}}</label>
+                                <div class="col-lg-1">
+                                    <input type="text" ng-model="taobao.key2Count" class="form-control"/>
+                                </div>
+                                <div class="col-lg-1 control-label">单</div>
+                            </div>
+                            <div class="form-group" ng-if="taobao.key3">
+                                <label class="col-lg-2 control-label">淘宝关键词3:{{taobao.key3}}</label>
+                                <div class="col-lg-1">
+                                    <input type="text" ng-model="taobao.key3Count" class="form-control"/>
+                                </div>
+                                <div class="col-lg-1 control-label">单</div>
+                            </div>
+                            <div class="form-group" ng-if="taobao.key4">
+                                <label class="col-lg-2 control-label">淘宝关键词4:{{taobao.key4}}</label>
+                                <div class="col-lg-1">
+                                    <input type="text" ng-model="taobao.key4Count" class="form-control"/>
+                                </div>
+                                <div class="col-lg-1 control-label">单</div>
+                            </div>
+                            <div class="form-group" ng-if="taobao.key5">
+                                <label class="col-lg-2 control-label">淘宝关键词5:{{taobao.key5}}</label>
+                                <div class="col-lg-1">
+                                    <input type="text" ng-model="taobao.key5Count" class="form-control"/>
+                                </div>
+                                <div class="col-lg-1 control-label">单</div>
+                            </div>
+
+                            <div class="form-group" ng-if="tmall.key1">
+                                <label class="col-lg-2 control-label">天猫关键词1:{{tmall.key1}}</label>
+                                <div class="col-lg-1">
+                                    <input type="text" ng-model="tmall.key1Count" class="form-control"/>
+                                </div>
+                                <div class="col-lg-1 control-label">单</div>
+                            </div>
+                            <div class="form-group" ng-if="tmall.key2">
+                                <label class="col-lg-2 control-label">天猫关键词2:{{tmall.key2}}</label>
+                                <div class="col-lg-1">
+                                    <input type="text" ng-model="tmall.key2Count" class="form-control"/>
+                                </div>
+                                <div class="col-lg-1 control-label">单</div>
+                            </div>
+                            <div class="form-group" ng-if="tmall.key3">
+                                <label class="col-lg-2 control-label">天猫关键词3:{{tmall.key3}}</label>
+                                <div class="col-lg-1">
+                                    <input type="text" ng-model="tmall.key3Count" class="form-control"/>
+                                </div>
+                                <div class="col-lg-1 control-label">单</div>
+                            </div>
+                            <div class="form-group" ng-if="tmall.key4">
+                                <label class="col-lg-2 control-label">天猫关键词4:{{tmall.key4}}</label>
+                                <div class="col-lg-1">
+                                    <input type="text" ng-model="tmall.key4Count" class="form-control"/>
+                                </div>
+                                <div class="col-lg-1 control-label">单</div>
+                            </div>
+                            <div class="form-group" ng-if="tmall.key5">
+                                <label class="col-lg-2 control-label">天猫关键词5:{{tmall.key5}}</label>
+                                <div class="col-lg-1">
+                                    <input type="text" ng-model="tmall.key5Count" class="form-control"/>
+                                </div>
+                                <div class="col-lg-1 control-label">单</div>
+                            </div>
+                        </div>
+
+                        <strong>4.订单留言</strong>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <p class="error">注：近期淘宝严查，出于安全性考虑，平台决定暂时去掉订单留言功能。商家可以通过个人中心的批量发货页面，查看最新的买手付款订单，如有订单，请及时去淘宝后台插旗标记（不要填写旗子里的备注内容）。建议隔一段时间刷新一次页面，避免真实发货！</p>
+                            </div>
+                        </div>
+
+                        <strong>5.下单提示 <span class="small">注：买手接任务时可以看见该提示，提示内容自由填写，如：商品在第*页*行、聊天时不要问发货地和哪家快递等。属于可选项，限 <span class="error">50</span>字以内。</span></strong>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <textarea name="" id="" cols="100"
+                                          rows="10" ng-model="item.tips"></textarea>
                             </div>
                         </div>
                     </div>
                 </section>
+
+                <section class="panel">
+                    <header class="panel-heading">
+                        费用小计
+                    </header>
+                    <div class="panel-body">
+                        <div class="alert alert-success">
+                            刷单费用：<span class="error">{{cost.fee}}</span> 金币/单 x <span class="error">{{item.totalCount}}</span> 单
+                            <span class="pull-right"><span class="error">{{cost.fee * item.totalCount | number:2}}</span>金币</span>
+                        </div>
+
+                        <div class="alert alert-success">
+                            订单分布：<span class="error">0.5</span> 金币/单 x <span class="error">{{item.phoneCount}}</span> 单
+                            <span class="pull-right"><span class="error">{{0.5 * item.phoneCount | number:2}}</span>金币</span>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="row" style="text-align: center">
+                    <button class="btn btn-info" ng-click="nextStep(2)">上一步</button>
+                    <button class="btn btn-info" ng-click="nextStep(4)">下一步</button>
+                </div>
             </div>
             <!--发布任务第三步结束-->
+
+            <!--发布任务第四步开始-->
+            <div ng-if="step==4">
+                <section class="panel">
+                    <header class="panel-heading">
+                        第四步：选择增值服务 <span class="pull-right">已选择: <span class="error">淘宝|<%= shopName %>|订单|{{item.totalCount}}</span></span>
+                    </header>
+                    <div class="panel-body">
+                        <!--快速返款给买手 开始-->
+                        <h5 style="font-weight: bolder; margin: 15px 0">快速返款给买手</h5>
+                        <br/>
+                        <input type="checkbox" ng-model="cost.isPayback" disabled/>
+                        <span style="font-weight: bolder; margin: 15px 0">押金直接返款：</span>
+                        <span class="small">选择此服务，买手完成后，平台将直接使用押金为您操作返款，商家无需耗费时间、人力处理退款，减少押款周期</span>
+                        <p>每单收取刷单金额的0.6%做为退款服务费，费用：{{cost.totalCount}}单 x {{cost.totalMoney}}元 x 0.6% = {{cost.payback}}金币</p>
+                        <p class="error">注：强烈推荐使用此服务，选择平台返款，可以杜绝买家在店铺恶意退款的行为发生。</p>
+                        <br/>
+                        <div class="border-bottom"></div>
+                        <br/>
+
+                        <h5 style="font-weight: bolder; margin: 15px 0">快速完成任务</h5>
+                        <br/>
+                        <span style="font-weight: bolder; margin: 15px 0">1.提升完成任务速度：</span>
+                        <span class="small">增加符点数越多，推荐任务排名越靠前，便于买手更快速完成任务</span>
+                        <p>
+                            <input type="radio" ng-model="cost.speed" value="0"/> 不提升（不推荐）
+                            <input type="radio" ng-model="cost.speed" value="10"/> +10金币
+                            <input type="radio" ng-model="cost.speed" value="20"/> +20金币
+                            <input type="radio" ng-model="cost.speed" value="30"/> +30金币
+                        </p>
+                        <br/>
+                        <div class="border-bottom"></div>
+                        <br/>
+
+                        <span style="font-weight: bolder; margin: 15px 0">2.加赏任务佣金：</span>
+                        <span class="small">增加符点数越多，买手完成任务的积极性越大，买手会优先做此类任务</span>
+                        <p>
+                            <input type="checkbox" ng-model="item.isExtendFee"/>
+                            每单加赏佣金
+                            <input type="text" ng-model="cost.extendFee"/>
+                            人气符点，共计：{{cost.totalCount}}单 x {{cost.extendFee}} 金币 = {{cost.totalCount * cost.extendFee | number:2}} 金币(最低为2金币)
+                        </p>
+                        <br/>
+                        <div class="border-bottom"></div>
+                        <br/>
+                        <!--快速返款给买手 结束-->
+
+                        <!--安全优化 开始-->
+                        <h5 style="font-weight: bolder; margin: 15px 0">安全优化</h5>
+                        <br/>
+                        <span style="font-weight: bolder; margin: 15px 0">1.任务发布间隔：</span>
+                        <input type="checkbox" ng-model="cost.isInterval" checked/>
+                        每隔
+                        <select ng-model="cost.intervalTime">
+                            <option value="10">10分钟</option>
+                            <option value="15">15分钟</option>
+                            <option value="30">30分钟</option>
+                            <option value="60">1小时</option>
+                            <option value="120">2小时</option>
+                            <option value="180">3小时</option>
+                            <option value="300">5小时</option>
+                            <option value="480">8小时</option>
+                            <option value="720">12小时</option>
+                            <option value="1440">24小时</option>
+                            <option value="2880">2天</option>
+                            <option value="5760">4天</option>
+                        </select>
+                        发布
+                        <select ng-model="cost.intervalCount">
+                            <option value="1">1单</option>
+                        </select>
+                        任务 选择此服务平台将收取：<span class="error">10</span>符点
+                        <p>选择此项服务后，一家网会将您的任务分批发布，以避免订单过于集中：为了安全性建议选择此项服务</p>
+                        <p>注：强烈推荐使用此服务，选择平台返款，可以杜绝买家在店铺恶意退款的行为发生。</p>
+                        <br/>
+                        <div class="border-bottom"></div>
+                        <br/>
+
+                        <span style="font-weight: bolder; margin: 15px 0">2.稀释自然搜索转化率：</span>
+                        <span class="small">平台会根据您的选择匹配相应的自然搜索访客流量，本流量将会被计入淘宝搜索引擎统计</span>
+                        <p class="error">注：淘宝近期严查自然搜索转化率，为安全起见，即日起，平台要求所有任务必须匹配相应的自然搜索流量。</p>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <label class="checkbox-inline">
+                                    <input type="radio" ng-model="cost.selectPV" value="30"> 30访客
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="radio" ng-model="cost.selectPV" value="36"> 36访客
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="radio" ng-model="cost.selectPV" value="60"> 60访客
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="radio" ng-model="cost.selectPV" value="90"> 90访客
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="radio" ng-model="cost.selectPV" value="150"> 150访客
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="radio" ng-model="cost.selectPV" value="300"> 300访客
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="radio" ng-model="cost.selectPV" value="0"> 自定义
+                                </label>
+                                <input type="text" ng-model="cost.freePV"> 访客 <span class="small">(不能低于30访客)</span>
+                            </div>
+                            <div class="col-lg-12" style="border: 1px solid #50c8ea">
+                                <p ng-if="taobao.key1">淘宝关键词1:  <span class="error">{{taobao.key1}}</span>刷{{taobao.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * taobao.key1Count}}</p>
+                                <p ng-if="taobao.key2">淘宝关键词2:  <span class="error">{{taobao.key2}}</span>刷{{taobao.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * taobao.key2Count}}</p>
+                                <p ng-if="taobao.key3">淘宝关键词3:  <span class="error">{{taobao.key3}}</span>刷{{taobao.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * taobao.key3Count}}</p>
+                                <p ng-if="taobao.key4">淘宝关键词4:  <span class="error">{{taobao.key4}}</span>刷{{taobao.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * taobao.key4Count}}</p>
+                                <p ng-if="taobao.key5">淘宝关键词5:  <span class="error">{{taobao.key5}}</span>刷{{taobao.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * taobao.key5Count}}</p>
+
+                                <p ng-if="tmall.key1">天猫关键词1:  <span class="error">{{tmall.key1}}</span>刷{{tmall.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * tmall.key1Count}}</p>
+                                <p ng-if="tmall.key2">天猫关键词2:  <span class="error">{{tmall.key2}}</span>刷{{tmall.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * tmall.key2Count}}</p>
+                                <p ng-if="tmall.key3">天猫关键词3:  <span class="error">{{tmall.key3}}</span>刷{{tmall.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * tmall.key3Count}}</p>
+                                <p ng-if="tmall.key4">天猫关键词4:  <span class="error">{{tmall.key4}}</span>刷{{tmall.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * tmall.key4Count}}</p>
+                                <p ng-if="tmall.key5">天猫关键词5:  <span class="error">{{tmall.key5}}</span>刷{{tmall.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * tmall.key5Count}}</p>
+                                <p class="small">注：到店访客流量数可能会有少量误差，属于正常情况；</p>
+                                <div class="border-bottom"></div>
+                                <p>你目前有 <span class="error"><%= cUser.pv %></span> 个访客流量</p>
+                            </div>
+                            <div class="border-bottom"></div>
+                        </div>
+                        <br/>
+                        <div class="border-bottom"></div>
+                        <br/>
+
+                        <span style="font-weight: bolder; margin: 15px 0">2.延长买家购物周期： <span class="small">仅推荐 重复购买率低的商品使用，如家居，家电，高单价的商品等；其他品类不推荐使用</span></span>
+                        <p>
+                            <input type="radio" ng-model="cost.cycleTime" value="0"/> 不选择
+                            <input type="radio" ng-model="cost.cycleTime" value="2"/> <span class="error">2</span>金币/单/商品
+                            <input type="radio" ng-model="cost.cycleTime" value="3"/> <span class="error">3</span>金币/单/商品
+                        </p>
+                        <p>选择此项服务后，购买过任务商品的买家 <span class="error">{{cost.cycleTime}}</span>个月内，将不能再接手包含本任务商品的任务；</p>
+                        <br/>
+                        <div class="border-bottom"></div>
+                        <br/>
+                        <!--安全优化 结束-->
+
+                    </div>
+                </section>
+            </div>
+            <!--发布任务第四步结束-->
         </section>
     </section>
     <!--main content end-->
