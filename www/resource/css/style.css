@@ -4691,6 +4691,14 @@ span.success {
     color: #41cac0;
 }
 
+p.error {
+    color: #ff0000;
+}
+
+p.success {
+    color: #41cac0;
+}
+
 .box {
     padding-bottom: 10px;
     border-bottom: 1px dashed #aeb2b7;

@@ -71,6 +71,7 @@
 
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" ng-model="item.name">
+                                    <p class="help-block error" ng-hide="item.name"><i class="icon-exclamation-sign"></i>商品名称不能为空</p>
                                 </div>
                                 <label class="col-md-1 control-label"><span
                                         class="error">必填</span></label>
@@ -80,6 +81,7 @@
 
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" ng-model="item.url">
+                                    <p class="help-block error" ng-hide="item.url"><i class="icon-exclamation-sign"></i>商品链接不正确</p>
                                 </div>
                                 <label class="col-md-1 control-label"><span
                                         class="error">必填</span></label>
@@ -119,6 +121,9 @@
                                         class="error">必填</span></label>
                                 <label class="col-md-3 control-label">下单总金额
                                     <span class="error">{{item.money * item.count}}</span>元</label>
+                                <div class="col-md-2">
+                                    <p class="help-block error" ng-hide="(item.money * item.count) > 0"><i class="icon-exclamation-sign"></i>商品金额不正确</p>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label">搜索页面展示价格</label>
@@ -152,6 +157,9 @@
                                 <div class="col-md-1">
                                     <a ng-href="{{taobao.imagefile}}" target="_blank" ng-show="taobao.imagefile">[查看图片]</a>
                                 </div>
+                                <div class="col-md-2">
+                                    <p class="help-block error" ng-hide="taobao.imagefile"><i class="icon-exclamation-sign"></i>淘宝商品主图不正确</p>
+                                </div>
                             </div>
                         </div>
                         <div class="form-body">
@@ -164,6 +172,9 @@
                                        class="col-md-4 control-label"/>
                                 <label class="col-md-1 control-label"><span
                                         class="error">必填</span></label>
+                                <div class="col-md-2">
+                                    <p class="help-block error" ng-hide="taobao.key1 && taobao.key1.length < 10"><i class="icon-exclamation-sign"></i>商品关键字不能为空且输入中文不能超过10个字</p>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
@@ -192,6 +203,9 @@
                                        class="col-md-4 control-label"/>
                                 <label class="col-md-1 control-label"><span
                                         class="error">必填</span></label>
+                                <div class="col-md-2">
+                                    <p class="help-block error" ng-hide="taobao.key2 && taobao.key2.length < 10"><i class="icon-exclamation-sign"></i>商品关键字不能为空且输入中文不能超过10个字</p>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
@@ -220,6 +234,9 @@
                                        class="col-md-4 control-label"/>
                                 <label class="col-md-1 control-label"><span
                                         class="error">必填</span></label>
+                                <div class="col-md-2">
+                                    <p class="help-block error" ng-hide="taobao.key3 && taobao.key3.length < 10"><i class="icon-exclamation-sign"></i>商品关键字不能为空且输入中文不能超过10个字</p>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
@@ -248,6 +265,9 @@
                                        class="col-md-4 control-label"/>
                                 <label class="col-md-1 control-label"><span
                                         class="error">必填</span></label>
+                                <div class="col-md-2">
+                                    <p class="help-block error" ng-hide="taobao.key4 && taobao.key4.length < 10"><i class="icon-exclamation-sign"></i>商品关键字不能为空且输入中文不能超过10个字</p>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
@@ -276,6 +296,9 @@
                                        class="col-md-4 control-label"/>
                                 <label class="col-md-1 control-label"><span
                                         class="error">必填</span></label>
+                                <div class="col-md-2">
+                                    <p class="help-block error" ng-hide="taobao.key5 && taobao.key5.length < 10"><i class="icon-exclamation-sign"></i>商品关键字不能为空且输入中文不能超过10个字</p>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
@@ -316,6 +339,9 @@
                                 <div class="col-md-1">
                                     <a ng-href="{{tmall.imagefile}}" target="_blank" ng-show="tmall.imagefile">[查看图片]</a>
                                 </div>
+                                <div class="col-md-2">
+                                    <p class="help-block error" ng-hide="tmall.imagefile"><i class="icon-exclamation-sign"></i>天猫主图不正确</p>
+                                </div>
                             </div>
                         </div>
                         <div class="form-body">
@@ -328,6 +354,9 @@
                                        class="col-md-4 control-label"/>
                                 <label class="col-md-1 control-label"><span
                                         class="error">必填</span></label>
+                                <div class="col-md-2">
+                                    <p class="help-block error" ng-hide="tmall.key1 && tmall.key1.length < 10"><i class="icon-exclamation-sign"></i>商品关键字不能为空且输入中文不能超过10个字</p>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
@@ -356,6 +385,9 @@
                                        class="col-md-4 control-label"/>
                                 <label class="col-md-1 control-label"><span
                                         class="error">必填</span></label>
+                                <div class="col-md-2">
+                                    <p class="help-block error" ng-hide="tmall.key2 && tmall.key2.length < 10"><i class="icon-exclamation-sign"></i>商品关键字不能为空且输入中文不能超过10个字</p>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
@@ -384,6 +416,9 @@
                                        class="col-md-4 control-label"/>
                                 <label class="col-md-1 control-label"><span
                                         class="error">必填</span></label>
+                                <div class="col-md-2">
+                                    <p class="help-block error" ng-hide="tmall.key3 && tmall.key3.length < 10"><i class="icon-exclamation-sign"></i>商品关键字不能为空且输入中文不能超过10个字</p>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
@@ -412,6 +447,9 @@
                                        class="col-md-4 control-label"/>
                                 <label class="col-md-1 control-label"><span
                                         class="error">必填</span></label>
+                                <div class="col-md-2">
+                                    <p class="help-block error" ng-hide="tmall.key4 && tmall.key4.length < 10"><i class="icon-exclamation-sign"></i>商品关键字不能为空且输入中文不能超过10个字</p>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
@@ -440,6 +478,9 @@
                                        class="col-md-4 control-label"/>
                                 <label class="col-md-1 control-label"><span
                                         class="error">必填</span></label>
+                                <div class="col-md-2">
+                                    <p class="help-block error" ng-hide="tmall.key5 && tmall.key5.length < 10"><i class="icon-exclamation-sign"></i>商品关键字不能为空且输入中文不能超过10个字</p>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
@@ -664,7 +705,13 @@
                             <div class="form-group">
                                 <label class="col-md-2 control-label">上传商品主图</label>
                                 <div class="col-md-2">
-                                    <input type="file"/>
+                                    <button class="btn btn-info" ng-file-select ng-model="extendItem1.image">上传商品主图</button>
+                                </div>
+                                <div class="col-md-1">
+                                    <a ng-href="{{extendItem1.imagefile}}" target="_blank" ng-show="extendItem1.imagefile">[查看图片]</a>
+                                </div>
+                                <div class="col-md-2">
+                                    <p class="help-block error" ng-hide="extendItem1.imagefile"><i class="icon-exclamation-sign"></i>商品2主图不正确</p>
                                 </div>
                             </div>
                         </div>
@@ -739,7 +786,13 @@
                             <div class="form-group">
                                 <label class="col-md-2 control-label">上传商品主图</label>
                                 <div class="col-md-2">
-                                    <input type="file"/>
+                                    <button class="btn btn-info" ng-file-select ng-model="extendItem2.image">上传商品主图</button>
+                                </div>
+                                <div class="col-md-1">
+                                    <a ng-href="{{extendItem2.imagefile}}" target="_blank" ng-show="extendItem2.imagefile">[查看图片]</a>
+                                </div>
+                                <div class="col-md-2">
+                                    <p class="help-block error" ng-hide="extendItem2.imagefile"><i class="icon-exclamation-sign"></i>商品3主图不正确</p>
                                 </div>
                             </div>
                         </div>
