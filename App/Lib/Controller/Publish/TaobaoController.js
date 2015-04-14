@@ -1,3 +1,5 @@
+var ShopModel = thinkRequire('ShopModel');
+
 module.exports = Controller("Publish/BaseController", function(){
   "use strict";
   return {
@@ -7,10 +9,16 @@ module.exports = Controller("Publish/BaseController", function(){
       self.assign('title', '个人中心');
 
       if (self.isGet()) {
+        var shop = ShopModel();
         var shopId = self.get('shopId');
-        self.assign('shopId', shopId);
 
-        return self.display();
+        shop
+          .getOne(self.cUser.id, shopId)
+          .then(function(res) {
+            self.assign('shopId', shopId);
+            self.assign('shopName', res.shopName);
+            return self.display();
+          });
       }
 
       if (self.isPost()) {}

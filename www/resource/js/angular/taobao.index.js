@@ -2,7 +2,11 @@
   var TaobaoIndexModule = angular.module('YiApp.TaobaoIndex', ['angularFileUpload']);
 
   TaobaoIndexModule.controller('taobaoIndexCtrl', ['$scope', '$http', '$upload', function($scope, $http, $upload) {
-    $scope.step = 2;
+    $scope.step = 3; //默认值为:2
+
+    $scope.nextStep = function(step) {
+      $scope.step = step;
+    };
 
     $scope.upload = function(file) {
       return $upload.upload({
@@ -57,6 +61,8 @@
 
     //step2 start
     $scope.extendCount = 1;
+    $scope.itemFlag = false;
+    $scope.transportFlag = false;
 
     $scope.item = {
       name: ''
@@ -69,6 +75,10 @@
       , priceStart: null
       , priceEnd: null
       , position: '全国'
+      , totalCount: 3
+      , _totalCount: 3
+      , pcCount: 0
+      , phoneCount: 0
     };
 
     $scope.extendItem1 = {
@@ -262,7 +272,6 @@
       }
       //检查天猫搜索框
       if ($scope.tmall.searchBox) {
-
         if (!$scope.tmall.imagefile) {
           alert('请检查天猫商品主图是否正确');
           return false;
@@ -357,16 +366,18 @@
           }
         }
       }
-      console.log($scope.item);
-      console.log($scope.taobao);
-      console.log($scope.tmall);
+
+      $scope.itemFlag = true;
     };
 
     $scope.transport = 'baoyou';
 
     $scope.confirmTransport = function() {
-      console.log($scope.transport);
+      $scope.transportFlag = true;
     };
     //step2 end
+
+    //step3 start
+    //step3 end
   }]);
 })();
