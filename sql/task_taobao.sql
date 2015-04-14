@@ -1,0 +1,41 @@
+create table if not exists `yi_task_taobao` (
+    `id` int(11) unsigned not null auto_increment,
+    `taobaoTaskId` int(11) not null comment '所属任务id',
+    `taobaoKeywordsCount` int(1) not null default '1' comment '关键词数量',
+    `taobaoKey1` varchar(32) not null default '' comment '淘宝关键词1',
+    `taobaoKeyCount1` int(5) not null default '0' comment '淘宝关键词1刷单数',
+    `taobaoKey1Extend1` varchar(32) not null default '' comment '淘宝关键词1分类1',
+    `taobaoKey1Extend2` varchar(32) not null default '' comment '淘宝关键词1分类1',
+    `taobaoKey1Extend3` varchar(32) not null default '' comment '淘宝关键词1分类1',
+    `taobaoKey1Extend4` varchar(32) not null default '' comment '淘宝关键词1分类1',
+
+    `taobaoKey2` varchar(32) not null default '' comment '淘宝关键词2',
+    `taobaoKeyCount2` int(5) not null default '0' comment '淘宝关键词2刷单数',
+    `taobaoKey2Extend1` varchar(32) not null default '' comment '淘宝关键词2分类1',
+    `taobaoKey2Extend2` varchar(32) not null default '' comment '淘宝关键词2分类1',
+    `taobaoKey2Extend3` varchar(32) not null default '' comment '淘宝关键词2分类1',
+    `taobaoKey2Extend4` varchar(32) not null default '' comment '淘宝关键词2分类1',
+
+    `taobaoKey3` varchar(32) not null default '' comment '淘宝关键词3',
+    `taobaoKeyCount3` int(5) not null default '0' comment '淘宝关键词3刷单数',
+    `taobaoKey3Extend1` varchar(32) not null default '' comment '淘宝关键词3分类1',
+    `taobaoKey3Extend2` varchar(32) not null default '' comment '淘宝关键词3分类1',
+    `taobaoKey3Extend3` varchar(32) not null default '' comment '淘宝关键词3分类1',
+    `taobaoKey3Extend4` varchar(32) not null default '' comment '淘宝关键词3分类1',
+
+    `taobaoKey4` varchar(32) not null default '' comment '淘宝关键词4',
+    `taobaoKeyCount4` int(5) not null default '0' comment '淘宝关键词4刷单数',
+    `taobaoKey4Extend1` varchar(32) not null default '' comment '淘宝关键词4分类1',
+    `taobaoKey4Extend2` varchar(32) not null default '' comment '淘宝关键词4分类1',
+    `taobaoKey4Extend3` varchar(32) not null default '' comment '淘宝关键词4分类1',
+    `taobaoKey4Extend4` varchar(32) not null default '' comment '淘宝关键词4分类1',
+
+    `taobaoKey5` varchar(32) not null default '' comment '淘宝关键词5',
+    `taobaoKeyCount5` int(5) not null default '0' comment '淘宝关键词5刷单数',
+    `taobaoKey5Extend1` varchar(32) not null default '' comment '淘宝关键词5分类1',
+    `taobaoKey5Extend2` varchar(32) not null default '' comment '淘宝关键词5分类1',
+    `taobaoKey5Extend3` varchar(32) not null default '' comment '淘宝关键词5分类1',
+    `taobaoKey5Extend4` varchar(32) not null default '' comment '淘宝关键词5分类1',
+    `taobaoCreateTime` timestamp not null default current_timestamp,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
