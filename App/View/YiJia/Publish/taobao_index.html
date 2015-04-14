@@ -1025,7 +1025,7 @@
             <div ng-if="step==4">
                 <section class="panel">
                     <header class="panel-heading">
-                        第四步：选择增值服务 <span class="pull-right">已选择: <span class="error">淘宝|<%= shopName %>|订单|{{item.totalCount}}</span></span>
+                        第四步：选择增值服务 <span class="pull-right">已选择: <span class="error">淘宝|<%= shopName %>|订单|{{item.totalCount}}单套餐</span></span>
                     </header>
                     <div class="panel-body">
                         <!--快速返款给买手 开始-->
@@ -1034,7 +1034,7 @@
                         <input type="checkbox" ng-model="cost.isPayback" disabled/>
                         <span style="font-weight: bolder; margin: 15px 0">押金直接返款：</span>
                         <span class="small">选择此服务，买手完成后，平台将直接使用押金为您操作返款，商家无需耗费时间、人力处理退款，减少押款周期</span>
-                        <p>每单收取刷单金额的0.6%做为退款服务费，费用：{{cost.totalCount}}单 x {{cost.totalMoney}}元 x 0.6% = {{cost.payback}}金币</p>
+                        <p>每单收取刷单金额的0.6%做为退款服务费，费用：{{cost.totalCount}}单 x {{cost.totalMoney}}元 x 0.6% = {{cost.payback | number:2}}金币</p>
                         <p class="error">注：强烈推荐使用此服务，选择平台返款，可以杜绝买家在店铺恶意退款的行为发生。</p>
                         <br/>
                         <div class="border-bottom"></div>
@@ -1265,27 +1265,36 @@
                                 <td>押金</td>
                                 <td>
                                     <p>商品1: {{item.money}}元 x {{item.count}}</p>
+                                    <p ng-if="extendItem1.money">商品2: {{extendItem1.money}}元 x {{extendItem1.count}}</p>
+                                    <p ng-if="extendItem2.money">商品3: {{extendItem2.money}}元 x {{extendItem2.count}}</p>
+                                    <p>退款保障金: {{cost.payback | number: 2}}</p>
                                 </td>
-                                <td>{{item.money * item.count | number: 2}}</td>
-                                <td>{{item.money * item.count | number: 2}} x {{cost.totalCount}} = {{item.money * item.count * cost.totalCount | number: 2}}元</td>
+                                <td>{{cost.totalMoney + cost.payback | number: 2}}</td>
+                                <td>{{cost.totalMoney + cost.payback | number: 2}} x {{cost.totalCount}} = {{(cost.totalMoney + cost.payback) * cost.totalCount | number: 2}}元</td>
                             </tr>
                             <tr>
                                 <td>一家币</td>
                                 <td>套餐服务费：{{cost.fee}}金币</td>
                                 <td>{{cost.fee}}金币</td>
-                                <td>{{cost.fee}} x {{cost.totalCount}} = {{cost.totalFee | number:2}}</td>
+                                <td>{{cost.fee}} x {{cost.totalCount}} = {{cost.totalFee | number:2}}金币</td>
                             </tr>
                             <tr>
                                 <td>增值服务</td>
                                 <td>
+                                    <p ng-show="cost.speed">提升完成任务速度: {{cost.speed}}金币</p>
+                                    <p ng-show="cost.totalExtendFee">加赏任务佣金: {{cost.totalExtendFee}}金币</p>
+                                    <p ng-show="cost.isInterval">任务发布间隔: {{cost.interval}}金币</p>
+                                    <p ng-show="cost.cycleTime">延长买家购物周期: {{cost.cycleTime * cost.totalCount}}金币</p>
+                                    <p ng-show="cost.isGoodComment">优质好评: {{cost.goodCommentFee}}金币</p>
+                                    <p ng-show="cost.phone">手机端加成: {{cost.phone}}金币</p>
                                 </td>
-                                <td></td>
-                                <td></td>
+                                <td>--</td>
+                                <td>{{cost.speed + cost.totalExtendFee + cost.interval + cost.cycleTime * cost.totalCount + cost.goodCommentFee + cost.phone}}金币</td>
                             </tr>
                             <tr>
                                 <td colspan="4"><span class="pull-right">
-                                    费用合计 押金: {{cost.totalMoney * cost.totalCount | number:2}}
-                                    一家币:  金币
+                                    费用合计 押金: {{(cost.totalMoney + cost.payback) * cost.totalCount | number:2}}
+                                    一家币:  {{cost.totalFee + cost.speed + cost.totalExtendFee + cost.interval + cost.cycleTime + cost.goodCommentFee + cost.phone}}金币
                                 </span></td>
                             </tr>
                             </tbody>

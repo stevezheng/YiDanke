@@ -57,29 +57,32 @@
       , totalFee: 0 //刷单总的费用
 
       , phone: 0 //移动端刷单附加费
+
       , isPayback: true //是否平台返款
       , payback: 0 //平台返款服务费
+
       , speed: 0 //提升完成任务速度
 
       , isExtendFee: false //是否平台加赏任务佣金
       , extendFee: 2 //加赏单任务佣金
       , totalExtendFee: 0 //加赏任务总佣金
 
-      , isInterval: false
-      , intervalTime: 10
-      , intervalCount: 1
-      , interval: 10
+      , isInterval: false //是否任务发布间隔
+      , intervalTime: 10 //每隔多久发布
+      , intervalCount: 1 //间隔发布几个
+      , interval: 10 //任务间隔发布费用
 
-      , selectPV: 60
-      , freePV: 0
-      , pv: 60
+      , selectPV: 60 //选择流量
+      , freePV: 0 //自定义流量
+      , pv: 60 //实际使用流量
 
-      , cycleTime: 0
-      , totalCycle: 0
+      , cycleTime: 0 //延长买家购物周期与费用(周期和费用一样)
+      , totalCycle: 0 //延长买家购物周期总共费用 totalCycle = cycleTime * totalCount
 
-      , isGoodComment: false
-      , goodCommentCount: 3
-      , goodComment: [
+      , isGoodComment: false //是否优质好评
+      , goodCommentCount: 3 //好评个数
+      , goodCommentFee: 0 //好评费用
+      , goodComment: [ //好评内容
         '',
         '',
         '',
@@ -122,6 +125,7 @@
         }
         totalCount = parseInt(totalCount);
         $scope.cost.totalCount = totalCount;
+        $scope.cost.goodCommentFee = totalCount;
 
         if (parseInt($scope.item.phoneCount) < parseInt($scope.item.pcCount)) {
           alert('手机订单的数量至少要占据订单总数的50%');
@@ -150,7 +154,9 @@
           return false;
         }
 
+        $scope.cost.totalFee = $scope.cost.fee * $scope.cost.totalCount;
         $scope.cost.payback = $scope.cost.totalCount * $scope.cost.totalMoney * 0.06;
+        $scope.cost.phone = $scope.item.phoneCount * 0.5;
       }
 
       $scope.step = step;
