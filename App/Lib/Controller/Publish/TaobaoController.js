@@ -28,14 +28,13 @@ module.exports = Controller("Publish/BaseController", function(){
 
       if (self.isPost()) {
         var item = self.post('item')
+          , user = self.post('user')
           , taobao = self.post('taobao')
           , cost = self.post('cost')
           , tmall = self.post('tmall')
           , extendItem1 = self.post('extendItem1')
           , extendItem2 = self.post('extendItem2')
-          , transport = self.post('transport')
-          , shopId = self.post('shopId')
-          , shopName = self.post('shopName');
+          , transport = self.post('transport');
 
         //todo:这里需要重新计算一下费用
         var task = TaskModel();
@@ -43,8 +42,8 @@ module.exports = Controller("Publish/BaseController", function(){
         var _task = {
           taskStatus: 0
           , taskUserId: self.cUser.id
-          , taskShopName: shopName
-          , taskShopId: shopId
+          , taskShopName: user.shopName
+          , taskShopId: user.shopId
           , taskPV: cost.pv
           , taskPlatform: 'taobao'
           , taskType: 'dingdan'
@@ -53,6 +52,8 @@ module.exports = Controller("Publish/BaseController", function(){
           , taskUrl: item.url
           , taskMoney: item.money
           , taskCount: item.count
+          , taskAllCoin: cost.allCoin
+          , taskAllMoney: cost.allMoney
           , taskSearchMoney: item.searchMoney || 0
           , taskPriceStart: item.priceStart || 0
           , taskPriceEnd: item.priceEnd || 0

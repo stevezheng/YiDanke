@@ -10,6 +10,8 @@ create table if not exists `yi_task` (
     `taskHeight` decimal(4,2) not null comment '商品重量',
     `taskName` varchar(256) not null default '' comment '商品名',
     `taskUrl` varchar(512) not null default '' comment '商品链接',
+    `taskAllCoin` decimal(10, 2) not null default '0' comment '总费用',
+    `taskAllMoney` decimal(10, 2) not null default '0' comment '总押金',
     `taskMoney` decimal(10, 2) not null default '0' comment '商品价格',
     `taskCount` int(4) not null default '0' comment '商品购买数量',
     `taskSearchMoney` decimal(10,2) not null default '0' comment '商品搜索价格',

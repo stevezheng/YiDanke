@@ -169,9 +169,12 @@
       }
 
       if (step == 5) {
-        if (!$scope.taskId) {
+        $scope.cost.allCoin =($scope.cost.totalMoney * 1.05 + $scope.cost.promise) * $scope.cost.totalCount;
+        $scope.cost.allMoney = ($scope.cost.totalFee * 1 + $scope.cost.transport * $scope.cost.totalCount) + $scope.cost.payback * 1 + $scope.cost.speed * 1 + ($scope.cost.isExtendFee?$scope.cost.extendFee * $scope.cost.totalCount:0) + ($scope.cost.isInterval?$scope.cost.interval:0) * 1 + ($scope.cost.cycleTime * 1) * ($scope.cost.totalCount * 1) + ($scope.cost.isGoodComment?$scope.cost.goodCommentFee * 1: 0) + $scope.cost.phone * 1;
+        //if (!$scope.taskId) {
           $http.post('/publish/taobao', {
-            cost: $scope.cost
+            user: $scope.user
+            , cost: $scope.cost
             , item: $scope.item
             , taobao: $scope.taobao
             , tmall: $scope.tmall
@@ -183,6 +186,17 @@
               $scope.taskId = res.data;
             }
           })
+        //}
+
+        $scope.cost.payCoin = true;
+        if ($scope.user.coin == 0) {
+          $scope.cost.payCoin = false;
+          $scope.cost.payCoinFlag = false;
+        }
+
+        $scope.cost.payMoney = true;
+        if ($scope.user.money == 0) {
+          $scope.cost.payMoneyFlag = false;
         }
       }
 

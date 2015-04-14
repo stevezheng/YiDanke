@@ -1,7 +1,7 @@
 <% include ../common_header.html %>
 <link rel="stylesheet" href="/resource/css/tasks.css"/>
 <script src="/resource/js/angular/taobao.index.js"></script>
-<section id="container" ng-controller="taobaoIndexCtrl">
+<section id="container" ng-controller="taobaoIndexCtrl" ng-init="user = {shopName: '<%= shopName %>', shopId: '<%= shopId %>', money: '<%= cUser.money %>', coin: '<%= cUser.coin %>'}">
     <% include ../Seller/seller_nav.html %>
     <!--main content start-->
     <section id="main-content" ng-controller="taobaoIndexCtrl">
@@ -1321,14 +1321,41 @@
             <div ng-if="step==5">
                 <section class="panel">
                     <header class="panel-heading">
-                        第四步：选择增值服务 <span class="pull-right">已选择: <span class="error">淘宝|<%= shopName %>|订单|{{item.totalCount}}单套餐</span></span>
+                        第五步：支付
                     </header>
                     <div class="panel-body">
+                        <div class="alert alert-success">
+                            本次任务发布{{cost.totalCount}}单
+                            <span class="pull-right">
+                                需要押金:
+                            <span class="error">{{(cost.totalMoney * 1.05 + cost.promise) * cost.totalCount | number: 2}}</span>
+                                元
+                                一家币:
+                            <span class="error">{{(cost.totalFee * 1 + cost.transport * cost.totalCount) + cost.payback * 1 + cost.speed * 1 + (cost.isExtendFee?cost.extendFee * cost.totalCount:0) + (cost.isInterval?cost.interval:0) * 1 + (cost.cycleTime * 1) * (cost.totalCount * 1) + (cost.isGoodComment?cost.goodCommentFee * 1: 0) + cost.phone * 1 | number:2}}</span>
+                                金币
+                            </span>
                         </div>
+                    </div>
                     </section>
+                <section class="panel">
+                    <header class="panel-heading">
+                        选择支付方式
+                    </header>
+                    <div class="panel-body">
+                        <div class="alert alert-warning">
+                            <input type="checkbox" ng-disable="!cost.payCoinFlag" ng-model="cost.payCoin"/> 使用一家币点支付 (可用一家币：<%= cUser.coin %>点) 1点 = 1元
+                        </div>
+                        <div class="alert alert-warning">
+                            <input type="checkbox" ng-disable="!cost.payMoneyFlag" ng-model="cost.payMoney"/> 使用押金支付 (可用押金：<%= cUser.money %>元)
+                        </div>
+                        <div class="alert alert-warning">
+                            <input type="radio" ng-model="cost.payKuaiqian"/> 使用快钱支付
+                        </div>
+                    </div>
+                </section>
                 <div class="row" style="text-align: center; margin-bottom: 20px;">
                     <button class="btn btn-info" ng-click="nextStep(4)">上一步</button>
-                    <button class="btn btn-info" ng-click="pay()">下一步</button>
+                    <button class="btn btn-warning" ng-click="pay()">付款并发布任务</button>
                 </div>
                 </div>
             <!--发布任务第五步结束-->
