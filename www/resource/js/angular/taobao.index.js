@@ -48,6 +48,8 @@
 
     $scope.step = 2; //默认值为:2
 
+    $scope.taskId = null;
+
      //任务花费明细
     $scope.cost = {
       totalCount: 0 //最终刷单数
@@ -167,17 +169,21 @@
       }
 
       if (step == 5) {
-        $http.post('/publish/taobao', {
-          cost: $scope.cost
-          , item: $scope.item
-          , taobao: $scope.taobao
-          , tmall: $scope.tmall
-          , extendItem1: $scope.extendItem1
-          , extendItem2: $scope.extendItem2
-          , transport: $scope.transport
-        }).success(function(res) {
-          console.log(res);
-        })
+        if (!$scope.taskId) {
+          $http.post('/publish/taobao', {
+            cost: $scope.cost
+            , item: $scope.item
+            , taobao: $scope.taobao
+            , tmall: $scope.tmall
+            , extendItem1: $scope.extendItem1
+            , extendItem2: $scope.extendItem2
+            , transport: $scope.transport
+          }).success(function(res) {
+            if (res.errno == 0) {
+              $scope.taskId = res.data;
+            }
+          })
+        }
       }
 
       $scope.step = step;

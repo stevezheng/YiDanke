@@ -1292,20 +1292,20 @@
                             <tr>
                                 <td>增值服务</td>
                                 <td>
-                                    <p ng-show="cost.payback">押金直接返款: {{cost.payback}}金币</p>
-                                    <p ng-show="cost.speed">提升完成任务速度: {{cost.speed}}金币</p>
-                                    <p ng-show="cost.isExtendFee">加赏任务佣金: {{cost.extendFee * cost.totalCount}}金币</p>
-                                    <p ng-show="cost.isInterval">任务发布间隔: {{cost.interval}}金币</p>
-                                    <p ng-show="cost.cycleTime">延长买家购物周期: {{cost.cycleTime * cost.totalCount}}金币</p>
-                                    <p ng-show="cost.isGoodComment">优质好评: {{cost.goodCommentFee}}金币</p>
-                                    <p ng-show="cost.phone">手机端加成: {{cost.phone}}金币</p>
+                                    <p ng-show="cost.payback">押金直接返款: {{cost.payback | number:2}}金币</p>
+                                    <p ng-show="cost.speed">提升完成任务速度: {{cost.speed | number:2}}金币</p>
+                                    <p ng-show="cost.isExtendFee">加赏任务佣金: {{cost.extendFee * cost.totalCount | number:2}}金币</p>
+                                    <p ng-show="cost.isInterval">任务发布间隔: {{cost.interval | number:2}}金币</p>
+                                    <p ng-show="cost.cycleTime">延长买家购物周期: {{cost.cycleTime * cost.totalCount | number:2}}金币</p>
+                                    <p ng-show="cost.isGoodComment">优质好评: {{cost.goodCommentFee | number:2}}金币</p>
+                                    <p ng-show="cost.phone">手机端加成: {{cost.phone | number:2}}金币</p>
                                 </td>
                                 <td>--</td>
                                 <td>{{cost.payback * 1 + cost.speed * 1 + (cost.isExtendFee?cost.extendFee * cost.totalCount:0) + (cost.isInterval?cost.interval:0) * 1 + (cost.cycleTime * 1) * (cost.totalCount * 1) + (cost.isGoodComment?cost.goodCommentFee * 1: 0) + cost.phone * 1 | number:2}}金币</td>
                             </tr>
                             <tr>
                                 <td colspan="4"><span class="pull-right">
-                                    费用合计 押金: {{(cost.totalMoney + cost.payback) * cost.totalCount | number:2}} 元
+                                    费用合计 押金: {{(cost.totalMoney * 1.05 + cost.promise) * cost.totalCount | number: 2}} 元
                                     一家币: {{(cost.totalFee * 1 + cost.transport * cost.totalCount) + cost.payback * 1 + cost.speed * 1 + (cost.isExtendFee?cost.extendFee * cost.totalCount:0) + (cost.isInterval?cost.interval:0) * 1 + (cost.cycleTime * 1) * (cost.totalCount * 1) + (cost.isGoodComment?cost.goodCommentFee * 1: 0) + cost.phone * 1 | number:2}}金币
                                 </span></td>
                             </tr>
@@ -1315,6 +1315,23 @@
                 </section>
             </div>
             <!--发布任务第四步结束-->
+
+
+            <!--发布任务第五步开始-->
+            <div ng-if="step==5">
+                <section class="panel">
+                    <header class="panel-heading">
+                        第四步：选择增值服务 <span class="pull-right">已选择: <span class="error">淘宝|<%= shopName %>|订单|{{item.totalCount}}单套餐</span></span>
+                    </header>
+                    <div class="panel-body">
+                        </div>
+                    </section>
+                <div class="row" style="text-align: center; margin-bottom: 20px;">
+                    <button class="btn btn-info" ng-click="nextStep(4)">上一步</button>
+                    <button class="btn btn-info" ng-click="pay()">下一步</button>
+                </div>
+                </div>
+            <!--发布任务第五步结束-->
         </section>
     </section>
     <!--main content end-->
