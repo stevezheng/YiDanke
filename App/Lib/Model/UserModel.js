@@ -84,6 +84,19 @@ module.exports = Model(function() {
     },
 
     /**
+     * 获取用户信息
+     * @param id 用户id
+     * @returns {*}
+     */
+    getOne: function(id) {
+      var self = this;
+
+      return self
+        .where({id: id})
+        .find()
+    },
+
+    /**
      * 更新cUser的session
      * @param scope action中的this
      * @returns {*}

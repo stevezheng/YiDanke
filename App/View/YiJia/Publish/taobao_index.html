@@ -1343,7 +1343,7 @@
                     </header>
                     <div class="panel-body">
                         <div class="alert alert-warning">
-                            <input type="checkbox"  ng-model="cost.payCoinFlag"/> 使用一家币点支付 (可用一家币：<%= cUser.coin %>点) 1点 = 1元
+                            <input type="checkbox"  ng-model="cost.payCoinFlag"/> 使用一家币点支付 (可用一家币：<%= cUser.coin %>金币) 1金币 = 1元
                             <span class="pull-right">支付： <span class="error">{{cost.payCoin | number:2}}</span> 金币</span>
                         </div>
                         <div class="alert alert-warning">
@@ -1359,9 +1359,31 @@
                 <div class="row" style="text-align: center; margin-bottom: 20px;">
                     <button class="btn btn-info" ng-click="nextStep(4)">上一步</button>
                     <button class="btn btn-warning" ng-click="pay()">付款并发布任务</button>
+                    <a href="#myModal" style="display: none;" id="pay" data-toggle="modal">打开模态</a>
                 </div>
                 </div>
             <!--发布任务第五步结束-->
+            <!-- Modal -->
+            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">请到打开的新窗口进行银行卡支付：</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>支付小贴士：</p>
+                            <p>1. 付款未完成前请不要关闭本页面</p>
+                            <p>2. 如果银行页面没有打开，请您设置您的浏览器为允许弹出，并确保已经安装了银行的 ActiveX 安全控件， 然后点击下面的“返回支付页面，重新选择”按钮，重新支付。</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+                            <button class="btn btn-info" type="button" ng-click="doPay()">确定</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- modal -->
         </section>
     </section>
     <!--main content end-->

@@ -282,10 +282,49 @@
         $scope.$watch('cost.payMoneyFlag', function () {
           calculatePay();
         });
+
+        $scope.pay = function() {
+          if ($scope.cost.payKuaiqian == 0) {
+            //押金和金币足够支付
+            $http.post('/publish/pay', {taskId: $scope.taskId, payCoin: $scope.cost.payCoin, payMoney: $scope.cost.payMoney})
+              .success(function(res) {
+                if (res.errno == 0) {
+                  alert(res.data);
+                  location.href = '/seller';
+                } else {
+                  alert(res.errmsg);
+                }
+              })
+              .error(function(err) {
+                console.error(err);
+              })
+
+          } else {
+            //押金和金币不够支付
+            document.getElementById('pay').click();
+            window.open('/seller/money/kuaiqian?type=1&value=' + $scope.cost.payKuaiqian);
+          }
+        }
+
       }
 
       $scope.step = step;
     };
+
+    $scope.doPay = function() {
+      $http.post('/publish/pay', {taskId: $scope.taskId, payCoin: $scope.cost.payCoin, payMoney: $scope.cost.payMoney + $scope.cost.payKuaiqian})
+        .success(function(res) {
+          if (res.errno == 0) {
+            alert(res.data);
+            location.href = '/seller';
+          } else {
+            alert(res.errmsg);
+          }
+        })
+        .error(function(err) {
+          console.error(err);
+        })
+    }
 
     $scope.$watch('item.url', function () {
       var val = $scope.item.url;
