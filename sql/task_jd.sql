@@ -1,0 +1,42 @@
+create table if not exists `yi_task_jd` (
+    `id` int(11) unsigned not null auto_increment,
+    `jdTaskId` int(11) not null comment '所属任务id',
+    `jdImage` varchar(512) not null default '' comment '京东商品图片',
+    `jdKeywordsCount` int(1) not null default '1' comment '关键词数量',
+    `jdKey1` varchar(32) not null default '' comment '京东关键词1',
+    `jdKeyCount1` int(5) not null default '0' comment '京东关键词1刷单数',
+    `jdKey1Extend1` varchar(32) not null default '' comment '京东关键词1分类1',
+    `jdKey1Extend2` varchar(32) not null default '' comment '京东关键词1分类1',
+    `jdKey1Extend3` varchar(32) not null default '' comment '京东关键词1分类1',
+    `jdKey1Extend4` varchar(32) not null default '' comment '京东关键词1分类1',
+
+    `jdKey2` varchar(32) not null default '' comment '京东关键词2',
+    `jdKeyCount2` int(5) not null default '0' comment '京东关键词2刷单数',
+    `jdKey2Extend1` varchar(32) not null default '' comment '京东关键词2分类1',
+    `jdKey2Extend2` varchar(32) not null default '' comment '京东关键词2分类1',
+    `jdKey2Extend3` varchar(32) not null default '' comment '京东关键词2分类1',
+    `jdKey2Extend4` varchar(32) not null default '' comment '京东关键词2分类1',
+
+    `jdKey3` varchar(32) not null default '' comment '京东关键词3',
+    `jdKeyCount3` int(5) not null default '0' comment '京东关键词3刷单数',
+    `jdKey3Extend1` varchar(32) not null default '' comment '京东关键词3分类1',
+    `jdKey3Extend2` varchar(32) not null default '' comment '京东关键词3分类1',
+    `jdKey3Extend3` varchar(32) not null default '' comment '京东关键词3分类1',
+    `jdKey3Extend4` varchar(32) not null default '' comment '京东关键词3分类1',
+
+    `jdKey4` varchar(32) not null default '' comment '京东关键词4',
+    `jdKeyCount4` int(5) not null default '0' comment '京东关键词4刷单数',
+    `jdKey4Extend1` varchar(32) not null default '' comment '京东关键词4分类1',
+    `jdKey4Extend2` varchar(32) not null default '' comment '京东关键词4分类1',
+    `jdKey4Extend3` varchar(32) not null default '' comment '京东关键词4分类1',
+    `jdKey4Extend4` varchar(32) not null default '' comment '京东关键词4分类1',
+
+    `jdKey5` varchar(32) not null default '' comment '京东关键词5',
+    `jdKeyCount5` int(5) not null default '0' comment '京东关键词5刷单数',
+    `jdKey5Extend1` varchar(32) not null default '' comment '京东关键词5分类1',
+    `jdKey5Extend2` varchar(32) not null default '' comment '京东关键词5分类1',
+    `jdKey5Extend3` varchar(32) not null default '' comment '京东关键词5分类1',
+    `jdKey5Extend4` varchar(32) not null default '' comment '京东关键词5分类1',
+    `jdCreateTime` timestamp not null default current_timestamp,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
