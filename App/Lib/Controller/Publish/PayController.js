@@ -14,8 +14,13 @@ module.exports = Controller("Publish/BaseController", function(){
 
       if (self.isPost()) {
         var taskId = self.post('taskId')
-          , payCoin = self.post('payCoin')
-          , payMoney = self.post('payMoney');
+          , payPV = self.post('payPV') || 0
+          , payCoin = self.post('payCoin') || 0
+          , payMoney = self.post('payMoney') || 0;
+
+        console.log(payPV);
+        console.log(payCoin);
+        console.log(payMoney);
 
         var user = UserModel();
         var task = TaskModel();
@@ -23,6 +28,9 @@ module.exports = Controller("Publish/BaseController", function(){
         return user
           .getOne(self.cUser.id)
           .then(function(res) {
+            console.log(res.pv);
+            console.log(res.coin);
+            console.log(res.money);
             if (payCoin > res.coin) {
               return self.error(500, '金币不足，无法支付');
             }
@@ -31,12 +39,26 @@ module.exports = Controller("Publish/BaseController", function(){
               return self.error(500, '金币不足，无法支付');
             }
 
-            return user
-              .subCoin(self.cUser.id, payCoin)
+            if (payPV > res.pv) {
+              return self.error(500, '流量不足，无法支付');
+            }
+
+            if (payCoin > 0) {
+              return user
+                .subCoin(self.cUser.id, payCoin)
+            }
           })
           .then(function() {
-            return user
-              .subMoney(self.cUser.id, payMoney)
+            if (payMoney > 0) {
+              return user
+                .subMoney(self.cUser.id, payMoney)
+            }
+          })
+          .then(function() {
+            if (payPV > 0) {
+              return user
+                .subPV(self.cUser.id, payPV)
+            }
           })
           .then(function() {
             return task

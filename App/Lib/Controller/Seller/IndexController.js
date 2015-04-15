@@ -18,6 +18,26 @@ module.exports = Controller("Seller/BaseController", function(){
 
       if (self.isPost()) {}
     },
+
+    getOneAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {}
+
+      if (self.isPost()) {
+        var user = UserModel();
+
+        user
+          .getOne(self.cUser.id)
+          .then(function(res) {
+            return self.success({money: res.money, coin: res.coin, pv: res.pv});
+          })
+          .catch(function(err) {
+            return self.error(500, err);
+          })
+      }
+    },
     
     editPasswordAction: function() {
       var self = this;

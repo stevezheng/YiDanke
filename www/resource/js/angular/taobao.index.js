@@ -169,6 +169,13 @@
       }
 
       if (step == 5) {
+        if ($scope.cost.pv > $scope.user.pv) {
+          alert('流量不足，请先充值流量');
+          document.getElementById('pv').click();
+          window.open('/seller/money');
+          return false;
+        }
+
         $scope.cost.allCoin =($scope.cost.totalMoney * 1.05 + $scope.cost.promise) * $scope.cost.totalCount;
         $scope.cost.allMoney = ($scope.cost.totalFee * 1 + $scope.cost.transport * $scope.cost.totalCount) + $scope.cost.payback * 1 + $scope.cost.speed * 1 + ($scope.cost.isExtendFee?$scope.cost.extendFee * $scope.cost.totalCount:0) + ($scope.cost.isInterval?$scope.cost.interval:0) * 1 + ($scope.cost.cycleTime * 1) * ($scope.cost.totalCount * 1) + ($scope.cost.isGoodComment?$scope.cost.goodCommentFee * 1: 0) + $scope.cost.phone * 1;
         //if (!$scope.taskId) {
@@ -286,7 +293,7 @@
         $scope.pay = function() {
           if ($scope.cost.payKuaiqian == 0) {
             //押金和金币足够支付
-            $http.post('/publish/pay', {taskId: $scope.taskId, payCoin: $scope.cost.payCoin, payMoney: $scope.cost.payMoney})
+            $http.post('/publish/pay', {taskId: $scope.taskId, payCoin: $scope.cost.payCoin, payMoney: $scope.cost.payMoney, payPV:$scope.cost.pv})
               .success(function(res) {
                 if (res.errno == 0) {
                   alert(res.data);
@@ -312,17 +319,32 @@
     };
 
     $scope.doPay = function() {
-      $http.post('/publish/pay', {taskId: $scope.taskId, payCoin: $scope.cost.payCoin, payMoney: $scope.cost.payMoney + $scope.cost.payKuaiqian})
+      $http.post('/publish/pay', {taskId: $scope.taskId, payCoin: $scope.cost.payCoin, payMoney: $scope.cost.payMoney + $scope.cost.payKuaiqian, payPv: $scope.cost.pv})
         .success(function(res) {
           if (res.errno == 0) {
             alert(res.data);
+            document.getElementById('cancel-pay').click();
             location.href = '/seller';
           } else {
             alert(res.errmsg);
           }
         })
         .error(function(err) {
-          console.error(err);
+          console.log(err);
+        })
+    };
+
+    $scope.doPV = function() {
+      $http.post('/seller/index/getOne')
+        .success(function(res) {
+          if (res.errno == 0) {
+            $scope.user.pv = res.data.pv;
+            $scope.user.coin = res.data.coin;
+            $scope.user.money = res.data.money;
+            document.getElementById('cancel-pv').click();
+          } else {
+            alert(res.errmsg);
+          }
         })
     }
 

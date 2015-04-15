@@ -1,7 +1,7 @@
 <% include ../common_header.html %>
 <link rel="stylesheet" href="/resource/css/tasks.css"/>
 <script src="/resource/js/angular/taobao.index.js"></script>
-<section id="container" ng-controller="taobaoIndexCtrl" ng-init="user = {shopName: '<%= shopName %>', shopId: '<%= shopId %>', money: '<%= cUser.money %>', coin: '<%= cUser.coin %>'}">
+<section id="container" ng-controller="taobaoIndexCtrl" ng-init="user = {shopName: '<%= shopName %>', shopId: '<%= shopId %>', money: '<%= cUser.money %>', coin: '<%= cUser.coin %>', pv: '<%= cUser.pv %>'}">
     <% include ../Seller/seller_nav.html %>
     <!--main content start-->
     <section id="main-content" ng-controller="taobaoIndexCtrl">
@@ -1150,7 +1150,7 @@
                                 <p ng-if="tmall.key5">天猫关键词5:  <span class="error">{{tmall.key5}}</span>刷{{tmall.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * tmall.key5Count}}</p>
                                 <p class="small">注：到店访客流量数可能会有少量误差，属于正常情况；</p>
                                 <div class="border-bottom"></div>
-                                <p>你目前有 <span class="error"><%= cUser.pv %></span> 个访客流量</p>
+                                <p>你目前有 <span class="error">{{user.pv}}</span> 个访客流量,使用后还有 <span class="error">{{user.pv - cost.pv}}</span> 个访客流量</p>
                             </div>
                             <div class="border-bottom"></div>
                         </div>
@@ -1255,6 +1255,7 @@
                 <div class="row" style="text-align: center; margin-bottom: 20px;">
                     <button class="btn btn-info" ng-click="nextStep(3)">上一步</button>
                     <button class="btn btn-info" ng-click="nextStep(5)">下一步</button>
+                    <a href="#myModal1" style="display: none;" id="pv" data-toggle="modal">打开模态pv</a>
                 </div>
                 <section class="panel">
                     <header class="panel-heading">
@@ -1359,7 +1360,7 @@
                 <div class="row" style="text-align: center; margin-bottom: 20px;">
                     <button class="btn btn-info" ng-click="nextStep(4)">上一步</button>
                     <button class="btn btn-warning" ng-click="pay()">付款并发布任务</button>
-                    <a href="#myModal" style="display: none;" id="pay" data-toggle="modal">打开模态</a>
+                    <a href="#myModal" style="display: none;" id="pay" data-toggle="modal">打开模态pay</a>
                 </div>
                 </div>
             <!--发布任务第五步结束-->
@@ -1374,11 +1375,31 @@
                         <div class="modal-body">
                             <p>支付小贴士：</p>
                             <p>1. 付款未完成前请不要关闭本页面</p>
-                            <p>2. 如果银行页面没有打开，请您设置您的浏览器为允许弹出，并确保已经安装了银行的 ActiveX 安全控件， 然后点击下面的“返回支付页面，重新选择”按钮，重新支付。</p>
+                            <p>2. 如果银行页面没有打开，请您设置您的浏览器为允许弹出，并确保已经安装了银行的 ActiveX 安全控件， 然后点击下面的“取消”按钮，重新支付。</p>
                         </div>
                         <div class="modal-footer">
-                            <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                            <button class="btn btn-info" type="button" ng-click="doPay()">确定</button>
+                            <button data-dismiss="modal" class="btn btn-default" id="cancel-pay" type="button">取消</button>
+                            <button class="btn btn-info" type="button" ng-click="doPay()">支付成功</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div aria-hidden="true" aria-labelledby="myModalLabel1" role="dialog" tabindex="-1" id="myModal1" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">请到打开的新窗口进行流量充值：</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>充值小贴士：</p>
+                            <p>1. 充值未完成前请不要关闭本页面</p>
+                            <p>2. 如果充值页面没有打开，请您设置您的浏览器为允许弹出，然后点击下面的“取消”按钮，重新支付。</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button data-dismiss="modal" class="btn btn-default" id="cancel-pv" type="button">取消</button>
+                            <button class="btn btn-info" type="button" ng-click="doPV()">充值成功</button>
                         </div>
                     </div>
                 </div>
