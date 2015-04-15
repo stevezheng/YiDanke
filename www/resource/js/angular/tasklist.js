@@ -20,5 +20,17 @@
     }
 
     getAccounts();
+
+    function getTasks() {
+      $http.get('/buyer/tasklist/all')
+        .success(function(res) {
+          if (res.errno == 0) {
+            $scope.tasks = res.data;
+          }
+        })
+    }
+
+    getTasks();
+
   });
 })();

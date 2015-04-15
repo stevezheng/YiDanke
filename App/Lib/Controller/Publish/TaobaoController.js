@@ -42,6 +42,7 @@ module.exports = Controller("Publish/BaseController", function(){
         var _task = {
           taskStatus: 0
           , taskUserId: self.cUser.id
+          , taskUserName: self.cUser.username
           , taskShopName: user.shopName
           , taskShopId: user.shopId
           , taskPV: cost.pv
@@ -58,6 +59,8 @@ module.exports = Controller("Publish/BaseController", function(){
           , taskPriceStart: item.priceStart || 0
           , taskPriceEnd: item.priceEnd || 0
           , taskTotalCount: cost.totalCount || 0
+          , taskPcCount: item.pcCount || 0
+          , taskPhoneCount: item.phoneCount || 0
           , taskTotalMoney: cost.totalMoney || 0
           , taskPromise: cost.promise
           , taskTotalPromise: cost.totalPromise
@@ -254,6 +257,7 @@ module.exports = Controller("Publish/BaseController", function(){
         var _task = {
           taskStatus: 0
           , taskUserId: self.cUser.id
+          , taskUserName: self.cUser.username
           , taskShopName: user.shopName
           , taskShopId: user.shopId
           , taskPV: cost.pv
@@ -270,6 +274,8 @@ module.exports = Controller("Publish/BaseController", function(){
           , taskPriceStart: item.priceStart || 0
           , taskPriceEnd: item.priceEnd || 0
           , taskTotalCount: cost.totalCount || 0
+          , taskPcCount: item.pcCount || 0
+          , taskPhoneCount: item.phoneCount || 0
           , taskTotalMoney: cost.totalMoney || 0
           , taskPromise: cost.promise
           , taskTotalPromise: cost.totalPromise

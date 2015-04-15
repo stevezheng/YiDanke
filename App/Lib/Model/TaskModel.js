@@ -7,6 +7,13 @@ module.exports = Model(function() {
         .select()
     },
 
+    allPass: function() {
+      var self = this;
+      return self
+        .where({taskStatus: 3})
+        .select()
+    },
+
     addOne: function(task) {
       var self = this;
 
