@@ -243,6 +243,7 @@ module.exports = Controller("Publish/BaseController", function(){
           , taobao = self.post('taobao')
           , cost = self.post('cost')
           , tmall = self.post('tmall')
+          , zhitongche = self.post('zhitongche')
           , extendItem1 = self.post('extendItem1')
           , extendItem2 = self.post('extendItem2')
           , transport = self.post('transport');
@@ -301,6 +302,7 @@ module.exports = Controller("Publish/BaseController", function(){
         var taskExtend = D('task_extend');
         var taskTaobao = D('task_taobao');
         var taskTmall = D('task_tmall');
+        var taskZhitongche = D('task_zhitongche');
 
 
         var taskId = 0;
@@ -419,6 +421,18 @@ module.exports = Controller("Publish/BaseController", function(){
 
             return taskTmall
               .add(_taskTmall)
+          })
+          .then(function() {
+            var _taskZhitongche = {
+              zhitongcheTaskId: taskId
+              , zhitongcheName: zhitongche.name
+              , zhitongcheMoney: zhitongche.money
+              , zhitongcheImagefile1: zhitongche.imagefile1
+              , zhitongcheImagefile2: zhitongche.imagefile2
+            };
+
+            return taskZhitongche
+              .add(_taskZhitongche)
           })
           .then(function() {
             self.success(taskId);

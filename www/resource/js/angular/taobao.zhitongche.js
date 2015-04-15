@@ -50,6 +50,12 @@
 
     $scope.taskId = null;
 
+    //直通车专属
+    $scope.zhitongche = {
+      name: ''
+      , money: null
+    };
+
      //任务花费明细
     $scope.cost = {
       totalCount: 0 //最终刷单数
@@ -179,7 +185,7 @@
         $scope.cost.allCoin =($scope.cost.totalMoney * 1.05 + $scope.cost.promise) * $scope.cost.totalCount;
         $scope.cost.allMoney = ($scope.cost.totalFee * 1 + $scope.cost.transport * $scope.cost.totalCount) + $scope.cost.payback * 1 + $scope.cost.speed * 1 + ($scope.cost.isExtendFee?$scope.cost.extendFee * $scope.cost.totalCount:0) + ($scope.cost.isInterval?$scope.cost.interval:0) * 1 + ($scope.cost.cycleTime * 1) * ($scope.cost.totalCount * 1) + ($scope.cost.isGoodComment?$scope.cost.goodCommentFee * 1: 0) + $scope.cost.phone * 1;
         //if (!$scope.taskId) {
-          $http.post('/publish/taobao', {
+          $http.post('/publish/taobao/zhitongche', {
             user: $scope.user
             , cost: $scope.cost
             , item: $scope.item
@@ -188,6 +194,7 @@
             , extendItem1: $scope.extendItem1
             , extendItem2: $scope.extendItem2
             , transport: $scope.transport
+            , zhitongche: $scope.zhitongche
           }).success(function(res) {
             if (res.errno == 0) {
               $scope.taskId = res.data;
@@ -376,6 +383,28 @@
       } else {
         $scope.extendItem2.urlFlag = true;
       }
+    });
+
+    $scope.$watch('zhitongche.image1', function () {
+      if (!$scope.zhitongche.image1) {
+        return false;
+      }
+      $scope
+        .upload($scope.zhitongche.image1)
+        .success(function(data, status, headers, config) {
+          $scope.zhitongche.imagefile1 = data.filename;
+        })
+    });
+
+    $scope.$watch('zhitongche.image2', function () {
+      if (!$scope.zhitongche.image2) {
+        return false;
+      }
+      $scope
+        .upload($scope.zhitongche.image2)
+        .success(function(data, status, headers, config) {
+          $scope.zhitongche.imagefile2 = data.filename;
+        })
     });
 
     $scope.$watch('taobao.image', function () {
@@ -628,6 +657,21 @@
 
       if ($scope.item.count * $scope.item.money <= 0) {
         alert('请检查商品金额是否正确');
+        return false;
+      }
+
+      if (!$scope.zhitongche.name) {
+        alert('请检查直通车创意商品名是否正确');
+        return false;
+      }
+
+      if (!$scope.zhitongche.money || !($scope.zhitongche.money * 1)) {
+        alert('请检查掌柜热卖区显示的商品价格是否正确');
+        return false;
+      }
+
+      if (!$scope.zhitongche.imagefile1 && !$scope.zhitongche.imagefile2) {
+        alert('请上传直通车商品创意图：必选至少需要上传一组图片');
         return false;
       }
 

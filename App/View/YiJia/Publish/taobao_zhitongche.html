@@ -98,6 +98,48 @@
                                 <label class="col-md-1 control-label"><span
                                         class="error">必填</span></label>
                             </div>
+                            <!--直通车 开始-->
+                            <div class="border-bottom"></div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">直通车创意商品名</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" ng-model="zhitongche.name">
+                                    <p class="help-block error" ng-hide="zhitongche.name"><i class="icon-exclamation-sign"></i>商品名称不能为空</p>
+                                </div>
+                                <label class="col-md-1 control-label"><span
+                                        class="error">必填</span></label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">掌柜热卖区显示的商品价格</label>
+
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" ng-model="zhitongche.money"
+                                           placeholder="元"/>
+                                    <p class="help-block error" ng-hide="zhitongche.money"><i class="icon-exclamation-sign"></i>商品金额不正确</p>
+                                </div>
+                                <label class="col-md-1 control-label"><span
+                                        class="error">必填</span></label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12 control-label">请上传直通车商品创意图：<span class="error">必选</span>至少需要上传一组图片 </label>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-2">
+                                    第一组:<button class="btn btn-info" ng-file-select ng-model="zhitongche.image1">上传第一组图</button>
+                                </div>
+                                <div class="col-md-1">
+                                    <a ng-href="{{zhitongche.imagefile1}}" target="_blank" ng-show="zhitongche.imagefile1">[查看图片]</a>
+                                </div>
+                                <div class="col-md-2">
+                                    第二组:<button class="btn btn-info" ng-file-select ng-model="zhitongche.image2">上传第二组图</button>
+                                </div>
+                                <div class="col-md-1">
+                                    <a ng-href="{{zhitongche.imagefile2}}" target="_blank" ng-show="zhitongche.imagefile2">[查看图片]</a>
+                                </div>
+                            </div>
+                            <div class="border-bottom"></div>
+                            <!--直通车 结束-->
                             <div class="form-group">
                                 <label class="col-md-2 control-label">规格</label>
 
