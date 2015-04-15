@@ -31,6 +31,23 @@ module.exports = Controller("Buyer/BaseController", function(){
 
       if (self.isPost()) {}
     },
+
+    getOwnPassAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+        var account = AccountModel();
+
+        account
+          .getOwnPass(self.cUser.id)
+          .then(function(res) {
+            return self.success(res);
+          })
+      }
+
+      if (self.isPost()) {}
+    },
     
     getOneAction: function() {
       var self = this;

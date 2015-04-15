@@ -1,0 +1,272 @@
+<% include ../common_header.html %>
+<section id="container" ng-controller="buyerTaskListCtrl">
+    <% include ./buyer_nav.html %>
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+            <section class="panel">
+                <header class="panel-heading">
+                    任务筛选
+                </header>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h3>请选择平台 <span class="small">请买手遵守平台规则，按照任务步骤中的提示完成任务，不得违规操作；如有违反，一家网有权利对买手进行处罚</span></h3>
+                        </div>
+                        <div class="col-lg-12">
+                            <button class="btn" ng-class="platform=='taobao'?'btn-info':'btn-default'" ng-click="platform='taobao'">淘宝(0)</button>
+                            <button class="btn" ng-class="platform=='tmall'?'btn-info':'btn-default'" ng-click="platform='tmall'">天猫(0)</button>
+                            <button class="btn" ng-class="platform=='jd'?'btn-info':'btn-default'" ng-click="platform='jd'">京东(0)</button>
+                            <!--<button class="btn" ng-class="platform=='mogujie'?'btn-info':'btn-default'" ng-click="platform='mogujie'">蘑菇街</button>-->
+                        </div>
+                        <div class="col-lg-4">
+                            <h3>请选择终端</h3>
+                            <button class="btn" ng-class="terminal=='pc'?'btn-info':'btn-default'" ng-click="terminal='pc'">电脑(0)</button>
+                            <button class="btn" ng-class="terminal=='phone'?'btn-info':'btn-default'" ng-click="terminal='phone'">手机/Pad(0)</button>
+                        </div>
+                        <div class="col-lg-8">
+                            <h3>请选择任务类型</h3>
+                            <button class="btn" ng-class="type=='dingdan'?'btn-info':'btn-default'" ng-click="type='dingdan'">订单(0)</button>
+                            <button class="btn" ng-class="type=='juhuasuan'?'btn-info':'btn-default'" ng-click="type='juhuasuan'">聚划算/Pad(0)</button>
+                            <button class="btn" ng-class="type=='zhitongche'?'btn-info':'btn-default'" ng-click="type='zhitongche'">直通车/Pad(0)</button>
+                        </div>
+                        <div class="col-lg-4">
+                            <h3>请选择买号</h3>
+                            <button ng-click="changeAccountId(account.id)" class="btn" ng-class="accountId==account.id?'btn-info':'btn-default'" ng-repeat="account in accounts" ng-show="account.accountPlatform == platform">
+                                {{account.accountName}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="panel">
+                <header class="panel-heading">
+                    任务列表
+                </header>
+                <div class="panel-body">
+                    <header class="panel-heading tab-bg-blue">
+                        <ul class="nav nav-tabs nav-justified ">
+                            <li class="active">
+                                <a href="#doing" data-toggle="tab">
+                                    全部
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#done" data-toggle="tab">
+                                    加赏
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="#cancel" data-toggle="tab">
+                                    推荐
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="#all" data-toggle="tab">
+                                    新商家
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="#all" data-toggle="tab">
+                                    常规
+                                </a>
+                            </li>
+                        </ul>
+                    </header>
+                    <div class="panel-body">
+                        <div class="tab-content tasi-tab">
+                            <div class="tab-pane active" id="doing">
+                                <article class="media box">
+                                    <a class="pull-left thumb p-thumb">
+                                        <img src="/resource/uploads/20151/1e28e_3226e54d-30b0-4084-839a-b54e52b7f145.png">
+                                    </a>
+
+                                    <div class="media-body">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <span class=" p-head">迪尼贝儿旗舰店</span>
+                                            </div>
+                                            <div class="col-lg-6">
+                                            <span>
+                                                任务编号： 1426916094633
+                                                <a href="">
+                                                    [详情]
+                                                </a>
+                                                发布时间：2015-03-21 13:3
+                                            </span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <span class="label label-primary">平台返款</span>
+                                                迪尼贝儿新生儿纯棉包被婴儿抱被抱毯盖被子春秋夏款薄款幼儿用品
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        进行中(0)|待发货(0)
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        未接单(0)|已完成(0)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <a href=""
+                                                   class="btn btn-warning">一键发布</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                                <article class="media box">
+                                    <a class="pull-left thumb p-thumb">
+                                        <img src="/resource/uploads/20151/1e28e_3226e54d-30b0-4084-839a-b54e52b7f145.png">
+                                    </a>
+
+                                    <div class="media-body">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <span class=" p-head">迪尼贝儿旗舰店</span>
+                                            </div>
+                                            <div class="col-lg-6">
+                                            <span>
+                                                任务编号： 1426916094633
+                                                <a href="">
+                                                    [详情]
+                                                </a>
+                                                发布时间：2015-03-21 13:3
+                                            </span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <span class="label label-primary">平台返款</span>
+                                                迪尼贝儿新生儿纯棉包被婴儿抱被抱毯盖被子春秋夏款薄款幼儿用品
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        进行中(0)|待发货(0)
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        未接单(0)|已完成(0)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <a href=""
+                                                   class="btn btn-warning">一键发布</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                                <article class="media box">
+                                    <a class="pull-left thumb p-thumb">
+                                        <img src="/resource/uploads/20151/1e28e_3226e54d-30b0-4084-839a-b54e52b7f145.png">
+                                    </a>
+
+                                    <div class="media-body">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <span class=" p-head">迪尼贝儿旗舰店</span>
+                                            </div>
+                                            <div class="col-lg-6">
+                                            <span>
+                                                任务编号： 1426916094633
+                                                <a href="">
+                                                    [详情]
+                                                </a>
+                                                发布时间：2015-03-21 13:3
+                                            </span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <span class="label label-primary">平台返款</span>
+                                                迪尼贝儿新生儿纯棉包被婴儿抱被抱毯盖被子春秋夏款薄款幼儿用品
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        进行中(0)|待发货(0)
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        未接单(0)|已完成(0)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <a href=""
+                                                   class="btn btn-warning">一键发布</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                                <article class="media box">
+                                    <a class="pull-left thumb p-thumb">
+                                        <img src="/resource/uploads/20151/1e28e_3226e54d-30b0-4084-839a-b54e52b7f145.png">
+                                    </a>
+
+                                    <div class="media-body">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <span class=" p-head">迪尼贝儿旗舰店</span>
+                                            </div>
+                                            <div class="col-lg-6">
+                                            <span>
+                                                任务编号： 1426916094633
+                                                <a href="">
+                                                    [详情]
+                                                </a>
+                                                发布时间：2015-03-21 13:3
+                                            </span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <span class="label label-primary">平台返款</span>
+                                                迪尼贝儿新生儿纯棉包被婴儿抱被抱毯盖被子春秋夏款薄款幼儿用品
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        进行中(0)|待发货(0)
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        未接单(0)|已完成(0)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <a href=""
+                                                   class="btn btn-warning">一键发布</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="tab-pane" id="done">
+                            </div>
+                            <div class="tab-pane " id="cancel">
+                                Recent Item goes here
+                            </div>
+                            <div class="tab-pane " id="all">
+                                Recent Item goes here
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </section>
+    <!--main content end-->
+</section>
+<% include ../common_footer.html %>

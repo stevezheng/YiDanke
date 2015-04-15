@@ -67,6 +67,22 @@ module.exports = Model(function() {
         .find()
     },
 
+    getOwn: function(accountUserId) {
+      var self = this;
+
+      return self
+        .where({accountUserId: accountUserId})
+        .select()
+    },
+
+    getOwnPass: function(accountUserId) {
+      var self = this;
+
+      return self
+        .where({accountUserId: accountUserId, accountStatus: 1})
+        .select()
+    },
+
     addOne: function(accountUserId, accountName, accountRealName, accountProvince, accountCity, accountArea, accountAddress, accountPhone, accountPlatform) {
       var self = this;
 
