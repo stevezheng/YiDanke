@@ -18,19 +18,12 @@ module.exports = Controller("Publish/BaseController", function(){
           , payCoin = self.post('payCoin') || 0
           , payMoney = self.post('payMoney') || 0;
 
-        console.log(payPV);
-        console.log(payCoin);
-        console.log(payMoney);
-
         var user = UserModel();
         var task = TaskModel();
 
         return user
           .getOne(self.cUser.id)
           .then(function(res) {
-            console.log(res.pv);
-            console.log(res.coin);
-            console.log(res.money);
             if (payCoin > res.coin) {
               return self.error(500, '金币不足，无法支付');
             }
