@@ -427,8 +427,8 @@ module.exports = Controller("Publish/BaseController", function(){
               zhitongcheTaskId: taskId
               , zhitongcheName: zhitongche.name
               , zhitongcheMoney: zhitongche.money
-              , zhitongcheImagefile1: zhitongche.imagefile1
-              , zhitongcheImagefile2: zhitongche.imagefile2
+              , zhitongcheImage1: zhitongche.imagefile1
+              , zhitongcheImage2: zhitongche.imagefile2
             };
 
             return taskZhitongche

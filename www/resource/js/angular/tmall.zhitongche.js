@@ -36,9 +36,9 @@
     return (coin * base).toFixed(2);
   }
 
-  var TaobaoZhitongcheModule = angular.module('YiApp.TaobaoZhitongche', ['angularFileUpload']);
+  var TmallZhitongcheModule = angular.module('YiApp.TmallZhitongche', ['angularFileUpload']);
 
-  TaobaoZhitongcheModule.controller('taobaoZhitongcheCtrl', ['$scope', '$http', '$upload', function($scope, $http, $upload) {
+  TmallZhitongcheModule.controller('tmallZhitongcheCtrl', ['$scope', '$http', '$upload', function($scope, $http, $upload) {
     $scope.upload = function(file) {
       return $upload.upload({
         url: '/home/index/upload',
@@ -187,7 +187,7 @@
         $scope.cost.allCoin =($scope.cost.totalMoney * 1.05 + $scope.cost.promise) * $scope.cost.totalCount;
         $scope.cost.allMoney = ($scope.cost.totalFee * 1 + $scope.cost.transport * $scope.cost.totalCount) + $scope.cost.payback * 1 + $scope.cost.speed * 1 + ($scope.cost.isExtendFee?$scope.cost.extendFee * $scope.cost.totalCount:0) + ($scope.cost.isInterval?$scope.cost.interval:0) * 1 + ($scope.cost.cycleTime * 1) * ($scope.cost.totalCount * 1) + ($scope.cost.isGoodComment?$scope.cost.goodCommentFee * 1: 0) + $scope.cost.phone * 1;
         //if (!$scope.taskId) {
-          $http.post('/publish/taobao/zhitongche', {
+          $http.post('/publish/tmall/zhitongche', {
             user: $scope.user
             , cost: $scope.cost
             , item: $scope.item
