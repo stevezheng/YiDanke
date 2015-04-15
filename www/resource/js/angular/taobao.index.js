@@ -188,16 +188,100 @@
           })
         //}
 
-        $scope.cost.payCoin = true;
+        $scope.cost.payKuaiqianFlag = true;
+
+        $scope.cost.payCoinFlag = true;
         if ($scope.user.coin == 0) {
-          $scope.cost.payCoin = false;
           $scope.cost.payCoinFlag = false;
         }
 
-        $scope.cost.payMoney = true;
+        $scope.cost.payMoneyFlag = true;
         if ($scope.user.money == 0) {
           $scope.cost.payMoneyFlag = false;
         }
+
+        function calculatePay() {
+          var extendCoin = 0;
+          var extendMoney = 0;
+
+          var payCoin = 0; //金币支付
+          var payMoney = 0; //押金支付
+          var payKuaiqian = 0; //快钱支付
+
+
+          //金币+押金
+          if ($scope.cost.payCoinFlag && $scope.cost.payMoneyFlag) {
+            //金币不够
+            if ($scope.user.coin < $scope.cost.allCoin) {
+              extendCoin = $scope.cost.allCoin - $scope.user.coin;
+              payCoin = $scope.user.coin;
+            } else {
+              payCoin = $scope.cost.allCoin;
+            }
+
+            //押金不够
+            if ($scope.user.money < $scope.cost.allMoney + extendCoin) {
+              extendMoney = $scope.cost.allMoney + extendCoin - $scope.user.money;
+              payMoney = $scope.user.money;
+            } else {
+              payMoney = $scope.cost.allMoney + extendCoin;
+            }
+
+            payKuaiqian = extendMoney;
+          }
+
+          //金币
+          if ($scope.cost.payCoinFlag && !$scope.cost.payMoneyFlag) {
+            if ($scope.user.coin < $scope.cost.allCoin) {
+              extendCoin = $scope.cost.allCoin - $scope.user.coin;
+              payCoin = $scope.user.coin;
+            } else {
+              payCoin = $scope.cost.allCoin;
+            }
+
+            payKuaiqian = $scope.cost.allMoney + extendCoin;
+          }
+
+          //押金
+          if (!$scope.cost.payCoinFlag && $scope.cost.payMoneyFlag) {
+            extendCoin = $scope.cost.allCoin;
+
+            if ($scope.user.money < $scope.cost.allMoney + extendCoin) {
+              extendMoney = $scope.cost.allMoney + extendCoin - $scope.user.money;
+              payMoney = $scope.user.money;
+            } else {
+              payMoney = $scope.cost.allMoney + extendCoin;
+            }
+
+            payKuaiqian = extendMoney;
+          }
+
+          //快钱
+          if (!$scope.cost.payCoinFlag && !$scope.cost.payMoneyFlag) {
+            extendCoin = $scope.cost.allCoin;
+            extendMoney = $scope.cost.allMoney;
+
+            payKuaiqian = extendMoney + extendCoin;
+          }
+
+          $scope.cost.payCoin = payCoin;
+          $scope.cost.payMoney = payMoney;
+          $scope.cost.payKuaiqian = payKuaiqian;
+
+          //金币+快钱
+
+          //押金+快钱
+
+          //金币+押金+快钱
+        }
+
+        $scope.$watch('cost.payCoinFlag', function () {
+          calculatePay();
+        });
+
+        $scope.$watch('cost.payMoneyFlag', function () {
+          calculatePay();
+        });
       }
 
       $scope.step = step;

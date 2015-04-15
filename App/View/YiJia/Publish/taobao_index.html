@@ -1343,13 +1343,16 @@
                     </header>
                     <div class="panel-body">
                         <div class="alert alert-warning">
-                            <input type="checkbox" ng-disable="!cost.payCoinFlag" ng-model="cost.payCoin"/> 使用一家币点支付 (可用一家币：<%= cUser.coin %>点) 1点 = 1元
+                            <input type="checkbox"  ng-model="cost.payCoinFlag"/> 使用一家币点支付 (可用一家币：<%= cUser.coin %>点) 1点 = 1元
+                            <span class="pull-right">支付： <span class="error">{{cost.payCoin | number:2}}</span> 金币</span>
                         </div>
                         <div class="alert alert-warning">
-                            <input type="checkbox" ng-disable="!cost.payMoneyFlag" ng-model="cost.payMoney"/> 使用押金支付 (可用押金：<%= cUser.money %>元)
+                            <input type="checkbox" ng-model="cost.payMoneyFlag"/> 使用押金支付 (可用押金：<%= cUser.money %>元)
+                            <span class="pull-right">支付： <span class="error">{{cost.payMoney | number:2}}</span> 元</span>
                         </div>
                         <div class="alert alert-warning">
-                            <input type="radio" ng-model="cost.payKuaiqian"/> 使用快钱支付
+                            <input type="radio" checked/> 使用快钱支付
+                            <span class="pull-right">支付： <span class="error">{{cost.payKuaiqian | number: 2}}</span> 元</span>
                         </div>
                     </div>
                 </section>
