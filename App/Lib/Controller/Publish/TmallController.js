@@ -45,7 +45,7 @@ module.exports = Controller("Publish/BaseController", function(){
           , taskShopName: user.shopName
           , taskShopId: user.shopId
           , taskPV: cost.pv
-          , taskPlatform: 'taobao'
+          , taskPlatform: 'tmall'
           , taskType: 'dingdan'
           , taskHeight: item.height
           , taskName: item.name
@@ -124,8 +124,8 @@ module.exports = Controller("Publish/BaseController", function(){
           .then(function() {
             var _taskTaobao = {
               taobaoTaskId: taskId
-              , taobaoKeywordsCount: taobao.keywordsCount
               , taobaoImage: taobao.imagefile
+              , taobaoKeywordsCount: taobao.keywordsCount
               , taobaoKey1: taobao.key1
               , taobaoKeyCount1: taobao.key1Count
               , taobaoKey1Extend1: taobao.key1extend1
@@ -168,8 +168,8 @@ module.exports = Controller("Publish/BaseController", function(){
           .then(function() {
             var _taskTmall = {
               tmallTaskId: taskId
-              , tmallKeywordsCount: tmall.keywordsCount
               , tmallImage: tmall.imagefile
+              , tmallKeywordsCount: tmall.keywordsCount
               , tmallKey1: tmall.key1
               , tmallKeyCount1: tmall.key1Count
               , tmallKey1Extend1: tmall.key1extend1

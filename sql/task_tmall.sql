@@ -1,6 +1,7 @@
 create table if not exists `yi_task_tmall` (
     `id` int(11) unsigned not null auto_increment,
     `tmallTaskId` int(11) not null comment '所属任务id',
+    `tmallImage` varchar(512) not null default '' comment '天猫商品图片',
     `tmallKeywordsCount` int(1) not null default '1' comment '关键词数量',
     `tmallKey1` varchar(32) not null default '' comment '天猫关键词1',
     `tmallKeyCount1` int(5) not null default '0' comment '天猫关键词1刷单数',

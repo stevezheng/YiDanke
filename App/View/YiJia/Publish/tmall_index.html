@@ -1,6 +1,6 @@
 <% include ../common_header.html %>
 <link rel="stylesheet" href="/resource/css/tasks.css"/>
-<section id="container" ng-controller="taobaoIndexCtrl" ng-init="user = {shopName: '<%= shopName %>', shopId: '<%= shopId %>', money: '<%= cUser.money %>', coin: '<%= cUser.coin %>', pv: '<%= cUser.pv %>'}">
+<section id="container" ng-controller="tmallIndexCtrl" ng-init="user = {shopName: '<%= shopName %>', shopId: '<%= shopId %>', money: '<%= cUser.money %>', coin: '<%= cUser.coin %>', pv: '<%= cUser.pv %>'}">
     <% include ../Seller/seller_nav.html %>
     <!--main content start-->
     <section id="main-content">
@@ -862,7 +862,7 @@
             <div ng-if="step==3">
                 <section class="panel">
                     <header class="panel-heading">
-                        第三步：选择刷单数量<span class="pull-right">已选择: <span class="error">淘宝|<%= shopName %>|订单</span></span>
+                        第三步：选择刷单数量<span class="pull-right">已选择: <span class="error">天猫|<%= shopName %>|订单</span></span>
                     </header>
                     <div class="panel-body">
                         <strong>1.请选择刷单数量</strong>
@@ -1034,7 +1034,7 @@
             <div ng-if="step==4">
                 <section class="panel">
                     <header class="panel-heading">
-                        第四步：选择增值服务 <span class="pull-right">已选择: <span class="error">淘宝|<%= shopName %>|订单|{{item.totalCount}}单套餐</span></span>
+                        第四步：选择增值服务 <span class="pull-right">已选择: <span class="error">天猫|<%= shopName %>|订单|{{item.totalCount}}单套餐</span></span>
                     </header>
                     <div class="panel-body">
                         <!--快速返款给买手 开始-->
