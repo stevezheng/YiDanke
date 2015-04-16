@@ -20,6 +20,7 @@
       $scope.showAccount = account;
     };
 
+
     $scope.doTask  = function(task) {
       if ($scope.showAccount.accountPlatform != $scope.platform || !$scope.showAccount) {
         alert('请选择买号');
@@ -32,6 +33,25 @@
         .success(function(res) {
           if (res.errno == 0) {
             $scope.showTask = task;
+
+            $scope.actionTask = function(task) {
+              if ($scope.showAccount.accountPlatform != $scope.platform || !$scope.showAccount) {
+                alert('请选择买号');
+                return false;
+              }
+
+              var taskId = task.id;
+
+              $http.post('/buyer/dotask', {taskId: taskId, terminal: $scope.terminal, accountId: $scope.showAccount.id, accountName: $scope.showAccount.accountName})
+                .success(function(res) {
+                  if (res.errno == 0) {
+                    location.href = '/buyer/dotask?id=' + res.data;
+                  } else {
+                    alert(res.errmsg);
+                  }
+                })
+            };
+
             document.getElementById('showTask').click();
           } else {
             alert(res.errmsg);
