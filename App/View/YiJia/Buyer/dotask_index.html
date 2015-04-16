@@ -188,6 +188,66 @@
                     </div>
                 </div>
             </section>
+            <section class="panel" ng-if="step==3">
+                <header class="panel-heading">
+                    进入店铺首页，模拟用户正常浏览店铺，随机点开三个商品并从头到尾看完整个商品描述
+                    <span class="pull-right">任务编号：{{doTask.doTaskTaskId}} - {{doTaskId}}</span>
+                </header>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <p>
+                                1.如图示，进入店铺首页： <br/>
+                                <img src="/resource/img/four-1.jpg"/>
+                            </p>
+                            <p>
+                                2.进入店铺后，在店铺内随机点击 <span class="error">3-4</span> 个商品并浏览整个商品页面，并将宝贝地址复制粘贴到以下输入框中：
+                            </p>
+                            <p>
+                                注意：4个宝贝页面地址不可重复，如果搜索到的商品少于4个，可填写淘宝其他商品链接
+                            </p>
+                            <br/>
+                            <br/>
+                            <p>
+                                宝贝页地址1: <input type="text" style="width: 400px" placeholder="将店铺内点开的商品链接贴到此处" ng-model="item.url1"/>
+                            </p>
+                            <p>
+                                宝贝页地址2: <input type="text" style="width: 400px" placeholder="将店铺内点开的商品链接贴到此处" ng-model="item.url2"/>
+                            </p>
+                            <p>
+                                宝贝页地址3: <input type="text" style="width: 400px" placeholder="将店铺内点开的商品链接贴到此处" ng-model="item.url3"/>
+                            </p>
+                            <p>
+                                宝贝页地址4: <input type="text" style="width: 400px" placeholder="将店铺内点开的商品链接贴到此处" ng-model="item.url4"/>
+                            </p>
+                            <br/>
+                            <br/>
+                            <p>
+                                3.请使用旺旺：<span class="error">{{doTask.doTaskAccountName}}</span>联系卖家在线客服，至少问8个常见购买问题，可参考商品特性、材料、商品质量效果、售后售前问题、商品参数详情问题、发货时间、价格优惠、是否赠送小礼品等方面。（以上问题仅供参考，请买手根据商品实际情况自由发挥）
+                            </p>
+                            <p>注意：</p>
+                            <p>1.不得提起一家网、刷单等关键字，否则封禁一家网帐户</p>
+                            <p>2.聊天记录必须上传和指定商品店铺的聊天记录截图，不得上传虚假信息， <span class="error">否则封禁一家网账户！</span></p>
+                            <p>3.截图要求： <span class="error">截取任意一段聊天记录即可</span></p>
+                            <p>请将 <span class="error">{{doTask.doTaskAccountName}}</span> 请上传聊天记录截图:
+                                <button class="btn btn-info" ng-file-select ng-model="talk.image">选择聊天记录截图</button>
+                                <a ng-href="{{talk.imagefile}}" target="_blank" ng-show="talk.imagefile">[查看图片]</a>
+                            </p>
+                        </div>
+                        <div class="col-lg-10 col-lg-offset-1">
+                            <h3>温馨提示：此任务下单付款时注意：</h3>
+                            <p>1、此任务需要拍 <span class="error">{{doTask.taskCount}}</span> 个商品</p>
+                            <p>2、此任务下单时无需订单备注</p>
+                            <p>3、此任务要求必须用 <span class="error">{{doTask.doTaskTerminal=='pc'?'电脑':'手机'}}</span> 下单付款</p>
+                        </div>
+                    </div>
+                    <div class="row" style="text-align: center">
+                        <button class="btn btn-info" ng-click="nextStep(2)">上一步</button>
+                        <button class="btn btn-info" ng-click="nextStep(4)" >下一步</button>
+                    </div>
+                </div>
+            </section>
+
         </section>
     </section>
     <!--main content end-->
