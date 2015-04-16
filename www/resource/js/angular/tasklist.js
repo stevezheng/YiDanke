@@ -29,7 +29,7 @@
 
       var taskId = task.id;
 
-      $http.post('/buyer/tasklist/check', {taskId: taskId, terminal: $scope.terminal, accountId: $scope.showAccount.id})
+      $http.post('/buyer/dotask/check', {taskId: taskId, terminal: $scope.terminal, accountId: $scope.showAccount.id, accountName: $scope.showAccount.accountName})
         .success(function(res) {
           if (res.errno == 0) {
             $scope.showTask = task;

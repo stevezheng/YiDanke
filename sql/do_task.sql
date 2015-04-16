@@ -4,6 +4,8 @@ create table if not exists `yi_do_task` (
     `doTaskTerminal` varchar(6) not null comment '任务平台: pc:电脑, phone: 手机',
     `doTaskUserId` int(11) not null comment '任务用户id',
     `doTaskTaskId` int(11) not null comment '任务id',
+    `doTaskShopId` int(11) not null comment '店铺id',
+    `doTaskShopName` varchar(32) not null comment '店铺名称',
     `doTaskAccountId` int(11) not null comment '任务买手id',
     `doTaskAccountName` varchar(32) not null comment '任务买手名称',
     `doTaskKeyword` varchar(32) not null default '' comment '任务关键词',
