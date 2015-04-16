@@ -44,6 +44,13 @@ module.exports = Model(function() {
             'doTaskTaskId': 'tmallTaskId'
           }
         })
+        .join({
+          table: 'task_extend'
+          , join: 'left'
+          , on: {
+            'doTaskTaskId': 'extendTaskId'
+          }
+        })
         .where({'yi_do_task.id': id, doTaskUserId: userId})
         .find()
     },

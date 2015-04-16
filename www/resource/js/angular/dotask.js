@@ -31,7 +31,7 @@
   var DoTaskModule = angular.module('YiApp.DoTask', ['angularFileUpload']);
 
   DoTaskModule.controller('doTaskCtrl', function($scope, $http, $upload) {
-    $scope.step = 3;
+    $scope.step = 4;
 
     $scope.checkUrlFlag = false;
     $scope.itemUrl = '';

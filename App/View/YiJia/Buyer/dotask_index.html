@@ -247,6 +247,88 @@
                     </div>
                 </div>
             </section>
+            <section class="panel" ng-if="step==4">
+                <header class="panel-heading">
+                    将本次任务所有商品加入淘宝|天猫购物车,完成后回到一家网点击"下一步,备注并下单和付款"
+                    <span class="pull-right">任务编号：{{doTask.doTaskTaskId}} - {{doTaskId}}</span>
+                </header>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <p>
+                                1. 请将以下商品加入购物车：
+                            </p>
+                                <div class="col-lg-12 alert alert-warning">
+                                    <p>商品名： <span class="error">{{doTask.taskName}}</span></p>
+                                </div>
+                                <div class="col-lg-6">
+                                    <p>
+                                        商品图:
+                                        <img ng-if="doTask.taobaoImage" ng-src="{{doTask.taobaoImage}}" alt="" width="300"/>
+                                        <img ng-if="doTask.tmallImage" ng-src="{{doTask.tmallImage}}" alt="" width="300"/>
+                                    </p>
+                                </div>
+                                <div class="col-lg-6">
+                                    <p>
+                                        购买件数: <span class="error">{{doTask.taskCount}}</span>个
+                                    </p>
+                                    <p>
+                                        价格: <span class="error">{{doTask.taskMoney}}</span>元
+                                    </p>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-lg-12 alert alert-warning" ng-if="doTask.extend1Name">
+                                    <p>商品1商品名： <span class="error">{{doTask.extend1Name}}</span></p>
+                                </div>
+                                <div class="col-lg-6" ng-if="doTask.extend1Name">
+                                    <p>
+                                        商品1商品图:
+                                        <img ng-if="doTask.extend1Url" ng-src="{{doTask.extend1Image}}" alt="" width="300"/>
+                                    </p>
+                                </div>
+                                <div class="col-lg-6" ng-if="doTask.extend1Name">
+                                    <p>
+                                        商品1商品购买件数: <span class="error">{{doTask.extend1Count}}</span>个
+                                    </p>
+                                    <p>
+                                        商品1商品价格: <span class="error">{{doTask.extend1Money}}</span>元
+                                    </p>
+                                </div>
+                            <div class="clearfix"></div>
+
+                                <div class="col-lg-12 alert alert-warning" ng-if="doTask.extend2Name">
+                                    <p>商品2商品名： <span class="error">{{doTask.extend2Name}}</span></p>
+                                </div>
+                                <div class="col-lg-6" ng-if="doTask.extend2Name">
+                                    <p>
+                                        商品2商品图:
+                                        <img ng-if="doTask.extend2Url" ng-src="{{doTask.extend2Image}}" alt="" width="300"/>
+                                    </p>
+                                </div>
+                                <div class="col-lg-6" ng-if="doTask.extend2Name">
+                                    <p>
+                                        商品2商品购买件数: <span class="error">{{doTask.extend2Count}}</span>个
+                                    </p>
+                                    <p>
+                                        商品2商品价格: <span class="error">{{doTask.extend2Money}}</span>元
+                                    </p>
+                                </div>
+                            <div class="clearfix"></div>
+
+                        </div>
+                        <div class="col-lg-10 col-lg-offset-1">
+                            <h3>温馨提示：此任务下单付款时注意：</h3>
+                            <p>1. 您需要购买 <span class="error">{{doTask.taskCount + doTask.extend1Count + doTask.extend2Count}}</span>件商品，请核对您购买的商品总价为 <span class="error">{{doTask.taskTotalMoney}}</span>元（实际付款金额可能会上下浮动10左右）</p>
+                            <p class="error">2. 买手禁止使用花呗、余额宝分期、信用卡等方式付款</p>
+                            <p ng-if="doTask.taskTransport == 'baoyou'">3、当前商品为 <span class="error">（包邮）</span>，如果您购买的商品不包邮，请联系客服修改为包邮价</p>
+                        </div>
+                    </div>
+                    <div class="row" style="text-align: center">
+                        <button class="btn btn-info" ng-click="nextStep(3)">上一步</button>
+                        <button class="btn btn-info" ng-click="nextStep(5)">下一步</button>
+                    </div>
+                </div>
+            </section>
 
         </section>
     </section>
