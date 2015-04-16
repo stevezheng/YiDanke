@@ -30,6 +30,20 @@ module.exports = Model(function() {
             'doTaskTaskId': 'id'
           }
         })
+        .join({
+          table: 'task_taobao'
+          , join: 'left'
+          , on: {
+            'doTaskTaskId': 'taobaoTaskId'
+          }
+        })
+        .join({
+          table: 'task_tmall'
+          , join: 'left'
+          , on: {
+            'doTaskTaskId': 'tmallTaskId'
+          }
+        })
         .where({'yi_do_task.id': id, doTaskUserId: userId})
         .find()
     },

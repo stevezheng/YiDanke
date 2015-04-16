@@ -151,6 +151,43 @@
                     </div>
                 </div>
             </section>
+            <section class="panel" ng-if="step==2">
+                <header class="panel-heading">
+                    根据商品图和价格提示找到正确商品，并核对商品链接
+                    <span class="pull-right">任务编号：{{doTask.doTaskTaskId}} - {{doTaskId}}</span>
+                </header>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <p>
+                                1.找到卖家为：<span class="error">{{doTask.taskShopName.slice(0, 3)}}*********</span>
+                            </p>
+                            <p>
+                                商品图: <br/>
+                                <img ng-if="doTask.taobaoImage" ng-src="{{doTask.taobaoImage}}" alt="" width="500"/>
+                                <img ng-if="doTask.tmallImage" ng-src="{{doTask.tmallImage}}" alt="" width="500"/>
+                            </p>
+                            <p>2.核对商品链接：</p>
+                            <p>
+                                <input placeholder="将搜索到的商品链接贴到此处" type="text" style="width: 400px" ng-model="itemUrl"/>
+                                <button class="btn btn-warning" ng-click="checkUrl(itemUrl)">核对商品地址</button>
+                            </p>
+                        </div>
+                        <div class="col-lg-10 col-lg-offset-1">
+                            <h3>温馨提示：此任务下单付款时注意：</h3>
+                            <p>1、此任务需要拍 <span class="error">{{doTask.taskCount}}</span> 个商品,必须用 <span class="error">{{doTask.doTaskTerminal=='pc'?'电脑':'手机'}}</span> 下单付款 </p>
+                            <p>2、此任务下单时无需订单备注</p>
+                            <p>3、买手在搜索结果页面，按快捷键 Ctrl+F 搜索卖家名称的前三个字符，可快捷找到任务商品。若任务找不到商品，买手可尝试以下方法：
+                                ①清除浏览器缓存（cookies） ②更换浏览器 ③退出淘宝账号后搜索。<span class="error">平台客服不会帮助找商品。</span></p>
+                            <p>4、按照商家名称前三个字符搜索店铺直接访问的，接到商家投诉将会直接进行相应的处罚</p>
+                        </div>
+                    </div>
+                    <div class="row" style="text-align: center">
+                        <button class="btn btn-info" ng-click="nextStep(3)" ng-if="checkUrlFlag">下一步</button>
+                        <button class="btn btn-default" ng-if="!checkUrlFlag">下一步</button>
+                    </div>
+                </div>
+            </section>
         </section>
     </section>
     <!--main content end-->
