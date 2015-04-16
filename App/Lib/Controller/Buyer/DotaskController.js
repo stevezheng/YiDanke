@@ -64,6 +64,26 @@ module.exports = Controller("Buyer/BaseController", function(){
               return self.error(500, '该账号已经做过该店任务了');
             }
 
+            //调整任务执行数量进度
+            if (terminal == 'pc') {
+              return task
+                .addPcDoingCount(taskId)
+            }
+
+            if (terminal == 'phone') {
+              return task
+                .addPhoneDoingCount(taskId)
+            }
+          })
+          .then(function() {
+            //获取关键词
+            var keywords = [];
+
+          })
+          .then(function() {
+            //冻结押金
+          })
+          .then(function() {
             return doTask
               .addOne(terminal, self.cUser.id, taskId, accountId, accountName, keyword, _task.taskFee, _task.taskExtendFee, _task.taskShopId, _task.taskShopName)
           })

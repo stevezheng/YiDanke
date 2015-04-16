@@ -37,6 +37,22 @@ module.exports = Model(function() {
       return self
         .where({taskUserId: userId, id: id})
         .update({taskStatus: 2})
+    },
+
+    addPcDoingCount: function(taskId) {
+      var self = this;
+
+      return self
+        .where({id: taskId})
+        .updateInc('taskPcDoingCount')
+    },
+
+    addPhoneDoingCount: function(taskId) {
+      var self = this;
+
+      return self
+        .where({id: taskId})
+        .updateInc('taskPhoneDoingCount')
     }
   }
 });
