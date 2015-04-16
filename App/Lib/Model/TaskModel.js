@@ -14,6 +14,14 @@ module.exports = Model(function() {
         .select()
     },
 
+    getOne: function(id) {
+      var self = this;
+
+      return self
+        .where({id: id, taskStatus: 3})
+        .find()
+    },
+
     addOne: function(task) {
       var self = this;
 

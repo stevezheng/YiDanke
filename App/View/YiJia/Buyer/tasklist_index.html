@@ -32,15 +32,15 @@
                         </div>
                         <div class="col-lg-4">
                             <h3>请选择买号</h3>
-                            <button ng-click="changeAccountId(account.id)" class="btn" ng-class="accountId==account.id?'btn-info':'btn-default'" ng-repeat="account in taobaoAccounts" ng-show="'taobao' == platform">
+                            <button ng-click="changeAccountId(account.id, account)" class="btn" ng-class="accountId==account.id?'btn-info':'btn-default'" ng-repeat="account in taobaoAccounts" ng-show="'taobao' == platform">
                                 {{account.accountName}}
                             </button>
                             <a class="btn btn-default" href="/buyer/account" ng-if="platform=='taobao' && taobaoAccounts.length == 0">去绑定买号</a>
-                            <button ng-click="changeAccountId(account.id)" class="btn" ng-class="accountId==account.id?'btn-info':'btn-default'" ng-repeat="account in tmallAccounts" ng-show="'tmall' == platform">
+                            <button ng-click="changeAccountId(account.id, account)" class="btn" ng-class="accountId==account.id?'btn-info':'btn-default'" ng-repeat="account in tmallAccounts" ng-show="'tmall' == platform">
                                 {{account.accountName}}
                             </button>
                             <a class="btn btn-default" href="/buyer/account" ng-if="platform=='tmall' && tmallAccounts.length == 0">去绑定买号</a>
-                            <button ng-click="changeAccountId(account.id)" class="btn" ng-class="accountId==account.id?'btn-info':'btn-default'" ng-repeat="account in jdAccounts" ng-show="'jd' == platform">
+                            <button ng-click="changeAccountId(account.id, account)" class="btn" ng-class="accountId==account.id?'btn-info':'btn-default'" ng-repeat="account in jdAccounts" ng-show="'jd' == platform">
                                 {{account.accountName}}
                             </button>
                             <a class="btn btn-default" href="/buyer/account" ng-if="platform=='jd' && jdAccounts.length == 0">去绑定买号</a>
@@ -108,7 +108,7 @@
                                         <td>{{task.taskFee}} <span class="error" ng-if="task.taskIsExtendFee">+ {{task.taskExtendFee}} </span>金币</td>
                                         <td>{{terminal == 'pc'?task.taskPcCount:task.taskPhoneCount}}单</td>
                                         <td>{{terminal == 'pc'?(task.taskPcDoingCount + task.taskPcDoneCount)/task.taskPcCount * 100:(task.taskPhoneDoingCount + task.taskPhoneDoneCount)/task.taskPhoneCount* 100}}%</td>
-                                        <td><button class="btn btn-info">接手任务</button></td>
+                                        <td><button class="btn btn-info" ng-click="doTask(task)">接手任务</button></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -130,7 +130,46 @@
             </section>
         </section>
     </section>
+    <a href="#myModal" style="display: none;" id="showTask" data-toggle="modal">打开我的任务车模态</a>
     <!--main content end-->
+    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">我的任务车 </h4>
+                </div>
+                <div class="modal-body">
+                    <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>任务类型</th>
+                            <th>商家</th>
+                            <th>买手需垫付资金</th>
+                            <th>佣金</th>
+                            <th>接手买号</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{statusMap.type[type]}}</td>
+                            <td>{{showTask.taskUserName}}</td>
+                            <td>{{showTask.taskTotalMoney}}元</td>
+                            <td>{{showTask.taskFee}}金币</td>
+                            <td>{{showAccount.accountName}}</td>
+                        </tr>
+                        </tbody>
+                        </table>
+                    <p><span class="small">提示：任务车一次只能接一个任务  <span class="error">温馨提示：未操作【前去做任务】，此时放弃任务不扣符点</span></span> </p>
+                    <p>您需垫付总金额：<span class="error">{{showTask.taskTotalMoney}}</span>元，押金：1符点；任务完成将获得佣金：{{showTask.taskFee}}金币</p>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-default" id="cancel-pay" type="button">放弃任务</button>
+                    <button class="btn btn-info" type="button" ng-click="actionTask(showTask)">前去做任务</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 <% include ../common_footer.html %>
 <script src="/resource/assets/jquery-knob/js/jquery.knob.js"></script>

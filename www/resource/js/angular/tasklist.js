@@ -5,9 +5,42 @@
     $scope.platform = 'taobao';
     $scope.terminal = 'pc';
     $scope.type = 'dingdan';
+    $scope.showAccount = {};
 
-    $scope.changeAccountId = function(id) {
+    $scope.statusMap = {
+      type: {
+        'dingdan': '订单'
+        , 'juhuasuan': '聚划算'
+        , 'zhitongche': '直通车'
+      }
+    };
+
+    $scope.changeAccountId = function(id, account) {
       $scope.accountId = id;
+      $scope.showAccount = account;
+    };
+
+    $scope.doTask  = function(task) {
+      if ($scope.showAccount.accountPlatform != $scope.platform || !$scope.showAccount) {
+        alert('请选择买号');
+        return false;
+      }
+
+      var taskId = task.id;
+
+      $http.post('/buyer/tasklist/check', {taskId: taskId, terminal: $scope.terminal, accountId: $scope.showAccount.id})
+        .success(function(res) {
+          if (res.errno == 0) {
+            $scope.showTask = task;
+            document.getElementById('showTask').click();
+          } else {
+            alert(res.errmsg);
+          }
+        })
+    };
+
+    $scope.actionTask = function(showTask) {
+
     };
 
     function getAccounts() {
@@ -43,7 +76,10 @@
         .success(function(res) {
           if (res.errno == 0) {
             $scope.tasks = res.data;
-            countTasks();
+            $scope.$watch('platform', function() {
+              countTasks();
+            });
+
           }
         })
     }
@@ -137,10 +173,6 @@
         }
       }).length;
     }
-
-    $scope.$watch('platform', function() {
-      countTasks();
-    });
 
     getTasks();
 
