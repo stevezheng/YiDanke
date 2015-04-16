@@ -14,27 +14,36 @@
                             <h3>请选择平台 <span class="small">请买手遵守平台规则，按照任务步骤中的提示完成任务，不得违规操作；如有违反，一家网有权利对买手进行处罚</span></h3>
                         </div>
                         <div class="col-lg-12">
-                            <button class="btn" ng-class="platform=='taobao'?'btn-info':'btn-default'" ng-click="platform='taobao'">淘宝(0)</button>
-                            <button class="btn" ng-class="platform=='tmall'?'btn-info':'btn-default'" ng-click="platform='tmall'">天猫(0)</button>
-                            <button class="btn" ng-class="platform=='jd'?'btn-info':'btn-default'" ng-click="platform='jd'">京东(0)</button>
+                            <button class="btn" ng-class="platform=='taobao'?'btn-info':'btn-default'" ng-click="platform='taobao'">淘宝({{taobaoCount}})</button>
+                            <button class="btn" ng-class="platform=='tmall'?'btn-info':'btn-default'" ng-click="platform='tmall'">天猫({{tmallCount}})</button>
+                            <button class="btn" ng-class="platform=='jd'?'btn-info':'btn-default'" ng-click="platform='jd'">京东({{jdCount}})</button>
                             <!--<button class="btn" ng-class="platform=='mogujie'?'btn-info':'btn-default'" ng-click="platform='mogujie'">蘑菇街</button>-->
                         </div>
                         <div class="col-lg-4">
                             <h3>请选择终端</h3>
-                            <button class="btn" ng-class="terminal=='pc'?'btn-info':'btn-default'" ng-click="terminal='pc'">电脑(0)</button>
-                            <button class="btn" ng-class="terminal=='phone'?'btn-info':'btn-default'" ng-click="terminal='phone'">手机/Pad(0)</button>
+                            <button class="btn" ng-class="terminal=='pc'?'btn-info':'btn-default'" ng-click="terminal='pc'">电脑({{pcCount}})</button>
+                            <button class="btn" ng-class="terminal=='phone'?'btn-info':'btn-default'" ng-click="terminal='phone'">手机/Pad({{phoneCount}})</button>
                         </div>
                         <div class="col-lg-8">
                             <h3>请选择任务类型</h3>
-                            <button class="btn" ng-class="type=='dingdan'?'btn-info':'btn-default'" ng-click="type='dingdan'">订单(0)</button>
-                            <button class="btn" ng-class="type=='juhuasuan'?'btn-info':'btn-default'" ng-click="type='juhuasuan'">聚划算/Pad(0)</button>
-                            <button class="btn" ng-class="type=='zhitongche'?'btn-info':'btn-default'" ng-click="type='zhitongche'">直通车/Pad(0)</button>
+                            <button class="btn" ng-class="type=='dingdan'?'btn-info':'btn-default'" ng-click="type='dingdan'">订单({{dingdanCount}})</button>
+                            <button class="btn" ng-show="platform == 'taobao' || platform == 'tmall'" ng-class="type=='juhuasuan'?'btn-info':'btn-default'" ng-click="type='juhuasuan'">聚划算/Pad({{juhuasuanCount}})</button>
+                            <button class="btn" ng-show="platform == 'taobao' || platform == 'tmall'" ng-class="type=='zhitongche'?'btn-info':'btn-default'" ng-click="type='zhitongche'">直通车/Pad({{zhitongcheCount}})</button>
                         </div>
                         <div class="col-lg-4">
                             <h3>请选择买号</h3>
-                            <button ng-click="changeAccountId(account.id)" class="btn" ng-class="accountId==account.id?'btn-info':'btn-default'" ng-repeat="account in accounts" ng-show="account.accountPlatform == platform">
+                            <button ng-click="changeAccountId(account.id)" class="btn" ng-class="accountId==account.id?'btn-info':'btn-default'" ng-repeat="account in taobaoAccounts" ng-show="'taobao' == platform">
                                 {{account.accountName}}
                             </button>
+                            <a class="btn btn-default" href="/buyer/account" ng-if="platform=='taobao' && taobaoAccounts.length == 0">去绑定买号</a>
+                            <button ng-click="changeAccountId(account.id)" class="btn" ng-class="accountId==account.id?'btn-info':'btn-default'" ng-repeat="account in tmallAccounts" ng-show="'tmall' == platform">
+                                {{account.accountName}}
+                            </button>
+                            <a class="btn btn-default" href="/buyer/account" ng-if="platform=='tmall' && tmallAccounts.length == 0">去绑定买号</a>
+                            <button ng-click="changeAccountId(account.id)" class="btn" ng-class="accountId==account.id?'btn-info':'btn-default'" ng-repeat="account in jdAccounts" ng-show="'jd' == platform">
+                                {{account.accountName}}
+                            </button>
+                            <a class="btn btn-default" href="/buyer/account" ng-if="platform=='jd' && jdAccounts.length == 0">去绑定买号</a>
                         </div>
                     </div>
                 </div>
