@@ -1,5 +1,5 @@
 <% include ../common_header.html %>
-<section id="container" ng-controller="buyerTaskListCtrl">
+<section id="container" ng-controller="buyerTaskListCtrl" ng-init="user = {coin: <%= cUser.coin %>}">
     <% include ./buyer_nav.html %>
     <!--main content start-->
     <section id="main-content">
@@ -76,7 +76,7 @@
                                 </a>
                             </li>
                             <li class="">
-                                <a href="#all" data-toggle="tab">
+                                <a href="#normal" data-toggle="tab">
                                     常规
                                 </a>
                             </li>
@@ -108,21 +108,21 @@
                                         <td>{{task.taskFee}} <span class="error" ng-if="task.taskIsExtendFee">+ {{task.taskExtendFee}} </span>金币</td>
                                         <td>{{terminal == 'pc'?task.taskPcCount:task.taskPhoneCount}}单</td>
                                         <td>{{terminal == 'pc'?(task.taskPcDoingCount + task.taskPcDoneCount)/task.taskPcCount * 100:(task.taskPhoneDoingCount + task.taskPhoneDoneCount)/task.taskPhoneCount* 100}}%</td>
-                                        <td><button class="btn btn-info" ng-click="doTask(task)">接手任务</button></td>
+                                        <td>
+                                            <button ng-if="user.coin >= 1" class="btn btn-info" ng-click="doTask(task)">接手任务</button>
+                                            <a ng-if="user.coin <= 1" class="btn btn-default" href="/buyer/money">金币不足,请充值</a>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>
                             </div>
                             <div class="tab-pane" id="done">
-                                <div class="bio-chart">
-                                    <input class="knob" data-width="101" data-height="101" data-displayPrevious=true  data-thickness=".2" value="63" data-fgColor="#4CC5CD" data-bgColor="#e8e8e8">
-                                </div>
                             </div>
                             <div class="tab-pane " id="cancel">
-                                Recent Item goes here
                             </div>
                             <div class="tab-pane " id="all">
-                                Recent Item goes here
+                            </div>
+                            <div class="tab-pane " id="normal">
                             </div>
                         </div>
                     </div>
