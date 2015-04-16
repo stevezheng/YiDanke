@@ -10,7 +10,7 @@ module.exports = Controller("Seller/BaseController", function(){
 
       if (self.isGet()) {
         var user = UserModel();
-        user.reloadCurrenUser(self)
+        user.reloadCurrentUser(self)
           .then(function() {
             self.display();
           })

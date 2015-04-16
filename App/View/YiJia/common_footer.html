@@ -17,5 +17,30 @@
 <!--common script for all pages-->
 <script src="/resource/js/common-scripts.js"></script>
 
+<script src="/resource/js/underscore-min.js"></script>
+<script src="/resource/js/moment.min.js"></script>
+<script src="/resource/js/angular.min.js"></script>
+<script src="/resource/js/angular/angular-file-upload.min.js"></script>
+<script src="/resource/js/angular/buyer.js"></script>
+<script src="/resource/js/angular/seller.js"></script>
+<script src="/resource/js/angular/publish.js"></script>
+<script src="/resource/js/angular/tasklist.js"></script>
+<script src="/resource/js/angular/taobao.index.js"></script>
+<script src="/resource/js/angular/taobao.zhitongche.js"></script>
+<script src="/resource/js/angular/tmall.index.js"></script>
+<script src="/resource/js/angular/tmall.zhitongche.js"></script>
+<script src="/resource/js/angular/jd.index.js"></script>
+<script src="/resource/js/angular/dotask.js"></script>
+<script>
+    angular.module('YiApp', ['angularFileUpload',
+        'YiApp.Buyer', 'YiApp.Seller', 'YiApp.Publish',
+        'YiApp.TaobaoIndex', 'YiApp.TaobaoZhitongche',
+        'YiApp.TmallIndex', 'YiApp.TmallZhitongche',
+        'YiApp.JdIndex',
+        'YiApp.TaskList',
+        'YiApp.DoTask'
+    ]);
+</script>
+
 </body>
 </html>

@@ -101,7 +101,7 @@ module.exports = Model(function() {
      * @param scope action中的this
      * @returns {*}
      */
-    reloadCurrenUser: function(scope) {
+    reloadCurrentUser: function(scope) {
       var self = this;
 
       return self

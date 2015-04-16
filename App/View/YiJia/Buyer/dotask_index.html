@@ -1,14 +1,14 @@
 <% include ../common_header.html %>
 <link rel="stylesheet" href="/resource/css/tasks.css"/>
-<section id="container">
+<section id="container" ng-controller="doTaskCtrl">
     <% include ./buyer_nav.html %>
     <!--main content start-->
     <section id="main-content">
         <section class="wrapper">
             <section class="panel">
                 <header class="panel-heading">
-                    手机做任务
-                    <span class="pull-right">
+                    <span>{{doTask.doTaskTerminal=='pc'?'电脑端':'手机端'}}</span>做任务
+                    <span class="pull-right" ng-if="doTask.doTaskTerminal=='phone'">
                         此任务为手机刷单任务，在手机刷单之前请 <span class="error">先用电脑找到刷单商品</span>并加入购物车，之后 <span class="error">使用手机下单并付款</span>
                     </span>
                 </header>
@@ -16,9 +16,9 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="alert alert-warning">
-                                <p>接手任务的买号：<span class="error">贝克汉姆</span>(淘宝)，接手1个任务，需要在 <span class="error">2015-04-17 16:38</span>前完成(24小时内)</p>
+                                <p>接手任务的买号：<span class="error">{{doTask.doTaskAccountName}}</span>({{statusMap.platform[doTask.taskPlatform]}})，接手1个任务，需要在 <span class="error">{{doTask.doTaskFinishTime}}</span>前完成(24小时内)</p>
                                 <p>请按时完成任务，否则每个任务扣除：<span class="error">1</span>金币</p>
-                                <p>本次1个任务完成后将获得：<span class="error">5.4</span>金币</p>
+                                <p>本次1个任务完成后将获得：<span class="error">{{doTask.doTaskFee}}</span>金币</p>
                             </div>
                         </div>
                     </div>

@@ -53,6 +53,24 @@ module.exports = Model(function() {
       return self
         .where({id: taskId})
         .updateInc('taskPhoneDoingCount')
+    },
+
+    taobaoKeywords: function(taskId) {
+      var self = this;
+
+      return self
+        .join({
+          table: 'task_taobao'
+          , join: 'left'
+          , on: {'id': 'taobaoTaskId'}
+        })
+        .join({
+          table: 'task_tmall'
+          , join: 'left'
+          , on: {'id': 'tmallTaskId'}
+        })
+        .where({'yi_task.id': taskId})
+        .find()
     }
   }
 });

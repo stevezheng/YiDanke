@@ -1,5 +1,7 @@
 var TaskModel = thinkRequire('TaskModel');
 var DoTaskModel = thinkRequire('DoTaskModel');
+var UserModel = thinkRequire('UserModel');
+var moment = require('moment');
 
 module.exports = Controller("Buyer/BaseController", function(){
   "use strict";
@@ -11,8 +13,14 @@ module.exports = Controller("Buyer/BaseController", function(){
 
       if (self.isGet()) {
         var id = self.get('id');
+        var user = UserModel();
 
-        self.display();
+        user
+          .reloadCurrentUser(self)
+          .then(function() {
+            self.assign('doTaskId', id);
+            self.display();
+          });
       }
 
       if (self.isPost()) {
@@ -64,26 +72,96 @@ module.exports = Controller("Buyer/BaseController", function(){
               return self.error(500, '该账号已经做过该店任务了');
             }
 
+            return task
+              .taobaoKeywords(taskId)
+          })
+          .then(function(res) {
+            //获取关键词
+            var keywords = [];
+
+            if (res.taobaoKey1 != '') {
+              for (var i = 0; i < res.taobaoKeyCount1; i++) {
+                keywords.push(res.taobaoKey1);
+              }
+            }
+            if (res.taobaoKey2 != '') {
+              for (var i = 0; i < res.taobaoKeyCount2; i++) {
+                keywords.push(res.taobaoKey2);
+              }
+            }
+            if (res.taobaoKey3 != '') {
+              for (var i = 0; i < res.taobaoKeyCount3; i++) {
+                keywords.push(res.taobaoKey3);
+              }
+            }
+
+            if (res.taobaoKey4 != '') {
+              for (var i = 0; i < res.taobaoKeyCount4; i++) {
+                keywords.push(res.taobaoKey4);
+              }
+            }
+
+            if (res.taobaoKey5 != '') {
+              for (var i = 0; i < res.taobaoKeyCount5; i++) {
+                keywords.push(res.taobaoKey5);
+              }
+            }
+
+            if (res.tmallKey1 != '') {
+              for (var i = 0; i < res.tmallKeyCount1; i++) {
+                keywords.push(res.tmallKey1);
+              }
+            }
+            if (res.tmallKey2 != '') {
+              for (var i = 0; i < res.tmallKeyCount2; i++) {
+                keywords.push(res.tmallKey2);
+              }
+            }
+            if (res.tmallKey3 != '') {
+              for (var i = 0; i < res.tmallKeyCount3; i++) {
+                keywords.push(res.tmallKey3);
+              }
+            }
+
+            if (res.tmallKey4 != '') {
+              for (var i = 0; i < res.tmallKeyCount4; i++) {
+                keywords.push(res.tmallKey4);
+              }
+            }
+
+            if (res.tmallKey5 != '') {
+              for (var i = 0; i < res.tmallKeyCount5; i++) {
+                keywords.push(res.tmallKey5);
+              }
+            }
+
+            var index = res.taskPhoneDoingCount + res.taskPhoneDoneCount
+              + res.taskPcDoingCount + res.taskPcDoneCount;
+
+            keyword = keywords[index];
+
             //调整任务执行数量进度
             if (terminal == 'pc') {
+              //todo:需要打日志
               return task
                 .addPcDoingCount(taskId)
             }
 
             if (terminal == 'phone') {
+              //todo:需要打日志
               return task
                 .addPhoneDoingCount(taskId)
             }
           })
           .then(function() {
-            //获取关键词
-            var keywords = [];
-
-          })
-          .then(function() {
             //冻结押金
+            //todo:需要打日志
+            return D('user')
+              .where({id: self.cUser.id})
+              .updateDec('coin');
           })
           .then(function() {
+            //todo:需要打日志
             return doTask
               .addOne(terminal, self.cUser.id, taskId, accountId, accountName, keyword, _task.taskFee, _task.taskExtendFee, _task.taskShopId, _task.taskShopName)
           })
@@ -91,6 +169,7 @@ module.exports = Controller("Buyer/BaseController", function(){
             return self.success(insertId);
           })
           .catch(function(err) {
+            console.error(err.stack);
             return self.error(500, err);
           })
       }
@@ -159,6 +238,24 @@ module.exports = Controller("Buyer/BaseController", function(){
             return self.error(500, err);
           })
       }
+    },
+
+    getOneAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+        var id = self.get('id');
+        var doTask = DoTaskModel();
+
+        doTask
+          .getOwnOneAllInfo(self.cUser.id ,id)
+          .then(function(res) {
+            return self.success(res);
+          })
+      }
+
+      if (self.isPost()) {}
     },
   };
 });

@@ -19,6 +19,21 @@ module.exports = Model(function() {
         })
     },
 
+    getOwnOneAllInfo: function(userId, id) {
+      var self = this;
+
+      return self
+        .join({
+          table: 'task'
+          , join: 'left'
+          , on: {
+            'doTaskTaskId': 'id'
+          }
+        })
+        .where({'yi_do_task.id': id, doTaskUserId: userId})
+        .find()
+    },
+
     hasDoneShop: function(userId, accountId, shopName) {
       var self = this;
 
