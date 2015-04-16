@@ -31,7 +31,7 @@
   var DoTaskModule = angular.module('YiApp.DoTask', ['angularFileUpload']);
 
   DoTaskModule.controller('doTaskCtrl', function($scope, $http, $upload) {
-    $scope.step = 4;
+    $scope.step = 5;
 
     $scope.checkUrlFlag = false;
     $scope.itemUrl = '';
@@ -140,6 +140,11 @@
           res.data.doTaskDeadline = moment(res.data.doTaskCreateTime).add(1, 'd').format('YYYY-MM-DD HH:mm');
           res.data.doTaskCountdown = moment(res.data.doTaskCreateTime).add(1, 'd').diff(moment(), 'hours');
           $scope.doTask = res.data;
+
+          $http.get('/buyer/account/getOne?id=' + res.data.doTaskAccountId)
+            .success(function(res1) {
+              $scope.account = res1.data;
+            })
         })
     }
 

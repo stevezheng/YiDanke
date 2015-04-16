@@ -330,6 +330,58 @@
                 </div>
             </section>
 
+            <section class="panel" ng-if="step==5">
+                <header class="panel-heading">
+                    去{{doTask.doTaskTerminal=='pc'?'电脑':'手机'}}淘宝下单并付款
+                    <span class="pull-right">任务编号：{{doTask.doTaskTaskId}} - {{doTaskId}}</span>
+                </header>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <p>
+                                {{doTask.taskCount + doTask.extend1Count + doTask.extend2Count}}个商品都已放购物车，请打开{{doTask.doTaskTerminal=='pc'?'电脑':'手机'}}淘宝，登陆账号：{{doTask.doTaskAccountName}}
+                            </p>
+                            <div class="border-bottom"></div>
+                            <div class="col-lg-6">
+                                <h4>请注意：</h4>
+
+                                <p>1.收货地址请选择：</p>
+                                <p>{{account.accountProvince}} {{account.accountCity}} {{account.accountArea}} {{account.accountAddress}} {{account.accountName}}</p>
+                                <p>{{account.accountPhone}}</p>
+
+                                <div class="border-bottom"></div>
+
+                                <p>2.购买的商品信息为：</p>
+                                <div class="col-lg-2" style="margin-bottom: 30px;"><img ng-src="{{doTask.taobaoImage}}" alt="" width="50"/></div>
+                                <div class="col-lg-10">
+                                    {{doTask.taskName}} <span class="error">{{doTask.taskMoney}}</span>元 数量: <span class="error">{{doTask.taskCount}}</span>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-lg-2" ng-if="doTask.extend1Name"><img ng-src="{{doTask.extend1Image}}" alt="" width="50"/></div>
+                                <div class="col-lg-10" ng-if="doTask.extend1Name">
+                                    {{doTask.extend1Name}} <span class="error">{{doTask.extend1Money}}</span>元 数量: <span class="error">{{doTask.extend1Count}}</span>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-lg-2" ng-if="doTask.extend2Name"><img ng-src="{{doTask.extend2Image}}" alt="" width="50"/></div>
+                                <div class="col-lg-10" ng-if="doTask.extend2Name">
+                                    {{doTask.extend2Name}} <span class="error">{{doTask.extend2Money}}</span>元 数量: <span class="error">{{doTask.extend2Count}}</span>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="border-bottom"></div>
+                                <p style="margin-top: 20px">只能使用银行借记卡或支付宝付款，不得使用信用卡付款，也不得使用淘宝客和返利网站下单</p>
+                            </div>
+                            <div class="col-lg-6">
+                                <img src="/resource/img/mobile-img.jpg" alt="" ng-if="doTask.doTaskTerminal=='phone'"/>
+                                <!--<img src="/resource/img/pc-img.jpg" alt="" ng-if="doTask.doTaskTerminal=='pc'"/>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="text-align: center">
+                        <button class="btn btn-info" ng-click="nextStep(4)">上一步</button>
+                        <button class="btn btn-info" ng-click="nextStep(6)">下一步</button>
+                    </div>
+                </div>
+            </section>
         </section>
     </section>
     <!--main content end-->
