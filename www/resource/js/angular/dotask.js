@@ -2,6 +2,15 @@
   var DoTaskModule = angular.module('YiApp.DoTask', []);
 
   DoTaskModule.controller('doTaskCtrl', function($scope, $http) {
+    $scope.step = 1;
+
+    $scope.nextStep = function(step) {
+      if (step == 3) {
+
+      }
+
+      $scope.step = step;
+    };
 
     function getQueryString(name) {
       var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
@@ -20,10 +29,11 @@
     $scope.doTaskId = getQueryString('id');
 
     function getOne() {
-      console.log($scope.doTaskId);
       $http.get('/buyer/dotask/getOne?id=' + $scope.doTaskId)
         .success(function(res) {
-          res.data.doTaskFinishTime = moment(res.data.doTaskCreateTime).add(1, 'd').format('YYYY-MM-DD HH:mm');
+          res.data.doTaskDeadline = moment(res.data.doTaskCreateTime).add(1, 'd').format('YYYY-MM-DD HH:mm');
+          res.data.doTaskCountdown = moment(res.data.doTaskCreateTime).add(1, 'd').diff(moment(), 'hours');
+          console.log(res.data.doTaskCountdown);
           $scope.doTask = res.data;
         })
     }

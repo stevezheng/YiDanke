@@ -16,7 +16,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="alert alert-warning">
-                                <p>接手任务的买号：<span class="error">{{doTask.doTaskAccountName}}</span>({{statusMap.platform[doTask.taskPlatform]}})，接手1个任务，需要在 <span class="error">{{doTask.doTaskFinishTime}}</span>前完成(24小时内)</p>
+                                <p>接手任务的买号：<span class="error">{{doTask.doTaskAccountName}}</span>({{statusMap.platform[doTask.taskPlatform]}})，接手1个任务，需要在 <span class="error">{{doTask.doTaskDeadline}}</span>前完成(24小时内)</p>
                                 <p>请按时完成任务，否则每个任务扣除：<span class="error">1</span>金币</p>
                                 <p>本次1个任务完成后将获得：<span class="error">{{doTask.doTaskFee}}</span>金币</p>
                             </div>
@@ -27,20 +27,24 @@
                             <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered">
                                 <thead>
                                 <tr>
-                                    <th>任务类型</th>
                                     <th>商家</th>
-                                    <th>买手需垫付资金</th>
+                                    <th>购买件数</th>
+                                    <th>垫付资金</th>
                                     <th>佣金</th>
-                                    <th>接手买号</th>
+                                    <th>接手时间</th>
+                                    <th>倒计时</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td>{{statusMap.type[type]}}</td>
-                                    <td>{{showTask.taskUserName}}</td>
-                                    <td>{{showTask.taskTotalMoney}}元</td>
-                                    <td>{{showTask.taskFee}}金币</td>
-                                    <td>{{showAccount.accountName}}</td>
+                                    <td>{{doTask.taskUserName}}</td>
+                                    <td>{{doTask.taskCount}}件</td>
+                                    <td>{{doTask.taskTotalMoney}}元</td>
+                                    <td>{{doTask.taskFee}} <span class="error" ng-if="doTask.taskIsExtendFee">/{{doTask.taskExtendFee}}</span>金币</td>
+                                    <td>{{doTask.doTaskCreateTime | date: 'yyyy-MM-dd HH:mm'}}</td>
+                                    <td>{{doTask.doTaskCountdown}}小时</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -58,7 +62,7 @@
                             <div class="stepWrapper mt30">
                                 <div class="stepWaiting"
                                      style="position:absolute;top:0;left:-5px;">
-                                    <div class="">1</div>
+                                    <div ng-class="step==1?'stepOn':''">1</div>
                                     <div class="caption"
                                          style="width:72px;margin-left:-36px;">
                                         搜索商品
@@ -109,29 +113,37 @@
                     </div>
                 </div>
             </section>
-            <section class="panel">
+            <section class="panel" ng-if="step==1">
                 <header class="panel-heading">
                     模拟正常购物流程，通过搜索商品关键字，锁定商品大致范围
-                    <span class="pull-right">任务编号：1429167863535-839863</span>
+                    <span class="pull-right">任务编号：{{doTask.doTaskTaskId}} - {{doTaskId}}</span>
                 </header>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12">
                             <p>
-                                请访问淘宝|天猫，登录帐号：visionnair55，并刷新淘宝|天猫页面确认帐号是否已登录
+                                请访问淘宝|天猫，登录帐号：<span class="error">{{doTask.doTaskAccountName}}</span>，并刷新淘宝|天猫页面确认帐号是否已登录
                             </p>
                             <p>
-                                1.请进入淘宝页面搜索关键字：	孕妇护肤品
+                                1.请进入淘宝页面搜索关键字：<span class="error">{{doTask.doTaskKeyword}}</span>
                             </p>
-                            <p>2.搜索结果页面筛选商品分类：无需筛选分类</p>
-                            <p>3.筛选价格区间为： 无需筛选价格区间 , 筛选商品所在地为：广州</p>
-                            <p>4.下单提示:接任务的亲们烦请2小时内付款，用手机下单，不能再短时间内付款的亲们不要接任务哈，谢谢！</p>
+                            <p ng-if="doTask.taskTag1 || doTask.taskTag2">2.搜索结果页面筛选商品分类： <span class="error">{{doTask.taskTag1}} {{doTask.taskTag2}}</span></p>
+                            <p ng-if="!doTask.taskTag1 && !doTask.taskTag2">2.搜索结果页面筛选商品分类： <span class="error">无需筛选分类</span></p>
+                            <p>3.筛选价格区间为：
+                                <span class="error" ng-if="!doTask.taskPriceStart">无需筛选价格区间</span>
+                                <span class="error" ng-if="doTask.taskPriceStart">{{doTask.taskPriceStart}}-{{doTask.taskPriceEnd}}</span> ,
+                                筛选商品所在地为：
+                                <span class="error">
+                                    {{doTask.taskPosition}}
+                                </span>
+                                </p>
+                            <p class="error">4.下单提示:{{doTask.taskTips || '无'}}</p>
                         </div>
-                        <div class="col-lg-10 col-lg-offset-2">
+                        <div class="col-lg-10 col-lg-offset-1">
                             <h3>温馨提示：此任务下单付款时注意：</h3>
-                            <p>1、此任务需要拍1个商品</p>
+                            <p>1、此任务需要拍 <span class="error">{{doTask.taskCount}}</span> 个商品</p>
                             <p>2、此任务下单时无需订单备注</p>
-                            <p>3、此任务要求必须用手机下单付款</p>
+                            <p>3、此任务要求必须用 <span class="error">{{doTask.doTaskTerminal=='pc'?'电脑':'手机'}}</span> 下单付款</p>
                         </div>
                     </div>
                     <div class="row" style="text-align: center">
