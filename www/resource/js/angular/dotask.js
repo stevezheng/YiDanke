@@ -31,7 +31,30 @@
   var DoTaskModule = angular.module('YiApp.DoTask', ['angularFileUpload']);
 
   DoTaskModule.controller('doTaskCtrl', function($scope, $http, $upload) {
-    $scope.step = 5;
+    $scope.actionOrder = function() {
+      $http.post('/buyer/dotask/order', {
+        taskId: $scope.doTask.doTaskTaskId
+        , doTaskId: $scope.doTaskId
+        , itemUrl: $scope.itemUrl
+        , itemUrl1: $scope.item.url1
+        , itemUrl2: $scope.item.url2
+        , itemUrl3: $scope.item.url3
+        , itemUrl4: $scope.item.url4
+        , talkImagefile: $scope.talk.imagefile
+        , orderImagefile: $scope.order.imagefile
+        , orderId: $scope.order.orderId
+        , orderMoney: $scope.order.orderMoney
+      })
+        .success(function(res) {
+          if (res.errno == 0) {
+            alert(res.data);
+            location.href = '/buyer';
+          } else {
+            alert(res.errmsg);
+          }
+        });
+    };
+    $scope.step = 1;
 
     $scope.checkUrlFlag = false;
     $scope.itemUrl = '';
@@ -93,6 +116,7 @@
     };
 
     $scope.talk = {};
+    $scope.order = {};
 
     $scope.upload = function(file) {
       return $upload.upload({
@@ -109,6 +133,17 @@
         .upload($scope.talk.image)
         .success(function(data, status, headers, config) {
           $scope.talk.imagefile = data.filename;
+        })
+    });
+
+    $scope.$watch('order.image', function () {
+      if (!$scope.order.image) {
+        return false;
+      }
+      $scope
+        .upload($scope.order.image)
+        .success(function(data, status, headers, config) {
+          $scope.order.imagefile = data.filename;
         })
     });
 

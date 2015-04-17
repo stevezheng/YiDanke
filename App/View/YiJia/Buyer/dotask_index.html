@@ -113,7 +113,7 @@
                     </div>
                 </div>
             </section>
-            <section class="panel" ng-if="step==1">
+            <section class="panel" ng-show="step==1">
                 <header class="panel-heading">
                     模拟正常购物流程，通过搜索商品关键字，锁定商品大致范围
                     <span class="pull-right">任务编号：{{doTask.doTaskTaskId}} - {{doTaskId}}</span>
@@ -151,7 +151,7 @@
                     </div>
                 </div>
             </section>
-            <section class="panel" ng-if="step==2">
+            <section class="panel" ng-show="step==2">
                 <header class="panel-heading">
                     根据商品图和价格提示找到正确商品，并核对商品链接
                     <span class="pull-right">任务编号：{{doTask.doTaskTaskId}} - {{doTaskId}}</span>
@@ -188,7 +188,7 @@
                     </div>
                 </div>
             </section>
-            <section class="panel" ng-if="step==3">
+            <section class="panel" ng-show="step==3">
                 <header class="panel-heading">
                     进入店铺首页，模拟用户正常浏览店铺，随机点开三个商品并从头到尾看完整个商品描述
                     <span class="pull-right">任务编号：{{doTask.doTaskTaskId}} - {{doTaskId}}</span>
@@ -247,7 +247,7 @@
                     </div>
                 </div>
             </section>
-            <section class="panel" ng-if="step==4">
+            <section class="panel" ng-show="step==4">
                 <header class="panel-heading">
                     将本次任务所有商品加入淘宝|天猫购物车,完成后回到一家网点击"下一步,备注并下单和付款"
                     <span class="pull-right">任务编号：{{doTask.doTaskTaskId}} - {{doTaskId}}</span>
@@ -330,7 +330,7 @@
                 </div>
             </section>
 
-            <section class="panel" ng-if="step==5">
+            <section class="panel" ng-show="step==5">
                 <header class="panel-heading">
                     去{{doTask.doTaskTerminal=='pc'?'电脑':'手机'}}淘宝下单并付款
                     <span class="pull-right">任务编号：{{doTask.doTaskTaskId}} - {{doTaskId}}</span>
@@ -382,6 +382,88 @@
                     </div>
                 </div>
             </section>
+
+
+            <section class="panel" ng-show="step==6">
+                <header class="panel-heading">
+                    去淘宝下单并付款
+                    去{{doTask.doTaskTerminal=='pc'?'电脑':'手机'}}淘宝|天猫下单并付款，付款完成后回到一家网填写订单号
+                    <span class="pull-right">任务编号：{{doTask.doTaskTaskId}} - {{doTaskId}}</span>
+                </header>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert alert-warning">
+                                <p>
+                                    {{doTask.taskCount}} 个任务的商品都已放购物车，请使用：{{doTask.doTaskAccountName}}下单和付款，付款完毕后请填写您的订单号。
+                                </p>
+                                <p>请注意：</p>
+                                <p class="error">只能使用银行借记卡或支付宝付款，不得使用信用卡付款，也不得使用淘宝客和返利网站下单</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <h4>1. 请核对订单商品</h4>
+                            <p>请到【 <span class="error">淘宝，已买到的宝贝</span> 】，点击“买家已付款”，将此已付款订单的【 <span class="error">订单详情</span> 】截图，并上传到平台。</p>
+                            <div class="col-lg-2">
+                                <span class="error">参考示例图：</span>
+                            </div>
+                            <div class="col-lg-10">
+                                <img src="/resource/img/taobao.png" alt="" width="600"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 30px;">
+                        <div class="col-lg-12">
+                            <div class="col-md-1">
+                                上传截图
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-info" ng-file-select ng-model="order.image">上传订单截图</button>
+                            </div>
+                            <div class="col-md-1">
+                                <a ng-href="{{order.imagefile}}" target="_blank" ng-show="order.imagefile">[查看图片]</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 30px;">
+                        <div class="col-lg-12">
+                            <h4>第二步.请填写当前订单信息</h4>
+                            <p class="error">如任务商品拍下后产生2个订单号，请将两个订单号同时填写到下方，两个订单号中间用减号'-'隔开;</p>
+                            <p>请填写订单号： <input type="text" style="width: 180px;" ng-model="order.orderId"/>&nbsp;&nbsp; 实际付款金额
+                                <input type="text" style="width: 150px;" ng-model="order.orderMoney"/>元</p>
+                            <p class="error">实付金额和任务金额相差较大怎么办？【请按照订单实付金额填写，如商家反馈金额错误一次性扣除10个金币】</p>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 30px;">
+                        <div class="col-lg-12">
+                            <h4>第三步.请仔细查看淘宝|天猫页面，并确认淘宝|天猫下单收货人信息是否为以下内容</h4>
+                            <p>
+                                <span class="error">
+                                    {{account.accountProvince}}
+                                    {{account.accountCity}}
+                                    {{account.accountArea}}
+                                    {{account.accountAddress}}
+                                    {{account.accountName}}
+                                    {{account.accountPhone}}
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 30px">
+                        <div class="col-lg-10 col-lg-offset-1">
+                            <h3>温馨提示：此任务下单付款时注意：</h3>
+                            <p>1、此任务需要拍 <span class="error">{{doTask.taskCount}}</span> 个商品</p>
+                            <p>2、此任务下单时无需订单备注</p>
+                            <p>3、此任务要求必须用 <span class="error">{{doTask.doTaskTerminal=='pc'?'电脑':'手机'}}</span> 下单付款</p>
+                        </div>
+                    </div>
+                    <div class="row" style="text-align: center">
+                        <button class="btn btn-info" ng-click="nextStep(5)">上一步</button>
+                        <button class="btn btn-info" ng-click="actionOrder()">确认已付款，提交</button>
+                    </div>
+                </div>
+            </section>
+
         </section>
     </section>
     <!--main content end-->

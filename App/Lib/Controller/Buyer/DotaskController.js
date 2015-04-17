@@ -200,19 +200,19 @@ module.exports = Controller("Buyer/BaseController", function(){
             _task = res;
             //检查金币是否足够
             if (self.cUser.coin < 1) {
-              self.error(500, '金币不足,请先充值');
+              return self.error(500, '金币不足,请先充值');
             }
 
             //检查任务单是否足够
             if (terminal == 'pc') {
               if (res.taskPcCount - res.taskPcDoingCount - res.taskPcDoneCount < 1) {
-                self.error(500, '电脑端任务单不足');
+                return self.error(500, '电脑端任务单不足');
               }
             }
 
             if (terminal == 'phone') {
               if (res.taskPhoneCount - res.taskPhoneDoingCount - res.taskPhoneDoneCount < 1) {
-                self.error(500, '手机/Pad端任务单不足');
+                return self.error(500, '手机/Pad端任务单不足');
               }
             }
 
@@ -256,6 +256,39 @@ module.exports = Controller("Buyer/BaseController", function(){
       }
 
       if (self.isPost()) {}
+    },
+    
+    orderAction: function() {
+      var self = this;
+      self.assign('title', '');
+    
+      if (self.isGet()) {}
+      
+      if (self.isPost()) {
+        var data = {};
+        data.doTaskDetailItemUrl = self.post('itemUrl')
+          , data.doTaskDetailDoTaskId = self.post('doTaskId')
+          , data.doTaskDetailTaskId = self.post('taskId')
+          , data.doTaskDetailItemUrl1 = self.post('itemUrl1')
+          , data.doTaskDetailItemUrl2 = self.post('itemUrl2')
+          , data.doTaskDetailItemUrl3 = self.post('itemUrl3')
+          , data.doTaskDetailItemUrl4 = self.post('itemUrl4')
+          , data.doTaskDetailTalkImage = self.post('talkImagefile')
+          , data.doTaskDetailOrderImage = self.post('orderImagefile')
+          , data.doTaskDetailOrderId = self.post('orderId')
+          , data.doTaskDetailOrderMoney = self.post('orderMoney');
+
+        return D('do_task_detail')
+          .add(data)
+          .then(function(insertId) {
+            return D('do_task')
+              .where({id: data.doTaskDetailDoTaskId})
+              .update({doTaskStatus: 1})
+          })
+          .then(function() {
+            return self.success('提交成功');
+          })
+      }
     },
   };
 });

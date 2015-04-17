@@ -159,7 +159,7 @@
 
       $scope.dingdanCount = _.filter($scope.tasks, function(task) {
         if (task.taskPlatform == $scope.platform && task.taskType == 'dingdan') {
-          if ($scope.terminal == 'pc' && task.taskPcCount > 0) {
+          if ($scope.terminal == 'pc' && task.taskPcCount > 0 ) {
             return task;
           }
 
