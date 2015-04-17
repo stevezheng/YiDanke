@@ -47,6 +47,10 @@
                   if (res.errno == 0) {
                     location.href = '/buyer/dotask?id=' + res.data;
                   } else {
+                    if (res.errno == 800) {
+                      var _id = res.errmsg.split(':')[1];
+                      location.href = '/buyer/dotask?id=' + _id;
+                    }
                     alert(res.errmsg);
                   }
                 })
@@ -54,6 +58,10 @@
 
             document.getElementById('showTask').click();
           } else {
+            if (res.errno == 800) {
+              var _id = res.errmsg.split(':')[1];
+              location.href = '/buyer/dotask?id=' + _id;
+            }
             alert(res.errmsg);
           }
         })

@@ -1,0 +1,382 @@
+<% include ../common_header.html %>
+<link rel="stylesheet" href="/resource/css/tasks.css"/>
+<section id="container" ng-controller="doTaskJdCtrl">
+    <% include ./buyer_nav.html %>
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+            <section class="panel">
+                <header class="panel-heading">
+                    <span>{{doTask.doTaskTerminal=='pc'?'电脑端':'手机端'}}</span>做任务
+                    <span class="pull-right" ng-if="doTask.doTaskTerminal=='phone'">
+                        此任务为手机刷单任务，在手机刷单之前请 <span class="error">先用电脑找到刷单商品</span>并加入购物车，之后 <span class="error">使用手机下单并付款</span>
+                    </span>
+                </header>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert alert-warning">
+                                <p>接手任务的买号：<span class="error">{{doTask.doTaskAccountName}}</span>({{statusMap.platform[doTask.taskPlatform]}})，接手1个任务，需要在 <span class="error">{{doTask.doTaskDeadline}}</span>前完成(24小时内)</p>
+                                <p>请按时完成任务，否则每个任务扣除：<span class="error">1</span>金币</p>
+                                <p>本次1个任务完成后将获得：<span class="error">{{doTask.doTaskFee}}</span>金币</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>商家</th>
+                                    <th>购买件数</th>
+                                    <th>垫付资金</th>
+                                    <th>佣金</th>
+                                    <th>接手时间</th>
+                                    <th>倒计时</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>{{doTask.taskUserName}}</td>
+                                    <td>{{doTask.taskCount}}件</td>
+                                    <td>{{doTask.taskTotalMoney}}元</td>
+                                    <td>{{doTask.taskFee}} <span class="error" ng-if="doTask.taskIsExtendFee">/{{doTask.taskExtendFee}}</span>金币</td>
+                                    <td>{{doTask.doTaskCreateTime | date: 'yyyy-MM-dd HH:mm'}}</td>
+                                    <td>{{doTask.doTaskCountdown}}小时</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="panel">
+                <header class="panel-heading">
+                    任务进度
+                </header>
+                <div class="panel-body">
+                    <div class="row" style="margin: 30px ;">
+                        <div class="col-lg-10 col-lg-offset-1">
+                            <div class="stepWrapper mt30">
+                                <div class="stepWaiting"
+                                     style="position:absolute;top:0;left:-5px;">
+                                    <div ng-class="step==1?'stepOn':''">1</div>
+                                    <div class="caption"
+                                         style="width:72px;margin-left:-36px;">
+                                        搜索并核对商品
+                                    </div>
+                                </div>
+                                <div class="stepWaiting"
+                                     style="margin-left:30%;">
+                                    <div ng-class="step==2?'stepOn':''">2</div>
+                                    <div class="caption"
+                                         style="width:72px;margin-left:-36px;">
+                                        店铺浏览
+                                    </div>
+                                </div>
+                                <div class="stepWaiting"
+                                     style="margin-left:30%;">
+                                    <div ng-class="step==3?'stepOn':''">3</div>
+                                    <div class="caption"
+                                         style="width:72px;margin-left:-36px;">
+                                        放入购物车
+                                    </div>
+                                </div>
+                                <div class="stepWaiting"
+                                     style="position:absolute;top:0;right:-5px;">
+                                    <div ng-class="step==4?'stepOn':''">4</div>
+                                    <div class="caption"
+                                         style="width:48px;margin-left:-24px;">
+                                        去付款
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="panel" ng-show="step==1">
+                <header class="panel-heading">
+                    模拟正常购物流程，通过搜索商品关键字，锁定商品大致范围
+                    <span class="pull-right">任务编号：{{doTask.doTaskTaskId}} - {{doTaskId}}</span>
+                </header>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <p>
+                                请访问京东 <span class="error">www.jd.com</span>，登录帐号：<span class="error">{{doTask.doTaskAccountName}}</span>，并刷新京东页面确认帐号是否已登录
+                            </p>
+                            <p>
+                                1.请进入淘宝页面搜索关键字：<span class="error">{{doTask.doTaskKeyword}}</span>
+                            </p>
+                            <p ng-if="doTask.taskTag1 || doTask.taskTag2">2.搜索结果页面筛选商品分类： <span class="error">{{doTask.taskTag1}} {{doTask.taskTag2}}</span></p>
+                            <p ng-if="!doTask.taskTag1 && !doTask.taskTag2">2.搜索结果页面筛选商品分类： <span class="error">无需筛选分类</span></p>
+                            <p>3.筛选价格区间为：
+                                <span class="error" ng-if="!doTask.taskPriceStart">无需筛选价格区间</span>
+                                <span class="error" ng-if="doTask.taskPriceStart">{{doTask.taskPriceStart}}-{{doTask.taskPriceEnd}}</span> ,
+                                </p>
+                            <p class="error">4.卖家为:{{doTask.taskShopName.slice(0,3)}}************</p>
+                            <p>
+                                商品图: <br/>
+                                <img ng-if="doTask.jdImage" ng-src="{{doTask.jdImage}}" alt="" width="250"/>
+                            </p>
+                            <p>5.规格: <span class="error">{{doTask.taskTag1}} {{doTask.taskTag2}}</span></p>
+                            <p>6.核对商品链接：</p>
+                            <p>
+                                <input placeholder="将搜索到的商品链接贴到此处" type="text" style="width: 400px" ng-model="itemUrl"/>
+                                <button class="btn btn-warning" ng-click="checkJdUrl(itemUrl)">核对商品地址</button>
+                            </p>
+                        </div>
+                        <div class="col-lg-10 col-lg-offset-1">
+                            <h3>温馨提示：此任务下单付款时注意：</h3>
+                            <p>1、此任务需要拍 <span class="error">{{doTask.taskCount}}</span> 个商品</p>
+                            <p>2、此任务下单时无需订单备注</p>
+                            <p>3、此任务要求必须用 <span class="error">{{doTask.doTaskTerminal=='pc'?'电脑':'手机'}}</span> 下单付款</p>
+                        </div>
+                    </div>
+                    <div class="row" style="text-align: center">
+                        <button class="btn btn-info" ng-click="nextStep(2)">下一步</button>
+                    </div>
+                </div>
+            </section>
+            <section class="panel" ng-show="step==2">
+                <header class="panel-heading">
+                    进入店铺首页，模拟用户正常浏览店铺，随机点开三个商品并从头到尾看完整个商品描述
+                    <span class="pull-right">任务编号：{{doTask.doTaskTaskId}} - {{doTaskId}}</span>
+                </header>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <p>
+                                1.如图示，进入店铺首页： <br/>
+                                <img src="/resource/img/jd2-1.gif"/>
+                            </p>
+                            <p>
+                                商品图: <br/>
+                                <img ng-if="doTask.jdImage" ng-src="{{doTask.jdImage}}" alt="" width="500"/>
+                            </p>
+                            <p>
+                                2.进入店铺后，在店铺内随机点击 <span class="error">3-4</span> 个商品并浏览整个商品页面，并将宝贝地址复制粘贴到以下输入框中：
+                            </p>
+                            <p>
+                                注意：4个宝贝页面地址不可重复，如果搜索到的商品少于4个，可填写淘宝其他商品链接
+                            </p>
+                            <br/>
+                            <br/>
+                            <p>
+                                宝贝页地址1: <input type="text" style="width: 400px" placeholder="将店铺内点开的商品链接贴到此处" ng-model="item.url1"/>
+                            </p>
+                            <p>
+                                宝贝页地址2: <input type="text" style="width: 400px" placeholder="将店铺内点开的商品链接贴到此处" ng-model="item.url2"/>
+                            </p>
+                            <p>
+                                宝贝页地址3: <input type="text" style="width: 400px" placeholder="将店铺内点开的商品链接贴到此处" ng-model="item.url3"/>
+                            </p>
+                            <p>
+                                宝贝页地址4: <input type="text" style="width: 400px" placeholder="将店铺内点开的商品链接贴到此处" ng-model="item.url4"/>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row" style="text-align: center">
+                        <button class="btn btn-info" ng-click="nextStep(1)">上一步</button>
+                        <button class="btn btn-info" ng-click="nextStep(3)">下一步</button>
+                    </div>
+                </div>
+            </section>
+            <section class="panel" ng-show="step==3">
+                <header class="panel-heading">
+                    将本次任务所有商品加入京东购物车,完成后回到一家网点击"下一步,备注并下单和付款"
+                    <span class="pull-right">任务编号：{{doTask.doTaskTaskId}} - {{doTaskId}}</span>
+                </header>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <p>
+                                1. 请将以下商品加入购物车：
+                            </p>
+                            <div class="col-lg-12 alert alert-warning">
+                                <p>商品名： <span class="error">{{doTask.taskName}}</span></p>
+                            </div>
+                            <div class="col-lg-6">
+                                <p>
+                                    商品图:
+                                    <img ng-if="doTask.jdImage" ng-src="{{doTask.jdImage}}" alt="" width="300"/>
+                                </p>
+                            </div>
+                            <div class="col-lg-6">
+                                <p>
+                                    购买件数: <span class="error">{{doTask.taskCount}}</span>个
+                                </p>
+                                <p>
+                                    价格: <span class="error">{{doTask.taskMoney}}</span>元
+                                </p>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-lg-12 alert alert-warning" ng-if="doTask.extend1Name">
+                                <p>商品1商品名： <span class="error">{{doTask.extend1Name}}</span></p>
+                            </div>
+                            <div class="col-lg-6" ng-if="doTask.extend1Name">
+                                <p>
+                                    商品1商品图:
+                                    <img ng-if="doTask.extend1Url" ng-src="{{doTask.extend1Image}}" alt="" width="300"/>
+                                </p>
+                            </div>
+                            <div class="col-lg-6" ng-if="doTask.extend1Name">
+                                <p>
+                                    商品1商品购买件数: <span class="error">{{doTask.extend1Count}}</span>个
+                                </p>
+                                <p>
+                                    商品1商品价格: <span class="error">{{doTask.extend1Money}}</span>元
+                                </p>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <div class="col-lg-12 alert alert-warning" ng-if="doTask.extend2Name">
+                                <p>商品2商品名： <span class="error">{{doTask.extend2Name}}</span></p>
+                            </div>
+                            <div class="col-lg-6" ng-if="doTask.extend2Name">
+                                <p>
+                                    商品2商品图:
+                                    <img ng-if="doTask.extend2Url" ng-src="{{doTask.extend2Image}}" alt="" width="300"/>
+                                </p>
+                            </div>
+                            <div class="col-lg-6" ng-if="doTask.extend2Name">
+                                <p>
+                                    商品2商品购买件数: <span class="error">{{doTask.extend2Count}}</span>个
+                                </p>
+                                <p>
+                                    商品2商品价格: <span class="error">{{doTask.extend2Money}}</span>元
+                                </p>
+                            </div>
+                            <div class="clearfix"></div>
+
+                        </div>
+                        <div class="col-lg-10 col-lg-offset-1">
+                            <h3>温馨提示：此任务下单付款时注意：</h3>
+                            <p>1. 您需要购买 <span class="error">{{doTask.taskCount + doTask.extend1Count + doTask.extend2Count}}</span>件商品，请核对您购买的商品总价为 <span class="error">{{doTask.taskTotalMoney}}</span>元（实际付款金额可能会上下浮动10左右）</p>
+                            <p ng-if="doTask.taskTransport == 'baoyou'">2、当前商品为 <span class="error">（包邮）</span>，如果您购买的商品不包邮，请联系客服修改为包邮价</p>
+                        </div>
+                    </div>
+
+                    <div class="row" style="text-align: center">
+                        <button class="btn btn-info" ng-click="nextStep(2)">上一步</button>
+                        <button class="btn btn-info" ng-click="nextStep(4)" >下一步</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel" ng-show="step==4">
+                <header class="panel-heading">
+                    去京东下单并付款，付款完成后回到一家网填写订单号
+                    <span class="pull-right">任务编号：{{doTask.doTaskTaskId}} - {{doTaskId}}</span>
+                </header>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert alert-warning">
+                                <p>
+                                    {{doTask.taskCount}} 个任务的商品都已放购物车，请使用：{{doTask.doTaskAccountName}}下单和付款，付款完毕后请填写您的订单号。
+                                </p>
+                                <p>请注意：</p>
+                                <p class="error">只能使用银行借记卡或网银钱包、京东白条付款，不得使用信用卡付款，也不得通过任何返利网站下单</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <h4>1. 请核对订单商品</h4>
+
+                            <div class="col-lg-12">
+                                <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>商家</th>
+                                        <th>购买件数</th>
+                                        <th>垫付资金</th>
+                                        <th>佣金</th>
+                                        <th>接手时间</th>
+                                        <th>倒计时</th>
+                                        <th>状态</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>{{doTask.taskUserName}}</td>
+                                        <td>{{doTask.taskCount}}件</td>
+                                        <td>{{doTask.taskTotalMoney}}元</td>
+                                        <td>{{doTask.taskFee}} <span class="error" ng-if="doTask.taskIsExtendFee">/{{doTask.taskExtendFee}}</span>金币</td>
+                                        <td>{{doTask.doTaskCreateTime | date: 'yyyy-MM-dd HH:mm'}}</td>
+                                        <td>{{doTask.doTaskCountdown}}小时</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h3>2. 填写订单信息</h3>
+                            <p>第一步.请上传订单详情截图</p>
+                            <p>请到【我的订单】，点击“查看”，将此已付款订单的【订单详情】截图，并上传到平台。</p>
+                            <div class="col-lg-2">
+                                <span class="error">参考示例图：</span>
+                            </div>
+                            <div class="col-lg-10">
+                                <img src="/resource/img/jd.png" alt="" width="600"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 30px;">
+                        <div class="col-lg-12">
+                            <div class="col-md-1">
+                                上传截图
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-info" ng-file-select ng-model="order.image">上传订单截图</button>
+                            </div>
+                            <div class="col-md-1">
+                                <a ng-href="{{order.imagefile}}" target="_blank" ng-show="order.imagefile">[查看图片]</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 30px;">
+                        <div class="col-lg-12">
+                            <h4>第二步.请填写当前订单信息</h4>
+                            <p class="error">如任务商品拍下后产生2个订单号，请将两个订单号同时填写到下方，两个订单号中间用减号'-'隔开;</p>
+                            <p>请填写订单号： <input type="text" style="width: 180px;" ng-model="order.orderId"/>&nbsp;&nbsp; 实际付款金额
+                                <input type="text" style="width: 150px;" ng-model="order.orderMoney"/>元</p>
+                            <p class="error">实付金额和任务金额相差较大怎么办？【请按照订单实付金额填写，如商家反馈金额错误一次性扣除10个金币】</p>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 30px;">
+                        <div class="col-lg-12">
+                            <h4>第三步.请仔细查看京东页面，并确认京东下单收货人信息是否为以下内容</h4>
+                            <p>
+                                <span class="error">
+                                    {{account.accountProvince}}
+                                    {{account.accountCity}}
+                                    {{account.accountArea}}
+                                    {{account.accountAddress}}
+                                    {{account.accountName}}
+                                    {{account.accountPhone}}
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 30px">
+                        <div class="col-lg-10 col-lg-offset-1">
+                            <h3>温馨提示：此任务下单付款时注意：</h3>
+                            <p>1、此任务需要拍 <span class="error">{{doTask.taskCount}}</span> 个商品</p>
+                            <p>2、此任务下单时无需订单备注</p>
+                            <p>3、此任务要求必须用 <span class="error">{{doTask.doTaskTerminal=='pc'?'电脑':'手机'}}</span> 下单付款</p>
+                        </div>
+                    </div>
+                    <div class="row" style="text-align: center">
+                        <button class="btn btn-info" ng-click="actionOrder()">确认已付款，提交</button>
+                    </div>
+                </div>
+            </section>
+
+        </section>
+    </section>
+    <!--main content end-->
+</section>
+<% include ../common_footer.html %>

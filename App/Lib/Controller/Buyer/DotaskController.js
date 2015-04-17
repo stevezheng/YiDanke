@@ -14,12 +14,32 @@ module.exports = Controller("Buyer/BaseController", function(){
       if (self.isGet()) {
         var id = self.get('id');
         var user = UserModel();
+        self.assign('doTaskId', id);
 
         user
           .reloadCurrentUser(self)
           .then(function() {
-            self.assign('doTaskId', id);
-            self.display();
+            return D('do_task')
+              .join({
+                table: 'task'
+                , join: 'left'
+                , on: {
+                  'doTaskTaskId': 'id'
+                }
+              })
+              .where({'yi_do_task.id': id})
+              .find()
+          })
+          .then(function(res) {
+            if (res.taskPlatform == 'taobao' || res.taskPlatform == 'tmall') {
+              if (res.taskType == 'dingdan') {
+                self.display();
+              } else if (res.taskType == 'zhitongche') {
+                self.display('Buyer:Dotask:zhitongche');
+              }
+            } else if (res.taskPlatform == 'jd') {
+              self.display('Buyer:Dotask:jd');
+            }
           });
       }
 
@@ -61,7 +81,7 @@ module.exports = Controller("Buyer/BaseController", function(){
           })
           .then(function(res) {
             if (!isEmpty(res)) {
-              return self.error(500, '该已经有正在做的任务了');
+              return self.error(800, '该已经有正在做的任务了,任务id:' + res.id);
             }
 
             return doTask
@@ -132,6 +152,34 @@ module.exports = Controller("Buyer/BaseController", function(){
             if (res.tmallKey5 != '') {
               for (var i = 0; i < res.tmallKeyCount5; i++) {
                 keywords.push(res.tmallKey5);
+              }
+            }
+
+            if (res.jdKey1 != '') {
+              for (var i = 0; i < res.jdKeyCount1; i++) {
+                keywords.push(res.jdKey1);
+              }
+            }
+            if (res.jdKey2 != '') {
+              for (var i = 0; i < res.jdKeyCount2; i++) {
+                keywords.push(res.jdKey2);
+              }
+            }
+            if (res.jdKey3 != '') {
+              for (var i = 0; i < res.jdKeyCount3; i++) {
+                keywords.push(res.jdKey3);
+              }
+            }
+
+            if (res.jdKey4 != '') {
+              for (var i = 0; i < res.jdKeyCount4; i++) {
+                keywords.push(res.jdKey4);
+              }
+            }
+
+            if (res.jdKey5 != '') {
+              for (var i = 0; i < res.jdKeyCount5; i++) {
+                keywords.push(res.jdKey5);
               }
             }
 
@@ -221,7 +269,7 @@ module.exports = Controller("Buyer/BaseController", function(){
           })
           .then(function(res) {
             if (!isEmpty(res)) {
-              return self.error(500, '该账号已经有正在做的任务了');
+                return self.error(800, '该已经有正在做的任务了,任务id:' + res.id);
             }
 
             return doTask

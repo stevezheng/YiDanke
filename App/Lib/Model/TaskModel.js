@@ -69,6 +69,11 @@ module.exports = Model(function() {
           , join: 'left'
           , on: {'id': 'tmallTaskId'}
         })
+        .join({
+          table: 'task_jd'
+          , join: 'left'
+          , on: {'id': 'jdTaskId'}
+        })
         .where({'yi_task.id': taskId})
         .find()
     }
