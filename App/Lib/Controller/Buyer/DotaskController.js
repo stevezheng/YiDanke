@@ -35,7 +35,8 @@ module.exports = Controller("Buyer/BaseController", function(){
               if (res.taskType == 'dingdan') {
                 self.display();
               } else if (res.taskType == 'zhitongche') {
-                self.display('Buyer:Dotask:zhitongche');
+                self.display();
+                //self.display('Buyer:Dotask:zhitongche');
               }
             } else if (res.taskPlatform == 'jd') {
               self.display('Buyer:Dotask:jd');
