@@ -82,12 +82,17 @@ module.exports = Controller("Seller/BaseController", function(){
         data.doTaskExtendExpressName = self.post('doTaskDetailExpressName');
         data.doTaskExtendExpressId = self.post('doTaskDetailExpressId');
         data.doTaskExtendDoTaskId = self.post('doTaskDetailDoTaskId');
+        data.doTaskExtendTaskId = self.post('doTaskDetailTaskId');
         console.log(data);
 
         return D('do_task_extend')
-          .add(data)
+          .thenAdd(data, {'doTaskExtendDoTaskId': data.doTaskExtendDoTaskId}, true)
           .then(function(res) {
-            return self.success('添加订单号成功');
+            if (res.type == 'add') {
+              return self.success('添加订单号成功');
+            } else {
+              return self.success('该任务已添加订单号');
+            }
           })
           .catch(function(err) {
             console.log(err.stack);
