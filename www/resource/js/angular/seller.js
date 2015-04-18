@@ -246,6 +246,18 @@
         })
     };
 
+    $scope.send = function(doTask) {
+      $http.post('/seller/tasks/send', {doTaskId: doTask.doTaskDetailDoTaskId})
+        .success(function(res) {
+          if (res.errno == 0) {
+            alert(res.data);
+            getZixuan();
+          } else {
+            alert(res.errmsg);
+          }
+        })
+    };
+
     getShops();
 
     getZixuan();

@@ -50,12 +50,12 @@
                                 <div class="col-lg-2">{{doTask.doTaskDetailOrderId}}</div>
                                 <div class="col-lg-2"><a class="thumb p-thumb" ng-href="{{doTask.doTaskDetailOrderImage}}" target="_blank"><img ng-src="{{doTask.doTaskDetailOrderImage}}" alt=""/></a></div>
                                 <div class="col-lg-2">
-                                    <button class="btn btn-warning">确认发货</button>
+                                    <button class="btn btn-warning" ng-click="send(doTask)">确认发货</button>
                                 </div>
                             </div>
                             <div class="row" style="background: rgb(246, 251, 254); margin-top: 10px; padding: 10px 0" >
-                                <div class="col-lg-4">快递公司: <input type="text" ng-model="doTask.doTaskDetailExpressName"/></div>
-                                <div class="col-lg-4">快递订单: <input type="text" ng-model="doTask.doTaskDetailExpressId"/></div>
+                                <div class="col-lg-4">快递公司: <input type="text" ng-model="doTask.doTaskExtendExpressName"/></div>
+                                <div class="col-lg-4">快递订单: <input type="text" ng-model="doTask.doTaskExtendExpressId"/></div>
                                 <div class="col-lg-2"></div>
                                 <div class="col-lg-2"><button class="btn btn-info" ng-click="addExpress(doTask)">确定</button></div>
                             </div>

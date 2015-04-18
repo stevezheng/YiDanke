@@ -141,6 +141,13 @@ module.exports = Model(function() {
             'id': 'doTaskDetailDoTaskId'
           }
         })
+        .join({
+          table: 'do_task_extend'
+          , join: 'left'
+          , on: {
+            'id': 'doTaskExtendDoTaskId'
+          }
+        })
         .where({'yi_task.taskUserId': userId, 'yi_task.taskTransport': 'zixuan', 'yi_do_task.doTaskStatus': 1})
         .select()
     }

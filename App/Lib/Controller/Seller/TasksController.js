@@ -79,8 +79,8 @@ module.exports = Controller("Seller/BaseController", function(){
       if (self.isPost()) {
         var data = {};
 
-        data.doTaskExtendExpressName = self.post('doTaskDetailExpressName');
-        data.doTaskExtendExpressId = self.post('doTaskDetailExpressId');
+        data.doTaskExtendExpressName = self.post('doTaskExtendExpressName');
+        data.doTaskExtendExpressId = self.post('doTaskExtendExpressId');
         data.doTaskExtendDoTaskId = self.post('doTaskDetailDoTaskId');
         data.doTaskExtendTaskId = self.post('doTaskDetailTaskId');
         console.log(data);
@@ -97,6 +97,29 @@ module.exports = Controller("Seller/BaseController", function(){
           .catch(function(err) {
             console.log(err.stack);
             return self.error(err);
+          })
+      }
+    },
+    
+    sendAction: function() {
+      var self = this;
+      self.assign('title', '');
+    
+      if (self.isGet()) {
+
+      }
+      
+      if (self.isPost()) {
+        var doTaskId = self.post('doTaskId');
+
+        return D('do_task')
+          .where({id: doTaskId})
+          .update({doTaskStatus: 2})
+          .then(function(res) {
+            return self.success('发货成功');
+          })
+          .catch(function(err) {
+            return self.error(500, '发货失败', err);
           })
       }
     },
