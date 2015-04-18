@@ -154,5 +154,23 @@ module.exports = Controller("Admin/BaseController", function(){
           })
       }
     },
+
+    cancelExpressAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+
+      }
+
+      if (self.isPost()) {
+        var data = {};
+
+        //todo: 这里的逻辑需要白天清醒的时候写下
+        data.doTaskExtendDoTaskId = self.post('doTaskExtendDoTaskId');
+
+        self.success('撤销成功');
+      }
+    },
   };
 });

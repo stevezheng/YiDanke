@@ -59,6 +59,19 @@
         })
     };
 
+    $scope.editExpress = function(doTask) {
+      var data = {};
+      data.doTaskExtendDoTaskId = doTask.doTaskDetailDoTaskId;
+      $http.post('/admin/dotask/cancelExpress', data)
+        .success(function(res) {
+          if (res.errno == 0) {
+            alert(res.data);
+          } else {
+            alert(res.errmsg);
+          }
+        })
+    };
+
     $scope.statusMap = {
       '-1': '已撤销'
       , '0': '待完成'

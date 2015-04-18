@@ -18,13 +18,13 @@
                             </tr>
                             <tr>
                                 <td>店铺名称：{{doTask.taskShopName}}</td>
+                                <td>产品名称：{{doTask.taskName}}</td>
                                 <td>产品链接：{{doTask.taskUrl}}</td>
                                 <td>产品单价：{{doTask.taskTotalMoney}}元</td>
-                                <td>产品名称：{{doTask.taskName}}</td>
                             </tr>
                             <tr>
-                                <td colspan="2">聊天记录截图：<a href="{{doTask.doTaskDetailTalkImage}}"><img ng-src="{{doTask.doTaskDetailTalkImage}}" alt="" width="50"/></a></td>
-                                <td colspan="2">付款记录截图：<a href="{{doTask.doTaskDetailOrderImage}}"><img ng-src="{{doTask.doTaskDetailOrderImage}}" alt="" width="50"/></a></td>
+                                <td colspan="2">聊天记录截图：<a href="{{doTask.doTaskDetailTalkImage}}" target="_blank"><img ng-src="{{doTask.doTaskDetailTalkImage}}" alt="" width="50"/></a></td>
+                                <td colspan="2">付款记录截图：<a href="{{doTask.doTaskDetailOrderImage}}" target="_blank"><img ng-src="{{doTask.doTaskDetailOrderImage}}" alt="" width="50"/></a></td>
                             </tr>
                             <tr>
                                 <td>快递名称： <input type="text" ng-model="doTask.doTaskExtendExpressName"/></td>
@@ -36,7 +36,7 @@
                                 <td colspan="4">
                                     <button class="btn btn-warning" ng-click="addExpress(doTask)">添加快递</button>
                                     <button class="btn btn-warning" ng-click="editExpress(doTask)">编辑快递</button>
-                                    <button class="btn btn-warning" ng-click="cancel(doTask)">撤销任务单</button>
+                                    <!--<button class="btn btn-warning" ng-click="cancel(doTask)">撤销任务单</button>-->
                                 </td>
                             </tr>
                         </table>
