@@ -48,5 +48,52 @@ module.exports = Controller("Seller/BaseController", function(){
 
       if (self.isPost()) {}
     },
+
+    zixuanAction: function() {
+      var self = this;
+      self.assign('title', '自选快递');
+
+      if (self.isGet()) {
+
+        self.display();
+      }
+
+      if (self.isPost()) {
+        var doTask = DoTask();
+        doTask
+          .zixuan(self.cUser.id)
+          .then(function(res) {
+            return self.success(res);
+          })
+      }
+    },
+
+    addExpressAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+
+      }
+
+      if (self.isPost()) {
+        var data = {};
+
+        data.doTaskExtendExpressName = self.post('doTaskDetailExpressName');
+        data.doTaskExtendExpressId = self.post('doTaskDetailExpressId');
+        data.doTaskExtendDoTaskId = self.post('doTaskDetailDoTaskId');
+        console.log(data);
+
+        return D('do_task_extend')
+          .add(data)
+          .then(function(res) {
+            return self.success('添加订单号成功');
+          })
+          .catch(function(err) {
+            console.log(err.stack);
+            return self.error(err);
+          })
+      }
+    },
   };
 });

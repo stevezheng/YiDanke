@@ -15,10 +15,7 @@
         </ul>
         <!--  notification end -->
     </div>
-    <div class="nav notify-row pull-right " style="margin-left: 0;">
-        <a class="btn btn-info" href="/index/logout">退出</a>
-    </div>
-    <div class="nav notify-row pull-right">
+    <div class="nav notify-row">
         <ul class="nav top-menu">
             <li><a href="#"><%= cUser.username %></a></li>
             <li><a href="#">押金: <span class="error"><%= cUser.money %></span>&nbsp;元</a></li>
@@ -26,7 +23,7 @@
             <li><a href="/seller/pv" style="color: #58c9f3">[充值]</a></li>
             <li><a href="#">金币: <span class="error"><%= cUser.coin %></span>&nbsp;枚</a></li>
             <li><a href="/seller/money" style="color: #58c9f3">[充值]</a></li>
-            <li><a href="#">经验: <span class="error"><%= cUser.exp %></span>&nbsp;点</a></li>
+            <!--<li><a href="#">经验: <span class="error"><%= cUser.exp %></span>&nbsp;点</a></li>-->
             <% if (cUser.status == 2) { %>
             <li><a href="#">会员到期时间: 2015-05-02</a></li>
             <li><a href="/seller/member" style="color: #58c9f3">[续费]</a></li>
@@ -35,6 +32,9 @@
             <li><a href="/seller/member" style="color: #58c9f3">[升级会员]</a></li>
             <% } %>
         </ul>
+    </div>
+    <div class="nav notify-row pull-right " style="margin-left: 0;">
+        <a class="btn btn-info" href="/index/logout">退出</a>
     </div>
 </header>
 <!--header end-->

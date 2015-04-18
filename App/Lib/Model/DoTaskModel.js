@@ -120,6 +120,29 @@ module.exports = Model(function() {
       return self
         .where({doTaskUserId: userId, doTaskStatus: 0})
         .find()
+    },
+
+    zixuan: function(userId) {
+      var self = this;
+
+      return self
+        .order('yi_do_task.id desc')
+        .join({
+          table: 'task'
+          , join: 'left'
+          , on: {
+            'doTaskTaskId': 'id'
+          }
+        })
+        .join({
+          table: 'do_task_detail'
+          , join: 'left'
+          , on: {
+            'id': 'doTaskDetailDoTaskId'
+          }
+        })
+        .where({'yi_task.taskUserId': userId, 'yi_task.taskTransport': 'zixuan', 'yi_do_task.doTaskStatus': 1})
+        .select()
     }
   }
 });
