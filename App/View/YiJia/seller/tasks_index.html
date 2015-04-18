@@ -1,5 +1,5 @@
 <% include ../common_header.html %>
-<section id="container">
+<section id="container" ng-controller="sellerTasksCtrl">
     <% include ./seller_nav.html %>
     <!--main content start-->
     <section id="main-content">
@@ -7,8 +7,8 @@
             <section class="panel">
                 <header class="panel-heading">
                     待处理任务
-                    <a href="" class="pull-right"><span class="error"><i
-                            class="icon-ok-sign"></i>&nbsp;我要做任务</span></a>
+                    <a href="/seller/publish" class="pull-right"><span class="error"><i
+                            class="icon-ok-sign"></i>&nbsp;我要发任务</span></a>
                 </header>
                 <div class="panel-body">
                     <div class="row">
@@ -17,21 +17,21 @@
                             <aside class="profile-nav alt blue-border">
                                 <section class="panel">
                                     <div class="user-heading alt blue-bg">
-                                        <h1>已接手，待付款</h1>
+                                        <h1>买手已付款，自选快递待发货</h1>
 
-                                        <p><i class="icon-ok-sign"></i> &nbsp;请尽快开始并在要求时间内完成
+                                        <p><i class="icon-ok-sign"></i> &nbsp;请及时填写快递号到对应平台操作订单发货
                                         </p>
                                     </div>
 
                                     <ul class="nav nav-pills nav-stacked">
-                                        <li><a href="javascript:;"> 淘宝<span
-                                                class="label label-primary pull-right r-activity">9</span></a>
+                                        <li><a href="/seller/tasks/zixuan"> 淘宝<span
+                                                class="label label-primary pull-right r-activity">{{taobaoZixuans.length}}</span></a>
                                         </li>
-                                        <li><a href="javascript:;"> 天猫<span
-                                                class="label label-primary pull-right r-activity">1</span></a>
+                                        <li><a href="/seller/tasks/zixuan"> 天猫<span
+                                                class="label label-primary pull-right r-activity">{{tmallZixuans.length}}</span></a>
                                         </li>
-                                        <li><a href="javascript:;"> 京东 <span
-                                                class="label label-primary pull-right r-activity">3</span></a>
+                                        <li><a href="/seller/tasks/zixuan"> 京东 <span
+                                                class="label label-primary pull-right r-activity">{{jdZixuans.length}}</span></a>
                                         </li>
                                     </ul>
 
@@ -44,18 +44,21 @@
                             <aside class="profile-nav alt blue-border">
                                 <section class="panel">
                                     <div class="user-heading alt blue-bg">
-                                        <h1>快递单已打印，待确认收货</h1>
+                                        <h1>买手已付款，待发货</h1>
 
-                                        <p><i class="icon-ok-sign"></i> &nbsp;请待快递状态变为已签收后再确认收货并好评
+                                        <p><i class="icon-ok-sign"></i> &nbsp;请及时复制快递号到对应平台操作订单发货
                                         </p>
                                     </div>
 
                                     <ul class="nav nav-pills nav-stacked">
-                                        <li><a href="javascript:;"> 淘宝收货</a>
+                                        <li><a href="/seller/tasks/baoyou;"> 淘宝<span
+                                                class="label label-primary pull-right r-activity">{{taobaoBaoyous.length}}</span></a>
                                         </li>
-                                        <li><a href="javascript:;"> 天猫收货</a>
+                                        <li><a href="/seller/tasks/baoyou"> 天猫<span
+                                                class="label label-primary pull-right r-activity">{{tmallBaoyous.length}}</span></a>
                                         </li>
-                                        <li><a href="javascript:;"> 京东收货</a>
+                                        <li><a href="/seller/tasks/baoyou"> 京东 <span
+                                                class="label label-primary pull-right r-activity">{{jdBaoyous.length}}</span></a>
                                         </li>
                                     </ul>
 
@@ -68,18 +71,21 @@
                             <aside class="profile-nav alt blue-border">
                                 <section class="panel">
                                     <div class="user-heading alt blue-bg">
-                                        <h1>商家已退款，等待买手确认</h1>
+                                        <h1>买手已收货，待退款</h1>
 
-                                        <p><i class="icon-ok-sign"></i> &nbsp;商家预计在48小时内退款完毕，请等待退款到账
+                                        <p><i class="icon-ok-sign"></i> &nbsp;请在48小时内给买手退款
                                         </p>
                                     </div>
 
                                     <ul class="nav nav-pills nav-stacked">
-                                        <li><a href="javascript:;"> 淘宝退款</a>
+                                        <li><a href="/seller/tasks/tuikuan"> 淘宝<span
+                                                class="label label-primary pull-right r-activity">{{taobaoTuikuans.length}}</span></a>
                                         </li>
-                                        <li><a href="javascript:;"> 天猫退款</a>
+                                        <li><a href="/seller/tasks/tuikuan"> 天猫<span
+                                                class="label label-primary pull-right r-activity">{{tmallTuikuans.length}}</span></a>
                                         </li>
-                                        <li><a href="javascript:;"> 京东退款</a>
+                                        <li><a href="/seller/tasks/tuikuan"> 京东 <span
+                                                class="label label-primary pull-right r-activity">{{jdTuikuans.length}}</span></a>
                                         </li>
                                     </ul>
 
@@ -122,9 +128,9 @@
                     <div class="panel-body">
                         <div class="tab-content tasi-tab">
                             <div class="tab-pane active" id="doing">
-                                <article class="media box">
+                                <article class="media box" ng-repeat="doing in doings">
                                     <a class="pull-left thumb p-thumb">
-                                        <img src="/resource/uploads/20151/1e28e_3226e54d-30b0-4084-839a-b54e52b7f145.png">
+                                        <img ng-src="{{doing.taobaoImage || doing.tmallImage || doing.jdImage}}">
                                     </a>
 
                                     <div class="media-body">
@@ -134,178 +140,181 @@
                                             </div>
                                             <div class="col-lg-6">
                                             <span>
-                                                任务编号： 1426916094633
-                                                <a href="">
+                                                任务编号： {{doing.taobaoTaskId}}
+                                                <a href="/seller/dotask/detail?id={{doing.taobaoTaskId}}">
                                                     [详情]
                                                 </a>
-                                                发布时间：2015-03-21 13:3
+                                                发布时间：{{doing.taskCreateTime | date: 'yyyy-MM-dd HH:mm'}}
                                             </span>
+                                            <span class="pull-right"><a href="javascript:;;;" ng-click="upTaskFee(doing)">加赏</a> | <a href="javascript:;;;" ng-click="cancel(doing)">撤销</a></span>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <span class="label label-primary">平台返款</span>
-                                                迪尼贝儿新生儿纯棉包被婴儿抱被抱毯盖被子春秋夏款薄款幼儿用品
+                                                {{doing.taskName}}
                                             </div>
-                                            <div class="col-lg-4">
+                                            <div class="col-lg-3">
                                                 <div class="row">
                                                     <div class="col-lg-12">
-                                                        进行中(0)|待发货(0)
+                                                        进行中({{doing.taskPcDoingCount + doing.taskPhoneDoingCount}})|未接单({{doing.taskTotalCount - doing.taskPcDoingCount - doing.taskPcDoneCount - doing.taskPhoneDoingCount - doing.taskPhoneDoneCount}})
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-lg-12">
-                                                        未接单(0)|已完成(0)
+                                                        已完成({{doing.taskPcDoneCount + doing.taskPhoneDoneCount}})|总单数({{doing.taskTotalCount}})
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-2">
-                                                <a href=""
-                                                   class="btn btn-warning">一键发布</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </article>
-                                <article class="media box">
-                                    <a class="pull-left thumb p-thumb">
-                                        <img src="/resource/uploads/20151/1e28e_3226e54d-30b0-4084-839a-b54e52b7f145.png">
-                                    </a>
-
-                                    <div class="media-body">
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <span class=" p-head">迪尼贝儿旗舰店</span>
-                                            </div>
-                                            <div class="col-lg-6">
-                                            <span>
-                                                任务编号： 1426916094633
-                                                <a href="">
-                                                    [详情]
-                                                </a>
-                                                发布时间：2015-03-21 13:3
-                                            </span>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <span class="label label-primary">平台返款</span>
-                                                迪尼贝儿新生儿纯棉包被婴儿抱被抱毯盖被子春秋夏款薄款幼儿用品
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        进行中(0)|待发货(0)
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        未接单(0)|已完成(0)
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <a href=""
-                                                   class="btn btn-warning">一键发布</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </article>
-                                <article class="media box">
-                                    <a class="pull-left thumb p-thumb">
-                                        <img src="/resource/uploads/20151/1e28e_3226e54d-30b0-4084-839a-b54e52b7f145.png">
-                                    </a>
-
-                                    <div class="media-body">
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <span class=" p-head">迪尼贝儿旗舰店</span>
-                                            </div>
-                                            <div class="col-lg-6">
-                                            <span>
-                                                任务编号： 1426916094633
-                                                <a href="">
-                                                    [详情]
-                                                </a>
-                                                发布时间：2015-03-21 13:3
-                                            </span>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <span class="label label-primary">平台返款</span>
-                                                迪尼贝儿新生儿纯棉包被婴儿抱被抱毯盖被子春秋夏款薄款幼儿用品
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        进行中(0)|待发货(0)
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        未接单(0)|已完成(0)
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <a href=""
-                                                   class="btn btn-warning">一键发布</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </article>
-                                <article class="media box">
-                                    <a class="pull-left thumb p-thumb">
-                                        <img src="/resource/uploads/20151/1e28e_3226e54d-30b0-4084-839a-b54e52b7f145.png">
-                                    </a>
-
-                                    <div class="media-body">
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <span class=" p-head">迪尼贝儿旗舰店</span>
-                                            </div>
-                                            <div class="col-lg-6">
-                                            <span>
-                                                任务编号： 1426916094633
-                                                <a href="">
-                                                    [详情]
-                                                </a>
-                                                发布时间：2015-03-21 13:3
-                                            </span>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <span class="label label-primary">平台返款</span>
-                                                迪尼贝儿新生儿纯棉包被婴儿抱被抱毯盖被子春秋夏款薄款幼儿用品
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        进行中(0)|待发货(0)
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        未接单(0)|已完成(0)
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <a href=""
-                                                   class="btn btn-warning">一键发布</a>
+                                            <div class="col-lg-3">
+                                                <span>任务状态：{{statusMap.task[doing.taskStatus]}}</span>
+                                                <a href="javascript:;;;" ng-click="repeatPublish(doing)" class="pull-right btn btn-warning">一键发布</a>
                                             </div>
                                         </div>
                                     </div>
                                 </article>
                             </div>
                             <div class="tab-pane" id="done">
+                                <article class="media box" ng-repeat="done in dones">
+                                    <a class="pull-left thumb p-thumb">
+                                        <img ng-src="{{done.taobaoImage || done.tmallImage || done.jdImage}}">
+                                    </a>
+
+                                    <div class="media-body">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <span class=" p-head">迪尼贝儿旗舰店</span>
+                                            </div>
+                                            <div class="col-lg-6">
+                                            <span>
+                                                任务编号： {{done.taobaoTaskId}}
+                                                <a href="/seller/dotask/detail?id={{done.taobaoTaskId}}">
+                                                    [详情]
+                                                </a>
+                                                发布时间：{{done.taskCreateTime | date: 'yyyy-MM-dd HH:mm'}}
+                                            </span>
+                                                <span class="pull-right"><a href="javascript:;;;" ng-click="upTaskFee(done)">加赏</a> | <a href="javascript:;;;" ng-click="cancel(done)">撤销</a></span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <span class="label label-primary">平台返款</span>
+                                                {{done.taskName}}
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        进行中({{done.taskPcDoingCount + done.taskPhoneDoingCount}})|未接单({{done.taskTotalCount - done.taskPcDoingCount - done.taskPcDoneCount - done.taskPhoneDoingCount - done.taskPhoneDoneCount}})
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        已完成({{done.taskPcDoneCount + done.taskPhoneDoneCount}})|总单数({{done.taskTotalCount}})
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <span>任务状态：{{statusMap.task[done.taskStatus]}}</span>
+                                                <a href="javascript:;;;" ng-click="repeatPublish(done)" class="pull-right btn btn-warning">一键发布</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
                             </div>
                             <div class="tab-pane " id="cancel">
-                                Recent Item goes here
+                                <article class="media box" ng-repeat="cancel in cancels">
+                                    <a class="pull-left thumb p-thumb">
+                                        <img ng-src="{{cancel.taobaoImage || cancel.tmallImage || cancel.jdImage}}">
+                                    </a>
+
+                                    <div class="media-body">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <span class=" p-head">迪尼贝儿旗舰店</span>
+                                            </div>
+                                            <div class="col-lg-6">
+                                            <span>
+                                                任务编号： {{cancel.taobaoTaskId}}
+                                                <a href="/seller/dotask/detail?id={{cancel.taobaoTaskId}}">
+                                                    [详情]
+                                                </a>
+                                                发布时间：{{cancel.taskCreateTime | date: 'yyyy-MM-dd HH:mm'}}
+                                            </span>
+                                                <span class="pull-right"><a href="javascript:;;;" ng-click="upTaskFee(cancel)">加赏</a> | <a href="javascript:;;;" ng-click="cancel(cancel)">撤销</a></span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <span class="label label-primary">平台返款</span>
+                                                {{cancel.taskName}}
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        进行中({{cancel.taskPcDoingCount + cancel.taskPhoneDoingCount}})|未接单({{cancel.taskTotalCount - cancel.taskPcDoingCount - cancel.taskPcDoneCount - cancel.taskPhoneDoingCount - cancel.taskPhoneDoneCount}})
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        已完成({{cancel.taskPcDoneCount + cancel.taskPhoneDoneCount}})|总单数({{cancel.taskTotalCount}})
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <span>任务状态：{{statusMap.task[cancel.taskStatus]}}</span>
+                                                <a href="javascript:;;;" ng-click="repeatPublish(cancel)" class="pull-right btn btn-warning">一键发布</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
                             </div>
                             <div class="tab-pane " id="all">
-                                Recent Item goes here
+                                <article class="media box" ng-repeat="task in tasks">
+                                    <a class="pull-left thumb p-thumb">
+                                        <img ng-src="{{task.taobaoImage || task.tmallImage || task.jdImage}}">
+                                    </a>
+
+                                    <div class="media-body">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <span class=" p-head">迪尼贝儿旗舰店</span>
+                                            </div>
+                                            <div class="col-lg-6">
+                                            <span>
+                                                任务编号： {{task.taobaoTaskId}}
+                                                <a href="/seller/dotask/detail?id={{task.taobaoTaskId}}">
+                                                    [详情]
+                                                </a>
+                                                发布时间：{{task.taskCreateTime | date: 'yyyy-MM-dd HH:mm'}}
+                                            </span>
+                                                <span class="pull-right"><a href="javascript:;;;" ng-click="upTaskFee(task)">加赏</a> | <a href="javascript:;;;" ng-click="task(task)">撤销</a></span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <span class="label label-primary">平台返款</span>
+                                                {{task.taskName}}
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        进行中({{task.taskPcDoingCount + task.taskPhoneDoingCount}})|未接单({{task.taskTotalCount - task.taskPcDoingCount - task.taskPcDoneCount - task.taskPhoneDoingCount - task.taskPhoneDoneCount}})
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        已完成({{task.taskPcDoneCount + task.taskPhoneDoneCount}})|总单数({{task.taskTotalCount}})
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                            <span>任务状态：{{statusMap.task[task.taskStatus]}}</span>
+
+                                                <a href="javascript:;;;" ng-click="repeatPublish(task)" class="pull-right btn btn-warning">一键发布</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
                             </div>
                         </div>
                     </div>

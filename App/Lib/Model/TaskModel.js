@@ -3,6 +3,22 @@ module.exports = Model(function() {
     all: function(taskUserId) {
       var self = this;
       return self
+        .order('yi_task.id desc')
+        .join({
+          table: 'task_taobao'
+          , join: 'left'
+          , on: {'id': 'taobaoTaskId'}
+        })
+        .join({
+          table: 'task_tmall'
+          , join: 'left'
+          , on: {'id': 'tmallTaskId'}
+        })
+        .join({
+          table: 'task_jd'
+          , join: 'left'
+          , on: {'id': 'jdTaskId'}
+        })
         .where({taskUserId: taskUserId})
         .select()
     },
@@ -10,6 +26,7 @@ module.exports = Model(function() {
     allPass: function() {
       var self = this;
       return self
+        .order('id desc')
         .where({taskStatus: 3})
         .select()
     },

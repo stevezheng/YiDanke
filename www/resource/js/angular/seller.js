@@ -163,4 +163,53 @@
       }
     };
   });
+
+
+  SellerModule.controller('sellerTasksCtrl', function($scope, $http) {
+    function getOwnOneAll() {
+      $http.get('/seller/tasks/dotasks')
+        .success(function(res) {
+          $scope.doTasks = res.data;
+
+          //todo:好坑爹的命名方式
+          $scope.taobaoZixuans = _.where(res.data, {doTaskStatus: 1, taskTransport: 'zixuan', taskPlatform: 'taobao'});
+          $scope.tmallZixuans = _.where(res.data, {doTaskStatus: 1, taskTransport: 'zixuan', taskPlatform: 'tmall'});
+          $scope.jdZixuans = _.where(res.data, {doTaskStatus: 1, taskTransport: 'zixuan', taskPlatform: 'jd'});
+
+          $scope.taobaoBaoyous = _.where(res.data, {doTaskStatus: 2, taskPlatform: 'taobao'});
+          $scope.tmallBaoyous = _.where(res.data, {doTaskStatus: 2, taskPlatform: 'tmall'});
+          $scope.jdBaoyous = _.where(res.data, {doTaskStatus: 2, taskPlatform: 'jd'});
+
+          $scope.taobaoTuikuans = _.where(res.data, {doTaskStatus: 4, taskPlatform: 'taobao'});
+          $scope.tmallTuikuans = _.where(res.data, {doTaskStatus: 4, taskPlatform: 'tmall'});
+          $scope.jdTuikuans = _.where(res.data, {doTaskStatus: 4, taskPlatform: 'jd'});
+        });
+
+    }
+
+    function getOwn() {
+      $http.get('/seller/tasks/own')
+        .success(function(res) {
+          $scope.tasks = res.data;
+
+          $scope.doings = _.where(res.data, {taskStatus: 3});
+          $scope.dones = _.where(res.data, {taskStatus: 4});
+          $scope.cancels = _.where(res.data, {taskStatus: -1});
+        })
+    }
+
+    $scope.statusMap = {
+      task: {
+        '-1': '已撤销'
+        , 0: '创建中'
+        , 1: '未付款'
+        , 2: '待审核'
+        , 3: '进行中'
+        , 4: '已完成'
+      }
+    };
+
+    getOwnOneAll();
+    getOwn();
+  });
 })();

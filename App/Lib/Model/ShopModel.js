@@ -49,6 +49,7 @@ module.exports = Model(function() {
     all: function(shopUserId) {
       var self = this;
       return self
+        .order('id desc')
         .where({shopUserId: shopUserId})
         .select()
     },
@@ -62,6 +63,7 @@ module.exports = Model(function() {
       var self = this;
 
       return self
+        .order('id desc')
         .where({shopUserId: shopUserId})
         .select()
     },
@@ -75,6 +77,7 @@ module.exports = Model(function() {
       var self = this;
 
       return self
+        .order('id desc')
         .where({shopUserId: shopUserId, shopStatus: 1})
         .select()
     },

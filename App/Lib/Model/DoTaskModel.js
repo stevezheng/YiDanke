@@ -19,6 +19,50 @@ module.exports = Model(function() {
         })
     },
 
+    getOwnOneAllBySeller: function(userId) {
+      var self = this;
+
+      return self
+        .order('yi_do_task.id desc')
+        .join({
+          table: 'task'
+          , join: 'left'
+          , on: {
+            'doTaskTaskId': 'id'
+          }
+        })
+        .join({
+          table: 'task_taobao'
+          , join: 'left'
+          , on: {
+            'doTaskTaskId': 'taobaoTaskId'
+          }
+        })
+        .join({
+          table: 'task_tmall'
+          , join: 'left'
+          , on: {
+            'doTaskTaskId': 'tmallTaskId'
+          }
+        })
+        .join({
+          table: 'task_jd'
+          , join: 'left'
+          , on: {
+            'doTaskTaskId': 'jdTaskId'
+          }
+        })
+        .join({
+          table: 'task_extend'
+          , join: 'left'
+          , on: {
+            'doTaskTaskId': 'extendTaskId'
+          }
+        })
+        .where({'yi_task.taskUserId': userId})
+        .select()
+    },
+
     getOwnOneAllInfo: function(userId, id) {
       var self = this;
 

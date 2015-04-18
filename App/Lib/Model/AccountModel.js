@@ -55,6 +55,7 @@ module.exports = Model(function() {
     all: function(accountUserId) {
       var self = this;
       return self
+        .order('id desc')
         .where({accountUserId: accountUserId})
         .select()
     },
@@ -71,6 +72,7 @@ module.exports = Model(function() {
       var self = this;
 
       return self
+        .order('id desc')
         .where({accountUserId: accountUserId})
         .select()
     },
@@ -79,6 +81,7 @@ module.exports = Model(function() {
       var self = this;
 
       return self
+        .order('id desc')
         .where({accountUserId: accountUserId, accountStatus: 1})
         .select()
     },
