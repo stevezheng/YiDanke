@@ -150,6 +150,36 @@ module.exports = Model(function() {
         })
         .where({'yi_task.taskUserId': userId, 'yi_task.taskTransport': 'zixuan', 'yi_do_task.doTaskStatus': 1})
         .select()
+    },
+
+    baoyou: function(userId) {
+      var self = this;
+
+      return self
+        .order('yi_do_task.id desc')
+        .join({
+          table: 'task'
+          , join: 'left'
+          , on: {
+            'doTaskTaskId': 'id'
+          }
+        })
+        .join({
+          table: 'do_task_detail'
+          , join: 'left'
+          , on: {
+            'id': 'doTaskDetailDoTaskId'
+          }
+        })
+        .join({
+          table: 'do_task_extend'
+          , join: 'left'
+          , on: {
+            'id': 'doTaskExtendDoTaskId'
+          }
+        })
+        .where({'yi_task.taskUserId': userId, 'yi_do_task.doTaskStatus': 2})
+        .select()
     }
   }
 });

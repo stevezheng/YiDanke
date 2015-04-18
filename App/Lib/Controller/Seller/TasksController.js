@@ -1,5 +1,6 @@
 var DoTask = thinkRequire('DoTaskModel');
 var Task = thinkRequire('TaskModel');
+var moment = require('moment');
 
 module.exports = Controller("Seller/BaseController", function(){
   "use strict";
@@ -68,6 +69,25 @@ module.exports = Controller("Seller/BaseController", function(){
       }
     },
 
+    baoyouAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+
+        self.display();
+      }
+
+      if (self.isPost()) {
+        var doTask = DoTask();
+        doTask
+          .baoyou(self.cUser.id)
+          .then(function(res) {
+            return self.success(res);
+          })
+      }
+    },
+
     addExpressAction: function() {
       var self = this;
       self.assign('title', '');
@@ -83,7 +103,7 @@ module.exports = Controller("Seller/BaseController", function(){
         data.doTaskExtendExpressId = self.post('doTaskExtendExpressId');
         data.doTaskExtendDoTaskId = self.post('doTaskDetailDoTaskId');
         data.doTaskExtendTaskId = self.post('doTaskDetailTaskId');
-        console.log(data);
+        data.doTaskExtendExpressTime = moment();
 
         return D('do_task_extend')
           .thenAdd(data, {'doTaskExtendDoTaskId': data.doTaskExtendDoTaskId}, true)
@@ -114,7 +134,7 @@ module.exports = Controller("Seller/BaseController", function(){
 
         return D('do_task')
           .where({id: doTaskId})
-          .update({doTaskStatus: 2})
+          .update({doTaskStatus: 3})
           .then(function(res) {
             return self.success('发货成功');
           })

@@ -261,5 +261,47 @@
     getShops();
 
     getZixuan();
+  });
+
+  SellerModule.controller('sellerTasksBaoyouCtrl', function($scope, $http) {
+    $scope.platform = 'taobao';
+    $scope.shopId = 0;
+    function getBaoyou() {
+      $http.post('/seller/tasks/baoyou')
+        .success(function(res) {
+          $scope.doTasks = res.data;
+        })
+    }
+
+    $scope.changeShopId = function(id) {
+      $scope.shopId = id;
+    };
+
+    function getShops() {
+      $http.get('/seller/publish/getShops')
+        .success(function(res) {
+          $scope.shops = res.data;
+          $scope.shopId = res.data[0].id;
+        })
+    }
+
+    $scope.send = function(doTask) {
+      var r = confirm('是否确认发货?');
+      if (r) {
+        $http.post('/seller/tasks/send', {doTaskId: doTask.doTaskDetailDoTaskId})
+          .success(function(res) {
+            if (res.errno == 0) {
+              alert(res.data);
+              getBaoyou();
+            } else {
+              alert(res.errmsg);
+            }
+          })
+      }
+    };
+
+    getShops();
+
+    getBaoyou();
   })
 })();
