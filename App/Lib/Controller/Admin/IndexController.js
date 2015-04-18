@@ -48,5 +48,25 @@ module.exports = Controller("Admin/BaseController", function(){
           })
       }
     },
+
+    logoutAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+
+        return self
+          .session()
+          .then(function () {
+            return self.redirect('/admin');
+          })
+          .catch(function(err) {
+            console.error(err.message);
+            console.error(err.stack);
+          })
+      }
+
+      if (self.isPost()) {}
+    },
   };
 });

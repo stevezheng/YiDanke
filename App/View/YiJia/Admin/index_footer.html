@@ -21,20 +21,15 @@
 <script src="/resource/js/sparkline-chart.js"></script>
 <script src="/resource/js/easy-pie-chart.js"></script>
 
+<script src="/resource/js/underscore-min.js"></script>
+<!--<script src="/resource/js/moment-with-locales.min.js"></script>-->
+<script src="/resource/js/moment.min.js"></script>
+<script src="/resource/js/zh-cn.js"></script>
+<script src="/resource/js/angular.min.js"></script>
+<script src="/resource/js/angular/angular-file-upload.min.js"></script>
+<script src="/resource/js/admin/dotask.js"></script>
+
 <script>
-
-    //owl carousel
-
-    $(document).ready(function() {
-        $("#owl-demo").owlCarousel({
-            navigation : true,
-            slideSpeed : 300,
-            paginationSpeed : 400,
-            singleItem : true,
-            autoPlay:true
-
-        });
-    });
 
     //custom select box
 
@@ -42,6 +37,9 @@
         $('select.styled').customSelect();
     });
 
+    angular.module('YiAppAdmin', ['angularFileUpload',
+        'YiAppAdmin.DoTask'
+    ]);
 </script>
 
 </body>

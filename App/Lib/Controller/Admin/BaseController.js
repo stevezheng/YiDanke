@@ -11,7 +11,6 @@ module.exports = Controller(function(){
       if(this.http.action === 'login'){
         return;
       }
-      console.log(self);
       return this.session("cAdmin").then(function (cAdmin) {
         self.assign("StatusService", StatusService);
         //用户信息为空
