@@ -57,7 +57,7 @@
                                 <div class="col-lg-4">快递公司: {{doTask.doTaskExtendExpressName}}</div>
                                 <div class="col-lg-4">快递订单: {{doTask.doTaskExtendExpressId}}</div>
                                 <div class="col-lg-2"></div>
-                                <div class="col-lg-2"><button class="btn btn-info" ng-click="copyExpress(doTask)">复制订单号</button></div>
+                                <div class="col-lg-2"><button data-clipboard-text="{{doTask.doTaskExtendExpressId}}" class="btn btn-info btn-copy">复制订单号</button></div>
                             </div>
                             <div class="row" style="background: rgb(246, 251, 254); padding: 10px 0">
                                 <div class="col-lg-12">
@@ -74,3 +74,17 @@
     <!--main content end-->
 </section>
 <% include ../common_footer.html %>
+<script src="/resource/js/ZeroClipboard.js"></script>
+<script>
+    setTimeout(function() {
+        $('.btn-copy').each(function() {
+            var self = this;
+            var client = new ZeroClipboard($(self));
+            client.on('ready', function(readyEvent) {
+                client.on('aftercopy', function(event) {
+                    alert('已复制订单');
+                })
+            })
+        });
+    }, 1000);
+</script>
