@@ -1,0 +1,57 @@
+<% include ./index_header.html %>
+<section id="container" ng-controller="accountCtrl">
+    <% include ./index_nav.html %>
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+                <section class="panel">
+                    <header class="panel-heading">
+                        店铺管理
+                    </header>
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>账号名称</th>
+                                <th>审核状态</th>
+                                <th>绑定平台</th>
+                                <th>绑定账号</th>
+                                <th>绑定名字</th>
+                                <th>电话</th>
+                                <th>地址</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tr ng-repeat="d in data">
+                                <td>{{d.id}}</td>
+                                <td>{{d.username}}</td>
+                                <td>{{statusMap.status[d.accountStatus]}}</td>
+                                <td>{{statusMap.platform[d.accountPlatform]}}</td>
+                                <td>{{d.accountName}}</td>
+                                <td>{{d.accountRealName}}</td>
+                                <td>{{d.accountPhone}}</td>
+                                <td>{{d.accountProvince}}{{d.accountCity}}{{d.accountArea}}</td>
+                                <td>{{d.accountCreateTime | date: 'yyyy-MM-dd HH:mm'}}</td>
+                                <td>
+                                    <button class="btn btn-success" ng-click="pass(d)" ng-if="d.shopStatus == 0">通过</button>
+                                    <button class="btn btn-danger" ng-click="unpass(d)" ng-if="d.shopStatus == 0">拒绝</button>
+                                    <button class="btn btn-default" ng-if="d.shopStatus != 0">通过</button>
+                                    <button class="btn btn-default" ng-if="d.shopStatus != 0">拒绝</button>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="text-center">
+                            <ul class="pagination">
+                                <li ng-if="page != 1"><a ng-click="changePage(page-1)" href="javascript:;;;">«</a></li>
+                                <li ng-repeat="t in totalPage"><a href="javascript:;;;" ng-click="changePage(t)">{{t}}</a></li>
+                                <li ng-if="page != total"><a ng-click="changePage(page+1)" href="javascript:;;;">»</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+        </section>
+    </section>
+    <!--main content end-->
+</section>
+<% include ./index_footer.html %>
