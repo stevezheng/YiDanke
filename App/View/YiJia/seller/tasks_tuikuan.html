@@ -1,0 +1,75 @@
+<% include ../common_header.html %>
+<section id="container" ng-controller="sellerTasksTuikuanCtrl">
+    <% include ./seller_nav.html %>
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+            <section class="panel">
+                <header class="panel-heading">
+                    待处理任务
+                    <a href="/seller/publish" class="pull-right"><span class="error"><i
+                            class="icon-ok-sign"></i>&nbsp;我要发任务</span></a>
+                </header>
+                <div class="panel-body">
+                    <div class="col-lg-2">
+                        <h3>平台</h3>
+                        <p><button class="btn btn-block" ng-class="platform=='taobao'?'btn-info':'btn-default'" ng-click="platform = 'taobao'">淘宝 <span class="pull-right">({{(doTasks | filter: {taskPlatform:'taobao'}).length}})</span></button></p>
+                        <p><button class="btn btn-block" ng-class="platform=='tmall'?'btn-info':'btn-default'" ng-click="platform = 'tmall'">天猫<span class="pull-right">({{(doTasks | filter: {taskPlatform:'tmall'}).length}})</span></button></p>
+                        <p><button class="btn btn-block" ng-class="platform=='jd'?'btn-info':'btn-default'" ng-click="platform = 'jd'">京东<span class="pull-right">({{(doTasks | filter: {taskPlatform:'jd'}).length}})</span></button></p>
+                    </div>
+                    <div class="col-lg-2">
+                        <h3>店铺</h3>
+                        <p>
+                            <button ng-click="changeShopId(shop.id)" class="btn btn-block" ng-class="shopId==shop.id?'btn-info':'btn-default'" ng-repeat="shop in shops" ng-show="shop.shopPlatform == platform">
+                                {{shop.shopName}} <span class="pull-right">({{(doTasks | filter: {taskShopId: shop.id}).length}})</span>
+                            </button>
+                        </p>
+                    </div>
+                    <div class="col-lg-8">
+                        <h3>确认退款</h3>
+                        <div class="row" style="background: #f0f0f0; margin-bottom: 15px;">
+                                <div class="col-lg-4">商品</div>
+                                <div class="col-lg-2">买号</div>
+                                <div class="col-lg-2">订单号</div>
+                                <div class="col-lg-2">付款截图</div>
+                                <div class="col-lg-2">操作</div>
+                        </div>
+                        <div class="row border-bottom" style="padding-bottom: 10px" ng-repeat="doTask in doTasks" ng-show="doTask.taskShopId == shopId && doTask.taskPlatform == platform">
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="col-lg-4">
+                                    <article class="media">
+                                        <a class="pull-left thumb p-thumb">
+                                            <img ng-src="{{doTask.taobaoImage || doTask.tmallImage || doTask.jdImage}}">
+                                        </a>
+                                        <div class="media-body">
+                                            <span class=" p-head">{{doTask.taskName}}</span>
+                                        </div>
+                                    </article>
+                                </div>
+                                <div class="col-lg-2">{{doTask.doTaskAccountName}}</div>
+                                <div class="col-lg-2">{{doTask.doTaskDetailOrderId}}</div>
+                                <div class="col-lg-2"><a class="thumb p-thumb" ng-href="{{doTask.doTaskDetailOrderImage}}" target="_blank"><img ng-src="{{doTask.doTaskDetailOrderImage}}" alt=""/></a></div>
+                                <div class="col-lg-2">
+                                    <button class="btn btn-warning" ng-click="doTuikuan(doTask)">确认退款</button>
+                                </div>
+                            </div>
+                            <div class="row" style="background: rgb(246, 251, 254); margin-top: 10px; padding: 10px 0" >
+                                <div class="col-lg-4">快递公司: {{doTask.doTaskExtendExpressName}}</div>
+                                <div class="col-lg-4">快递订单: {{doTask.doTaskExtendExpressId}}</div>
+                                <div class="col-lg-2"></div>
+                            </div>
+                            <div class="row" style="background: rgb(246, 251, 254); padding: 10px 0">
+                                <div class="col-lg-12">
+                                    <span>任务编号： <span class="error">{{doTask.doTaskDetailDoTaskId}}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span><a href="/seller/doTask/?id={{doTask.doTaskDetailDoTaskId}}">查看详情</a></span></span>
+                                    <span class="pull-right">买手完成任务时间：{{doTask.doTaskDetailCreateTime | date: 'yyyy-MM-dd HH:mm'}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </section>
+    <!--main content end-->
+</section>
+<% include ../common_footer.html %>

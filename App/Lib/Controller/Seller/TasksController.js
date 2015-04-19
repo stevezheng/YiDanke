@@ -88,6 +88,51 @@ module.exports = Controller("Seller/BaseController", function(){
       }
     },
 
+    tuikuanAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+        return self.display();
+      }
+
+      if (self.isPost()) {
+        var doTask = DoTask();
+        doTask
+          .tuikuan(self.cUser.id)
+          .then(function(res) {
+            return self.success(res);
+          })
+      }
+    },
+
+    doTuikuanAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+
+      }
+
+      if (self.isPost()) {
+        var id = self.post('doTaskId');
+        return D('do_task_extend')
+          .where({doTaskExtendDoTaskId: id})
+          .update({doTaskExtendPaybackTime: moment().unix()})
+          .then(function() {
+            return D('do_task')
+              .where({id: id})
+              .update({doTaskStatus: 5})
+          })
+          .then(function() {
+            return self.success('退款成功');
+          })
+          .catch(function(err) {
+            return self.error(500, err);
+          })
+      }
+    },
+
     addExpressAction: function() {
       var self = this;
       self.assign('title', '');
@@ -103,7 +148,7 @@ module.exports = Controller("Seller/BaseController", function(){
         data.doTaskExtendExpressId = self.post('doTaskExtendExpressId');
         data.doTaskExtendDoTaskId = self.post('doTaskDetailDoTaskId');
         data.doTaskExtendTaskId = self.post('doTaskDetailTaskId');
-        data.doTaskExtendExpressTime = moment();
+        data.doTaskExtendExpressTime = moment().unix();
 
         return D('do_task_extend')
           .thenAdd(data, {'doTaskExtendDoTaskId': data.doTaskExtendDoTaskId}, true)

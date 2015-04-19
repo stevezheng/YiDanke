@@ -303,5 +303,47 @@
     getShops();
 
     getBaoyou();
+  });
+
+  SellerModule.controller('sellerTasksTuikuanCtrl', function($scope, $http) {
+    $scope.platform = 'taobao';
+    $scope.shopId = 0;
+    function getTuikuan() {
+      $http.post('/seller/tasks/tuikuan')
+        .success(function(res) {
+          $scope.doTasks = res.data;
+        })
+    }
+
+    $scope.changeShopId = function(id) {
+      $scope.shopId = id;
+    };
+
+    function getShops() {
+      $http.get('/seller/publish/getShops')
+        .success(function(res) {
+          $scope.shops = res.data;
+          $scope.shopId = res.data[0].id;
+        })
+    }
+
+    $scope.doTuikuan = function(doTask) {
+      var r = confirm('是否确认退款?');
+      if (r) {
+        $http.post('/seller/tasks/doTuikuan', {doTaskId: doTask.doTaskDetailDoTaskId})
+          .success(function(res) {
+            if (res.errno == 0) {
+              alert(res.data);
+              getTuikuan();
+            } else {
+              alert(res.errmsg);
+            }
+          })
+      }
+    };
+
+    getShops();
+
+    getTuikuan();
   })
 })();
