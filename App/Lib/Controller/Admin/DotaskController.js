@@ -14,6 +14,7 @@ module.exports = Controller("Admin/BaseController", function(){
         var page = self.post('page');
 
         return D('do_task')
+          .page(page, 20)
           .order('yi_do_task.id desc')
           .join({
             table: 'task'

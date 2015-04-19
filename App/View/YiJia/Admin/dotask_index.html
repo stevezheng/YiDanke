@@ -42,9 +42,9 @@
                         </table>
                         <div class="text-center">
                             <ul class="pagination">
-                                <li ng-if="page != 1"><a href="#">«</a></li>
-                                <li ng-repeat="t in totalPage"><a href="#" ng-click="page=t">{{t}}</a></li>
-                                <li ng-if="page != total"><a href="#">»</a></li>
+                                <li ng-if="page != 1"><a ng-click="changePage(page-1)" href="javascript:;;;">«</a></li>
+                                <li ng-repeat="t in totalPage"><a href="javascript:;;;" ng-click="changePage(t)">{{t}}</a></li>
+                                <li ng-if="page != total"><a ng-click="changePage(page+1)" href="javascript:;;;">»</a></li>
                             </ul>
                         </div>
                     </div>

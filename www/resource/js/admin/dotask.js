@@ -4,9 +4,10 @@
   DoTaskModule.controller('doTaskCtrl', function($scope, $http, $upload) {
     $scope.page = 1;
 
-    $scope.$watch('page', function() {
+    $scope.changePage = function(page) {
+      $scope.page = page;
       getDoTasks();
-    });
+    };
 
     function getDoTasks() {
       $http.post('/admin/dotask', {page: $scope.page})
