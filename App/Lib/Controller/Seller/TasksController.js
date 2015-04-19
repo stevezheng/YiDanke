@@ -118,7 +118,7 @@ module.exports = Controller("Seller/BaseController", function(){
         var id = self.post('doTaskId');
         return D('do_task_extend')
           .where({doTaskExtendDoTaskId: id})
-          .update({doTaskExtendPaybackTime: moment().unix()})
+          .update({doTaskExtendPaybackTime: moment().format('YYYY-MM-DD HH:mm:ss')})
           .then(function() {
             return D('do_task')
               .where({id: id})
