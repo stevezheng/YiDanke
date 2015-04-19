@@ -26,6 +26,30 @@
         })
     }
 
+    $scope.pass = function(d) {
+      $http.post('/admin/money/passIn', {id: d.id})
+        .success(function(res) {
+          if (res.errno == 0) {
+            alert(res.data);
+            d.moneyStatus = 1;
+          } else {
+            alert(res.errmsg);
+          }
+        })
+    };
+
+    $scope.unpass = function(d) {
+      $http.post('/admin/money/unpassIn', {id: d.id})
+        .success(function(res) {
+          if (res.errno == 0) {
+            alert(res.data);
+            d.moneyStatus = -1;
+          } else {
+            alert(res.errmsg);
+          }
+        })
+    };
+
     $scope.statusMap = {
       type: {
         '0': '金币'

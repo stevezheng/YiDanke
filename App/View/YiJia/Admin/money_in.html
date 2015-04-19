@@ -20,6 +20,7 @@
                                 <th>平台</th>
                                 <th>订单号</th>
                                 <th>创建时间</th>
+                                <th>操作</th>
                             </tr>
                             </thead>
                             <tr ng-repeat="d in data">
@@ -31,6 +32,12 @@
                                 <td>{{statusMap.platform[d.moneyPlatform]}}</td>
                                 <td>{{d.moneyOrder}}</td>
                                 <td>{{d.moneyCreateTime | date: 'yyyy-MM-dd HH:mm'}}</td>
+                                <td>
+                                    <button class="btn btn-success" ng-click="pass(d)" ng-if="d.moneyStatus == 0">通过</button>
+                                    <button class="btn btn-danger" ng-click="unpass(d)" ng-if="d.moneyStatus == 0">拒绝</button>
+                                    <button class="btn btn-default" ng-if="d.moneyStatus != 0">通过</button>
+                                    <button class="btn btn-default" ng-if="d.moneyStatus != 0">拒绝</button>
+                                </td>
                             </tr>
                         </table>
                         <div class="text-center">
