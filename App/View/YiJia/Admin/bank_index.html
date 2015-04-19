@@ -1,0 +1,52 @@
+<% include ./index_header.html %>
+<section id="container" ng-controller="bankCtrl">
+    <% include ./index_nav.html %>
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+                <section class="panel">
+                    <header class="panel-heading">
+                        提现账号管理
+                    </header>
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>用户类型</th>
+                                <th>账号名称</th>
+                                <th>审核状态</th>
+                                <th>绑定平台</th>
+                                <th>绑定账号</th>
+                                <th>绑定名称</th>
+                                <th>截图信息</th>
+                                <th>创建时间</th>
+                            </tr>
+                            </thead>
+                            <tr ng-repeat="d in data">
+                                <td>{{d.id}}</td>
+                                <td>{{statusMap.userType[d.type]}}</td>
+                                <td>{{d.username}}</td>
+                                <td>{{statusMap.status[d.bankStatus]}}</td>
+                                <td>{{statusMap.bankType[d.bankType]}}</td>
+                                <td>{{d.bankAccount}}</td>
+                                <td>{{d.bankRealName}}</td>
+                                <td><a href="{{d.bankImage}}" target="_blank"><img
+                                        ng-src="{{d.bankImage}}" alt=""/></a></td>
+                                <td>{{d.bankCreateTime | date: 'yyyy-MM-dd HH:mm'}}</td>
+                            </tr>
+                        </table>
+                        <div class="text-center">
+                            <ul class="pagination">
+                                <li ng-if="page != 1"><a ng-click="changePage(page-1)" href="javascript:;;;">«</a></li>
+                                <li ng-repeat="t in totalPage"><a href="javascript:;;;" ng-click="changePage(t)">{{t}}</a></li>
+                                <li ng-if="page != total"><a ng-click="changePage(page+1)" href="javascript:;;;">»</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+        </section>
+    </section>
+    <!--main content end-->
+</section>
+<% include ./index_footer.html %>
