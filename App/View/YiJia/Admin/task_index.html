@@ -1,0 +1,60 @@
+<% include ./index_header.html %>
+<section id="container" ng-controller="taskCtrl">
+    <% include ./index_nav.html %>
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+                <section class="panel">
+                    <header class="panel-heading">
+                        任务管理
+                    </header>
+                    <div class="panel-body">
+                        <table class="table" ng-repeat="d in data">
+                            <tr>
+                                <td>账号：{{d.username}}</td>
+                                <td>平台：{{statusMap.platform[d.taskPlatform]}}</td>
+                                <td>店铺名称：{{d.taskShopName}}</td>
+                                <td style="width: 400px; word-break: break-all">产品链接：{{d.taskUrl}}</td>
+                            </tr>
+                            <tr>
+                                <td>产品单价：{{d.taskMoney}}</td>
+                                <td>产品图片：<a href="{{d.taobaoImage || d.tmallImage || d.jdImage}}" target="_blank"><img ng-src="{{d.taobaoImage || d.tmallImage || d.jdImage}}" width="50" alt=""/></a></td>
+                                <td>产品名称：{{d.taskName}}</td>
+                                <td>是否包邮：{{statusMap.transport[d.taskTransport]}}</td>
+                            </tr>
+                            <tr>
+                                <td>总单数： {{d.taskTotalCount}}</td>
+                                <td>关键词：
+                                    {{d.taobaoKey1}} {{d.taobaoKey2}} {{d.taobaoKey3}} {{d.taobaoKey4}} {{d.taobaoKey5}}
+                                    {{d.tmallKey1}} {{d.tmallKey2}} {{d.tmallKey3}} {{d.tmallKey4}} {{d.tmallKey5}}
+                                    {{d.jdKey1}} {{d.jdKey2}} {{d.jdKey3}} {{d.jdKey4}} {{d.jdKey5}}
+                                </td>
+                                <td>关键词匹配数量：
+                                    {{d.taobaoKeyCount1}} {{d.taobaoKeyCount2}} {{d.taobaoKeyCount3}} {{d.taobaoKeyCount4}} {{d.taobaoKeyCount5}}
+                                    {{d.tmallKeyCount1}} {{d.tmallKeyCount2}} {{d.tmallKeyCount3}} {{d.tmallKeyCount4}} {{d.tmallKeyCount5}}
+                                    {{d.jdKeyCount1}} {{d.jdKeyCount2}} {{d.jdKeyCount3}} {{d.jdKeyCount4}} {{d.jdKeyCount5}}
+                                </td>
+                                <td>任务状态：{{statusMap.status[d.taskStatus]}}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <button ng-class="d.taskStatus != '0'?'btn-default':'btn-success'" class="btn" ng-click="pass(d)">通过</button>
+                                    <button ng-class="d.taskStatus != '0'?'btn-default':'btn-danger'" class="btn" ng-click="unpass(d)">拒绝</button>
+                                    <!--<button class="btn btn-warning" ng-click="cancel(doTask)">撤销任务单</button>-->
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="text-center">
+                            <ul class="pagination">
+                                <li ng-if="page != 1"><a ng-click="changePage(page-1)" href="javascript:;;;">«</a></li>
+                                <li ng-repeat="t in totalPage"><a href="javascript:;;;" ng-click="changePage(t)">{{t}}</a></li>
+                                <li ng-if="page != total"><a ng-click="changePage(page+1)" href="javascript:;;;">»</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+        </section>
+    </section>
+    <!--main content end-->
+</section>
+<% include ./index_footer.html %>
