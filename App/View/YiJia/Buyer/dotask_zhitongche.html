@@ -160,21 +160,36 @@
                 </header>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-lg-12">
+                        <div class="col-lg-8">
                             <p>
-                                1.找到卖家为：<span class="error">{{doTask.taskShopName.slice(0, 3)}}*********</span>
+                                1.如右图，请在淘宝搜索列表页右侧或最下方：“<span class="error">掌柜热卖</span>”区域找到以下商品
                             </p>
                             <p>
+                                商品名：{{doTask.taskName}} <br/>
+                                价格: {{doTask.taskMoney}} <br/>
                                 商品图: <br/>
                                 <img ng-if="doTask.taobaoImage" ng-src="{{doTask.taobaoImage}}" alt="" width="500"/>
                                 <img ng-if="doTask.tmallImage" ng-src="{{doTask.tmallImage}}" alt="" width="500"/>
                             </p>
+                            <p class="error">提示：如果页面最下方“掌柜热卖”找不到以下商品，请点击“掌柜热卖”进入“淘宝网热卖”频道找到以上商品</p>
                             <p>2.核对商品链接：</p>
                             <p>
                                 <input placeholder="将搜索到的商品链接贴到此处" type="text" style="width: 400px" ng-model="itemUrl"/>
                                 <button class="btn btn-warning" ng-click="checkUrl(itemUrl)">核对商品地址</button>
                             </p>
                         </div>
+                        <div class="col-lg-4">
+                            <p>
+                                <a href="/resource/img/make-task-nd.jpg" target="_blank">
+                                    <img src="/resource/img/make-task-nd.jpg" alt=""/>
+                                </a>
+                                <a href="/resource/img/make-task-nd2.jpg" target="_blank">
+                                    <img src="/resource/img/make-task-nd2.jpg" alt=""/>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-lg-10 col-lg-offset-1">
                             <h3>温馨提示：此任务下单付款时注意：</h3>
                             <p>1、此任务需要拍 <span class="error">{{doTask.taskCount}}</span> 个商品,必须用 <span class="error">{{doTask.doTaskTerminal=='pc'?'电脑':'手机'}}</span> 下单付款 </p>
