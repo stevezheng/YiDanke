@@ -1,0 +1,184 @@
+<% include ../common_header.html %>
+<section id="container" ng-controller="sellerTaskListCtrl" ng-init="user = {coin: <%= cUser.coin %>}">
+    <% include ./seller_nav.html %>
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+            <section class="panel">
+                <header class="panel-heading">
+                    任务筛选
+                </header>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h3>请选择平台 <span class="small">请买手遵守平台规则，按照任务步骤中的提示完成任务，不得违规操作；如有违反，一家网有权利对买手进行处罚</span></h3>
+                        </div>
+                        <div class="col-lg-12">
+                            <button class="btn" ng-class="platform=='taobao'?'btn-info':'btn-default'" ng-click="platform='taobao'">淘宝({{taobaoCount}})</button>
+                            <button class="btn" ng-class="platform=='tmall'?'btn-info':'btn-default'" ng-click="platform='tmall'">天猫({{tmallCount}})</button>
+                            <button class="btn" ng-class="platform=='jd'?'btn-info':'btn-default'" ng-click="platform='jd'">京东({{jdCount}})</button>
+                            <!--<button class="btn" ng-class="platform=='mogujie'?'btn-info':'btn-default'" ng-click="platform='mogujie'">蘑菇街</button>-->
+                        </div>
+                        <div class="col-lg-4">
+                            <h3>请选择终端</h3>
+                            <button class="btn" ng-class="terminal=='pc'?'btn-info':'btn-default'" ng-click="terminal='pc'">电脑({{pcCount}})</button>
+                            <button class="btn" ng-class="terminal=='phone'?'btn-info':'btn-default'" ng-click="terminal='phone'">手机/Pad({{phoneCount}})</button>
+                        </div>
+                        <div class="col-lg-8">
+                            <h3>请选择任务类型</h3>
+                            <button class="btn" ng-class="type=='dingdan'?'btn-info':'btn-default'" ng-click="type='dingdan'">订单({{dingdanCount}})</button>
+                            <button class="btn" ng-show="platform == 'taobao' || platform == 'tmall'" ng-class="type=='juhuasuan'?'btn-info':'btn-default'" ng-click="type='juhuasuan'">聚划算/Pad({{juhuasuanCount}})</button>
+                            <button class="btn" ng-show="platform == 'taobao' || platform == 'tmall'" ng-class="type=='zhitongche'?'btn-info':'btn-default'" ng-click="type='zhitongche'">直通车/Pad({{zhitongcheCount}})</button>
+                        </div>
+                        <div class="col-lg-4">
+                            <h3>请选择买号</h3>
+                            <button ng-click="changeAccountId(account.id, account)" class="btn" ng-class="accountId==account.id?'btn-info':'btn-default'" ng-repeat="account in taobaoAccounts" ng-show="'taobao' == platform">
+                                {{account.accountName}}
+                            </button>
+                            <a class="btn btn-default" href="/seller/account" ng-if="platform=='taobao' && taobaoAccounts.length == 0">去绑定买号</a>
+                            <button ng-click="changeAccountId(account.id, account)" class="btn" ng-class="accountId==account.id?'btn-info':'btn-default'" ng-repeat="account in tmallAccounts" ng-show="'tmall' == platform">
+                                {{account.accountName}}
+                            </button>
+                            <a class="btn btn-default" href="/seller/account" ng-if="platform=='tmall' && tmallAccounts.length == 0">去绑定买号</a>
+                            <button ng-click="changeAccountId(account.id, account)" class="btn" ng-class="accountId==account.id?'btn-info':'btn-default'" ng-repeat="account in jdAccounts" ng-show="'jd' == platform">
+                                {{account.accountName}}
+                            </button>
+                            <a class="btn btn-default" href="/seller/account" ng-if="platform=='jd' && jdAccounts.length == 0">去绑定买号</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="panel">
+                <header class="panel-heading">
+                    任务列表
+                </header>
+                <div class="panel-body">
+                    <header class="panel-heading tab-bg-blue">
+                        <ul class="nav nav-tabs nav-justified ">
+                            <li class="active">
+                                <a href="#doing" data-toggle="tab">
+                                    全部
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#done" data-toggle="tab">
+                                    加赏
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="#cancel" data-toggle="tab">
+                                    推荐
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="#all" data-toggle="tab">
+                                    新商家
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="#normal" data-toggle="tab">
+                                    常规
+                                </a>
+                            </li>
+                        </ul>
+                    </header>
+                    <div class="panel-body">
+                        <div class="tab-content tasi-tab">
+                            <div class="tab-pane active" id="doing">
+
+                                <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
+                                    <thead>
+                                    <tr>
+                                        <th>返款类型</th>
+                                        <th>卖家</th>
+                                        <th>购买件数</th>
+                                        <th>垫付资金</th>
+                                        <th>佣金</th>
+                                        <th>任务总数</th>
+                                        <th>领取进度</th>
+                                        <th>接手</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!--<tr ng-repeat="task in tasks" ng-if="task.taskPlatform == platform && task.taskType == type" ng-hide="(terminal=='pc' && (task.taskPcDoingCount + task.taskPcDoneCount) == task.taskPcCount) || (terminal=='phone' && (task.taskPhoneDoingCount + task.taskPhoneDoneCount) == task.taskPhoneCount) ">-->
+                                    <tr ng-repeat="task in tasks" ng-if="task.taskPlatform == platform && task.taskType == type">
+                                        <td><button class="btn btn-success">平台返款</button></td>
+                                        <td>{{task.taskUserName}}</td>
+                                        <td>{{task.taskCount}}件</td>
+                                        <td>{{task.taskTotalMoney}}元</td>
+                                        <td>{{task.taskFee}} <span class="error" ng-if="task.taskIsExtendFee">+ {{task.taskExtendFee}} </span>金币</td>
+                                        <td>{{terminal == 'pc'?task.taskPcCount:task.taskPhoneCount}}单</td>
+                                        <td ng-if="terminal=='pc'">{{(task.taskPcDoingCount + task.taskPcDoneCount)/task.taskPcCount * 100}}%</td>
+                                        <td ng-if="terminal=='phone'">{{(task.taskPhoneDoingCount + task.taskPhoneDoneCount)/task.taskPhoneCount * 100}}% </td>
+                                        <td>
+                                            暂无
+                                            <!--<button ng-if="user.coin >= 1" class="btn btn-info" ng-click="doTask(task)">接手任务</button>-->
+                                            <!--<a ng-if="user.coin < 1" class="btn btn-default" href="/seller/money">金币不足,请充值</a>-->
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="done">
+                            </div>
+                            <div class="tab-pane " id="cancel">
+                            </div>
+                            <div class="tab-pane " id="all">
+                            </div>
+                            <div class="tab-pane " id="normal">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </section>
+    <a href="#myModal" style="display: none;" id="showTask" data-toggle="modal">打开我的任务车模态</a>
+    <!--main content end-->
+    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">我的任务车 </h4>
+                </div>
+                <div class="modal-body">
+                    <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>任务类型</th>
+                            <th>商家</th>
+                            <th>买手需垫付资金</th>
+                            <th>佣金</th>
+                            <th>接手买号</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{statusMap.type[type]}}</td>
+                            <td>{{showTask.taskUserName}}</td>
+                            <td>{{showTask.taskTotalMoney}}元</td>
+                            <td>{{showTask.taskFee}}金币</td>
+                            <td>{{showAccount.accountName}}</td>
+                        </tr>
+                        </tbody>
+                        </table>
+                    <p><span class="small">提示：任务车一次只能接一个任务  <span class="error">温馨提示：未操作【前去做任务】，此时放弃任务不扣符点</span></span> </p>
+                    <p>您需垫付总金额：<span class="error">{{showTask.taskTotalMoney}}</span>元，押金：1符点；任务完成将获得佣金：{{showTask.taskFee}}金币</p>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-default" id="cancel-pay" type="button">放弃任务</button>
+                    <button class="btn btn-info" type="button" ng-click="actionTask(showTask)">前去做任务</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<% include ../common_footer.html %>
+<script src="/resource/assets/jquery-knob/js/jquery.knob.js"></script>
+<script>
+
+    //knob
+    $(".knob").knob();
+
+</script>
