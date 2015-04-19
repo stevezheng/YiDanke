@@ -1,3 +1,4 @@
+var moment = require('moment');
 var DoTask = thinkRequire('DoTaskModel');
 module.exports = Controller("Buyer/BaseController", function(){
   "use strict";
@@ -102,6 +103,52 @@ module.exports = Controller("Buyer/BaseController", function(){
           })
           .catch(function(err) {
             console.error(err);
+            return self.error(500, err);
+          })
+      }
+    },
+
+    tuikuanAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+        return self.display();
+      }
+
+      if (self.isPost()) {
+        var doTask = DoTask();
+
+        doTask
+          .getTuikuanByBuyer(self.cUser.id)
+          .then(function(res) {
+            return self.success(res);
+          });
+      }
+    },
+
+    doTuikuanAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+
+      }
+
+      if (self.isPost()) {
+        var id = self.post('id');
+        return D('do_task_extend')
+          .where({doTaskExtendDoTaskId: id})
+          .update({doTaskExtendConfirmTime: moment().format('YYYY-MM-DD HH:mm:ss')})
+          .then(function() {
+            return D('do_task')
+              .where({id: id})
+              .update({doTaskStatus: 6})
+          })
+          .then(function() {
+            return self.success('确认退款成功');
+          })
+          .catch(function(err) {
             return self.error(500, err);
           })
       }
