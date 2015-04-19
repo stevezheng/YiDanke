@@ -163,4 +163,59 @@
       }
     };
   });
+  BuyerModule.controller('buyerTasksCtrl', function($scope, $http) {
+    function getOwnOneAll() {
+      $http.get('/buyer/tasks/doTasks')
+        .success(function (res) {
+          $scope.doTasks = res.data;
+
+          $scope.taobaoShouhuos = _.where(res.data, {
+            doTaskStatus: 3,
+            taskPlatform: 'taobao'
+          });
+          $scope.tmallShouhuos = _.where(res.data, {
+            doTaskStatus: 3,
+            taskPlatform: 'tmall'
+          });
+          $scope.jdShouhuos = _.where(res.data, {
+            doTaskStatus: 3,
+            taskPlatform: 'jd'
+          });
+
+          $scope.taobaoTuikuans = _.where(res.data, {
+            doTaskStatus: 5,
+            taskPlatform: 'taobao'
+          });
+          $scope.tmallTuikuans = _.where(res.data, {
+            doTaskStatus: 5,
+            taskPlatform: 'tmall'
+          });
+          $scope.jdTuikuans = _.where(res.data, {
+            doTaskStatus: 5,
+            taskPlatform: 'jd'
+          });
+        });
+    }
+
+    function getFukuans() {
+      $http.get('/buyer/tasks/todoTasks')
+        .success(function(res) {
+          $scope.fukuans = res.data;
+        })
+    }
+
+    $scope.statusMap = {
+      dotask: {
+        '-1': '已撤销'
+        , 0: '创建中'
+        , 1: '未付款'
+        , 2: '待审核'
+        , 3: '进行中'
+        , 4: '已完成'
+      }
+    };
+
+    getOwnOneAll();
+    getFukuans();
+  })
 })();
