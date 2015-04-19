@@ -57,5 +57,54 @@ module.exports = Controller("Buyer/BaseController", function(){
       
       if (self.isPost()) {}
     },
+    
+    shouhuoAction: function() {
+      var self = this;
+      self.assign('title', '');
+    
+      if (self.isGet()) {
+        self.display();
+      }
+      
+      if (self.isPost()) {
+        var doTask = DoTask();
+
+        doTask
+          .getShouhuoByBuyer(self.cUser.id)
+          .then(function(res) {
+            return self.success(res);
+          });
+      }
+    },
+
+    goodCommentAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+
+      }
+
+      if (self.isPost()) {
+        var id = self.post('id')
+          , doTaskExtendGoodComment = self.post('doTaskExtendGoodComment');
+
+        return D('do_task_extend')
+          .where({doTaskExtendDoTaskId: id})
+          .update({doTaskExtendGoodComment: doTaskExtendGoodComment})
+          .then(function() {
+            return D('do_task')
+              .where({id: id})
+              .update({doTaskStatus: 4})
+          })
+          .then(function() {
+            return self.success('评价成功');
+          })
+          .catch(function(err) {
+            console.error(err);
+            return self.error(500, err);
+          })
+      }
+    },
   };
 });

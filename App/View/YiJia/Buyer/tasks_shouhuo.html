@@ -1,0 +1,71 @@
+<% include ../common_header.html %>
+<section id="container" ng-controller="buyerTasksShouhuoCtrl">
+    <% include ./buyer_nav.html %>
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+            <section class="panel">
+                <header class="panel-heading">
+                    待处理任务
+                    <a href="/buyer/tasklist" class="pull-right"><span class="error"><i
+                            class="icon-ok-sign"></i>&nbsp;我要做任务</span></a>
+                </header>
+                <div class="panel-body">
+                    <div class="col-lg-2">
+                        <h3>平台</h3>
+                        <p><button class="btn btn-block" ng-class="platform=='taobao'?'btn-info':'btn-default'" ng-click="platform = 'taobao'">淘宝 <span class="pull-right">({{(doTasks | filter: {taskPlatform:'taobao'}).length}})</span></button></p>
+                        <p><button class="btn btn-block" ng-class="platform=='tmall'?'btn-info':'btn-default'" ng-click="platform = 'tmall'">天猫<span class="pull-right">({{(doTasks | filter: {taskPlatform:'tmall'}).length}})</span></button></p>
+                        <p><button class="btn btn-block" ng-class="platform=='jd'?'btn-info':'btn-default'" ng-click="platform = 'jd'">京东<span class="pull-right">({{(doTasks | filter: {taskPlatform:'jd'}).length}})</span></button></p>
+                    </div>
+                    <!--<div class="col-lg-2">-->
+                        <!--<h3>店铺</h3>-->
+                        <!--<p>-->
+                            <!--<button ng-click="changeShopId(shop.id)" class="btn btn-block" ng-class="shopId==shop.id?'btn-info':'btn-default'" ng-repeat="shop in shops" ng-show="shop.shopPlatform == platform">-->
+                                <!--{{shop.shopName}} <span class="pull-right">({{(doTasks | filter: {taskShopId: shop.id}).length}})</span>-->
+                            <!--</button>-->
+                        <!--</p>-->
+                    <!--</div>-->
+                    <div class="col-lg-10">
+                        <h3>好评商品</h3>
+                        <div class="row" style="background: #f0f0f0; margin-bottom: 15px;">
+                                <div class="col-lg-8">商品</div>
+                                <div class="col-lg-2">买号</div>
+                                <div class="col-lg-2">操作</div>
+                        </div>
+                        <div class="row border-bottom" style="padding-bottom: 10px" ng-repeat="doTask in doTasks" ng-show="doTask.taskPlatform == platform">
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="col-lg-8">
+                                    <article class="media">
+                                        <a class="pull-left thumb p-thumb">
+                                            <img ng-src="{{doTask.taobaoImage || doTask.tmallImage || doTask.jdImage}}">
+                                        </a>
+                                        <div class="media-body">
+                                            <span class=" p-head">{{doTask.taskName}}</span>
+                                        </div>
+                                    </article>
+                                </div>
+                                <div class="col-lg-2">{{doTask.doTaskAccountName}}</div>
+                                <div class="col-lg-2">
+                                    <button class="btn btn-warning" ng-click="goodComment(doTask)">提交</button>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 15px;">
+                                <div class="col-lg-12">
+                                <textarea name="" id="" cols="120" ng-model="doTask.doTaskExtendGoodComment"
+                                          rows="5" placeholder="请将该商品的评价内容复制到此处。请注意：不能给商家中差评或低于5星 好评，否则平台将会冻结您的账户，账户一家不予提现"></textarea>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 15px;">
+                                <div class="col-lg-12">
+                                    请先在 淘宝|天猫 进行确认收货好评，再将商品的评价内容复制到此处。 若 淘宝|天猫 快递未签收，且未确认收货好评，就提前在一家平台确认收货好评的，平台将扣除2个符点及当次任务佣金作为处罚。
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </section>
+    <!--main content end-->
+</section>
+<% include ../common_footer.html %>

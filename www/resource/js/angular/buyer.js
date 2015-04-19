@@ -217,5 +217,42 @@
 
     getOwnOneAll();
     getFukuans();
-  })
+  });
+
+  BuyerModule.controller('buyerTasksShouhuoCtrl', function($scope, $http) {
+    $scope.platform = 'taobao';
+    //$scope.shopId = 0;
+    function getShouhuo() {
+      $http.post('/buyer/tasks/shouhuo')
+        .success(function(res) {
+          $scope.doTasks = res.data;
+        })
+    }
+
+    //$scope.changeShopId = function(id) {
+    //  $scope.shopId = id;
+    //};
+
+    //function getShops() {
+    //  $http.get('/buyer/tasks/getShops')
+    //    .success(function(res) {
+    //      $scope.shops = res.data;
+    //      $scope.shopId = res.data[0].id;
+    //    })
+    //}
+
+    //getShops();
+
+    getShouhuo();
+
+    $scope.goodComment = function(doTask) {
+      $http.post('/buyer/tasks/goodComment', {id: doTask.doTaskDetailDoTaskId, doTaskExtendGoodComment: doTask.doTaskExtendGoodComment})
+        .success(function(res) {
+          if (res.errno == 0) {
+            alert(res.data);
+            getShouhuo();
+          }
+        })
+    }
+  });
 })();
