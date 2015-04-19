@@ -283,11 +283,16 @@
     getTuikuan();
 
     $scope.doTuikuan = function(doTask) {
-      $http.post('/buyer/tasks/doTuikuan', {id: doTask.doTaskDetailDoTaskId})
+      $http.post('/buyer/tasks/doTuikuan', {
+        doTaskId: doTask.doTaskDetailDoTaskId,
+        terminal: doTask.doTaskTerminal,
+        taskId: doTask.doTaskTaskId})
         .success(function(res) {
           if (res.errno == 0) {
             alert(res.data);
             getTuikuan();
+          } else {
+            alert(res.errmsg);
           }
         })
     }

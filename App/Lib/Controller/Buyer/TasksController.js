@@ -136,14 +136,42 @@ module.exports = Controller("Buyer/BaseController", function(){
       }
 
       if (self.isPost()) {
-        var id = self.post('id');
+        var doTaskId = self.post('doTaskId');
+        var taskId = self.post('taskId');
+        var terminal = self.post('terminal');
+        //修改确认退款状态
         return D('do_task_extend')
-          .where({doTaskExtendDoTaskId: id})
+          .where({doTaskExtendDoTaskId: doTaskId})
           .update({doTaskExtendConfirmTime: moment().format('YYYY-MM-DD HH:mm:ss')})
           .then(function() {
             return D('do_task')
-              .where({id: id})
-              .update({doTaskStatus: 6})
+              .where({id: doTaskId})
+              .find()
+          })
+          .then(function(res) {
+            if (res.doTaskStatus == 6) {
+              return self.error(500, '请勿重复确认退款');
+            } else {
+              return D('do_task')
+                .where({id: doTaskId})
+                .update({doTaskStatus: 6})
+            }
+          })
+          .then(function() {
+            var data = {};
+            if (terminal == 'pc') {
+              data.taskPcDoingCount = ['exp', 'taskPcDoingCount-1'];
+              data.taskPcDoneCount = ['exp', 'taskPcDoneCount+1'];
+            }
+
+            if (terminal == 'phone') {
+              data.taskPhoneDoingCount = ['exp', 'taskPhoneDoingCount-1'];
+              data.taskPhoneDoneCount = ['exp', 'taskPhoneDoneCount+1'];
+            }
+            //修改任务状态
+            return D('task')
+              .where({id: taskId})
+              .update(data)
           })
           .then(function() {
             return self.success('确认退款成功');
