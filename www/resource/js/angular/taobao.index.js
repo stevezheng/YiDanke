@@ -118,7 +118,6 @@
       //需要检查第二步里面的数据是否正确
       if (step == 3) {
         $scope.confirmItem();
-        $scope.confirmTransport();
       }
 
       //需要检查第三步里面的数据是否正确
@@ -844,14 +843,15 @@
 
     $scope.transport = 'baoyou';
 
-    $scope.confirmTransport = function() {
+
+    $scope.confirmTransport = function(transport) {
       $scope.transportFlag = true;
-      if ($scope.transport == 'baoyou') {
+      if (transport == 'baoyou') {
         $scope.cost.transport = 5;
-      } else if ($scope.transport == 'bubaoyou') {
+      } else if (transport == 'bubaoyou') {
         $scope.cost.transport = 5;
         $scope.cost.promise = 10;
-      } else if ($scope.transport == 'zixuan') {
+      } else if (transport == 'zixuan') {
         $scope.cost.transport = 2;
       }
     };
