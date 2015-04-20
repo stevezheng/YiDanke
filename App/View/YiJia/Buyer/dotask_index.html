@@ -149,7 +149,8 @@
                         </div>
                     </div>
                     <div class="row" style="text-align: center">
-                        <button class="btn btn-info" ng-click="nextStep(2)">下一步</button>
+                        <button class="btn btn-info" ng-click="nextStep(2)" ng-show="nextStep2Flag">下一步</button>
+                        <button class="btn btn-default" ng-hide="nextStep2Flag">下一步</button>
                     </div>
                 </div>
             </section>
@@ -245,7 +246,8 @@
                     </div>
                     <div class="row" style="text-align: center">
                         <button class="btn btn-info" ng-click="nextStep(2)">上一步</button>
-                        <button class="btn btn-info" ng-click="nextStep(4)" >下一步</button>
+                        <button class="btn btn-info" ng-click="nextStep(4)" ng-show="nextStep4Flag">下一步</button>
+                        <button class="btn btn-default" ng-hide="nextStep4Flag">下一步</button>
                     </div>
                 </div>
             </section>
@@ -327,7 +329,8 @@
                     </div>
                     <div class="row" style="text-align: center">
                         <button class="btn btn-info" ng-click="nextStep(3)">上一步</button>
-                        <button class="btn btn-info" ng-click="nextStep(5)">下一步</button>
+                        <button class="btn btn-info" ng-click="nextStep(5)" ng-show="nextStep5Flag">下一步</button>
+                        <button class="btn btn-default" ng-hide="nextStep5Flag">下一步</button>
                     </div>
                 </div>
             </section>
@@ -380,7 +383,8 @@
                     </div>
                     <div class="row" style="text-align: center">
                         <button class="btn btn-info" ng-click="nextStep(4)">上一步</button>
-                        <button class="btn btn-info" ng-click="nextStep(6)">下一步</button>
+                        <button ng-show="nextStep6Flag" class="btn btn-info" ng-click="nextStep(6)">下一步</button>
+                        <button ng-hide="nextStep6Flag" class="btn btn-default">下一步</button>
                     </div>
                 </div>
             </section>

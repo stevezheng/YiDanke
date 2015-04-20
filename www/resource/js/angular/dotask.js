@@ -44,7 +44,7 @@
 
   var DoTaskModule = angular.module('YiApp.DoTask', ['angularFileUpload']);
 
-  DoTaskModule.controller('doTaskCtrl', function($scope, $http, $upload) {
+  DoTaskModule.controller('doTaskCtrl', function($scope, $http, $upload, $timeout) {
     $scope.actionOrder = function() {
       $http.post('/buyer/dotask/order', {
         taskId: $scope.doTask.doTaskTaskId
@@ -71,6 +71,20 @@
     $scope.step = 1;
 
     $scope.checkUrlFlag = false;
+    $scope.nextStep2Flag = false;
+    $scope.nextStep3Flag = false;
+    $scope.nextStep4Flag = false;
+    $scope.nextStep5Flag = false;
+    $scope.nextStep6Flag = false;
+
+    $timeout(function() {
+      $scope.nextStep2Flag = true;
+      $scope.nextStep3Flag = true;
+      $scope.nextStep4Flag = true;
+      $scope.nextStep5Flag = true;
+      $scope.nextStep6Flag = true;
+    }, 20000);
+
     $scope.itemUrl = '';
 
     $scope.item = {
@@ -81,6 +95,19 @@
     };
 
     $scope.nextStep = function(step) {
+      $scope.nextStep2Flag = false;
+      $scope.nextStep3Flag = false;
+      $scope.nextStep4Flag = false;
+      $scope.nextStep5Flag = false;
+      $scope.nextStep6Flag = false;
+
+      $timeout(function() {
+        $scope.nextStep2Flag = true;
+        $scope.nextStep3Flag = true;
+        $scope.nextStep4Flag = true;
+        $scope.nextStep5Flag = true;
+        $scope.nextStep6Flag = true;
+      }, 20000);
       if (step == 4) {
         if (!$scope.item.url1) {
           alert('请填写宝贝页地址1');
