@@ -71,6 +71,7 @@
     $scope.step = 1;
 
     $scope.checkUrlFlag = false;
+    $scope.nextFlag = false;
     $scope.nextStep2Flag = false;
     $scope.nextStep3Flag = false;
     $scope.nextStep4Flag = false;
@@ -78,6 +79,7 @@
     $scope.nextStep6Flag = false;
 
     $timeout(function() {
+      $scope.nextFlag = true;
       $scope.nextStep2Flag = true;
       $scope.nextStep3Flag = true;
       $scope.nextStep4Flag = true;
@@ -95,6 +97,7 @@
     };
 
     $scope.nextStep = function(step) {
+      $scope.nextFlag = false;
       $scope.nextStep2Flag = false;
       $scope.nextStep3Flag = false;
       $scope.nextStep4Flag = false;
@@ -102,6 +105,7 @@
       $scope.nextStep6Flag = false;
 
       $timeout(function() {
+        $scope.nextFlag = true;
         $scope.nextStep2Flag = true;
         $scope.nextStep3Flag = true;
         $scope.nextStep4Flag = true;
@@ -227,7 +231,13 @@
     getOne();
   });
 
-  DoTaskModule.controller('doTaskJdCtrl', function($scope, $http, $upload) {
+  DoTaskModule.controller('doTaskJdCtrl', function($scope, $http, $upload, $timeout) {
+    $scope.nextFlag = false;
+
+    $timeout(function() {
+      $scope.nextFlag = true;
+    }, 20000);
+
     $scope.actionOrder = function() {
       $http.post('/buyer/dotask/order', {
         taskId: $scope.doTask.doTaskTaskId
@@ -264,6 +274,11 @@
     };
 
     $scope.nextStep = function(step) {
+      $scope.nextFlag = false;
+
+      $timeout(function() {
+        $scope.nextFlag = true;
+      }, 20000);
       if (step == 3) {
         if (!$scope.item.url1) {
           alert('请填写宝贝页地址1');

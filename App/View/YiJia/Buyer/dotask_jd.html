@@ -136,10 +136,12 @@
                             <p>1、此任务需要拍 <span class="error">{{doTask.taskCount}}</span> 个商品</p>
                             <p>2、此任务下单时无需订单备注</p>
                             <p>3、此任务要求必须用 <span class="error">{{doTask.doTaskTerminal=='pc'?'电脑':'手机'}}</span> 下单付款</p>
+                            <p class="error">4、请认真核对信息，20秒后可进行下一步</p>
                         </div>
                     </div>
                     <div class="row" style="text-align: center">
-                        <button class="btn btn-info" ng-click="nextStep(2)">下一步</button>
+                        <button ng-show="nextFlag" class="btn btn-info" ng-click="nextStep(2)">下一步</button>
+                        <button ng-hide="nextFlag" class="btn btn-default">下一步</button>
                     </div>
                 </div>
             </section>
@@ -179,11 +181,13 @@
                             <p>
                                 宝贝页地址4: <input type="text" style="width: 400px" placeholder="将店铺内点开的商品链接贴到此处" ng-model="item.url4"/>
                             </p>
+                            <p class="error">3.请认真核对信息，20秒后可进行下一步</p>
                         </div>
                     </div>
                     <div class="row" style="text-align: center">
                         <button class="btn btn-info" ng-click="nextStep(1)">上一步</button>
-                        <button class="btn btn-info" ng-click="nextStep(3)">下一步</button>
+                        <button ng-show="nextFlag" class="btn btn-info" ng-click="nextStep(3)">下一步</button>
+                        <button ng-hide="nextFlag" class="btn btn-default">下一步</button>
                     </div>
                 </div>
             </section>
@@ -259,12 +263,14 @@
                             <h3>温馨提示：此任务下单付款时注意：</h3>
                             <p>1. 您需要购买 <span class="error">{{doTask.taskCount + doTask.extend1Count + doTask.extend2Count}}</span>件商品，请核对您购买的商品总价为 <span class="error">{{doTask.taskTotalMoney}}</span>元（实际付款金额可能会上下浮动10左右）</p>
                             <p ng-if="doTask.taskTransport == 'baoyou'">2、当前商品为 <span class="error">（包邮）</span>，如果您购买的商品不包邮，请联系客服修改为包邮价</p>
+                            <p class="error">3、请认真核对信息，20秒后可进行下一步</p>
                         </div>
                     </div>
 
                     <div class="row" style="text-align: center">
                         <button class="btn btn-info" ng-click="nextStep(2)">上一步</button>
-                        <button class="btn btn-info" ng-click="nextStep(4)" >下一步</button>
+                        <button ng-show="nextFlag" class="btn btn-info" ng-click="nextStep(4)" >下一步</button>
+                        <button ng-hide="nextFlag" class="btn btn-default">下一步</button>
                     </div>
                 </div>
             </section>
@@ -369,10 +375,12 @@
                             <p>1、此任务需要拍 <span class="error">{{doTask.taskCount}}</span> 个商品</p>
                             <p>2、此任务下单时无需订单备注</p>
                             <p>3、此任务要求必须用 <span class="error">{{doTask.doTaskTerminal=='pc'?'电脑':'手机'}}</span> 下单付款</p>
+                            <p class="error">4、请认真核对信息，20秒后可进行下一步</p>
                         </div>
                     </div>
                     <div class="row" style="text-align: center">
-                        <button class="btn btn-info" ng-click="actionOrder()">确认已付款，提交</button>
+                        <button ng-show="nextFlag" class="btn btn-info" ng-click="actionOrder()">确认已付款，提交</button>
+                        <button ng-hide="nextFlag" class="btn btn-default">确认已付款，提交</button>
                     </div>
                 </div>
             </section>
