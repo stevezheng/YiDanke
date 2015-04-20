@@ -108,8 +108,8 @@
                                         <td>{{task.taskTotalMoney}}元</td>
                                         <td>{{task.taskFee}} <span class="error" ng-if="task.taskIsExtendFee">+ {{task.taskExtendFee}} </span>金币</td>
                                         <td>{{terminal == 'pc'?task.taskPcCount:task.taskPhoneCount}}单</td>
-                                        <td ng-if="terminal=='pc'">{{(task.taskPcDoingCount + task.taskPcDoneCount)/task.taskPcCount * 100}}%</td>
-                                        <td ng-if="terminal=='phone'">{{(task.taskPhoneDoingCount + task.taskPhoneDoneCount)/task.taskPhoneCount * 100}}% </td>
+                                        <td ng-if="terminal=='pc'">{{(task.taskPcDoingCount + task.taskPcDoneCount)/task.taskPcCount * 100 | number: 0}}%</td>
+                                        <td ng-if="terminal=='phone'">{{(task.taskPhoneDoingCount + task.taskPhoneDoneCount)/task.taskPhoneCount * 100 | number: 0}}% </td>
                                         <td>
                                             暂无
                                             <!--<button ng-if="user.coin >= 1" class="btn btn-info" ng-click="doTask(task)">接手任务</button>-->
