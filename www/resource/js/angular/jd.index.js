@@ -681,14 +681,14 @@
 
     $scope.transport = 'baoyou';
 
-    $scope.confirmTransport = function() {
+    $scope.confirmTransport = function(transport) {
       $scope.transportFlag = true;
-      if ($scope.transport == 'baoyou') {
+      if (transport == 'baoyou') {
         $scope.cost.transport = 5;
-      } else if ($scope.transport == 'bubaoyou') {
+      } else if (transport == 'bubaoyou') {
         $scope.cost.transport = 5;
         $scope.cost.promise = 10;
-      } else if ($scope.transport == 'zixuan') {
+      } else if (transport == 'zixuan') {
         $scope.cost.transport = 2;
       }
     };

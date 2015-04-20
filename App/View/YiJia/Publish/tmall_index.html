@@ -830,42 +830,45 @@
                 <header class="panel-heading">
                     2.设置商品收取运费的方式 <span class="error small">必选</span>
                 </header>
-                <div class="panel-body" ng-show="itemFlag">
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="optionsRadios" ng-click="transport = 'baoyou'" checked="">
-                            商品本身包邮 <span class="small">买手按照商品实际金额下单</span>
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="optionsRadios" ng-click="transport = 'bubaoyou'">
-                            商品不包邮 <span class="small">无需买手联系客服。商家每单额外支出 <span class="error">10</span>元作为运费押金，任务完成后运费押金将全部退还给商家</span>
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="optionsRadios" ng-click="transport = 'zixuan'">
-                            自选快递 <span class="small">商家自选快递发货，平台收取 <span class="error">2</span>元作为服务费用</span>
-                        </label>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <button class="btn btn-warning" ng-click="confirmTransport()">确认提交信息</button>
+                <section class="panel">
+                    <header class="panel-heading">
+                        2.设置商品收取运费的方式 <span class="error small">必选</span>
+                    </header>
+                    <div class="panel-body" ng-show="itemFlag">
+                        <div class="radio" ng-click="transport = 'baoyou'">
+                            <label>
+                                <input type="radio" name="optionsRadios" checked>
+                                商品本身包邮 <span class="small">买手按照商品实际金额下单</span>
+                            </label>
+                        </div>
+                        <div class="radio" ng-click="transport = 'bubaoyou'">
+                            <label>
+                                <input type="radio" name="optionsRadios">
+                                商品不包邮 <span class="small">无需买手联系客服。商家每单额外支出 <span class="error">10</span>元作为运费押金，任务完成后运费押金将全部退还给商家</span>
+                            </label>
+                        </div>
+                        <div class="radio" ng-click="transport = 'zixuan'">
+                            <label>
+                                <input type="radio" name="optionsRadios">
+                                自选快递 <span class="small">商家自选快递发货，平台收取 <span class="error">2</span>元作为服务费用</span>
+                            </label>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <button class="btn btn-warning" ng-click="confirmTransport(transport)">确认提交信息</button>
+                            </div>
+                        </div>
+                        <div class="border-bottom"></div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <span class="error">为了经营安全，请商家在店铺详情页，旺旺自动快捷回复语等关于店铺发货默认快递的说明中</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="border-bottom"></div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                    <span class="error">为了经营安全，请商家在店铺详情页，旺旺自动快捷回复语等关于店铺发货默认快递的说明中</span>
-                        </div>
-                    </div>
-                </div>
             </section>
             <div class="row" style="text-align: center">
                 <a class="btn btn-info" href="/seller/publish">上一步</a>
                 <button ng-class="transportFlag?'btn btn-info': 'btn btn-default'" ng-click="nextStep(3)">下一步</button>
-            </div>
             </div>
             <!--发布任务第二步结束-->
 
