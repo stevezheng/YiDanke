@@ -1166,40 +1166,40 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <label class="checkbox-inline">
-                                    <input type="radio" ng-model="cost.selectPV" value="30"> 30访客
+                                    <input type="radio" ng-model="cost.selectPV" value="{{cost.totalCount * 5}}"> {{cost.totalCount * 5}}访客
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="radio" ng-model="cost.selectPV" value="36"> 36访客
+                                    <input type="radio" ng-model="cost.selectPV" value="{{cost.totalCount * 10}}"> {{cost.totalCount * 10}}访客
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="radio" ng-model="cost.selectPV" value="60"> 60访客
+                                    <input type="radio" ng-model="cost.selectPV" value="{{cost.totalCount * 12}}"> {{cost.totalCount * 12}}访客
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="radio" ng-model="cost.selectPV" value="90"> 90访客
+                                    <input type="radio" ng-model="cost.selectPV" value="{{cost.totalCount * 20}}"> {{cost.totalCount * 20}}访客
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="radio" ng-model="cost.selectPV" value="150"> 150访客
+                                    <input type="radio" ng-model="cost.selectPV" value="{{cost.totalCount * 50}}"> {{cost.totalCount * 50}}访客
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="radio" ng-model="cost.selectPV" value="300"> 300访客
+                                    <input type="radio" ng-model="cost.selectPV" value="{{cost.totalCount * 100}}"> {{cost.totalCount * 100}}访客
                                 </label>
                                 <label class="checkbox-inline">
                                     <input type="radio" ng-model="cost.selectPV" value="0"> 自定义
                                 </label>
-                                <input type="text" ng-model="cost.freePV"> 访客 <span class="small">(不能低于30访客)</span>
+                                <input type="text" ng-model="cost.freePV"> 访客 <span class="small">(不能低于{{cost.totalCount * 5}}访客)</span>
                             </div>
                             <div class="col-lg-12" style="border: 1px solid #50c8ea; padding: 15px; margin-top: 15px">
-                                <p ng-if="taobao.key1">淘宝关键词1:  <span class="error">{{taobao.key1}}</span>刷{{taobao.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * taobao.key1Count}}</p>
-                                <p ng-if="taobao.key2">淘宝关键词2:  <span class="error">{{taobao.key2}}</span>刷{{taobao.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * taobao.key2Count}}</p>
-                                <p ng-if="taobao.key3">淘宝关键词3:  <span class="error">{{taobao.key3}}</span>刷{{taobao.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * taobao.key3Count}}</p>
-                                <p ng-if="taobao.key4">淘宝关键词4:  <span class="error">{{taobao.key4}}</span>刷{{taobao.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * taobao.key4Count}}</p>
-                                <p ng-if="taobao.key5">淘宝关键词5:  <span class="error">{{taobao.key5}}</span>刷{{taobao.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * taobao.key5Count}}</p>
+                                <p ng-if="taobao.key1">淘宝关键词1:  <span class="error">{{taobao.key1}}</span>刷{{taobao.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * taobao.key1Count | number: 0}}</p>
+                                <p ng-if="taobao.key2">淘宝关键词2:  <span class="error">{{taobao.key2}}</span>刷{{taobao.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * taobao.key2Count | number: 0}}</p>
+                                <p ng-if="taobao.key3">淘宝关键词3:  <span class="error">{{taobao.key3}}</span>刷{{taobao.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * taobao.key3Count | number: 0}}</p>
+                                <p ng-if="taobao.key4">淘宝关键词4:  <span class="error">{{taobao.key4}}</span>刷{{taobao.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * taobao.key4Count | number: 0}}</p>
+                                <p ng-if="taobao.key5">淘宝关键词5:  <span class="error">{{taobao.key5}}</span>刷{{taobao.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * taobao.key5Count | number: 0}}</p>
 
-                                <p ng-if="tmall.key1">天猫关键词1:  <span class="error">{{tmall.key1}}</span>刷{{tmall.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * tmall.key1Count}}</p>
-                                <p ng-if="tmall.key2">天猫关键词2:  <span class="error">{{tmall.key2}}</span>刷{{tmall.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * tmall.key2Count}}</p>
-                                <p ng-if="tmall.key3">天猫关键词3:  <span class="error">{{tmall.key3}}</span>刷{{tmall.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * tmall.key3Count}}</p>
-                                <p ng-if="tmall.key4">天猫关键词4:  <span class="error">{{tmall.key4}}</span>刷{{tmall.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * tmall.key4Count}}</p>
-                                <p ng-if="tmall.key5">天猫关键词5:  <span class="error">{{tmall.key5}}</span>刷{{tmall.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * tmall.key5Count}}</p>
+                                <p ng-if="tmall.key1">天猫关键词1:  <span class="error">{{tmall.key1}}</span>刷{{tmall.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * tmall.key1Count | number: 0}}</p>
+                                <p ng-if="tmall.key2">天猫关键词2:  <span class="error">{{tmall.key2}}</span>刷{{tmall.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * tmall.key2Count | number: 0}}</p>
+                                <p ng-if="tmall.key3">天猫关键词3:  <span class="error">{{tmall.key3}}</span>刷{{tmall.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * tmall.key3Count | number: 0}}</p>
+                                <p ng-if="tmall.key4">天猫关键词4:  <span class="error">{{tmall.key4}}</span>刷{{tmall.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * tmall.key4Count | number: 0}}</p>
+                                <p ng-if="tmall.key5">天猫关键词5:  <span class="error">{{tmall.key5}}</span>刷{{tmall.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * tmall.key5Count | number: 0}}</p>
                                 <p class="small">注：到店访客流量数可能会有少量误差，属于正常情况；</p>
                                 <div class="border-bottom"></div>
                                 <p>你目前有 <span class="error">{{user.pv}}</span> 个访客流量,使用后还有 <span class="error">{{user.pv - cost.pv}}</span> 个访客流量</p>
