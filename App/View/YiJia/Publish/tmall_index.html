@@ -424,7 +424,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label">让买手在 <span
                                         class="error">tmall.com</span>搜索关键字进入“搜索列表”</label>
-                                <input type="text" ng-model="tmall.key3"
+                                <input type="text"
                                        class="col-md-4 control-label"/>
                                 <label class="col-md-1 control-label"><span
                                         class="error">必填</span></label>
@@ -455,7 +455,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label">让买手在 <span
                                         class="error">tmall.com</span>搜索关键字进入“搜索列表”</label>
-                                <input type="text" ng-model="tmall.key4"
+                                <input type="text"
                                        class="col-md-4 control-label"/>
                                 <label class="col-md-1 control-label"><span
                                         class="error">必填</span></label>
@@ -486,7 +486,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label">让买手在 <span
                                         class="error">tmall.com</span>搜索关键字进入“搜索列表”</label>
-                                <input type="text" ng-model="tmall.key5"
+                                <input type="text"
                                        class="col-md-4 control-label"/>
                                 <label class="col-md-1 control-label"><span
                                         class="error">必填</span></label>
@@ -830,45 +830,43 @@
                 <header class="panel-heading">
                     2.设置商品收取运费的方式 <span class="error small">必选</span>
                 </header>
-                <section class="panel">
-                    <header class="panel-heading">
-                        2.设置商品收取运费的方式 <span class="error small">必选</span>
-                    </header>
-                    <div class="panel-body" ng-show="itemFlag">
-                        <div class="radio" ng-click="transport = 'baoyou'">
-                            <label>
-                                <input type="radio" name="optionsRadios" checked>
-                                商品本身包邮 <span class="small">买手按照商品实际金额下单</span>
-                            </label>
-                        </div>
-                        <div class="radio" ng-click="transport = 'bubaoyou'">
-                            <label>
-                                <input type="radio" name="optionsRadios">
-                                商品不包邮 <span class="small">无需买手联系客服。商家每单额外支出 <span class="error">10</span>元作为运费押金，任务完成后运费押金将全部退还给商家</span>
-                            </label>
-                        </div>
-                        <div class="radio" ng-click="transport = 'zixuan'">
-                            <label>
-                                <input type="radio" name="optionsRadios">
-                                自选快递 <span class="small">商家自选快递发货，平台收取 <span class="error">2</span>元作为服务费用</span>
-                            </label>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <button class="btn btn-warning" ng-click="confirmTransport(transport)">确认提交信息</button>
-                            </div>
-                        </div>
-                        <div class="border-bottom"></div>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <span class="error">为了经营安全，请商家在店铺详情页，旺旺自动快捷回复语等关于店铺发货默认快递的说明中</span>
-                            </div>
+                <div class="panel-body" ng-show="itemFlag">
+                    <div class="radio" ng-click="transport = 'baoyou'">
+                        <label>
+                            <input type="radio" name="optionsRadios" checked>
+                            商品本身包邮 <span class="small">买手按照商品实际金额下单</span>
+                        </label>
+                    </div>
+                    <div class="radio" ng-click="transport = 'bubaoyou'">
+                        <label>
+                            <input type="radio" name="optionsRadios">
+                            商品不包邮 <span class="small">无需买手联系客服。商家每单额外支出 <span class="error">10</span>元作为运费押金，任务完成后运费押金将全部退还给商家</span>
+                        </label>
+                    </div>
+                    <div class="radio" ng-click="transport = 'zixuan'">
+                        <label>
+                            <input type="radio" name="optionsRadios">
+                            自选快递 <span class="small">商家自选快递发货，平台收取 <span class="error">2</span>元作为服务费用</span>
+                        </label>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <button class="btn btn-warning" ng-click="confirmTransport(transport)">确认提交信息</button>
                         </div>
                     </div>
+                    <div class="border-bottom"></div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <span class="error">为了经营安全，请商家在店铺详情页，旺旺自动快捷回复语等关于店铺发货默认快递的说明中</span>
+                        </div>
+                    </div>
+                </div>
+
             </section>
             <div class="row" style="text-align: center">
                 <a class="btn btn-info" href="/seller/publish">上一步</a>
                 <button ng-class="transportFlag?'btn btn-info': 'btn btn-default'" ng-click="nextStep(3)">下一步</button>
+            </div>
             </div>
             <!--发布任务第二步结束-->
 
@@ -1058,7 +1056,7 @@
                         <span style="font-weight: bolder; margin: 15px 0">押金直接返款：</span>
                         <span class="small">选择此服务，买手完成后，平台将直接使用押金为您操作返款，商家无需耗费时间、人力处理退款，减少押款周期</span>
                         <p>每单收取刷单金额的0.6%做为退款服务费，费用：{{cost.totalCount}}单 x {{cost.totalMoney}}元 x 0.6% = {{cost.payback | number:2}}金币</p>
-                        <p class="error">注：必须使用此服务，选择平台返款，可以杜绝买家在店铺恶意退款的行为发生。</p>
+                        <p class="error">注：强烈推荐使用此服务，选择平台返款，可以杜绝买家在店铺恶意退款的行为发生。</p>
                         <br/>
                         <div class="border-bottom"></div>
                         <br/>
@@ -1127,47 +1125,46 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <label class="checkbox-inline">
-                                    <input type="radio" ng-model="cost.selectPV" value="{{cost.totalCount * 5}}"> {{cost.totalCount * 5}}访客
+                                    <input type="radio" ng-model="cost.selectPV" value="30"> 30访客
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="radio" ng-model="cost.selectPV" value="{{cost.totalCount * 10}}"> {{cost.totalCount * 10}}访客
+                                    <input type="radio" ng-model="cost.selectPV" value="36"> 36访客
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="radio" ng-model="cost.selectPV" value="{{cost.totalCount * 12}}"> {{cost.totalCount * 12}}访客
+                                    <input type="radio" ng-model="cost.selectPV" value="60"> 60访客
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="radio" ng-model="cost.selectPV" value="{{cost.totalCount * 20}}"> {{cost.totalCount * 20}}访客
+                                    <input type="radio" ng-model="cost.selectPV" value="90"> 90访客
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="radio" ng-model="cost.selectPV" value="{{cost.totalCount * 50}}"> {{cost.totalCount * 50}}访客
+                                    <input type="radio" ng-model="cost.selectPV" value="150"> 150访客
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="radio" ng-model="cost.selectPV" value="{{cost.totalCount * 100}}"> {{cost.totalCount * 100}}访客
+                                    <input type="radio" ng-model="cost.selectPV" value="300"> 300访客
                                 </label>
                                 <label class="checkbox-inline">
                                     <input type="radio" ng-model="cost.selectPV" value="0"> 自定义
                                 </label>
-                                <input type="text" ng-model="cost.freePV"> 访客 <span class="small">(不能低于{{cost.totalCount * 5}}访客)</span>
+                                <input type="text" ng-model="cost.freePV"> 访客 <span class="small">(不能低于30访客)</span>
                             </div>
                             <div class="col-lg-12" style="border: 1px solid #50c8ea; padding: 15px; margin-top: 15px">
-                                <p ng-if="taobao.key1">淘宝关键词1:  <span class="error">{{taobao.key1}}</span>刷{{taobao.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * taobao.key1Count | number: 0}}</p>
-                                <p ng-if="taobao.key2">淘宝关键词2:  <span class="error">{{taobao.key2}}</span>刷{{taobao.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * taobao.key2Count | number: 0}}</p>
-                                <p ng-if="taobao.key3">淘宝关键词3:  <span class="error">{{taobao.key3}}</span>刷{{taobao.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * taobao.key3Count | number: 0}}</p>
-                                <p ng-if="taobao.key4">淘宝关键词4:  <span class="error">{{taobao.key4}}</span>刷{{taobao.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * taobao.key4Count | number: 0}}</p>
-                                <p ng-if="taobao.key5">淘宝关键词5:  <span class="error">{{taobao.key5}}</span>刷{{taobao.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * taobao.key5Count | number: 0}}</p>
+                                <p ng-if="taobao.key1">淘宝关键词1:  <span class="error">{{taobao.key1}}</span>刷{{taobao.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * taobao.key1Count}}</p>
+                                <p ng-if="taobao.key2">淘宝关键词2:  <span class="error">{{taobao.key2}}</span>刷{{taobao.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * taobao.key2Count}}</p>
+                                <p ng-if="taobao.key3">淘宝关键词3:  <span class="error">{{taobao.key3}}</span>刷{{taobao.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * taobao.key3Count}}</p>
+                                <p ng-if="taobao.key4">淘宝关键词4:  <span class="error">{{taobao.key4}}</span>刷{{taobao.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * taobao.key4Count}}</p>
+                                <p ng-if="taobao.key5">淘宝关键词5:  <span class="error">{{taobao.key5}}</span>刷{{taobao.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * taobao.key5Count}}</p>
 
-                                <p ng-if="tmall.key1">天猫关键词1:  <span class="error">{{tmall.key1}}</span>刷{{tmall.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * tmall.key1Count | number: 0}}</p>
-                                <p ng-if="tmall.key2">天猫关键词2:  <span class="error">{{tmall.key2}}</span>刷{{tmall.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * tmall.key2Count | number: 0}}</p>
-                                <p ng-if="tmall.key3">天猫关键词3:  <span class="error">{{tmall.key3}}</span>刷{{tmall.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * tmall.key3Count | number: 0}}</p>
-                                <p ng-if="tmall.key4">天猫关键词4:  <span class="error">{{tmall.key4}}</span>刷{{tmall.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * tmall.key4Count | number: 0}}</p>
-                                <p ng-if="tmall.key5">天猫关键词5:  <span class="error">{{tmall.key5}}</span>刷{{tmall.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * tmall.key5Count | number: 0}}</p>
+                                <p ng-if="tmall.key1">天猫关键词1:  <span class="error">{{tmall.key1}}</span>刷{{tmall.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * tmall.key1Count}}</p>
+                                <p ng-if="tmall.key2">天猫关键词2:  <span class="error">{{tmall.key2}}</span>刷{{tmall.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * tmall.key2Count}}</p>
+                                <p ng-if="tmall.key3">天猫关键词3:  <span class="error">{{tmall.key3}}</span>刷{{tmall.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * tmall.key3Count}}</p>
+                                <p ng-if="tmall.key4">天猫关键词4:  <span class="error">{{tmall.key4}}</span>刷{{tmall.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * tmall.key4Count}}</p>
+                                <p ng-if="tmall.key5">天猫关键词5:  <span class="error">{{tmall.key5}}</span>刷{{tmall.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * tmall.key5Count}}</p>
                                 <p class="small">注：到店访客流量数可能会有少量误差，属于正常情况；</p>
                                 <div class="border-bottom"></div>
                                 <p>你目前有 <span class="error">{{user.pv}}</span> 个访客流量,使用后还有 <span class="error">{{user.pv - cost.pv}}</span> 个访客流量</p>
                             </div>
                             <div class="border-bottom"></div>
                         </div>
-
                         <br/>
                         <div class="border-bottom"></div>
                         <br/>

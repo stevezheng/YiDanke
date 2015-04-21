@@ -9,7 +9,7 @@ module.exports = Controller("Home/BaseController", function () {
       self.assign('title', '用户登陆');
 
       if (self.isGet()) {
-        self.display();
+        return self.display();
       }
 
       if (self.isPost()) {
