@@ -203,17 +203,18 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            拥有金币： <span class="error"><%= cUser.coin %></span> 个= <span class="error"><%= cUser.coin %></span> 元 （做任务金币不够，可充值购买）
+                            拥有金币： <span class="error"><%= cUser.coin %></span> 个= <span class="error"><%= cUser.coin %></span> 元 （做任务金币不够，可充值购买） |
+                            拥有押金： <span class="error"><%= cUser.money %></span> 元
                         </div>
                     </div>
                     <div class="row" style="margin-top: 30px;">
                         <div class="col-lg-12">
-                            待返还笔数： <span class="error">0</span> 笔 待商家发放佣金： <span class="error">0.00</span> 金币 冻结金币： <span class="error">0.00</span> 个 | 经验值： <span class="error">0.00</span> 点
+                            待返还笔数： <span class="error"><%= count %></span> 笔 待平台发放押金： <span class="error"><%= money %></span> 元
                         </div>
                     </div>
                     <div class="row" style="margin-top: 30px;">
                         <div class="col-lg-12">
-                            垫付本金： <span class="error"><%= cUser.sellerMoney + cUser.platformMoney %></span> 元 | 可提现： <span class="error"><%= cUser.money %></span> 元
+                            待返退款保证金： <span class="error"><%= promiseMoney %></span> 元 | 可提现： <span class="error"><%= cUser.money %></span> 元
                         </div>
                     </div>
                 </div>
@@ -224,7 +225,8 @@
                 </header>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-lg-12">
+                        <div class="alert alert-warning">暂无公告</div>
+                        <div class="col-lg-12" style="display: none;">
                             <ul>
                                 <li style="margin-top: 10px;"><a href="">封号/扣金币通知 <span class="pull-right">2015-03-16 15:46:49</span></a></li>
                                 <li style="margin-top: 10px;"><a href="">最给力的福利来了，邀请会员做任务返金币，做的多返得多，快来参与吧！【新增邀请商家任务奖励<span class="pull-right">2015-03-16 15:46:49</span></a></li>

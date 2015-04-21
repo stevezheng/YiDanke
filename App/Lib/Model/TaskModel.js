@@ -1,5 +1,54 @@
 module.exports = Model(function() {
   return {
+    /**
+     * 电脑待返还笔数
+     * @param taskUserId
+     */
+    countPcDoing: function(taskUserId) {
+      var self = this;
+
+      return self
+        .where({taskUserId: taskUserId, taskStatus: 3})
+        .sum('taskPcDoingCount')
+    },
+
+    /**
+     * 电脑待返还笔数
+     * @param taskUserId
+     */
+    countPhoneDoing: function(taskUserId) {
+      var self = this;
+
+      return self
+        .where({taskUserId: taskUserId, taskStatus: 3})
+        .sum('taskPhoneDoingCount')
+    },
+
+    /**
+     * 通过的订单
+     * @param taskUserId
+     * @returns {*}
+     */
+    pass: function(taskUserId) {
+      var self = this;
+      var data = {
+        taskStatus: 3
+      };
+
+      if (taskUserId) {
+        data.taskUserId = taskUserId;
+      }
+
+      return self
+        .where(data)
+        .select()
+    },
+
+    /**
+     * 获取某用户的所有任务
+     * @param taskUserId
+     * @returns {*}
+     */
     all: function(taskUserId) {
       var self = this;
       return self
@@ -23,6 +72,10 @@ module.exports = Model(function() {
         .select()
     },
 
+    /**
+     * 获取所有通过的任务
+     * @returns {*}
+     */
     allPass: function() {
       var self = this;
       return self
@@ -31,6 +84,11 @@ module.exports = Model(function() {
         .select()
     },
 
+    /**
+     * 获取一个创建成功的任务
+     * @param id
+     * @returns {*}
+     */
     getOne: function(id) {
       var self = this;
 
@@ -39,6 +97,11 @@ module.exports = Model(function() {
         .find()
     },
 
+    /**
+     * 创建任务
+     * @param task
+     * @returns {*}
+     */
     addOne: function(task) {
       var self = this;
 
@@ -48,6 +111,12 @@ module.exports = Model(function() {
         .add(task)
     },
 
+    /**
+     * 任务付款
+     * @param userId
+     * @param id
+     * @returns {*}
+     */
     pay: function(userId, id) {
       var self = this;
 

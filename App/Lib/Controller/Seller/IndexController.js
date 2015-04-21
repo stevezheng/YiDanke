@@ -1,5 +1,7 @@
 var UserModel = thinkRequire('UserModel');
+var TaskModel = thinkRequire('TaskModel');
 var logUser = thinkRequire('LogUserModel')();
+var _ = require('underscore');
 
 module.exports = Controller("Seller/BaseController", function(){
   "use strict";
@@ -7,12 +9,47 @@ module.exports = Controller("Seller/BaseController", function(){
     indexAction: function() {
       var self = this;
       self.assign('title', '个人中心');
+      var count = 0;
 
       if (self.isGet()) {
         var user = UserModel();
+        var task = TaskModel();
         user.reloadCurrentUser(self)
-          .then(function() {
+          .then(function () {
+            return task
+              .countPcDoing(self.cUser.id)
+          })
+          .then(function (sum) {
+            count += sum;
+
+            return task
+              .countPhoneDoing(self.cUser.id)
+          })
+          .then(function (sum) {
+            count += sum;
+          })
+          .then(function () {
+            return task
+              .pass(self.cUser.id)
+          })
+          .then(function (res) {
+            var money = 0;
+            var promiseMoney = 0;
+            if (!isEmpty(res)) {
+              for (var i = 0; i < res.length; i++) {
+                var obj = res[i];
+                money += obj.taskTotalMoney * (obj.taskPcDoingCount + obj.taskPhoneDoingCount);
+                promiseMoney += obj.taskPromise * (obj.taskPcDoingCount + obj.taskPhoneDoingCount);
+              }
+            }
+
+            self.assign('money', money);
+            self.assign('promiseMoney', promiseMoney);
+            self.assign('count', count);
             self.display();
+          })
+          .catch(function(err) {
+            console.error(err.stack);
           })
       }
 
