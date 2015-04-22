@@ -231,6 +231,48 @@ module.exports = Controller("Seller/BaseController", function(){
           .then(function() {
             return self.success('加赏成功');
           })
+          .catch(function(err) {
+            return self.error(err);
+          })
+      }
+    },
+    
+    cancelTaskAction: function() {
+      var self = this;
+      self.assign('title', '');
+    
+      if (self.isGet()) {}
+      
+      if (self.isPost()) {
+        var taskId = self.post('taskId');
+        var task = TaskModel();
+        var user = UserModel();
+        var paybackMoney, paybackCoin;
+
+        return task
+          .getOwnOne(self.cUser.id, taskId)
+          .then(function(res) {
+            var totalUndoCount = res.taskTotalCount - res.taskPhoneDoingCount - res.taskPhoneDoneCount - res.taskPcDoingCount - res.taskPcDoneCount;
+            paybackMoney = totalUndoCount * (res.taskPromise + res.taskTotalMoney);
+            paybackCoin = totalUndoCount * (res.taskFee + res.taskExtendFee);
+
+            return task
+              .cancelTask(self.cUser.id, taskId)
+          })
+          .then(function() {
+            return user
+              .addMoney(self.cUser.id, paybackMoney)
+          })
+          .then(function() {
+            return user
+              .addCoin(self.cUser.id, paybackCoin)
+          })
+          .then(function() {
+            return self.success('撤销任务成功');
+          })
+          .catch(function(err) {
+            return self.error(err);
+          })
       }
     },
   };

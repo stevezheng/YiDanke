@@ -203,6 +203,14 @@ module.exports = Model(function() {
       return self
         .where({id: taskId})
         .update({taskExtendFee: ['exp', 'taskExtendFee+' + upTaskFee]})
+    },
+
+    cancelTask: function(taskUserId, taskId) {
+      var self = this;
+
+      return self
+        .where({id: taskId, taskUserId: taskUserId})
+        .update({taskStatus: -1})
     }
   }
 });

@@ -140,13 +140,13 @@
                                             </div>
                                             <div class="col-lg-6">
                                             <span>
-                                                任务编号： {{doing.taobaoTaskId}}
-                                                <a href="/seller/dotask/detail?id={{doing.taobaoTaskId}}">
+                                                任务编号： {{doing.taobaoTaskId || jdTaskId}}
+                                                <a href="/seller/dotask/detail?id={{doing.taobaoTaskId || jdTaskId}}">
                                                     [详情]
                                                 </a>
                                                 发布时间：{{doing.taskCreateTime | date: 'yyyy-MM-dd HH:mm'}}
                                             </span>
-                                            <span class="pull-right"><a href="javascript:;;;" ng-click="upTaskFee(doing)">加赏</a> | <a href="javascript:;;;" ng-click="cancel(doing)">撤销</a></span>
+                                            <span class="pull-right"><a href="javascript:;;;" ng-click="upTaskFee(doing)">加赏</a> | <a href="javascript:;;;" ng-click="cancelTask(doing)">撤销</a></span>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -187,13 +187,13 @@
                                             </div>
                                             <div class="col-lg-6">
                                             <span>
-                                                任务编号： {{done.taobaoTaskId}}
-                                                <a href="/seller/dotask/detail?id={{done.taobaoTaskId}}">
+                                                任务编号： {{done.taobaoTaskId || jdTaskId}}
+                                                <a href="/seller/dotask/detail?id={{done.taobaoTaskId || jdTaskId}}">
                                                     [详情]
                                                 </a>
                                                 发布时间：{{done.taskCreateTime | date: 'yyyy-MM-dd HH:mm'}}
                                             </span>
-                                                <span class="pull-right"><a href="javascript:;;;" ng-click="upTaskFee(done)">加赏</a> | <a href="javascript:;;;" ng-click="cancel(done)">撤销</a></span>
+                                                <span class="pull-right"><a href="javascript:;;;" ng-click="upTaskFee(done)">加赏</a> | <a href="javascript:;;;" ng-click="cancelTask(done)">撤销</a></span>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -234,13 +234,13 @@
                                             </div>
                                             <div class="col-lg-6">
                                             <span>
-                                                任务编号： {{cancel.taobaoTaskId}}
-                                                <a href="/seller/dotask/detail?id={{cancel.taobaoTaskId}}">
+                                                任务编号： {{cancel.taobaoTaskId || jdTaskId}}
+                                                <a href="/seller/dotask/detail?id={{cancel.taobaoTaskId || jdTaskId}}">
                                                     [详情]
                                                 </a>
                                                 发布时间：{{cancel.taskCreateTime | date: 'yyyy-MM-dd HH:mm'}}
                                             </span>
-                                                <span class="pull-right"><a href="javascript:;;;" ng-click="upTaskFee(cancel)">加赏</a> | <a href="javascript:;;;" ng-click="cancel(cancel)">撤销</a></span>
+                                                <span class="pull-right"><a href="javascript:;;;" ng-click="upTaskFee(cancel)">加赏</a> | <a href="javascript:;;;" ng-click="cancelTask(cancel)">撤销</a></span>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -282,13 +282,13 @@
                                             </div>
                                             <div class="col-lg-6">
                                             <span>
-                                                任务编号： {{task.taobaoTaskId}}
-                                                <a href="/seller/dotask/detail?id={{task.taobaoTaskId}}">
+                                                任务编号： {{task.taobaoTaskId || jdTaskId}}
+                                                <a href="/seller/dotask/detail?id={{task.taobaoTaskId || jdTaskId}}">
                                                     [详情]
                                                 </a>
                                                 发布时间：{{task.taskCreateTime | date: 'yyyy-MM-dd HH:mm'}}
                                             </span>
-                                                <span class="pull-right"><a href="javascript:;;;" ng-click="upTaskFee(task)">加赏</a> | <a href="javascript:;;;" ng-click="task(task)">撤销</a></span>
+                                                <span class="pull-right"><a href="javascript:;;;" ng-click="upTaskFee(task)">加赏</a> | <a href="javascript:;;;" ng-click="cancelTask(task)">撤销</a></span>
                                             </div>
                                         </div>
                                         <div class="row">

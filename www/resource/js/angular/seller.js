@@ -232,6 +232,18 @@
         })
     };
 
+    $scope.cancelTask = function(task) {
+      var taskId = task.taobaoTaskId || task.jdTaskId;
+
+      $http.post('/seller/tasks/cancelTask', {taskId: taskId})
+        .success(function(res) {
+          if (res.errno == 0) {
+            alert(res.data);
+            location.reload();
+          }
+        })
+    };
+
     $scope.statusMap = {
       task: {
         '-1': '已撤销'
