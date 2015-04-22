@@ -1,4 +1,5 @@
 var StatusService = thinkRequire('StatusService');
+var moment = require('moment');
 module.exports = Controller(function(){
   'use strict';
   return {
@@ -31,6 +32,9 @@ module.exports = Controller(function(){
           self.cUser = cUser;
           self.assign("StatusService", StatusService);
           self.assign("cUser", cUser);
+          self.assign("formatDate", function(_date) {
+            return moment(_date).format('YYYY-MM-DD');
+          });
         }
       })
     }

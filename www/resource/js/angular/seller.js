@@ -166,6 +166,23 @@
 
 
   SellerModule.controller('sellerTasksCtrl', function($scope, $http) {
+    $scope.repeatPublish = function(task) {
+      var platform = task.taskPlatform;
+      var type = task.taskType;
+      var shopId = task.taskShopId;
+
+      var url = '/publish/' + platform ;
+
+      if (type == 'dingdan') {
+        url += '/index'
+      } else if (type == 'zhitongche') {
+        url += '/zhitongche';
+      }
+
+      url += '?shopId=' + shopId + '&taskId=' + task.taobaoTaskId || task.jdTaskId;
+      location.href = url;
+    };
+
     function getOwnOneAll() {
       $http.get('/seller/tasks/dotasks')
         .success(function(res) {
