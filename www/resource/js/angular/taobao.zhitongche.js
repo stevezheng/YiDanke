@@ -599,6 +599,184 @@
       , key5extend4: ''
     };
 
+    var taskId = getQueryString('taskId');
+
+    if (taskId) {
+      $http.post('/publish/index/getTask', {taskId: taskId})
+        .success(function(res) {
+          if (res.errno == 0) {
+            res = res.data;
+            //任务花费明细
+            $scope.cost = {
+              totalCount: res.taskTotalCount //最终刷单数
+              , totalMoney: res.taskTotalMoney //最终商品1、商品2、商品3的总价格
+
+              //, transport: 0 //快递费
+
+              , promise: res.taskPromise //退款保证金
+              , totalPromise: res.taskTotalPromise //总退款保证金
+
+              , fee: res.taskFee //刷单一单的费用
+              , totalFee: res.taskTotalFee //刷单总的费用
+
+              , phone: res.taskPhone //移动端刷单附加费
+
+              , isPayback: res.taskIsPayback//是否平台返款
+              , payback: res.taskPayback //平台返款服务费
+
+              , speed: res.taskSpeed //提升完成任务速度
+
+              , isExtendFee: res.taskIsExtendFee //是否平台加赏任务佣金
+              , extendFee: res.taskExtendFee //加赏单任务佣金
+
+              , isInterval: res.taskIsInterval //是否任务发布间隔
+              , intervalTime: res.taskInterval //每隔多久发布
+              , intervalCount: res.taskIntervalCount //间隔发布几个
+              , interval: res.taskInterval//任务间隔发布费用
+
+              , selectPV: 60 //选择流量
+              , freePV: 0 //自定义流量
+              , pv: 60 //实际使用流量
+
+              , cycleTime: res.taskCycleTime //延长买家购物周期与费用(周期和费用一样)
+              , totalCycle: res.taskTotalCycle //延长买家购物周期总共费用 totalCycle = cycleTime * totalCount
+
+              , isGoodComment: false //是否优质好评
+              , goodCommentCount: 3 //好评个数
+              , goodCommentFee: 0 //好评费用
+              , goodComment: [ //好评内容
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                ''
+              ]
+            };
+            $scope.item = {
+              name: res.taskName //商品名称
+              , url: res.taskUrl //商品链接
+              , urlFlag: '' //商品链接是否正确
+              , tag1: res.taskTag1 //规格1
+              , tag2: res.taskTag2 //规格2
+              , money: res.taskMoney //购买价格
+              , count: res.taskCount //购买数量
+              , searchMoney: res.taskSearchMoney//搜索价格
+              , priceStart: res.taskPriceStart//搜索价格开始
+              , priceEnd: res.taskPriceEnd//搜索价格结束
+              , position: '全国'
+              , totalCount: res.taskTotalCount //选择刷单数
+              , freeTotalCount: 3 //自定义刷单数
+              , pcCount: res.taskPcCount //电脑端刷单数
+              , phoneCount: res.taskPhoneCount //移动端刷单数
+              , tips: res.taskTips //下单提示
+            };
+
+            $scope.extendItem1 = {
+              name: res.extend1Name
+              , url: res.extend1Url
+              , urlFlag: '' //商品链接是否正确
+              , image: ''
+              , imagefile: res.extend1Image
+              , tag1: res.extend1Tag1
+              , tag2: res.extend1Tag2
+              , money: res.extend1Money
+              , count: res.extend1Count
+              , searchMoney: res.extend1SearchMoney
+            };
+
+            $scope.extendItem2 = {
+              name: res.extend2Name
+              , url: res.extend2Url
+              , urlFlag: '' //商品链接是否正确
+              , image: ''
+              , imagefile: res.extend2Image
+              , tag1: res.extend2Tag1
+              , tag2: res.extend2Tag2
+              , money: res.extend2Money
+              , count: res.extend2Count
+              , searchMoney: res.extend2SearchMoney
+            };
+
+            $scope.taobao = {
+              searchBox: true
+              , imagefile: res.taobaoImage
+              , keywordsCount: res.taobaoKeywords
+              , key1: res.taobaoKey1
+              , key1Count: res.taobaoKeyCount1
+              , key1extend1: ''
+              , key1extend2: ''
+              , key1extend3: ''
+              , key1extend4: ''
+              , key2: ''
+              , key2Count: 0
+              , key2extend1: ''
+              , key2extend2: ''
+              , key2extend3: ''
+              , key2extend4: ''
+              , key3: ''
+              , key3Count: 0
+              , key3extend1: ''
+              , key3extend2: ''
+              , key3extend3: ''
+              , key3extend4: ''
+              , key4: ''
+              , key4Count: 0
+              , key4extend1: ''
+              , key4extend2: ''
+              , key4extend3: ''
+              , key4extend4: ''
+              , key5: ''
+              , key5Count: 0
+              , key5extend1: ''
+              , key5extend2: ''
+              , key5extend3: ''
+              , key5extend4: ''
+            };
+
+            $scope.tmall = {
+              searchBox: false
+              , keywordsCount: 1
+              , key1: ''
+              , key1Count: 0
+              , key1extend1: ''
+              , key1extend2: ''
+              , key1extend3: ''
+              , key1extend4: ''
+              , key2: ''
+              , key2Count: 0
+              , key2extend1: ''
+              , key2extend2: ''
+              , key2extend3: ''
+              , key2extend4: ''
+              , key3: ''
+              , key3Count: 0
+              , key3extend1: ''
+              , key3extend2: ''
+              , key3extend3: ''
+              , key3extend4: ''
+              , key4: ''
+              , key4Count: 0
+              , key4extend1: ''
+              , key4extend2: ''
+              , key4extend3: ''
+              , key4extend4: ''
+              , key5: ''
+              , key5Count: 0
+              , key5extend1: ''
+              , key5extend2: ''
+              , key5extend3: ''
+              , key5extend4: ''
+            };
+
+          }
+        })
+    }
+
     $scope.addTaobaoKeywordCount = function() {
       if ($scope.taobao.keywordsCount < 5) {
         $scope.taobao.keywordsCount++;

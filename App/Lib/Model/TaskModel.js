@@ -25,6 +25,39 @@ module.exports = Model(function() {
     },
 
     /**
+     * 获取属于用户的某个任务
+     * @param taskUserId
+     * @param taskId
+     */
+    getOwnOne: function(taskUserId, taskId) {
+      var self = this;
+
+      return self
+        .join({
+          table: 'task_taobao'
+          , join: 'left'
+          , on: {'id': 'taobaoTaskId'}
+        })
+        .join({
+          table: 'task_tmall'
+          , join: 'left'
+          , on: {'id': 'tmallTaskId'}
+        })
+        .join({
+          table: 'task_jd'
+          , join: 'left'
+          , on: {'id': 'jdTaskId'}
+        })
+        .join({
+          table: 'task_extend'
+          , join: 'left'
+          , on: {'id': 'extendTaskId'}
+        })
+        .where({taskUserId: taskUserId, 'yi_task.id': taskId})
+        .find()
+    },
+
+    /**
      * 通过的订单
      * @param taskUserId
      * @returns {*}
