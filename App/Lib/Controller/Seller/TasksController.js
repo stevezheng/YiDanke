@@ -275,5 +275,26 @@ module.exports = Controller("Seller/BaseController", function(){
           })
       }
     },
+
+    taskDetailAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+        var id = self.get('id');
+        var task = TaskModel();
+
+        return task
+          .getOwnOne(self.cUser.id, id)
+          .then(function(res) {
+            self.assign('task', res);
+            return self.display();
+          })
+      }
+
+      if (self.isPost()) {
+
+      }
+    },
   };
 });

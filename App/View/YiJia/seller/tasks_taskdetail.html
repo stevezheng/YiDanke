@@ -1,0 +1,189 @@
+<% include ../common_header.html %>
+<section id="container" ng-controller="sellerTasksCtrl">
+    <% include ./seller_nav.html %>
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+            <section class="panel">
+                <header class="panel-heading">
+                    任务详情
+                </header>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <section class="panel">
+                                <header class="panel-heading">
+                                    任务信息
+                                </header>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <p>
+                                                任务总单数: <span class="error">20</span>单
+                                            </p>
+                                            <p>
+                                                电脑端: <span class="error">3</span> 单
+                                            </p>
+                                            <p>
+                                                进行中: <span class="error">3</span> 单,
+                                                未接手: <span class="error">3</span> 单
+                                                已完成: <span class="error">3</span> 单
+                                            </p>
+                                            <p>
+                                                手机端: <span class="error">3</span> 单
+                                            </p>
+                                            <p>
+                                                进行中: <span class="error">3</span> 单,
+                                                未接手: <span class="error">3</span> 单
+                                                已完成: <span class="error">3</span> 单
+                                            </p>
+                                            <p>商品搜索关键词</p>
+                                            <p>淘宝搜索关键词：</p>
+                                            <p>天猫搜索关键词：</p>
+                                        </div>
+                                        <div class="border-bottom"></div>
+                                        <div class="col-lg-12">
+                                            <p>任务编号: 31242342343</p>
+                                            <p>任务发布时间: 31242342343</p>
+                                            <p>店铺: 动感超人</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="col-lg-8">
+                            <section class="panel">
+                                <header class="panel-heading">
+                                    任务状态： 任务已提交，等待付款
+                                </header>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <p>
+                                                您还可以：
+                                                <button class="btn btn-warning">修改任务</button>
+                                                <button class="btn btn-warning">撤销任务</button>
+                                            </p>
+                                        </div>
+                                        <div class="border-bottom"></div>
+                                        <div class="col-lg-12">
+                                            <p>平台返款冻结押金： <span class="error">23423423</span>元</p>
+                                            <p>平台已返还： <span class="error">423</span>元/<span class="error">0</span>笔</p>
+                                            <p>平台待返还： <span class="error">423</span>元/<span class="error">0</span>笔</p>
+                                            <p>已发放佣金： <span class="error">0</span>金币/<span class="error">0</span>笔</p>
+                                            <p>待发放佣金： <span class="error">0</span>金币/<span class="error">0</span>笔</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+        <section class="panel">
+            <header class="panel-heading">
+                任务清单
+            </header>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>买号</th>
+                                <th>下单终端</th>
+                                <th>订单号</th>
+                                <th>快递信息</th>
+                                <th>任务状态</th>
+                                <th>退款金额</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="panel">
+            <header class="panel-heading">
+                刷单商品
+            </header>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>商品</th>
+                                <th>单价</th>
+                                <th>购买数量</th>
+                                <th>小计</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="panel">
+            <header class="panel-heading">
+                费用合计
+            </header>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>商品</th>
+                                <th>单价</th>
+                                <th>购买数量</th>
+                                <th>小计</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section
+    </section>
+    <a href="#myModal" data-toggle="modal" style="display: none" id="btn-add-extend-fee">一键加赏</a>
+    <!-- Modal -->
+    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">加赏任务</h4>
+                </div>
+                <div class="modal-body">
+                    <p>请问您要加赏多少金币？</p>
+                    <input ng-model="upTaskFeeCoin" type="text" placeholder="金币" autocomplete="off" class="form-control placeholder-no-fix">
+
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-default" id="btn-cancel" type="button">取消</button>
+                    <button class="btn btn-info" ng-click="addExtendFee()" type="button">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal -->
+    <!--main content end-->
+</section>
+script:src
+<% include ../common_footer.html %>
