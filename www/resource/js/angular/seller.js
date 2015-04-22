@@ -215,6 +215,23 @@
         })
     }
 
+    $scope.upTaskFee = function(task) {
+      $('#btn-add-extend-fee').click();
+      $scope.upTaskFeeCoin = '';
+      $scope.currentTask = task;
+    };
+
+    $scope.addExtendFee = function() {
+      var task = $scope.currentTask;
+      $http.post('/publish/index/addExtendFee', {upTaskFee: $scope.upTaskFeeCoin, taskId: task.taobaoTaskId || task.jdTaskId})
+        .success(function(res) {
+          if (res.errno == 0) {
+            alert(res.data);
+            $('#btn-cancel').click();
+          }
+        })
+    };
+
     $scope.statusMap = {
       task: {
         '-1': '已撤销'

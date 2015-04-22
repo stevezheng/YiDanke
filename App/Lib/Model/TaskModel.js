@@ -195,6 +195,14 @@ module.exports = Model(function() {
         })
         .where({'yi_task.id': taskId})
         .find()
+    },
+
+    upTaskFee: function(taskId, upTaskFee) {
+      var self = this;
+
+      return self
+        .where({id: taskId})
+        .update({taskExtendFee: ['exp', 'taskExtendFee+' + upTaskFee]})
     }
   }
 });
