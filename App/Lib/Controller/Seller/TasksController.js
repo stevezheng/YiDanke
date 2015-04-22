@@ -1,5 +1,6 @@
 var DoTask = thinkRequire('DoTaskModel');
-var Task = thinkRequire('TaskModel');
+var TaskModel = thinkRequire('TaskModel');
+var UserModel = thinkRequire('UserModel');
 var moment = require('moment');
 
 module.exports = Controller("Seller/BaseController", function(){
@@ -21,7 +22,7 @@ module.exports = Controller("Seller/BaseController", function(){
       self.assign('title', '');
 
       if (self.isGet()) {
-        var task = Task();
+        var task = TaskModel();
 
         task
           .all(self.cUser.id)
@@ -185,6 +186,50 @@ module.exports = Controller("Seller/BaseController", function(){
           })
           .catch(function(err) {
             return self.error(500, '发货失败', err);
+          })
+      }
+    },
+
+    addExtendFeeAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+
+      }
+
+      if (self.isPost()) {
+        var taskId = self.post('taskId')
+          , upTaskFee = self.post('upTaskFee');
+        var user = UserModel();
+        var task = TaskModel();
+
+        var totalTaskFee, cTask, cUser;
+
+        return task
+          .getOwnOne(self.cUser.id, taskId)
+          .then(function(res) {
+            cTask = res;
+            return user
+              .getUser(self.cUser.id)
+          })
+          .then(function(res) {
+            cUser = res;
+            var totalUndoCount = cTask.taskTotalCount - cTask.taskPhoneDoingCount - cTask.taskPhoneDoneCount - cTask.taskPcDoingCount - cTask.taskPcDoneCount;
+            totalTaskFee = totalUndoCount * upTaskFee;
+            if (cUser.coin < totalTaskFee) {
+              return self.error(500, '金币不足');
+            } else {
+              return task
+                .upTaskFee(taskId, upTaskFee)
+            }
+          })
+          .then(function(res) {
+            return user
+              .subCoin(self.cUser.id, totalTaskFee)
+          })
+          .then(function() {
+            return self.success('加赏成功');
           })
       }
     },

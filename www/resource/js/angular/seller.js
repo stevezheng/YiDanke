@@ -223,7 +223,7 @@
 
     $scope.addExtendFee = function() {
       var task = $scope.currentTask;
-      $http.post('/publish/index/addExtendFee', {upTaskFee: $scope.upTaskFeeCoin, taskId: task.taobaoTaskId || task.jdTaskId})
+      $http.post('/seller/tasks/addExtendFee', {upTaskFee: $scope.upTaskFeeCoin, taskId: task.taobaoTaskId || task.jdTaskId})
         .success(function(res) {
           if (res.errno == 0) {
             alert(res.data);
