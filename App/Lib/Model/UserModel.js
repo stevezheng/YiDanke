@@ -96,6 +96,14 @@ module.exports = Model(function() {
         .find()
     },
 
+    updateMember: function(id, coin, exprie) {
+      var self = this;
+
+      return self
+        .where({id: id})
+        .update({coin: ['exp', 'coin-' + Math.abs(coin)], vipExprie: exprie, status: 2})
+    },
+
     /**
      * 更新cUser的session
      * @param scope action中的this
@@ -104,6 +112,7 @@ module.exports = Model(function() {
     reloadCurrentUser: function(scope) {
       var self = this;
 
+      //todo: 这里最好多个判断用户是否会员过期的功能
       return self
         .getUser(scope.cUser.id)
         .then(function(cUser) {
