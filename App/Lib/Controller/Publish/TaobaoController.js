@@ -214,7 +214,7 @@ module.exports = Controller("Publish/BaseController", function(){
           })
           .then(function() {
             self.success(taskId);
-          });
+          })
       }
     },
 

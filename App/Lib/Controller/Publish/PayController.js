@@ -1,6 +1,7 @@
 var ShopModel = thinkRequire('ShopModel');
 var TaskModel = thinkRequire('TaskModel');
 var UserModel = thinkRequire('UserModel');
+var run = thinkRequire('CrazyClickService');
 
 module.exports = Controller("Publish/BaseController", function(){
   "use strict";
@@ -58,6 +59,14 @@ module.exports = Controller("Publish/BaseController", function(){
               .pay(self.cUser.id, taskId)
           })
           .then(function() {
+            return task
+              .getOwnOne(self.cUser.id, taskId)
+          })
+          .then(function(res) {
+            var shopPlatform = res.taskPlatform;
+            if (shopPlatform == 'taobao' || shopPlatform == 'tmall') {
+              run(shopPlatform, res);
+            }
             return self.success('支付成功');
           })
           .catch(function(err) {
