@@ -272,15 +272,19 @@
     };
 
     $scope.cancelTask = function (task) {
-      var taskId = task.taobaoTaskId || task.jdTaskId;
+      var r = confirm('是否撤销该任务?');
 
-      $http.post('/seller/tasks/cancelTask', {taskId: taskId})
-        .success(function (res) {
-          if (res.errno == 0) {
-            alert(res.data);
-            location.reload();
-          }
-        })
+      if (r) {
+        var taskId = task.taobaoTaskId || task.jdTaskId;
+
+        $http.post('/seller/tasks/cancelTask', {taskId: taskId})
+          .success(function (res) {
+            if (res.errno == 0) {
+              alert(res.data);
+              location.reload();
+            }
+          })
+      }
     };
 
     $scope.statusMap = {
@@ -451,6 +455,21 @@
         , '2': '创建成功，待审核'
         , '3': '任务进行中'
         , '4': '任务已完成'
+      }
+    };
+
+    $scope.cancelTask = function(task) {
+      var r = confirm('是否要撤销该任务?');
+      if (r) {
+        var taskId = task.taobaoTaskId || task.jdTaskId;
+
+        $http.post('/seller/tasks/cancelTask', {taskId: taskId})
+          .success(function (res) {
+            if (res.errno == 0) {
+              alert(res.data);
+              location.reload();
+            }
+          })
       }
     };
 
