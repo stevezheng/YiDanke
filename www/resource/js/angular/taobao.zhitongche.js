@@ -712,26 +712,26 @@
               , key1extend2: ''
               , key1extend3: ''
               , key1extend4: ''
-              , key2: ''
-              , key2Count: 0
+              , key2: res.taobaoKey2
+              , key2Count: res.taobaoKeyCount2
               , key2extend1: ''
               , key2extend2: ''
               , key2extend3: ''
               , key2extend4: ''
-              , key3: ''
-              , key3Count: 0
+              , key3: res.taobaoKey3
+              , key3Count: res.taobaoKeyCount3
               , key3extend1: ''
               , key3extend2: ''
               , key3extend3: ''
               , key3extend4: ''
-              , key4: ''
-              , key4Count: 0
+              , key4: res.taobaoKey4
+              , key4Count: res.taobaoKeyCount4
               , key4extend1: ''
               , key4extend2: ''
               , key4extend3: ''
               , key4extend4: ''
-              , key5: ''
-              , key5Count: 0
+              , key5: res.taobaoKey5
+              , key5Count: res.taobaoKeyCount5
               , key5extend1: ''
               , key5extend2: ''
               , key5extend3: ''
@@ -741,32 +741,32 @@
             $scope.tmall = {
               searchBox: false
               , keywordsCount: 1
-              , key1: ''
-              , key1Count: 0
+              , key1: res.tmallKey1
+              , key1Count: res.tmallKeyCount1
               , key1extend1: ''
               , key1extend2: ''
               , key1extend3: ''
               , key1extend4: ''
-              , key2: ''
-              , key2Count: 0
+              , key2: res.tmallKey2
+              , key2Count: res.tmallKeyCount2
               , key2extend1: ''
               , key2extend2: ''
               , key2extend3: ''
               , key2extend4: ''
-              , key3: ''
-              , key3Count: 0
+              , key3: res.tmallKey3
+              , key3Count: res.tmallKeyCount3
               , key3extend1: ''
               , key3extend2: ''
               , key3extend3: ''
               , key3extend4: ''
-              , key4: ''
-              , key4Count: 0
+              , key4: res.tmallKey4
+              , key4Count: res.tmallKeyCount4
               , key4extend1: ''
               , key4extend2: ''
               , key4extend3: ''
               , key4extend4: ''
-              , key5: ''
-              , key5Count: 0
+              , key5: res.tmallKey5
+              , key5Count: res.tmallKeyCount5
               , key5extend1: ''
               , key5extend2: ''
               , key5extend3: ''

@@ -18,9 +18,9 @@ module.exports = Controller('Seller/BaseController', function() {
         var _vipExprie = self.cUser.vipExprie;
         var vipExprie = moment().diff(_vipExprie, 'days');
         if (vipExprie < 0) {
-          self.assign('vipExprie', '剩余' + Math.abs(vipExprie).toString());
+          self.assign('vipExprie', '剩余' + Math.abs(vipExprie).toString() + '天');
         } else {
-          self.assign('vipExprie', '超期' + Math.abs(vipExprie).toString());
+          self.assign('vipExprie', '已超期');
         }
         self.assign('statusMap', statusMap);
         return self.display();

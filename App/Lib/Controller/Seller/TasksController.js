@@ -296,5 +296,42 @@ module.exports = Controller("Seller/BaseController", function(){
 
       }
     },
+    
+    doTaskListAction: function() {
+      var self = this;
+      self.assign('title', '');
+    
+      if (self.isGet()) {
+
+      }
+      
+      if (self.isPost()) {
+        var taskId = self.post('taskId');
+
+        return D('do_task')
+          .join({
+            'table': 'do_task_detail'
+            , 'join': 'left'
+            , 'on': {
+              'id': 'doTaskDetailDoTaskId'
+            }
+          })
+          .join({
+            'table': 'do_task_extend'
+            , 'join': 'left'
+            , 'on': {
+              'id': 'doTaskExtendDoTaskId'
+            }
+          })
+          .where({doTaskTaskId: taskId})
+          .select()
+          .then(function(res) {
+            return self.success(res);
+          })
+          .catch(function(err) {
+            return self.error(err);
+          })
+      }
+    },
   };
 });
