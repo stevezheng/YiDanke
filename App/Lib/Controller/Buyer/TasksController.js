@@ -1,5 +1,6 @@
 var moment = require('moment');
 var DoTask = thinkRequire('DoTaskModel');
+var UserModel = thinkRequire('UserModel');
 module.exports = Controller("Buyer/BaseController", function(){
   "use strict";
   return {
@@ -139,6 +140,8 @@ module.exports = Controller("Buyer/BaseController", function(){
         var doTaskId = self.post('doTaskId');
         var taskId = self.post('taskId');
         var terminal = self.post('terminal');
+        var user = UserModel();
+        var _dotask;
         //修改确认退款状态
         return D('do_task_extend')
           .where({doTaskExtendDoTaskId: doTaskId})
@@ -149,6 +152,7 @@ module.exports = Controller("Buyer/BaseController", function(){
               .find()
           })
           .then(function(res) {
+            _dotask = res;
             if (res.doTaskStatus == 6) {
               return self.error(500, '请勿重复确认退款');
             } else {
@@ -174,9 +178,18 @@ module.exports = Controller("Buyer/BaseController", function(){
               .update(data)
           })
           .then(function() {
+            return user
+              .addCoin(self.cUser.id, '1')
+          })
+          .then(function() {
+            return user
+              .addMoney(self.cUser.id, _dotask.doTaskFee + _dotask.doTaskExtendFee)
+          })
+          .then(function() {
             return self.success('确认退款成功');
           })
           .catch(function(err) {
+            console.error(err.stack);
             return self.error(500, err);
           })
       }

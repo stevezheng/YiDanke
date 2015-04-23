@@ -332,7 +332,7 @@ module.exports = Model(function() {
 
       return self
         .where({id: id})
-        .updateInc('money', value)
+        .updateField('money', ['exp', 'money+' + value])
     },
 
     /**
@@ -346,7 +346,7 @@ module.exports = Model(function() {
 
       return self
         .where({id: id})
-        .updateDec('money', value)
+        .updateField('money', ['exp', 'money-' + parseFloat(value)])
     },
 
     /**
@@ -360,7 +360,7 @@ module.exports = Model(function() {
 
       return self
         .where({id: id})
-        .updateInc('coin', value)
+        .updateField('coin', ['exp', 'coin+' + parseFloat(value)])
     },
 
     /**
@@ -374,7 +374,7 @@ module.exports = Model(function() {
 
       return self
         .where({id: id})
-        .updateDec('coin', value)
+        .updateField('coin', ['exp', 'coin-' + parseFloat(value)])
     },
 
     /**

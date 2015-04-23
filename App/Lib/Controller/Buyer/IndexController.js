@@ -27,7 +27,7 @@ module.exports = Controller("Buyer/BaseController", function(){
             for (var i = 0; i < res.length; i++) {
               var obj = res[i];
 
-              if (obj.doTaskStatus >= 1 && obj.doTaskStatus < 5) {
+              if (obj.doTaskStatus >= 1 && obj.doTaskStatus < 6) {
                 doingCount++;
                 freezeMoney += obj.doTaskDetailOrderMoney;
                 freezeFee += obj.doTaskFee + obj.doTaskExtendFee;
