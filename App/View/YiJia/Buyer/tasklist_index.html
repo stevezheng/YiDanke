@@ -32,14 +32,14 @@
                         </div>
                         <div class="col-lg-4">
                             <h3>请选择买号</h3>
-                            <button ng-click="changeAccountId(account.id, account)" class="btn" ng-class="accountId==account.id?'btn-info':'btn-default'" ng-repeat="account in taobaoAccounts" ng-show="'taobao' == platform">
+                            <button ng-click="changeAccountId(account.id, account)" class="btn" ng-class="accountId==account.id?'btn-info':'btn-default'" ng-repeat="account in taobaoAccounts" ng-show="'taobao' == platform || 'tmall' == platform">
                                 {{account.accountName}}
                             </button>
                             <a class="btn btn-default" href="/buyer/account" ng-if="platform=='taobao' && taobaoAccounts.length == 0">去绑定买号</a>
-                            <button ng-click="changeAccountId(account.id, account)" class="btn" ng-class="accountId==account.id?'btn-info':'btn-default'" ng-repeat="account in tmallAccounts" ng-show="'tmall' == platform">
-                                {{account.accountName}}
-                            </button>
-                            <a class="btn btn-default" href="/buyer/account" ng-if="platform=='tmall' && tmallAccounts.length == 0">去绑定买号</a>
+                            <!--<button ng-click="changeAccountId(account.id, account)" class="btn" ng-class="accountId==account.id?'btn-info':'btn-default'" ng-repeat="account in tmallAccounts" ng-show="'tmall' == platform">-->
+                                <!--{{account.accountName}}-->
+                            <!--</button>-->
+                            <!--<a class="btn btn-default" href="/buyer/account" ng-if="platform=='tmall' && tmallAccounts.length == 0">去绑定买号</a>-->
                             <button ng-click="changeAccountId(account.id, account)" class="btn" ng-class="accountId==account.id?'btn-info':'btn-default'" ng-repeat="account in jdAccounts" ng-show="'jd' == platform">
                                 {{account.accountName}}
                             </button>
