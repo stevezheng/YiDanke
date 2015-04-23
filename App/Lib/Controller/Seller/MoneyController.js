@@ -239,6 +239,16 @@ module.exports = Controller("Seller/BaseController", function () {
       if (self.isPost()) {
         var payMethod = self.post('payMethod')
           , payPV = self.post('payPV');
+        var coinMap = {
+          '400': 100
+          , '5000': 1000
+          , '11428': 2000
+          , '33333': 5000
+          , '80000': 10000
+          , '200000': 20000
+        };
+
+        var coin = coinMap[payPV];
 
         if (payMethod == 'coin') {
           var user = UserModel();
@@ -246,11 +256,11 @@ module.exports = Controller("Seller/BaseController", function () {
           user
             .getUser(self.cUser.id)
             .then(function(res) {
-              if (payPV > res.coin) {
+              if (coin > res.coin) {
                 return self.error(500, '金币不足');
               } else {
                 return user
-                  .subCoin(self.cUser.id, payPV)
+                  .subCoin(self.cUser.id, coin)
                   .then(function() {
                     return user
                       .addPV(self.cUser.id, payPV)
@@ -266,11 +276,11 @@ module.exports = Controller("Seller/BaseController", function () {
           user
             .getUser(self.cUser.id)
             .then(function(res) {
-              if (payPV > res.money) {
+              if (coin > res.money) {
                 return self.error(500, '押金不足');
               } else {
                 return user
-                  .subMoney(self.cUser.id, payPV)
+                  .subMoney(self.cUser.id, coin)
                   .then(function() {
                     return user
                       .addPV(self.cUser.id, payPV)

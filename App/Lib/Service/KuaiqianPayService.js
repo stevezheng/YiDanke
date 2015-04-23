@@ -98,10 +98,10 @@ KuaiqianPayService.prototype = {
     kq_all_para = php.substr(kq_all_para,0, kq_all_para.length - 1);
 
     //正式版
-    //var private_key = fs.readFileSync(self.basePath + '/key/99bill-rsa.pem');
+    var private_key = fs.readFileSync(self.basePath + '/key/99bill-rsa.pem');
 
     //测试版
-    var private_key = fs.readFileSync(self.basePath + '/keybak/99bill-rsa.pem');
+    //var private_key = fs.readFileSync(self.basePath + '/keybak/99bill-rsa.pem');
 
     var signer = crypto.createSign('RSA-SHA1');
     signer.update(kq_all_para);
