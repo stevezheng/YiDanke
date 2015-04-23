@@ -385,11 +385,11 @@ module.exports = Model(function() {
      */
     addPV: function(id, payPV) {
       var self = this;
-      var pv = pvMap[payPV];
+      //var pv = pvMap[payPV];
 
       return self
         .where({id: id})
-        .updateInc('pv', pv)
+        .updateInc('pv', payPV)
     },
 
     /**

@@ -28,6 +28,10 @@ module.exports = Controller(function(){
             }
           }
 
+          if (cUser.status != 2 && self.http.controller != 'Member' && self.http.controller != 'Money') {
+            return self.redirect('/buyer/member');
+          }
+
           //用户已经登录
           self.cUser = cUser;
           self.assign("StatusService", StatusService);

@@ -11,7 +11,11 @@ module.exports = Controller("Seller/BaseController", function () {
       self.assign('title', '资金管理');
 
       if (self.isGet()) {
-        self.display();
+        var user = UserModel();
+        user.reloadCurrentUser(self)
+          .then(function () {
+            self.display();
+          })
       }
 
       if (self.isPost()) {
@@ -238,17 +242,17 @@ module.exports = Controller("Seller/BaseController", function () {
       
       if (self.isPost()) {
         var payMethod = self.post('payMethod')
-          , payPV = self.post('payPV');
+          , coin = self.post('payPV');
         var coinMap = {
-          '400': 100
-          , '5000': 1000
-          , '11428': 2000
-          , '33333': 5000
-          , '80000': 10000
-          , '200000': 20000
+          '100': 400
+          , '1000':5000
+          , '2000': 11428
+          , '5000': 33333
+          , '10000': 80000
+          , '20000': 200000
         };
 
-        var coin = coinMap[payPV];
+        var payPV = coinMap[coin];
 
         if (payMethod == 'coin') {
           var user = UserModel();

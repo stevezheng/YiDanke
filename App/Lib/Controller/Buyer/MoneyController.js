@@ -11,7 +11,11 @@ module.exports = Controller("Buyer/BaseController", function(){
       self.assign('title', '资金管理');
 
       if (self.isGet()) {
-        self.display();
+        var user = UserModel();
+        user.reloadCurrentUser(self)
+          .then(function () {
+            self.display();
+          })
       }
 
       if (self.isPost()) {}
