@@ -43,7 +43,7 @@ module.exports = Controller("Seller/BaseController", function () {
               //pageUrl: "http://bbs.yijia90.com/seller/money/kuaiqianrecieve",
 
               //bgUrl: "",
-              bgUrl: "http://bbs.yijia90.com/seller/money/kuaiqianrecieve",
+              bgUrl: "http://www.yijia90.com/seller/money/kuaiqianrecieve",
 
               version: "v2.0",
               language: "1",
@@ -156,9 +156,8 @@ module.exports = Controller("Seller/BaseController", function () {
                           .pass(res.id, res.moneyUserId, dealId)
                       })
                       .then(function () {
-                        var r = '<result>1</result> <redirecturl>http://baidu.com</redirecturl>';
-                        //var r = '<result>1</result> <redirecturl>http://bbs.yijia90.com/'+ext1+'</redirecturl>';
-                        console.log(r);
+                        //var r = '<result>1</result> <redirecturl>http://baidu.com</redirecturl>';
+                        var r = '<result>1</result> <redirecturl>http://www.yijia90.com/'+ext1+'</redirecturl>';
                         return self.echo(r);
                       })
                       .catch(function(err) {
@@ -172,8 +171,8 @@ module.exports = Controller("Seller/BaseController", function () {
                           .pass(res.id, res.moneyUserId, dealId)
                       })
                       .then(function () {
-                        var r = '<result>1</result> <redirecturl>http://baidu.com</redirecturl>';
-                        //var r = '<result>1</result> <redirecturl>http://bbs.yijia90.com/'+ext1+'</redirecturl>';
+                        //var r = '<result>1</result> <redirecturl>http://baidu.com</redirecturl>';
+                        var r = '<result>1</result> <redirecturl>http://www.yijia90.com/'+ext1+'</redirecturl>';
                         console.log(r);
                         return self.echo(r);
                       })
@@ -182,17 +181,17 @@ module.exports = Controller("Seller/BaseController", function () {
                       })
                   }
                 } else {
-                  var r = '<result>0</result> <redirecturl>http://www.yijia09.com/home/money/error</redirecturl>'
+                  var r = '<result>0</result> <redirecturl>http://www.yijia90.com/home/money/error</redirecturl>'
                   return self.end(r);
                 }
               });
           default:
-            var r = '<result>0</result> <redirecturl>http://www.yijia09.com/home/money/error</redirecturl>'
+            var r = '<result>0</result> <redirecturl>http://www.yijia90.com/home/money/error</redirecturl>'
             return self.end(r);
 
         }
       } else {
-        var r = '<result>0</result> <redirecturl>http://www.yijia09.com/home/money/error</redirecturl>'
+        var r = '<result>0</result> <redirecturl>http://www.yijia90.com/home/money/error</redirecturl>'
         return self.end(r);
       }
     },

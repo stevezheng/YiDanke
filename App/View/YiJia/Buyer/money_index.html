@@ -11,7 +11,7 @@
                     <header class="panel-heading" style="font-size: 12px;">
                         <i class="icon-ok-sign"></i>&nbsp;目前您账户剩余金币8个， 可接手8个任务；如需接手更多任务，请先充值购买金币；购买的金币作为接手任务的押金冻结；任务完成之后会自动解冻。
                     </header>
-                    <div class="panel-body">
+                    <div class="panel-body" id="paycoin">
                         <div class="row">
                             <div class="col-lg-12">
                                 1.选择套餐
@@ -19,25 +19,25 @@
                         </div>
                         <div class="row" style="margin-top: 30px">
                             <div class="col-lg-2">
-                                <div class="box-money active">
+                                <div class="box-money active" data-data="10">
                                     <div class="title-money">10金币迷你包</div>
                                     <div class="content-money">10元</div>
                                 </div>
                             </div>
                             <div class="col-lg-2">
-                                <div class="box-money">
+                                <div class="box-money" data-data="20">
                                     <div class="title-money">20金币标准包</div>
                                     <div class="content-money">20元</div>
                                 </div>
                             </div>
                             <div class="col-lg-2">
-                                <div class="box-money">
+                                <div class="box-money" data-data="40">
                                     <div class="title-money">40金币高级包</div>
                                     <div class="content-money">40元</div>
                                 </div>
                             </div>
                             <div class="col-lg-2">
-                                <div class="box-money">
+                                <div class="box-money" data-data="100">
                                     <div class="title-money">100金币豪华包</div>
                                     <div class="content-money">100元</div>
                                 </div>
@@ -55,7 +55,7 @@
                         </div>
                         <div class="row" style="margin-top: 30px;">
                             <div class="col-lg-2">
-                                <div class="box-pay active">
+                                <div class="box-pay active" data-data="kuaiqian">
                                     <div class="title-pay">快钱</div>
                                     <div class="content-pay">
                                         <img src="/resource/img/paycenter.gif" alt="" width="100%"/>
@@ -63,7 +63,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-2">
-                                <div class="box-pay">
+                                <div class="box-pay" data-data="alipay">
                                     <div class="title-pay">支付宝</div>
                                     <div class="content-pay">
                                         <img src="/resource/img/paycenter.gif" alt="" width="100%"/>
@@ -73,7 +73,7 @@
                         </div>
                         <div class="row" style="margin-top: 30px">
                             <div class="col-lg-12">
-                                <button class="btn btn-info">确认</button>
+                                <button class="btn btn-info" id="btn-pay">确认</button>
                             </div>
                         </div>
                     </div>
@@ -120,13 +120,10 @@
                         <div class="tab-pane" id="coin">
                         </div>
                         <div class="tab-pane " id="money">
-                            Recent Item goes here
                         </div>
                         <div class="tab-pane " id="pay">
-                            Recent Item goes here
                         </div>
                         <div class="tab-pane " id="user">
-                            Recent Item goes here
                         </div>
                     </div>
                 </div>
@@ -148,4 +145,27 @@
         $('.box-pay').removeClass('active');
         self.addClass('active');
     });
+
+    function getPayMethod(element) {
+        return $(element).find('.box-pay.active').attr('data-data');
+    }
+
+        $('#btn-pay').click(function() {
+            //支付方式
+            var payMethod = getPayMethod('#paycoin');
+
+            //支付金币
+            var payCoin= $('#paycoin .box-money.active').attr('data-data');
+
+            if (payCoin < 1) {
+                alert('最低1元起充');
+                return false;
+            }
+
+            if (payMethod == 'kuaiqian') {
+                window.open('/buyer/money/kuaiqian?type=0&value=' + payCoin);
+            } else if (payMethod == 'alipay') {
+                location.href = '/buyer/money/alipay?type=0&value=' + payCoin;
+            }
+        })
 </script>
