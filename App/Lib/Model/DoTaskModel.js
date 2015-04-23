@@ -97,6 +97,13 @@ module.exports = Model(function() {
           }
         })
         .join({
+          table: 'do_task_detail'
+          , join: 'left'
+          , on: {
+            'id': 'doTaskDetailTaskId'
+          }
+        })
+        .join({
           table: 'task_extend'
           , join: 'left'
           , on: {

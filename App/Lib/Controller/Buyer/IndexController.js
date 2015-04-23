@@ -12,7 +12,38 @@ module.exports = Controller("Buyer/BaseController", function(){
         var user = UserModel();
         user.reloadCurrentUser(self)
           .then(function() {
+            var DoTaskModel = thinkRequire('DoTaskModel');
+            var doTask = DoTaskModel();
+
+            return doTask
+              .getOwnOneAllByBuyer(self.cUser.id)
+          })
+          .then(function(res) {
+            var doingCount = 0;
+            var freezeMoney = 0;
+            var freezeFee = 0;
+            var dianfu = 0;
+
+            for (var i = 0; i < res.length; i++) {
+              var obj = res[i];
+
+              if (obj.doTaskStatus >= 1 && obj.doTaskStatus < 5) {
+                doingCount++;
+                freezeMoney += obj.doTaskDetailOrderMoney;
+                freezeFee += obj.doTaskFee + obj.doTaskExtendFee;
+              }
+              dianfu += obj.doTaskDetailOrderMoney || 0;
+            }
+            self.assign('doTasks', res);
+            self.assign('doingCount', doingCount);
+            self.assign('dianfu', dianfu.toFixed(2));
+            self.assign('freezeMoney', freezeMoney.toFixed(2));
+            self.assign('freezeFee', freezeFee.toFixed(2));
             self.display();
+          })
+          .catch(function(err) {
+            console.error(err.stack);
+            return self.error(err);
           })
       }
 
