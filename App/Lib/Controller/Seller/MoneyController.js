@@ -33,10 +33,10 @@ module.exports = Controller("Seller/BaseController", function () {
           .then(function (insertId) {
             var config = {
               //测试
-              merchantAcctId: "1001213884201",
+              //merchantAcctId: "1001213884201",
 
               //正式
-              //merchantAcctId: "1002429517101",
+              merchantAcctId: "1002429517101",
               inputCharset: "1",
 
               pageUrl: "",

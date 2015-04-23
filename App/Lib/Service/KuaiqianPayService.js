@@ -118,10 +118,10 @@ KuaiqianPayService.prototype = {
 function checkSignature(data, sig) {
   var basePath = RESOURCE_PATH + '/resource/';
   //正式版
-  //var keyPath = basePath + '/key/99bill.cert.rsa.20340630.cer';
+  var keyPath = basePath + '/key/99bill.cert.rsa.20340630.cer';
 
   //测试版
-  var keyPath = basePath + '/keybak/99bill[1].cert.rsa.20140803.cer';
+  //var keyPath = basePath + '/keybak/99bill[1].cert.rsa.20140803.cer';
   var key = fs.readFileSync(keyPath);
 
   var verifier = crypto.createVerify('RSA-SHA1');

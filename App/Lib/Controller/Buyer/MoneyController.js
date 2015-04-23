@@ -32,17 +32,17 @@ module.exports = Controller("Buyer/BaseController", function(){
           .then(function (insertId) {
             var config = {
               //测试
-              merchantAcctId: "1001213884201",
+              //merchantAcctId: "1001213884201",
 
               //正式
-              //merchantAcctId: "1002429517101",
+              merchantAcctId: "1002429517101",
               inputCharset: "1",
 
               pageUrl: "",
-              //pageUrl: "http://bbs.yijia90.com/seller/money/kuaiqianrecieve",
+              //pageUrl: "http://bbs.yijia90.com/buyer/money/kuaiqianrecieve",
 
               //bgUrl: "",
-              bgUrl: "http://www.yijia90.com/seller/money/kuaiqianrecieve",
+              bgUrl: "http://www.yijia90.com/buyer/money/kuaiqianrecieve",
 
               version: "v2.0",
               language: "1",
@@ -56,9 +56,9 @@ module.exports = Controller("Buyer/BaseController", function(){
               productName: "www.yijia90.com",
               productNum: "1",
               productId: insertId || "55558888",
-              productDesc: 'seller' || "",
-              ext1: 'seller',
-              ext2: insertId + ',seller',
+              productDesc: 'buyer' || "",
+              ext1: 'buyer',
+              ext2: insertId + ',buyer',
               payType: "00",
               bankId: "",
               redoFlag: "",
