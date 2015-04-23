@@ -2,6 +2,31 @@
   var Module = angular.module('YiAppAdmin.User', ['angularFileUpload']);
 
   Module.controller('buyerCtrl', function($scope, $http, $upload) {
+    $scope.addMoney = function(user) {
+      var r = prompt('增加多少押金?');
+      if (r) {
+        $http.post('/admin/user/money', {id: user.id, type: 'add', money: r})
+          .success(function(res) {
+            if (res.errno == 0) {
+              alert(res.data);
+              user.money += parseFloat(r);
+            }
+          })
+      }
+    };
+
+    $scope.addCoin = function(user) {
+      var r = prompt('增加多少金币?');
+      if (r) {
+        $http.post('/admin/user/coin', {id: user.id, type: 'add', coin: r})
+          .success(function(res) {
+            if (res.errno == 0) {
+              alert(res.data);
+              user.coin += parseFloat(r);
+            }
+          })
+      }
+    };
     $scope.page = 1;
 
     $scope.changePage = function(page) {
@@ -30,6 +55,31 @@
   });
 
   Module.controller('sellerCtrl', function($scope, $http, $upload) {
+    $scope.addMoney = function(user) {
+      var r = prompt('增加多少押金?');
+      if (r) {
+        $http.post('/admin/user/money', {id: user.id, type: 'add', money: r})
+          .success(function(res) {
+            if (res.errno == 0) {
+              alert(res.data);
+              user.money += parseFloat(r);
+            }
+          })
+      }
+    };
+
+    $scope.addCoin = function(user) {
+      var r = prompt('增加多少金币?');
+      if (r) {
+        $http.post('/admin/user/coin', {id: user.id, type: 'add', coin: r})
+          .success(function(res) {
+            if (res.errno == 0) {
+              alert(res.data);
+              user.coin += parseFloat(r);
+            }
+          })
+      }
+    };
     $scope.page = 1;
 
     $scope.changePage = function(page) {

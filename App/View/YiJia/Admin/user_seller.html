@@ -21,6 +21,7 @@
                                 <th>金币</th>
                                 <th>本金</th>
                                 <th>流量</th>
+                                <th>操作</th>
                             </tr>
                             </thead>
                             <tr ng-repeat="user in users">
@@ -33,6 +34,10 @@
                                 <td>{{user.coin}}</td>
                                 <td>{{user.money}}</td>
                                 <td>{{user.pv}}</td>
+                                <td>
+                                    <button class="btn btn-success" ng-click="addMoney(user)">增加押金</button>
+                                    <button class="btn btn-success" ng-click="addCoin(user)">增加金币</button>
+                                </td>
                             </tr>
                         </table>
                         <div class="text-center">

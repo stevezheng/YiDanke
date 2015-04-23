@@ -20,6 +20,7 @@
                                 <th>所在地</th>
                                 <th>金币</th>
                                 <th>本金</th>
+                                <th>操作</th>
                             </tr>
                             </thead>
                             <tr ng-repeat="user in users">
@@ -31,6 +32,10 @@
                                 <td>{{user.province}}{{user.city}}{{user.area}}</td>
                                 <td>{{user.coin}}</td>
                                 <td>{{user.money}}</td>
+                                <td>
+                                    <button class="btn btn-success" ng-click="addMoney(user)">增加押金</button>
+                                    <button class="btn btn-success" ng-click="addCoin(user)">增加金币</button>
+                                </td>
                             </tr>
                         </table>
                         <div class="text-center">
