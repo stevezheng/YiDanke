@@ -29,12 +29,11 @@ module.exports = Controller('Seller/BaseController', function() {
       if (self.isPost()) {
         var time = self.post('time');
         var map = {
-          '1': 20
-          , '3': 50
-          , '6': 100
-          , '9': 150
-          , '12': 200
-          , '24': 400
+          '3': 600
+          , '6': 1200
+          , '12': 2400
+          , '24': 4320
+          , '48': 7680
         };
 
         var user = UserModel();

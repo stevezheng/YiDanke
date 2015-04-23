@@ -35,7 +35,7 @@
                                 <div class="radio">
                                     <label>
                                         <input type="radio" name="optionsRadios" value="1" checked>
-                                        1个月 <span class="error">20</span>元
+                                        3个月 <span class="error">600</span>元
                                     </label>
                                 </div>
                             </label>
@@ -43,7 +43,7 @@
                                 <div class="radio">
                                     <label>
                                         <input type="radio" name="optionsRadios" value="3">
-                                        3个月 <span class="error">50</span>元
+                                        6个月 <span class="error">1200</span>元
                                     </label>
                                 </div>
                             </label>
@@ -51,7 +51,7 @@
                                 <div class="radio">
                                     <label>
                                         <input type="radio" name="optionsRadios" value="6">
-                                        6个月 <span class="error">100</span>元
+                                        12个月 <span class="error">2400</span>元
                                     </label>
                                 </div>
                             </label>
@@ -59,7 +59,7 @@
                                 <div class="radio">
                                     <label>
                                         <input type="radio" name="optionsRadios" value="9">
-                                        9个月 <span class="error">150</span>元
+                                        24个月 <span class="error">4320</span>元
                                     </label>
                                 </div>
                             </label>
@@ -67,7 +67,7 @@
                                 <div class="radio">
                                     <label>
                                         <input type="radio" name="optionsRadios" value="12">
-                                        12个月 <span class="error">200</span>元
+                                        48个月 <span class="error">7680</span>元
                                     </label>
                                 </div>
                             </label>
@@ -101,12 +101,11 @@
 <script>
     var user = {};
     var map = {
-        '1': 20
-        , '3': 50
-        , '6': 100
-        , '9': 150
-        , '12': 200
-        , '24': 400
+        '3': 600
+        , '6': 1200
+        , '12': 2400
+        , '24': 4320
+        , '48': 7680
     };
     $('input[name="optionsRadios"]').change(function() {
         user.coin = parseFloat('<%= cUser.coin %>');
