@@ -333,5 +333,43 @@ module.exports = Controller("Seller/BaseController", function(){
           })
       }
     },
+
+    doTaskDetailAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+        self.display();
+      }
+
+      if (self.isPost()) {
+        var id = self.post('id');
+
+        return D('do_task')
+          .join({
+            'table': 'do_task_detail'
+            , 'join': 'left'
+            , 'on': {
+              'id': 'doTaskDetailDoTaskId'
+            }
+          })
+          .join({
+            'table': 'do_task_extend'
+            , 'join': 'left'
+            , 'on': {
+              'id': 'doTaskExtendDoTaskId'
+            }
+          })
+          .where({'yi_do_task.id': id})
+          .find()
+          .then(function(res) {
+            return self.success(res);
+          })
+          .catch(function(err) {
+            console.error(err.stack);
+            return self.error(err);
+          })
+      }
+    },
   };
 });

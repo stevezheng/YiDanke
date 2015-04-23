@@ -54,7 +54,7 @@
                         <div class="col-lg-8">
                             <section class="panel">
                                 <header class="panel-heading">
-                                    任务状态： 任务已提交，等待付款
+                                    任务状态： {{statusMap.taskStatus[task.taskStatus]}}
                                 </header>
                                 <div class="panel-body">
                                     <div class="row">
@@ -99,10 +99,19 @@
                             <tr ng-repeat="dotask in dotasks" ng-if="dotasks.length > 0">
                                 <td>{{dotask.doTaskAccountName}}</td>
                                 <td>{{dotask.doTaskTerminal=='pc'?'电脑端':'移动端'}}</td>
-                                <td>{{dotask.doTaskDetailOrderId}}</td>
                                 <td>
-                                    {{dotask.doTaskExtendExpressName}}
-                                    {{dotask.doTaskExtendExpressId}}
+                                    <p>
+                                        {{dotask.doTaskDetailOrderId}}
+                                    </p>
+                                    <p><a href="/seller/tasks/doTaskDetail?id={{dotask.doTaskDetailDoTaskId}}&taskId={{dotask.doTaskTaskId}}">查看详情</a></p>
+                                </td>
+                                <td>
+                                    <p>
+                                        {{dotask.doTaskExtendExpressName}}
+                                    </p>
+                                    <p>
+                                        {{dotask.doTaskExtendExpressId}}
+                                    </p>
                                 </td>
                                 <td>{{statusMap[dotask.doTaskStatus]}}</td>
                                 <td>{{dotask.doTaskDetailOrderMoney}}</td>

@@ -1,0 +1,210 @@
+<% include ../common_header.html %>
+<section id="container" ng-controller="sellerDoTaskDetailCtrl">
+    <% include ./seller_nav.html %>
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+            <section class="panel">
+                <header class="panel-heading">
+                    任务详情
+                </header>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <section class="panel">
+                                <header class="panel-heading">
+                                    任务信息
+                                </header>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <p>
+                                                任务总单数: <span class="error">{{task.taskTotalCount}}</span>单
+                                            </p>
+                                            <p>
+                                                电脑端: <span class="error">{{task.taskPcCount}}</span> 单
+                                            </p>
+                                            <p>
+                                                进行中: <span class="error">{{task.taskPcDoingCount}}</span> 单,
+                                                未接手: <span class="error">{{task.taskPcCount - task.taskPcDoingCount - task.taskPcDoneCount}}</span> 单,
+                                                已完成: <span class="error">{{task.taskPcDoneCount}}</span> 单
+                                            </p>
+                                            <p>
+                                                手机端: <span class="error">{{task.taskPhoneCount}}</span> 单
+                                            </p>
+                                            <p>
+                                                进行中: <span class="error">{{task.taskPhoneDoingCount}}</span> 单,
+                                                未接手: <span class="error">{{task.taskPhoneCount - task.taskPhoneDoingCount - task.taskPhoneDoneCount}}</span> 单,
+                                                已完成: <span class="error">{{task.taskPhoneDoneCount}}</span> 单
+                                            </p>
+                                            <p>商品搜索关键词</p>
+                                            <p>淘宝搜索关键词：{{task.taobaoKey1}} {{task.taobaoKey2}} {{task.taobaoKey3}} {{task.taobaoKey4}} {{task.taobaoKey5}}</p>
+                                            <p>天猫搜索关键词：{{task.tmallKey1}} {{task.tmallKey2}} {{task.tmallKey3}} {{task.tmallKey4}} {{task.tmallKey5}}</p>
+                                        </div>
+                                        <div class="border-bottom"></div>
+                                        <div class="col-lg-12">
+                                            <p>任务编号: {{task.taobaoTaskId || task.jdTaskId}}</p>
+                                            <p>任务发布时间: {{task.taskCreateTime | date: 'yyyy-MM-dd HH:mm'}}</p>
+                                            <p>店铺: {{task.taskShopName}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="col-lg-8">
+                            <section class="panel">
+                                <header class="panel-heading">
+                                    任务状态
+                                </header>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <h3>{{statusMap[dotask.doTaskStatus]}}
+                                                <img src="/resource/img/icon.png" alt="" class="pull-right"/>
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="panel">
+                <header class="panel-heading">
+                    任务进展
+                </header>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="alert alert-info" style="display: none;">
+                            货比三家
+                        </div>
+
+                        <div class="alert alert-info">
+                            <h4>
+                                浏览店铺，客服询盘 <span class="small">{{dotask.doTaskDetailCreateTime | date: 'yyyy-MM-dd HH:mm'}}</span>
+                            </h4>
+                            <p>聊天截图如下：</p>
+                            <p>
+                                <img ng-src="{{dotask.doTaskDetailTalkImage}}" alt=""/>
+                            </p>
+                        </div>
+
+                        <div class="alert alert-info">
+                            <h4>
+                                下单支付 <span class="small">{{dotask.doTaskDetailCreateTime | date: 'yyyy-MM-dd HH:mm'}}</span>
+                            </h4>
+                            <p>买手已完成，订单号 <span class="error">{{dotask.doTaskDetailOrderId}}</span>：</p>
+                            <p>
+                                <img ng-src="{{dotask.doTaskDetailOrderImage}}" alt=""/>
+                            </p>
+                        </div>
+
+                        <div class="alert alert-info">
+                            <h4>
+                                商家发货 <span class="small">{{dotask.doTaskExtendExpressCreateTime | date: 'yyyy-MM-dd HH:mm'}}</span>
+                            </h4>
+                            <p>快递方式: <span class="error">{{dotask.doTaskExtendExpressName}}</span></p>
+                            <p>快递单号: <span class="error">{{dotask.doTaskExtendExpressId}}</span></p>
+                        </div>
+
+                        <div class="alert alert-info">
+                            <h4>
+                                收货并好评 <span class="small">{{dotask.doTaskExtendExpressTime | date: 'yyyy-MM-dd HH:mm'}}</span>
+                            </h4>
+                            <p>买手号: <span class="error">{{dotask.doTaskAccountName}}</span></p>
+                            <p>商品名称: <span class="error">{{task.taskName}}</span></p>
+                            <p>评价内容: <span class="error">{{dotask.doTaskExtendGoodComment}}</span></p>
+                        </div>
+
+                        <div class="alert alert-info">
+                            <h4>
+                                平台返款 <span class="small">{{dotask.doTaskExtendPaybackTime | date: 'yyyy-MM-dd HH:mm'}}</span>
+                            </h4>
+                            <p>商家已确认返款金额: <span class="error">{{dotask.doTaskDetailOrderMoney}}</span></p>
+                            <p class="error">平台将会在买手确认返款金额无误后，将垫付本金打入买手账户</p>
+                        </div>
+
+                        <div class="alert alert-info">
+                            <h4>
+                                平台返款完成 <span class="small">{{dotask.doTaskExtendConfirmTime | date: 'yyyy-MM-dd HH:mm'}}</span>
+                            </h4>
+                            <p class="error">已完成买手确认订单</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="panel">
+                <header class="panel-heading">
+                    刷单商品
+                </header>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>商品</th>
+                                    <th>单价</th>
+                                    <th>购买数量</th>
+                                    <th>小计</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <img ng-src="{{task.taobaoImage || task.tmallImage || task.jdImage}}" alt="" width="50"/>
+                                    <span class="error">
+                                    {{task.taskName}}
+                                    </span>
+                                    </td>
+                                    <td>
+                                        {{task.taskMoney}}元
+                                    </td>
+                                    <td>
+                                        {{task.taskCount}}
+                                    </td>
+                                    <td>{{task.taskMoney * task.taskCount}}元</td>
+                                </tr>
+                                <tr ng-if='task.extend1Name'>
+                                    <td>
+                                        <img ng-src="{{task.extend1Image}}" alt="" width="50"/>
+                                    <span class="error">
+                                    {{task.extend1Name}}
+                                    </span>
+                                    </td>
+                                    <td>
+                                        {{task.extend1Money}}元
+                                    </td>
+                                    <td>
+                                        {{task.extend1Count}}
+                                    </td>
+                                    <td>{{task.extend1Money * task.extend1Count }}元</td>
+                                </tr>
+                                <tr ng-if='task.extend2Name'>
+                                    <td>
+                                        <img ng-src="{{task.extend2Image}}" alt="" width="50"/>
+                                    <span class="error">
+                                    {{task.extend2Name}}
+                                    </span>
+                                    </td>
+                                    <td>
+                                        {{task.extend2Money}}元
+                                    </td>
+                                    <td>
+                                        {{task.extend2Count}}
+                                    </td>
+                                    <td>{{task.extend2Money * task.extend2Count }}元</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section
+        </section>
+    </section>
+    <!--main content end-->
+</section>
+script:src
+<% include ../common_footer.html %>
