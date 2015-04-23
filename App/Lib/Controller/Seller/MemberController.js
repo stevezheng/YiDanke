@@ -23,7 +23,12 @@ module.exports = Controller('Seller/BaseController', function() {
           self.assign('vipExprie', '已超期');
         }
         self.assign('statusMap', statusMap);
-        return self.display();
+
+        var user = UserModel();
+        user.reloadCurrentUser(self)
+          .then(function () {
+            self.display();
+          })
       }
 
       if (self.isPost()) {
