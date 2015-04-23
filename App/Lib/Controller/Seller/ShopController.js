@@ -67,6 +67,7 @@ module.exports = Controller("Seller/BaseController", function(){
           , shopProvince = self.post('shopProvince')
           , shopCity = self.post('shopCity')
           , shopArea = self.post('shopArea')
+          , shopExpressNumber = self.post('shopExpressNumber')
           , shopPlatform = self.post('shopPlatform');
 
         var shop = ShopModel();
@@ -104,6 +105,7 @@ module.exports = Controller("Seller/BaseController", function(){
           , shopCity = self.post('shopCity')
           , shopArea = self.post('shopArea')
           , shopPlatform = self.post('shopPlatform')
+          , shopExpressNumber = self.post('shopExpressNumber')
           , id = self.post('id');
 
         var shop = ShopModel();

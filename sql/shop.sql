@@ -9,6 +9,7 @@ create table if not exists `yi_shop` (
     `shopAddress` varchar(512) not null default '' comment '店铺地址',
     `shopUserId` int(11) not null comment '用户id',
     `shopPlatform` varchar(11) not null comment '平台id',
+    `shopExpressNumber` varchar(64) not null comment '快递网点号',
     `shopComment` varchar(512) not null default '' comment '备注信息',
     `shopCreateTime` timestamp not null default current_timestamp,
     PRIMARY KEY (`id`)
