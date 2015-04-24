@@ -34,10 +34,10 @@
                                 <td>{{d.accountProvince}}{{d.accountCity}}{{d.accountArea}}</td>
                                 <td>{{d.accountCreateTime | date: 'yyyy-MM-dd HH:mm'}}</td>
                                 <td>
-                                    <button class="btn btn-success" ng-click="pass(d)" ng-if="d.shopStatus == 0">通过</button>
-                                    <button class="btn btn-danger" ng-click="unpass(d)" ng-if="d.shopStatus == 0">拒绝</button>
-                                    <button class="btn btn-default" ng-if="d.shopStatus != 0">通过</button>
-                                    <button class="btn btn-default" ng-if="d.shopStatus != 0">拒绝</button>
+                                    <button class="btn btn-success" ng-click="pass(d)" ng-if="d.accountStatus == 0">通过</button>
+                                    <button class="btn btn-danger" ng-click="unpass(d)" ng-if="d.accountStatus == 0">拒绝</button>
+                                    <button class="btn btn-default" ng-if="d.accountStatus != 0">通过</button>
+                                    <button class="btn btn-default" ng-if="d.accountStatus != 0">拒绝</button>
                                 </td>
                             </tr>
                         </table>
