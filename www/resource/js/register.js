@@ -300,7 +300,7 @@ $.fn.Validform = function(c){
       ifok : false,
       nocls : false,
       reg : {
-        username    : [[5,/^.{4,15}$/],[5,/^[a-zA-z0-9\u4E00-\u9FA5]*$/]],
+        //username    : [[5,/^.{4,15}$/],[5,/^[a-zA-z0-9\u4E00-\u9FA5]*$/]],
         loginpassword :['6nb16',[4,/^\d+$/],[4,/^[A-Za-z]+$/],[4,/^[^A-Za-z0-9]+$/]],
         paypassword :['6nb16',[4,/^\d+$/],[4,/^[A-Za-z]+$/],[4,/^[^A-Za-z0-9]+$/]],
         email   : [[3,/^([a-zA-Z0-9]+[_|\-|\.]?)*[a-zA-Z0-9]+@(vip.qq|qq|163|126)\.com/]],
