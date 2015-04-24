@@ -12,10 +12,10 @@ module.exports = Model(function() {
     fields: {
       'username': {
         valid: ['required', 'length']
-        , length_args: [6, 30]
+        , length_args: [4, 30]
         , msg: {
           required: '用户名不能为空',
-          length: '用户名长度为6-30个字符'
+          length: '用户名长度为4-30个字符'
         }
       },
       'qq': {
