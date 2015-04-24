@@ -88,7 +88,7 @@ module.exports = Controller("Admin/BaseController", function(){
           , coin = self.post('coin');
         if (type == 'add') {
           return user
-            .addMoney(id, coin)
+            .addCoin(id, coin)
             .then(function(res) {
               return self.success('操作成功');
             })
@@ -96,9 +96,39 @@ module.exports = Controller("Admin/BaseController", function(){
 
         if (type == 'sub') {
           return user
-            .subMoney(id, coin)
+            .subCoin(id, coin)
             .then(function(res) {
               return self.success('操作成功');
+            })
+        }
+      }
+    },
+
+    passwordAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {}
+
+      if (self.isPost()) {
+        var id = self.post('id')
+          , type = self.post('type')
+          , password = self.post('password');
+        if (type == 'password') {
+          return D('user')
+            .where({id: id})
+            .update({'password': md5(password)})
+            .then(function(res) {
+              return self.success('修改密码成功');
+            })
+        }
+
+        if (type == 'tradepassword') {
+          return D('user')
+            .where({id: id})
+            .update({'tradePassword': md5(password)})
+            .then(function(res) {
+              return self.success('修改支付密码成功');
             })
         }
       }

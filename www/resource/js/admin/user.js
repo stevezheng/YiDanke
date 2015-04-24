@@ -27,6 +27,30 @@
           })
       }
     };
+
+    $scope.editPassword = function(user) {
+      var r = prompt('请输入新密码');
+      if (r) {
+        $http.post('/admin/user/password', {id: user.id, type: 'password', password: r})
+          .success(function(res) {
+            if (res.errno == 0) {
+              alert(res.data);
+            }
+          })
+      }
+    };
+
+    $scope.editTradePassword = function(user) {
+      var r = prompt('请输入新密码');
+      if (r) {
+        $http.post('/admin/user/password', {id: user.id, type: 'tradepassword', password: r})
+          .success(function(res) {
+            if (res.errno == 0) {
+              alert(res.data);
+            }
+          })
+      }
+    };
     $scope.page = 1;
 
     $scope.changePage = function(page) {
@@ -80,6 +104,31 @@
           })
       }
     };
+
+    $scope.editPassword = function(user) {
+      var r = prompt('请输入新密码');
+      if (r) {
+        $http.post('/admin/user/password', {id: user.id, type: 'password', password: r})
+          .success(function(res) {
+            if (res.errno == 0) {
+              alert(res.data);
+            }
+          })
+      }
+    };
+
+    $scope.editTradePassword = function(user) {
+      var r = prompt('请输入新密码');
+      if (r) {
+        $http.post('/admin/user/password', {id: user.id, type: 'tradepassword', password: r})
+          .success(function(res) {
+            if (res.errno == 0) {
+              alert(res.data);
+            }
+          })
+      }
+    };
+
     $scope.page = 1;
 
     $scope.changePage = function(page) {
