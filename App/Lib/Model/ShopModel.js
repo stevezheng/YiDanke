@@ -90,7 +90,7 @@ module.exports = Model(function() {
         .find()
     },
 
-    addOne: function(shopUserId, shopName, shopUrl, shopProvince, shopCity, shopArea, shopPlatform) {
+    addOne: function(shopUserId, shopName, shopUrl, shopProvince, shopCity, shopArea, shopAddress, shopExpressNumber, shopPlatform) {
       var self = this;
 
       //todo:这里应该要根据shopPlatform判断shopUrl是否正确
@@ -103,13 +103,15 @@ module.exports = Model(function() {
           , 'shopProvince': shopProvince
           , 'shopCity': shopCity
           , 'shopArea': shopArea
+          , 'shopAddress': shopAddress
+          , 'shopExpressNumber': shopExpressNumber
           , 'shopPlatform': shopPlatform
         }, {
           'shopUrl': shopUrl
         }, true);
     },
 
-    editOne: function(shopUserId, id, shopName, shopUrl, shopProvince, shopCity, shopArea, shopPlatform) {
+    editOne: function(shopUserId, id, shopName, shopUrl, shopProvince, shopCity, shopArea, shopAddress, shopExpressNumber, shopPlatform) {
       var self = this;
 
       return self
@@ -123,6 +125,8 @@ module.exports = Model(function() {
           , 'shopProvince': shopProvince
           , 'shopCity': shopCity
           , 'shopArea': shopArea
+          , 'shopAddress': shopAddress
+          , 'shopExpressNumber': shopExpressNumber
           , 'shopPlatform': shopPlatform
           , 'shopStatus': 0
         });

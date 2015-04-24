@@ -68,12 +68,13 @@ module.exports = Controller("Seller/BaseController", function(){
           , shopCity = self.post('shopCity')
           , shopArea = self.post('shopArea')
           , shopExpressNumber = self.post('shopExpressNumber')
+          , shopAddress = self.post('shopAddress')
           , shopPlatform = self.post('shopPlatform');
 
         var shop = ShopModel();
 
         shop
-          .addOne(self.cUser.id, shopName, shopUrl, shopProvince , shopCity, shopArea, shopPlatform)
+          .addOne(self.cUser.id, shopName, shopUrl, shopProvince , shopCity, shopArea, shopAddress, shopExpressNumber, shopPlatform)
           .then(function(res) {
             console.log(res);
             if (res.type == 'exist') {
@@ -104,8 +105,9 @@ module.exports = Controller("Seller/BaseController", function(){
           , shopProvince = self.post('shopProvince')
           , shopCity = self.post('shopCity')
           , shopArea = self.post('shopArea')
-          , shopPlatform = self.post('shopPlatform')
           , shopExpressNumber = self.post('shopExpressNumber')
+          , shopAddress = self.post('shopAddress')
+          , shopPlatform = self.post('shopPlatform')
           , id = self.post('id');
 
         var shop = ShopModel();

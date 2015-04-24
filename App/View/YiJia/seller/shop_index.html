@@ -58,11 +58,14 @@
                                 <tr>
                                     <th><%= shop.shopName %></th>
                                     <th>
-                                        <%= shop.shopProvince %>
-                                        -
-                                        <%= shop.shopCity %>
-                                        -
-                                        <%= shop.shopArea %>
+                                        <p>
+                                            <%= shop.shopProvince %>
+                                            -
+                                            <%= shop.shopCity %>
+                                            -
+                                            <%= shop.shopArea %>
+                                        </p>
+                                        <p><%= shop.shopAddress %></p>
                                     </th>
                                     <th><%= shop.shopUrl %></th>
                                     <th><%= statusMap[shop.shopStatus] %></th>
@@ -104,11 +107,16 @@
                         <tr>
                             <th><%= shop.shopName %></th>
                             <th>
-                                <%= shop.shopProvince %>
-                                -
-                                <%= shop.shopCity %>
-                                -
-                                <%= shop.shopArea %>
+                                <p>
+                                    <%= shop.shopProvince %>
+                                    -
+                                    <%= shop.shopCity %>
+                                    -
+                                    <%= shop.shopArea %>
+                                </p>
+                                <p>
+                                    <%= shop.shopAddress %>
+                                </p>
                             </th>
                             <th><%= shop.shopUrl %></th>
                             <th><%= statusMap[shop.shopStatus] %></th>
@@ -150,11 +158,16 @@
                         <tr>
                             <th><%= shop.shopName %></th>
                             <th>
-                                <%= shop.shopProvince %>
-                                -
-                                <%= shop.shopCity %>
-                                -
-                                <%= shop.shopArea %>
+                                <p>
+                                    <%= shop.shopProvince %>
+                                    -
+                                    <%= shop.shopCity %>
+                                    -
+                                    <%= shop.shopArea %>
+                                </p>
+                                <p>
+                                    <%= shop.shopAddress %>
+                                </p>
                             </th>
                             <th><%= shop.shopUrl %></th>
                             <th><%= statusMap[shop.shopStatus] %></th>
@@ -290,6 +303,13 @@
                         </em>
                         <label id="position-error" class="error" style="display: none;">请选择所在地</label>
                     </div>
+                </div>
+                <div class="form-group">
+                    <label for="shop-name" class="control-label col-lg-3">详细地址</label>
+                    <div class="col-lg-6">
+                        <input type="text" class="form-control valid" id="shop-address" name="shop-address"/>
+                    </div>
+                    <p style="font-size: 12px;">(店铺绑定后无法修改)</p>
                 </div>
                 <div class="form-group">
                     <label for="shop-name" class="control-label col-lg-3">网点号</label>
@@ -512,6 +532,7 @@
                     , shopArea: $('#area').val()
                     , shopPlatform: $('#select-platform .btn-info').attr('data-data')
                     , shopExpressNumber: $('#express-number').val()
+                    , shopAddress: $('#shop-address').val()
                 };
 
                 if ($(this).attr('data-data') == 'add') {
