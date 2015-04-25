@@ -1,6 +1,7 @@
 var DoTask = thinkRequire('DoTaskModel');
 var TaskModel = thinkRequire('TaskModel');
 var UserModel = thinkRequire('UserModel');
+var Log= thinkRequire('LogService');
 var moment = require('moment');
 
 module.exports = Controller("Seller/BaseController", function(){
@@ -266,6 +267,31 @@ module.exports = Controller("Seller/BaseController", function(){
           .then(function() {
             return user
               .addCoin(self.cUser.id, paybackCoin)
+          })
+          .then(function() {
+            var p1 = Log.coin(
+              1
+              , paybackCoin
+              , (self.cUser.coin + paybackCoin)
+              , self.cUser.id
+              , self.cUser.username
+              , 1
+              , self.ip()
+              , '撤销任务['+taskId+']返还' + paybackCoin + '金币'
+            );
+
+            var p2 = Log.money(
+              1
+              , paybackMoney
+              , (self.cUser.money + paybackMoney)
+              , self.cUser.id
+              , self.cUser.username
+              , 1
+              , self.ip()
+              , '撤销任务['+taskId+']返还' + paybackMoney + '元'
+            );
+
+            return Promise.all([p1, p2])
           })
           .then(function() {
             return self.success('撤销任务成功');
