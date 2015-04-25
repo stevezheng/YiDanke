@@ -230,6 +230,18 @@ module.exports = Controller("Seller/BaseController", function(){
               .subCoin(self.cUser.id, totalTaskFee)
           })
           .then(function() {
+            return Log.coin(
+              -1
+              , totalTaskFee
+              , (self.cUser.coin + totalTaskFee)
+              , self.cUser.id
+              , self.cUser.username
+              , 1
+              , self.ip()
+              , '加赏任务['+taskId+']扣除金币' + totalTaskFee  + '金币'
+            );
+          })
+          .then(function() {
             return self.success('加赏成功');
           })
           .catch(function(err) {

@@ -229,7 +229,7 @@ module.exports = Controller("Buyer/BaseController", function(){
                   , _task.totalMoney * 0.05 + _task.taskPromise
                   , (res.money+ _task.totalMoney * 0.05 + _task.taskPromise)
                   , res.id
-                  , self.cUser.username
+                  , res.username
                   , 1
                   , self.ip()
                   , '完成任务['+doTaskId+']返还押金' + _task.totalMoney * 0.05 + _task.taskPromise  + '元'
