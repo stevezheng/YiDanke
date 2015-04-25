@@ -9,6 +9,27 @@
                         账号管理
                     </header>
                     <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <p>
+                                    ID: <input type="text" ng-model="filter.id" style="width: 50px;"/> &nbsp;
+                                    账号: <input type="text" ng-model="filter.username" style="width: 100px;"/> &nbsp;
+                                    审核状态: <select name="" ng-model="filter.accountStatus">
+                                    <option value="">全部</option><option value="0">待审核</option>
+                                    <option value="1">通过</option> &nbsp;
+                                    <option value="-1">拒绝</option></select> &nbsp;
+                                    绑定平台: <select name="" ng-model="filter.accountStatus">
+                                    <option value="">全部</option>
+                                    <option value="taobao">淘宝</option>
+                                    <option value="tmall">天猫</option> &nbsp;
+                                    <option value="jd">京东</option></select> &nbsp;
+                                    绑定账号: <input type="text" ng-model="filter.accountName" style="width: 100px;"/> &nbsp;
+                                    绑定名称: <input type="text" ng-model="filter.accountRealName" style="width: 100px;"/> &nbsp;
+                                    电话: <input type="text" ng-model="filter.accountPhone" style="width: 100px;"/> &nbsp;
+                                    <button class="btn btn-success btn-xs" ng-click="search()">查询</button>
+                                </p>
+                            </div>
+                        </div>
                         <table class="table">
                             <thead>
                             <tr>
