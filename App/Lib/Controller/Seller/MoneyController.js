@@ -2,6 +2,7 @@ var MoneyModel = thinkRequire('MoneyModel');
 var UserModel = thinkRequire('UserModel');
 var Kuaiqian = thinkRequire('KuaiqianPayService');
 var moment = require('moment');
+var Log = thinkRequire('LogService');
 
 module.exports = Controller("Seller/BaseController", function () {
   "use strict";
@@ -150,6 +151,11 @@ module.exports = Controller("Seller/BaseController", function () {
                   var moneyValue = res.moneyValue;
                   var moneyType = res.moneyType;
 
+                  return D('user')
+                    .where({id: moneyUserId})
+                    .then(function(res) {
+                      self.cUser = res;
+
                   var user = UserModel();
 
                   if (moneyType == 0) {
@@ -158,6 +164,18 @@ module.exports = Controller("Seller/BaseController", function () {
                       .then(function () {
                         return money
                           .pass(res.id, res.moneyUserId, dealId)
+                      })
+                      .then(function() {
+                        return Log.coin(
+                          1
+                          , moneyValue
+                          , (self.cUser.coin + moneyValue)
+                          , self.cUser.id
+                          , self.cUser.username
+                          , 1
+                          , self.ip()
+                          , '通过快钱充值' + moneyValue + '金币'
+                        )
                       })
                       .then(function () {
                         //var r = '<result>1</result> <redirecturl>http://baidu.com</redirecturl>';
@@ -174,6 +192,18 @@ module.exports = Controller("Seller/BaseController", function () {
                         return money
                           .pass(res.id, res.moneyUserId, dealId)
                       })
+                      .then(function() {
+                        return Log.money(
+                          1
+                          , moneyValue
+                          , (self.cUser.money + moneyValue)
+                          , self.cUser.id
+                          , self.cUser.username
+                          , 1
+                          , self.ip()
+                          , '通过快钱充值' + moneyValue + '元'
+                        )
+                      })
                       .then(function () {
                         //var r = '<result>1</result> <redirecturl>http://baidu.com</redirecturl>';
                         var r = '<result>1</result> <redirecturl>http://www.yijia90.com/'+ext1+'</redirecturl>';
@@ -184,6 +214,7 @@ module.exports = Controller("Seller/BaseController", function () {
                         console.error(err);
                       })
                   }
+                    })
                 } else {
                   var r = '<result>0</result> <redirecturl>http://www.yijia90.com/home/money/error</redirecturl>'
                   return self.end(r);

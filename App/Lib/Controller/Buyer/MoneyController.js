@@ -1,6 +1,7 @@
 var MoneyModel = thinkRequire('MoneyModel');
 var UserModel = thinkRequire('UserModel');
 var Kuaiqian = thinkRequire('KuaiqianPayService');
+var Log = thinkRequire('LogService');
 var moment = require('moment');
 
 module.exports = Controller("Buyer/BaseController", function(){
@@ -149,41 +150,70 @@ module.exports = Controller("Buyer/BaseController", function(){
                   var moneyValue = res.moneyValue;
                   var moneyType = res.moneyType;
 
-                  var user = UserModel();
+                  return D('user')
+                    .where({id: moneyUserId})
+                    .then(function(res) {
+                      self.cUser = res;
 
-                  if (moneyType == 0) {
-                    user
-                      .addCoin(moneyUserId, moneyValue)
-                      .then(function () {
-                        return money
-                          .pass(res.id, res.moneyUserId, dealId)
-                      })
-                      .then(function () {
-                        //var r = '<result>1</result> <redirecturl>http://baidu.com</redirecturl>';
-                        var r = '<result>1</result> <redirecturl>http://www.yijia90.com/'+ext1+'</redirecturl>';
-                        console.log(r);
-                        return self.echo(r);
-                      })
-                      .catch(function(err) {
-                        console.error(err);
-                      })
-                  } else if (moneyType == 1) {
-                    user
-                      .addMoney(moneyUserId, moneyValue)
-                      .then(function () {
-                        return money
-                          .pass(res.id, res.moneyUserId, dealId)
-                      })
-                      .then(function () {
-                        //var r = '<result>1</result> <redirecturl>http://baidu.com</redirecturl>';
-                        var r = '<result>1</result> <redirecturl>http://www.yijia90.com/'+ext1+'</redirecturl>';
-                        console.log(r);
-                        return self.echo(r);
-                      })
-                      .catch(function(err) {
-                        console.error(err);
-                      })
-                  }
+                      var user = UserModel();
+
+                      if (moneyType == 0) {
+                        user
+                          .addCoin(moneyUserId, moneyValue)
+                          .then(function () {
+                            return money
+                              .pass(res.id, res.moneyUserId, dealId)
+                          })
+                          .then(function() {
+                            return Log.coin(
+                              1
+                              , moneyValue
+                              , (self.cUser.coin + moneyValue)
+                              , self.cUser.id
+                              , self.cUser.username
+                              , 0
+                              , self.ip()
+                              , '通过快钱充值' + moneyValue + '金币'
+                            )
+                          })
+                          .then(function () {
+                            //var r = '<result>1</result> <redirecturl>http://baidu.com</redirecturl>';
+                            var r = '<result>1</result> <redirecturl>http://www.yijia90.com/'+ext1+'</redirecturl>';
+                            return self.echo(r);
+                          })
+                          .catch(function(err) {
+                            console.error(err);
+                          })
+                      } else if (moneyType == 1) {
+                        user
+                          .addMoney(moneyUserId, moneyValue)
+                          .then(function () {
+                            return money
+                              .pass(res.id, res.moneyUserId, dealId)
+                          })
+                          .then(function() {
+                            return Log.money(
+                              1
+                              , moneyValue
+                              , (self.cUser.money + moneyValue)
+                              , self.cUser.id
+                              , self.cUser.username
+                              , 0
+                              , self.ip()
+                              , '通过快钱充值' + moneyValue + '元'
+                            )
+                          })
+                          .then(function () {
+                            //var r = '<result>1</result> <redirecturl>http://baidu.com</redirecturl>';
+                            var r = '<result>1</result> <redirecturl>http://www.yijia90.com/'+ext1+'</redirecturl>';
+                            console.log(r);
+                            return self.echo(r);
+                          })
+                          .catch(function(err) {
+                            console.error(err);
+                          })
+                      }
+                    })
                 } else {
                   var r = '<result>0</result> <redirecturl>http://www.yijia90.com/home/money/error</redirecturl>'
                   return self.end(r);
