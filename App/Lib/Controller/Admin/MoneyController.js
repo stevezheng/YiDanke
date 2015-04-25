@@ -1,4 +1,5 @@
 var moment = require('moment');
+var Log = thinkRequire('LogService');
 var _ = require('underscore');
 module.exports = Controller("Admin/BaseController", function(){
   "use strict";
@@ -65,17 +66,42 @@ module.exports = Controller("Admin/BaseController", function(){
           .then(function(money) {
             if (money.moneyStatus == 0) {
               var data = {};
-              if (money.moneyType == 0) {
-                //金币
-                data.coin = ['exp', 'coin+' + money.moneyValue];
-              } else if (money.moneyType == 1) {
-                //押金
-                data.money = ['exp', 'money+' + money.moneyValue];
-              }
-              return D('user')
+              D('user')
                 .where({id: money.moneyUserId})
-                .update(data);
-              //todo: 打日志
+                .find()
+                .then(function(cUser) {
+                  if (money.moneyType == 0) {
+                    //金币
+                    data.coin = ['exp', 'coin+' + money.moneyValue];
+
+                   Log.money(
+                      1
+                      , money.moneyValue
+                      , (cUser.money + money.moneyValue)
+                      , cUser.id
+                      , cUser.username
+                      , 1
+                      , self.ip()
+                      , '通过支付宝充值' + money.moneyValue + '元');
+
+                  } else if (money.moneyType == 1) {
+                    //押金
+                    data.money = ['exp', 'money+' + money.moneyValue];
+
+                    Log.coin(
+                      1
+                      , money.moneyValue
+                      , (cUser.coin + money.moneyValue)
+                      , cUser.id
+                      , cUser.username
+                      , 1
+                      , self.ip()
+                      , '通过支付宝充值' + money.moneyValue + '金币');
+                  }
+                  return D('user')
+                    .where({id: money.moneyUserId})
+                    .update(data);
+                })
             } else {
               return self.error(500, '请勿重复审核');
             }
