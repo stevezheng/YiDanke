@@ -74,19 +74,6 @@ module.exports = Controller("Admin/BaseController", function(){
                     //金币
                     data.coin = ['exp', 'coin+' + money.moneyValue];
 
-                   Log.money(
-                      1
-                      , money.moneyValue
-                      , (cUser.money + money.moneyValue)
-                      , cUser.id
-                      , cUser.username
-                      , 1
-                      , self.ip()
-                      , '通过支付宝充值' + money.moneyValue + '元');
-
-                  } else if (money.moneyType == 1) {
-                    //押金
-                    data.money = ['exp', 'money+' + money.moneyValue];
 
                     Log.coin(
                       1
@@ -97,6 +84,19 @@ module.exports = Controller("Admin/BaseController", function(){
                       , 1
                       , self.ip()
                       , '通过支付宝充值' + money.moneyValue + '金币');
+
+                  } else if (money.moneyType == 1) {
+                    //押金
+                    data.money = ['exp', 'money+' + money.moneyValue];
+                    Log.money(
+                      1
+                      , money.moneyValue
+                      , (cUser.money + money.moneyValue)
+                      , cUser.id
+                      , cUser.username
+                      , 1
+                      , self.ip()
+                      , '通过支付宝充值' + money.moneyValue + '元');
                   }
                   return D('user')
                     .where({id: money.moneyUserId})

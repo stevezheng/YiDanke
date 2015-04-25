@@ -102,12 +102,7 @@
                             </a>
                         </li>
                         <li class="">
-                            <a href="#pay" data-toggle="tab">
-                                佣金记录
-                            </a>
-                        </li>
-                        <li class="">
-                            <a href="#user" data-toggle="tab">
+                            <a href="#member" data-toggle="tab">
                                 会员记录
                             </a>
                         </li>
@@ -115,19 +110,118 @@
                 </header>
                 <div class="panel-body">
                     <div class="tab-content tasi-tab">
-                        <div class="tab-pane active" id="withdraw">
+                        <div class="tab-pane active" id="withdraw" ng-controller="buyerLogWithdrawCtrl">
+                            <div class="alert alert-warning" ng-if="data.length == 0">暂无数据</div>
+                            <table class="table" ng-if="data.length != 0">
+                                <thead>
+                                <tr>
+                                    <th>金额</th>
+                                    <th>申请时间</th>
+                                    <th>状态</th>
+                                    <th>备注</th>
+                                </tr>
+                                </thead>
+                                <tr ng-repeat="d in data">
+                                    <td>{{d.id}}</td>
+                                    <td>{{d.username}}</td>
+                                    <td>{{statusMap.status[d.accountStatus]}}</td>
+                                    <td>{{statusMap.platform[d.accountPlatform]}}</td>
+                                </tr>
+                            </table>
+                            <div class="text-center" ng-if="data.length != 0">
+                                <ul class="pagination">
+                                    <li ng-if="page != 1"><a ng-click="changePage(page-1)" href="javascript:;;;">«</a></li>
+                                    <li ng-repeat="t in totalPage"><a href="javascript:;;;" ng-click="changePage(t)">{{t}}</a></li>
+                                    <li ng-if="page != total"><a ng-click="changePage(page+1)" href="javascript:;;;">»</a></li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="tab-pane" id="coin">
+                        <div class="tab-pane" id="coin" ng-controller="buyerLogCoinCtrl">
+                            <div class="alert alert-warning" ng-if="data.length == 0">暂无数据</div>
+                            <table class="table" ng-if="data.length != 0">
+                                <thead>
+                                <tr>
+                                    <th>时间</th>
+                                    <th>收入</th>
+                                    <th>支出</th>
+                                    <th>结余</th>
+                                    <th>备注</th>
+                                </tr>
+                                </thead>
+                                <tr ng-repeat="d in data">
+                                    <td>{{d.logCoinCreateTime | date: 'yyyy-MM-dd HH:mm'}}</td>
+                                    <td><span class="error" ng-if="d.logCoinType == 1">{{d.logCoin}}</span></td>
+                                    <td><span class="error" ng-if="d.logCoinType == -1">{{d.logCoin}}</span></td>
+                                    <td><span class="error">{{d.logCoinBalance}}</span></td>
+                                    <td>{{d.logCoinComment}}</td>
+                                </tr>
+                            </table>
+                            <div class="text-center" ng-if="data.length != 0">
+                                <ul class="pagination">
+                                    <li ng-if="page != 1"><a ng-click="changePage(page-1)" href="javascript:;;;">«</a></li>
+                                    <li ng-repeat="t in totalPage"><a href="javascript:;;;" ng-click="changePage(t)">{{t}}</a></li>
+                                    <li ng-if="page != total"><a ng-click="changePage(page+1)" href="javascript:;;;">»</a></li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="tab-pane " id="money">
+                        <div class="tab-pane " id="money" ng-controller="buyerLogMoneyCtrl">
+                            <div class="alert alert-warning" ng-if="data.length == 0">暂无数据</div>
+                            <table class="table" ng-if="data.length != 0">
+                                <thead>
+                                <tr>
+                                    <th>时间</th>
+                                    <th>收入</th>
+                                    <th>支出</th>
+                                    <th>结余</th>
+                                    <th>备注</th>
+                                </tr>
+                                </thead>
+                                <tr ng-repeat="d in data">
+                                    <td>{{d.logMoneyCreateTime | date: 'yyyy-MM-dd HH:mm'}}</td>
+                                    <td><span class="error" ng-if="d.logMoneyType == 1">{{d.logMoney}}</span></td>
+                                    <td><span class="error" ng-if="d.logMoneyType == -1">{{d.logMoney}}</span></td>
+                                    <td><span class="error">{{d.logMoneyBalance}}</span></td>
+                                    <td>{{d.logMoneyComment}}</td>
+                                </tr>
+                            </table>
+                            <div class="text-center" ng-if="data.length != 0">
+                                <ul class="pagination">
+                                    <li ng-if="page != 1"><a ng-click="changePage(page-1)" href="javascript:;;;">«</a></li>
+                                    <li ng-repeat="t in totalPage"><a href="javascript:;;;" ng-click="changePage(t)">{{t}}</a></li>
+                                    <li ng-if="page != total"><a ng-click="changePage(page+1)" href="javascript:;;;">»</a></li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="tab-pane " id="pay">
-                        </div>
-                        <div class="tab-pane " id="user">
+                        <div class="tab-pane " id="member" ng-controller="buyerLogMemberCtrl">
+                            <div class="alert alert-warning" ng-if="data.length == 0">暂无数据</div>
+                            <table class="table" ng-if="data.length != 0">
+                                <thead>
+                                <tr>
+                                    <th>时间</th>
+                                    <th>金额</th>
+                                    <th>类型</th>
+                                    <th>备注</th>
+                                </tr>
+                                </thead>
+                                <tr ng-repeat="d in data">
+                                    <td>{{d.logMemberCreateTime | date: 'yyyy-MM-dd HH:mm'}}</td>
+                                    <td><span class="error" ng-if="d.logMemberType == 1">{{d.logMember}}</span></td>
+                                    <td>开通</td>
+                                    <td>{{d.logMemberComment}}</td>
+                                </tr>
+                            </table>
+                            <div class="text-center" ng-if="data.length != 0">
+                                <ul class="pagination">
+                                    <li ng-if="page != 1"><a ng-click="changePage(page-1)" href="javascript:;;;">«</a></li>
+                                    <li ng-repeat="t in totalPage"><a href="javascript:;;;" ng-click="changePage(t)">{{t}}</a></li>
+                                    <li ng-if="page != total"><a ng-click="changePage(page+1)" href="javascript:;;;">»</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </section>
     </section>
     <!--main content end-->

@@ -262,6 +262,115 @@ module.exports = Controller("Buyer/BaseController", function(){
             return self.error(500, '支付失败', err);
           })
       }
-    }
+    },
+
+    logcoinAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+
+      }
+
+      if (self.isPost()) {
+        var page = self.post('page');
+
+        return D('log_coin')
+          .order('id desc')
+          .page(page, 20)
+          .where({logCoinUserId: self.cUser.id})
+          .countSelect()
+          .then(function(res) {
+            return self.success(res);
+          })
+      }
+    },
+
+    logmoneyAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+
+      }
+
+      if (self.isPost()) {
+        var page = self.post('page');
+
+        return D('log_money')
+          .order('id desc')
+          .where({logMoneyUserId: self.cUser.id})
+          .page(page, 20)
+          .countSelect()
+          .then(function(res) {
+            return self.success(res);
+          })
+      }
+    },
+
+    logyongjinAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+
+      }
+
+      if (self.isPost()) {
+        var page = self.post('page');
+
+        return D('log_coin')
+          .order('id desc')
+          .where({logCoinUserId: self.cUser.id})
+          .page(page, 20)
+          .countSelect()
+          .then(function(res) {
+            return self.success(res);
+          })
+      }
+    },
+
+    logmemberAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+
+      }
+
+      if (self.isPost()) {
+        var page = self.post('page');
+
+        return D('log_member')
+          .order('id desc')
+          .where({logMemberUserId: self.cUser.id})
+          .page(page, 20)
+          .countSelect()
+          .then(function(res) {
+            return self.success(res);
+          })
+      }
+    },
+    logwithdrawAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+
+      }
+
+      if (self.isPost()) {
+        var page = self.post('page');
+
+        return D('log_withdraw')
+          .order('id desc')
+          .where({logWithdrawUserId: self.cUser.id})
+          .page(page, 20)
+          .countSelect()
+          .then(function(res) {
+            return self.success(res);
+          })
+      }
+    },
   };
 });

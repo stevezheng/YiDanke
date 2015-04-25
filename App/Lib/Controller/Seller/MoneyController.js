@@ -396,6 +396,7 @@ module.exports = Controller("Seller/BaseController", function () {
         return D('log_coin')
           .order('id desc')
           .page(page, 20)
+          .where({logCoinUserId: self.cUser.id})
           .countSelect()
           .then(function(res) {
             return self.success(res);
@@ -416,6 +417,7 @@ module.exports = Controller("Seller/BaseController", function () {
 
         return D('log_money')
           .order('id desc')
+          .where({logMoneyUserId: self.cUser.id})
           .page(page, 20)
           .countSelect()
           .then(function(res) {
@@ -437,6 +439,7 @@ module.exports = Controller("Seller/BaseController", function () {
 
         return D('log_pv')
           .order('id desc')
+          .where({logPVUserId: self.cUser.id})
           .page(page, 20)
           .countSelect()
           .then(function(res) {
@@ -458,6 +461,7 @@ module.exports = Controller("Seller/BaseController", function () {
 
         return D('log_member')
           .order('id desc')
+          .where({logMemberUserId: self.cUser.id})
           .page(page, 20)
           .countSelect()
           .then(function(res) {
@@ -478,6 +482,7 @@ module.exports = Controller("Seller/BaseController", function () {
 
         return D('log_withdraw')
           .order('id desc')
+          .where({logWithdrawUserId: self.cUser.id})
           .page(page, 20)
           .countSelect()
           .then(function(res) {

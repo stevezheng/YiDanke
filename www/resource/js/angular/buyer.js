@@ -1,5 +1,137 @@
 (function() {
   var BuyerModule = angular.module('YiApp.Buyer', []);
+  
+  BuyerModule.controller('buyerLogCoinCtrl', function ($scope, $http) {
+    $scope.data = [];
+    $scope.changePage = function(page) {
+      $scope.page = page;
+      getData();
+    };
+
+    function getData() {
+      $http.post('/buyer/money/logcoin', {page: $scope.page})
+        .success(function(res) {
+          if (res.errno == 0) {
+            $scope.data = res.data.data;
+            $scope.total = res.data.total;
+            $scope.count = res.data.count;
+            $scope.num = res.data.num;
+
+            $scope.totalPage = [];
+            for (var i = 0; i < res.data.total; i++) {
+              $scope.totalPage.push(i+1);
+            }
+          }
+        })
+    }
+    getData();
+  });
+
+  BuyerModule.controller('buyerLogYongjinCtrl', function ($scope, $http) {
+    $scope.data = [];
+    $scope.changePage = function(page) {
+      $scope.page = page;
+      getData();
+    };
+
+    function getData() {
+      $http.post('/buyer/money/logyongjin', {page: $scope.page})
+        .success(function(res) {
+          if (res.errno == 0) {
+            $scope.data = res.data.data;
+            $scope.total = res.data.total;
+            $scope.count = res.data.count;
+            $scope.num = res.data.num;
+
+            $scope.totalPage = [];
+            for (var i = 0; i < res.data.total; i++) {
+              $scope.totalPage.push(i+1);
+            }
+          }
+        })
+    }
+    getData();
+  });
+
+  BuyerModule.controller('buyerLogMemberCtrl', function ($scope, $http) {
+    $scope.data = [];
+    $scope.changePage = function(page) {
+      $scope.page = page;
+      getData();
+    };
+
+    function getData() {
+      $http.post('/buyer/money/logmember', {page: $scope.page})
+        .success(function(res) {
+          if (res.errno == 0) {
+            $scope.data = res.data.data;
+            $scope.total = res.data.total;
+            $scope.count = res.data.count;
+            $scope.num = res.data.num;
+
+            $scope.totalPage = [];
+            for (var i = 0; i < res.data.total; i++) {
+              $scope.totalPage.push(i+1);
+            }
+          }
+        })
+    }
+    getData();
+  });
+
+
+  BuyerModule.controller('buyerLogMoneyCtrl', function ($scope, $http) {
+    $scope.data = [];
+    $scope.changePage = function(page) {
+      $scope.page = page;
+      getData();
+    };
+
+    function getData() {
+      $http.post('/buyer/money/logmoney', {page: $scope.page})
+        .success(function(res) {
+          if (res.errno == 0) {
+            $scope.data = res.data.data;
+            $scope.total = res.data.total;
+            $scope.count = res.data.count;
+            $scope.num = res.data.num;
+
+            $scope.totalPage = [];
+            for (var i = 0; i < res.data.total; i++) {
+              $scope.totalPage.push(i+1);
+            }
+          }
+        })
+    }
+
+    getData();
+  });
+
+  BuyerModule.controller('buyerLogWithdrawCtrl', function ($scope, $http) {
+    $scope.data = [];
+    $scope.changePage = function(page) {
+      $scope.page = page;
+      getData();
+    };
+
+    function getData() {
+      $http.post('/buyer/money/logwithdraw', {page: $scope.page})
+        .success(function(res) {
+          if (res.errno == 0) {
+            $scope.data = res.data.data;
+            $scope.total = res.data.total;
+            $scope.count = res.data.count;
+            $scope.num = res.data.num;
+
+            $scope.totalPage = [];
+            for (var i = 0; i < res.data.total; i++) {
+              $scope.totalPage.push(i+1);
+            }
+          }
+        })
+    }
+    getData();
+  });
 
   BuyerModule.controller('buyerCtrl', function($scope, $http) {
     $scope.editPasswordBox = false;

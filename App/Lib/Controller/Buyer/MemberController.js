@@ -82,7 +82,7 @@ module.exports = Controller('Buyer/BaseController', function() {
 
             var p2 = Log.member(
               1
-              , time
+              , coin
               , ''
               , self.cUser.id
               , self.cUser.username
