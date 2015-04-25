@@ -34,7 +34,8 @@ module.exports = Controller("Publish/BaseController", function(){
           , tmall = self.post('tmall')
           , extendItem1 = self.post('extendItem1')
           , extendItem2 = self.post('extendItem2')
-          , transport = self.post('transport');
+          , transport = self.post('transport')
+          , transportType = self.post('transportType');
 
         //todo:这里需要重新计算一下费用
         var task = TaskModel();
@@ -48,7 +49,11 @@ module.exports = Controller("Publish/BaseController", function(){
           , taskPV: cost.pv
           , taskPlatform: 'taobao'
           , taskType: 'dingdan'
+          , taskWeight: item.weight
+          , taskVolume: item.volume
           , taskHeight: item.height
+          , taskLength: item.length
+          , taskWidth: item.width
           , taskName: item.name
           , taskUrl: item.url
           , taskMoney: item.money
@@ -84,6 +89,7 @@ module.exports = Controller("Publish/BaseController", function(){
           , taskGoodCommentFee: cost.goodCommentFee
           , taskGoodComment: cost.goodComment
           , taskTransport: transport
+          , taskTransportType: transportType
           , taskTips: item.tips
           , taskPosition: item.position
           , taskTag1: item.tag1
