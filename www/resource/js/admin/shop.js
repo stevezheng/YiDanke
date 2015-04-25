@@ -4,6 +4,34 @@
   Module.controller('shopCtrl', function($scope, $http, $upload) {
     $scope.page = 1;
 
+    $scope.edit = function(data) {
+      new PCAS("province", "city", "area", data.shopProvince, data.shopCity, data.shopArea);
+      $scope.cShop = data;
+      $('#edit-shop').click();
+    };
+
+    $scope.submit = function() {
+      var cShop = $scope.cShop;
+      cShop.shopProvince = $('#province').val();
+      cShop.shopCity = $('#city').val();
+      cShop.shopArea = $('#area').val();
+      $http.post('/admin/shop/edit', {
+        id: cShop.id
+        , shopUrl: cShop.shopUrl
+        , shopName: cShop.shopName
+        , shopProvince: cShop.shopProvince
+        , shopCity: cShop.shopCity
+        , shopArea: cShop.shopArea
+        , shopAddress: cShop.shopAddress
+        , shopExpressNumber: cShop.shopExpressNumber
+      }).success(function(res) {
+        if (res.errno == 0) {
+          $('#btn-cancel').click();
+          alert(res.data);
+        }
+      });
+    };
+
     $scope.changePage = function(page) {
       $scope.page = page;
       getData();

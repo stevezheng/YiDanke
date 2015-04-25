@@ -6,7 +6,7 @@
         <section class="wrapper">
                 <section class="panel">
                     <header class="panel-heading">
-                        提现账号管理
+                        店铺管理
                     </header>
                     <div class="panel-body">
                         <table class="table">
@@ -30,13 +30,27 @@
                                 <td>{{statusMap.platform[d.shopPlatform]}}</td>
                                 <td>{{d.shopUrl}}</td>
                                 <td>{{d.shopName}}</td>
-                                <td>{{d.shopProvince}}{{d.shopCity}}{{d.shopArea}}</td>
+                                <td>
+                                    <p>
+                                        {{d.shopProvince}}{{d.shopCity}}{{d.shopArea}}
+                                    </p>
+                                    <p>{{d.shopAddress}}</p>
+                                    <p>{{d.shopExpressNumber}}</p>
+                                </td>
                                 <td>{{d.shopCreateTime | date: 'yyyy-MM-dd HH:mm'}}</td>
                                 <td>
-                                    <button class="btn btn-success" ng-click="pass(d)" ng-if="d.shopStatus == 0">通过</button>
-                                    <button class="btn btn-danger" ng-click="unpass(d)" ng-if="d.shopStatus == 0">拒绝</button>
-                                    <button class="btn btn-default" ng-if="d.shopStatus != 0">通过</button>
-                                    <button class="btn btn-default" ng-if="d.shopStatus != 0">拒绝</button>
+                                    <div class="btn-group">
+                                        <button data-toggle="dropdown" class="btn btn-success dropdown-toggle btn-xs" type="button">操作<span class="caret"></span></button>
+                                        <ul role="menu" class="dropdown-menu">
+                                            <li><a ng-click="pass(d)">通过</a></li>
+                                            <li><a ng-click="unpass(d)">拒绝</a></li>
+                                            <li class="divider"></li>
+                                            <li>
+                                                <a ng-click="edit(d)">编辑</a>
+                                                <a id="edit-shop" href="#modal-shop" data-toggle="modal" style="display: none;">编辑</a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </td>
                             </tr>
                         </table>
@@ -52,5 +66,147 @@
         </section>
     </section>
     <!--main content end-->
+    <!-- Modal -->
+    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog"
+         tabindex="-1" id="modal-shop" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">编辑店铺</h4>
+                </div>
+                <form class="modal-body form-horizontal cmxform tasi-form" id="bind-shop">
+                    <div class="form-group">
+                        <label class="control-label col-lg-3">店铺首页地址</label>
+                        <div class="col-lg-4"><input ng-model="cShop.shopUrl" type="text"
+                                                     class="form-control valid"
+                                                     name="shop-url"
+                                                     id="shop-url" placeholder="请以http://开头"/></div>
+                        <p style="font-size: 12px;">(店铺绑定后无法修改)</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="shop-name" class="control-label col-lg-3">店铺名称</label>
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control valid" ng-model="cShop.shopName" id="shop-name" name="shop-name"/>
+                        </div>
+                        <p style="font-size: 12px;">(店铺绑定后无法修改)</p>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 form-label">所在地区</label>
+                        <div class="col-lg-8">
+                            <em>
+                                <select id="province" name="province">
+                                    <option value="">--请选择省份--</option>
+                                    <option value="北京">北京</option>
+                                    <option value="天津">天津</option>
+                                    <option value="河北省">河北省</option>
+                                    <option value="山西省">山西省</option>
+                                    <option value="内蒙古自治区">内蒙古自治区</option>
+                                    <option value="辽宁省">辽宁省</option>
+                                    <option value="吉林省">吉林省</option>
+                                    <option value="黑龙江省">黑龙江省</option>
+                                    <option value="上海">上海</option>
+                                    <option value="江苏省">江苏省</option>
+                                    <option value="浙江省">浙江省</option>
+                                    <option value="安徽省">安徽省</option>
+                                    <option value="福建省">福建省</option>
+                                    <option value="江西省">江西省</option>
+                                    <option value="山东省">山东省</option>
+                                    <option value="河南省">河南省</option>
+                                    <option value="湖北省">湖北省</option>
+                                    <option value="湖南省">湖南省</option>
+                                    <option value="广东省">广东省</option>
+                                    <option value="广西壮族自治区">广西壮族自治区</option>
+                                    <option value="海南省">海南省</option>
+                                    <option value="重庆">重庆</option>
+                                    <option value="四川省">四川省</option>
+                                    <option value="贵州省">贵州省</option>
+                                    <option value="云南省">云南省</option>
+                                    <option value="西藏自治区">西藏自治区</option>
+                                    <option value="陕西省">陕西省</option>
+                                    <option value="甘肃省">甘肃省</option>
+                                    <option value="青海省">青海省</option>
+                                    <option value="宁夏回族自治区">宁夏回族自治区</option>
+                                    <option value="新疆维吾尔自治区">新疆维吾尔自治区</option>
+                                    <option value="香港特别行政区">香港特别行政区</option>
+                                    <option value="澳门特别行政区">澳门特别行政区</option>
+                                    <option value="台湾省">台湾省</option>
+                                    <option value="其它">其它</option>
+                                    <option value="">--请选择省份--</option>
+                                    <option value="北京">北京</option>
+                                    <option value="天津">天津</option>
+                                    <option value="河北省">河北省</option>
+                                    <option value="山西省">山西省</option>
+                                    <option value="内蒙古自治区">内蒙古自治区</option>
+                                    <option value="辽宁省">辽宁省</option>
+                                    <option value="吉林省">吉林省</option>
+                                    <option value="黑龙江省">黑龙江省</option>
+                                    <option value="上海">上海</option>
+                                    <option value="江苏省">江苏省</option>
+                                    <option value="浙江省">浙江省</option>
+                                    <option value="安徽省">安徽省</option>
+                                    <option value="福建省">福建省</option>
+                                    <option value="江西省">江西省</option>
+                                    <option value="山东省">山东省</option>
+                                    <option value="河南省">河南省</option>
+                                    <option value="湖北省">湖北省</option>
+                                    <option value="湖南省">湖南省</option>
+                                    <option value="广东省">广东省</option>
+                                    <option value="广西壮族自治区">广西壮族自治区</option>
+                                    <option value="海南省">海南省</option>
+                                    <option value="重庆">重庆</option>
+                                    <option value="四川省">四川省</option>
+                                    <option value="贵州省">贵州省</option>
+                                    <option value="云南省">云南省</option>
+                                    <option value="西藏自治区">西藏自治区</option>
+                                    <option value="陕西省">陕西省</option>
+                                    <option value="甘肃省">甘肃省</option>
+                                    <option value="青海省">青海省</option>
+                                    <option value="宁夏回族自治区">宁夏回族自治区</option>
+                                    <option value="新疆维吾尔自治区">新疆维吾尔自治区</option>
+                                    <option value="香港特别行政区">香港特别行政区</option>
+                                    <option value="澳门特别行政区">澳门特别行政区</option>
+                                    <option value="台湾省">台湾省</option>
+                                    <option value="其它">其它</option>
+                                </select>
+                                <select id="city" name="city">
+
+                                    <option value="">--请选择城市--</option>
+                                </select>
+                                <select id="area" name="area">
+
+                                    <option value="">--请选择地区--</option>
+                                </select>
+                            </em>
+                            <label id="position-error" class="error" style="display: none;">请选择所在地</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="shop-name" class="control-label col-lg-3">详细地址</label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control valid" id="shop-address" name="shop-address" ng-model="cShop.shopAddress"/>
+                        </div>
+                        <p style="font-size: 12px;">(店铺绑定后无法修改)</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="shop-name" class="control-label col-lg-3">网点号</label>
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control valid" id="express-number" name="express-number" ng-model="cShop.shopExpressNumber"/>
+                        </div>
+                        <p style="font-size: 12px;">(店铺绑定后无法修改)</p>
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-default"
+                            type="button" id="btn-cancel">取消
+                    </button>
+                    <button class="btn btn-info" type="button" id="btn-confirm" data-data="add" ng-click="submit()">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal -->
 </section>
 <% include ./index_footer.html %>
+<script src="/resource/js/location.js"></script>

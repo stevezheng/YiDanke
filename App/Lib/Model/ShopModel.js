@@ -130,6 +130,24 @@ module.exports = Model(function() {
           , 'shopPlatform': shopPlatform
           , 'shopStatus': 0
         });
+    },
+
+    adminEditShop: function(id, shopName, shopUrl, shopProvince, shopCity, shopArea, shopAddress, shopExpressNumber) {
+      var self = this;
+
+      return self
+        .where({
+          id: id
+        })
+        .update({
+          'shopName': shopName
+          , 'shopUrl': shopUrl
+          , 'shopProvince': shopProvince
+          , 'shopCity': shopCity
+          , 'shopArea': shopArea
+          , 'shopAddress': shopAddress
+          , 'shopExpressNumber': shopExpressNumber
+        });
     }
   }
 });

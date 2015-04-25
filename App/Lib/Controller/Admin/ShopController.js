@@ -1,4 +1,5 @@
 var moment = require('moment');
+var shop = thinkRequire('ShopModel')();
 module.exports = Controller("Admin/BaseController", function(){
   "use strict";
   return {
@@ -27,6 +28,36 @@ module.exports = Controller("Admin/BaseController", function(){
           .countSelect()
           .then(function(res) {
             return self.success(res);
+          })
+      }
+    },
+
+    editAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+
+      }
+
+      if (self.isPost()) {
+        var id = self.post('id');
+        var shopUrl = self.post('shopUrl');
+        var shopName =  self.post('shopName');
+        var shopProvince= self.post('shopProvince');
+        var shopCity= self.post('shopCity');
+        var shopArea= self.post('shopArea');
+        var shopAddress= self.post('shopAddress');
+        var shopExpressNumber= self.post('shopExpressNumber');
+
+        return shop
+          .adminEditShop(id, shopName, shopUrl, shopProvince, shopCity, shopArea, shopAddress, shopExpressNumber)
+          .then(function() {
+            return self.success('修改成功');
+          })
+          .catch(function(err) {
+            console.error(err.stack);
+            return self.error(err);
           })
       }
     },
