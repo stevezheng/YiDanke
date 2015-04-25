@@ -9,6 +9,31 @@
       getData();
     };
 
+    $scope.filter = {};
+    $scope.search = function() {
+      var filter = _.pick($scope.filter, function(value, key, object) {
+        if (value != '') {
+          return true;
+        }
+      });
+
+
+      $http.post('/admin/money/in', {page: $scope.page, data: filter})
+        .success(function(res) {
+          if (res.errno == 0) {
+            $scope.data = res.data.data;
+            $scope.total = res.data.total;
+            $scope.count = res.data.count;
+            $scope.num = res.data.num;
+
+            $scope.totalPage = [];
+            for (var i = 0; i < res.data.total; i++) {
+              $scope.totalPage.push(i+1);
+            }
+          }
+        })
+    };
+
     function getData() {
       $http.post('/admin/money/in', {page: $scope.page})
         .success(function(res) {

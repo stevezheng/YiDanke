@@ -1,4 +1,5 @@
 var moment = require('moment');
+var _ = require('underscore');
 module.exports = Controller("Admin/BaseController", function(){
   "use strict";
   return {
@@ -11,8 +12,24 @@ module.exports = Controller("Admin/BaseController", function(){
       }
 
       if (self.isPost()) {
-        var page = self.post('page');
+        var page = self.post('page')
+          , data = self.post('data') || {};
 
+        var data = _.mapObject(data, function(val, key) {
+          return ['like', '%' + val + '%'];
+        });
+        
+
+        if (data.username) {
+          data['yi_user.username'] = data.username;
+          delete data.username;
+        }
+
+        if (data.id) {
+          data['yi_money.id'] = data.id;
+          delete data.id;
+        }
+        
         return D('money')
           .field(['yi_money.*', 'yi_user.username'])
           .join({
@@ -24,6 +41,7 @@ module.exports = Controller("Admin/BaseController", function(){
           })
           .order('id desc')
           .page(page, 20)
+          .where(data)
           .countSelect()
           .then(function(res) {
             return self.success(res);
@@ -99,6 +117,7 @@ module.exports = Controller("Admin/BaseController", function(){
     },
 
     outAction: function() {
+      //todo: 这里要新建表
       var self = this;
       self.assign('title', '提现');
 
