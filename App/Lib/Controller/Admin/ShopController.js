@@ -1,4 +1,5 @@
 var moment = require('moment');
+var _ = require('underscore');
 var shop = thinkRequire('ShopModel')();
 module.exports = Controller("Admin/BaseController", function(){
   "use strict";
@@ -12,7 +13,22 @@ module.exports = Controller("Admin/BaseController", function(){
       }
 
       if (self.isPost()) {
-        var page = self.post('page');
+        var page = self.post('page')
+          , data = self.post('data') || {};
+
+        var data = _.mapObject(data, function(val, key) {
+          return ['like', '%' + val + '%'];
+        });
+
+        if (data.username) {
+          data['yi_user.username'] = data.username;
+          delete data.username;
+        }
+
+        if (data.id) {
+          data['yi_shop.id'] = data.id;
+          delete data.id;
+        }
 
         return D('shop')
           .field(['yi_shop.*', 'yi_user.username'])
@@ -25,6 +41,7 @@ module.exports = Controller("Admin/BaseController", function(){
           })
           .order('id desc')
           .page(page, 20)
+          .where(data)
           .countSelect()
           .then(function(res) {
             return self.success(res);

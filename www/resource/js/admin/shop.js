@@ -4,6 +4,30 @@
   Module.controller('shopCtrl', function($scope, $http, $upload) {
     $scope.page = 1;
 
+    $scope.filter = {};
+    $scope.search = function() {
+      var filter = _.pick($scope.filter, function(value, key, object) {
+        if (value != '') {
+          return true;
+        }
+      });
+
+      $http.post('/admin/shop', {page: $scope.page, data: filter})
+        .success(function(res) {
+          if (res.errno == 0) {
+            $scope.data = res.data.data;
+            $scope.total = res.data.total;
+            $scope.count = res.data.count;
+            $scope.num = res.data.num;
+
+            $scope.totalPage = [];
+            for (var i = 0; i < res.data.total; i++) {
+              $scope.totalPage.push(i+1);
+            }
+          }
+        })
+    };
+
     $scope.edit = function(data) {
       new PCAS("province", "city", "area", data.shopProvince, data.shopCity, data.shopArea);
       $scope.cShop = data;

@@ -9,6 +9,21 @@
                         店铺管理
                     </header>
                     <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <p>
+                                    ID: <input type="text" ng-model="filter.id" style="width: 50px;"/> &nbsp;
+                                    账号: <input type="text" ng-model="filter.username" style="width: 100px;"/> &nbsp;
+                                    审核状态: <select name="" ng-model="filter.shopStatus">
+                                    <option value="">全部</option><option value="0">待审核</option>
+                                    <option value="1">通过</option> &nbsp;
+                                    <option value="-1">拒绝</option></select> &nbsp;
+                                    店铺链接: <input type="text" ng-model="filter.shopUrl" style="width: 100px;"/> &nbsp;
+                                    店铺名称: <input type="text" ng-model="filter.shopName" style="width: 100px;"/> &nbsp;
+                                    <button class="btn btn-success btn-xs" ng-click="search()">查询</button>
+                                </p>
+                            </div>
+                        </div>
                         <table class="table">
                             <thead>
                             <tr>
