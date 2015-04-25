@@ -70,17 +70,23 @@ module.exports = Controller("Home/BaseController", function () {
           , area = self.post('area');
 
         var user = UserModel();
+        var ip = self.ip();
         user
           .reg(username, password, email, qq, phone, type, province, city, area)
           .then(function (res) {
             if (res.type == 'exist') {
-              self.success('exist');
-            } else if (res.type == 'add') {
+              return self.success('exist');
+            } else {
               //注册日志
               var logUser = LogUserModel();
-              logUser.reg(res.id, username, ip);
-
-              self.success(res.id);
+              logUser.reg(res.id, username, ip)
+                .then(function() {
+                  return self.success(res.id);
+                })
+                .catch(function(err) {
+                  console.error(err);
+                  return self.error(err);
+                })
             }
           })
           .catch(function (err) {
@@ -93,6 +99,7 @@ module.exports = Controller("Home/BaseController", function () {
     logoutAction: function () {
       var self = this;
       self.assign('title', '');
+      var ip = self.ip();
 
       if (self.isGet()) {
         return self

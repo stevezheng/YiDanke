@@ -54,7 +54,7 @@ module.exports = Model(function() {
       return self
         .add({
           logUserId: userId
-          , logUserIp: userIP
+          , logUserIP: userIP
           , logUserType: 1
           , logUserComment: util.format('用户:%s,于%s注册系统', userUsername, moment().format('YYYY-MM-DD HH:mm:ss'))
         })
