@@ -1,4 +1,5 @@
 var UserModel = thinkRequire('UserModel');
+var Log= thinkRequire('LogService');
 var moment = require('moment');
 
 module.exports = Controller('Seller/BaseController', function() {
@@ -65,6 +66,18 @@ module.exports = Controller('Seller/BaseController', function() {
 
               return user.updateMember(self.cUser.id, coin, newExprie)
             }
+          })
+          .then(function() {
+            return Log.coin(
+              -1
+              , coin
+              , (self.cUser.coin + coin)
+              , self.cUser.id
+              , self.cUser.username
+              , 1
+              , self.ip()
+              , '充值会员扣除金币' + coin + '金币'
+            );
           })
           .then(function() {
             return self.success('升级成功');
