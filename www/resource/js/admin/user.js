@@ -10,6 +10,29 @@
   var Module = angular.module('YiAppAdmin.User', ['angularFileUpload']);
 
   Module.controller('buyerCtrl', function($scope, $http, $upload) {
+    $scope.filter = {};
+    $scope.search = function() {
+      var filter = _.pick($scope.filter, function(value, key, object) {
+        if (value != '') {
+          return true;
+        }
+      });
+
+      $http.post('/admin/user/buyer', {page: $scope.page, data: filter})
+        .success(function(res) {
+          if (res.errno == 0) {
+            $scope.users = res.data.data;
+            $scope.total = res.data.total;
+            $scope.count = res.data.count;
+            $scope.num = res.data.num;
+
+            $scope.totalPage = [];
+            for (var i = 0; i < res.data.total; i++) {
+              $scope.totalPage.push(i+1);
+            }
+          }
+        })
+    };
     $scope.statusMap = statusMap;
     $scope.member = function(user) {
       var r = confirm('确定要给该用户增加3个月会员?');
@@ -37,13 +60,26 @@
     };
 
     $scope.addCoin = function(user) {
-      var r = prompt('增加多少金币?');
+      var r = prompt('修改多少金币?');
       if (r) {
         $http.post('/admin/user/coin', {id: user.id, type: 'add', coin: r})
           .success(function(res) {
             if (res.errno == 0) {
               alert(res.data);
               user.coin += parseFloat(r);
+            }
+          })
+      }
+    };
+
+    $scope.addMoney= function(user) {
+      var r = prompt('修改多少押金?');
+      if (r) {
+        $http.post('/admin/user/money', {id: user.id, type: 'add', money: r})
+          .success(function(res) {
+            if (res.errno == 0) {
+              alert(res.data);
+              user.money += parseFloat(r);
             }
           })
       }
@@ -100,6 +136,30 @@
   });
 
   Module.controller('sellerCtrl', function($scope, $http, $upload) {
+    $scope.filter = {};
+    $scope.search = function() {
+      var filter = _.pick($scope.filter, function(value, key, object) {
+        if (value != '') {
+          return true;
+        }
+      });
+
+      $http.post('/admin/user/seller', {page: $scope.page, data: filter})
+        .success(function(res) {
+          if (res.errno == 0) {
+            $scope.users = res.data.data;
+            $scope.total = res.data.total;
+            $scope.count = res.data.count;
+            $scope.num = res.data.num;
+
+            $scope.totalPage = [];
+            for (var i = 0; i < res.data.total; i++) {
+              $scope.totalPage.push(i+1);
+            }
+          }
+        })
+    };
+
     $scope.member = function(user) {
       var r = confirm('确定要给该用户增加3个月会员?');
       if (r) {
@@ -126,7 +186,7 @@
     };
 
     $scope.addMoney = function(user) {
-      var r = prompt('增加多少押金?');
+      var r = prompt('修改多少押金?');
       if (r) {
         $http.post('/admin/user/money', {id: user.id, type: 'add', money: r})
           .success(function(res) {
@@ -139,7 +199,7 @@
     };
 
     $scope.addCoin = function(user) {
-      var r = prompt('增加多少金币?');
+      var r = prompt('修改多少金币?');
       if (r) {
         $http.post('/admin/user/coin', {id: user.id, type: 'add', coin: r})
           .success(function(res) {

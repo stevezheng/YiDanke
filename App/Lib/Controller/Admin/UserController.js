@@ -1,4 +1,5 @@
 var moment = require('moment');
+var _ = require('underscore');
 var UserModel = thinkRequire('UserModel');
 var user = UserModel();
 module.exports = Controller("Admin/BaseController", function(){
@@ -13,12 +14,19 @@ module.exports = Controller("Admin/BaseController", function(){
       }
 
       if (self.isPost()) {
-        var page = self.post('page');
+        var page = self.post('page')
+          , data = self.post('data') || {};
+
+        var data = _.mapObject(data, function(val, key) {
+          return ['like', '%' + val + '%'];
+        });
+
+        data.type = 0;
 
         return D('user')
           .order('id desc')
           .page(page, 20)
-          .where({type: 0})
+          .where(data)
           .countSelect()
           .then(function(res) {
             return self.success(res);
@@ -35,12 +43,19 @@ module.exports = Controller("Admin/BaseController", function(){
       }
 
       if (self.isPost()) {
-        var page = self.post('page');
+        var page = self.post('page')
+          , data = self.post('data') || {};
+
+        var data = _.mapObject(data, function(val, key) {
+          return ['like', '%' + val + '%'];
+        });
+
+        data.type = 1;
 
         return D('user')
           .order('id desc')
           .page(page, 20)
-          .where({type: 1})
+          .where(data)
           .countSelect()
           .then(function(res) {
             return self.success(res);

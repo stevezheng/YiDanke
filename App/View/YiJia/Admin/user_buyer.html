@@ -9,10 +9,23 @@
                         买手管理
                     </header>
                     <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <p>
+                                    ID: <input type="text" ng-model="filter.id" style="width: 50px;"/> &nbsp;
+                                    账号: <input type="text" ng-model="filter.username" style="width: 100px;"/> &nbsp;
+                                    等级: <select name="" ng-model="filter.status">
+                                    <option value="">全部</option><option value="1">游客</option><option value="2">会员</option></select> &nbsp;
+                                    电话: <input type="text" ng-model="filter.phone" style="width: 100px;"/> &nbsp;
+                                    QQ: <input type="text" ng-model="filter.qq" style="width: 100px;"/> &nbsp;
+                                    <button class="btn btn-success btn-xs" ng-click="search()">查询</button>
+                                </p>
+                            </div>
+                        </div>
                         <table class="table">
                             <thead>
                             <tr>
-                                <th>id</th>
+                                <th>ID</th>
                                 <th>账号</th>
                                 <th>等级</th>
                                 <th>电话</th>
@@ -39,8 +52,8 @@
                                 <td>{{user.money}}</td>
                                 <td>
                                     <p>
-                                        <button class="btn btn-success btn-xs" ng-click="addMoney(user)">增加押金</button>
-                                        <button class="btn btn-success btn-xs" ng-click="addCoin(user)">增加金币</button>
+                                        <button class="btn btn-success btn-xs" ng-click="addMoney(user)">修改押金</button>
+                                        <button class="btn btn-success btn-xs" ng-click="addCoin(user)">修改金币</button>
                                     </p>
                                     <p>
                                         <button class="btn btn-success btn-xs" ng-click="editPassword(user)">修改密码</button>
