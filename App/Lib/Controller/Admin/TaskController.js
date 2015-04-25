@@ -69,7 +69,7 @@ module.exports = Controller("Admin/BaseController", function(){
 
         return D('task')
           .where({id: id})
-          .update({taskStatus: 1})
+          .update({taskStatus: 3})
           .then(function(res) {
             return self.success('通过审核成功');
           })

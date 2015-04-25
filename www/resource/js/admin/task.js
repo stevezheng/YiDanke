@@ -29,20 +29,20 @@
     getData();
 
     $scope.pass = function(d) {
-      if (d.taskStatus == '0') {
-        $http.post('/admin/task/pass', {id: d.id})
+      if (d.taskStatus == '2') {
+        $http.post('/admin/task/pass', {id: d.taobaoTaskId || d.tmallTaskId || d.jdTaskId})
           .success(function(res) {
             if (res.errno == 0) {
               alert(res.data);
-              d.taskStatus = 1;
+              d.taskStatus = 3;
             }
           })
       }
     };
 
     $scope.unpass = function(d) {
-      if (d.taskStatus == '0') {
-        $http.post('/admin/task/unpass', {id: d.id})
+      if (d.taskStatus == '2') {
+        $http.post('/admin/task/unpass', {id: d.taobaoTaskId || d.tmallTaskId || d.jdTaskId})
           .success(function(res) {
             if (res.errno == 0) {
               alert(res.data);
