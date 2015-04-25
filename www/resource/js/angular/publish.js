@@ -12,6 +12,10 @@
     };
 
     $scope.next = function() {
+      if (!$scope.shopId) {
+        alert('请选择店铺');
+        return false;
+      }
       location.href = '/publish/' + $scope.platform + '/' + $scope.publishType + '?shopId=' + $scope.shopId;
     };
 
@@ -19,7 +23,6 @@
       $http.get('/seller/publish/getShops')
         .success(function(res) {
           $scope.shops = res.data;
-          $scope.shopId = res.data[0].id;
         })
     }
 
