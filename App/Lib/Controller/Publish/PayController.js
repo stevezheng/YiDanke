@@ -91,7 +91,18 @@ module.exports = Controller("Publish/BaseController", function(){
               , '发布任务['+taskId+']支付' + payMoney + '元'
             );
 
-            return Promise.all([p1, p2])
+            var p3 = Log.pv(
+              -1
+              , payPV
+              , self.cUser.pv - payPV
+              , self.cUser.id
+              , self.cUser.username
+              , 1
+              , self.ip()
+              , '发布任务['+taskId+']消耗流量' + payPV + '个'
+            );
+
+            return Promise.all([p1, p2, p3])
           })
           .then(function() {
             return self.success('支付成功');

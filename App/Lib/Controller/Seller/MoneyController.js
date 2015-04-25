@@ -333,7 +333,7 @@ module.exports = Controller("Seller/BaseController", function () {
                       .addPV(self.cUser.id, payPV)
                   })
                   .then(function() {
-                    return Log.money(
+                    var p1 = Log.money(
                       -1
                       , coin
                       , (self.cUser.money - coin)
@@ -343,6 +343,19 @@ module.exports = Controller("Seller/BaseController", function () {
                       , self.ip()
                       , '充值流量:' + payPV + '个,花费' + coin + '元'
                     );
+
+                    var p2 = Log.pv(
+                      1
+                      , payPV
+                      , self.cUser.pv + payPV
+                      , self.cUser.id
+                      , self.cUser.username
+                      , 1
+                      , self.ip()
+                      , '充值流量:' + payPV + '个'
+                    );
+
+                    return Promise.all([p1, p2]);
                   })
                   .then(function(res) {
                     return self.success('支付成功');
