@@ -1,4 +1,6 @@
 var moment = require('moment');
+var _ = require('underscore');
+var TaskModel = thinkRequire('TaskModel');
 module.exports = Controller("Admin/BaseController", function(){
   "use strict";
   return {
@@ -11,7 +13,18 @@ module.exports = Controller("Admin/BaseController", function(){
       }
 
       if (self.isPost()) {
-        var page = self.post('page');
+        var page = self.post('page')
+          , data = self.post('data') || {};
+
+        var data = _.mapObject(data, function(val, key) {
+          return ['like', '%' + val + '%'];
+        });
+
+
+        if (data.id) {
+          data['yi_task.id'] = data.id;
+          delete data.id;
+        }
 
         return D('task')
           .page(page, 20)
@@ -51,6 +64,14 @@ module.exports = Controller("Admin/BaseController", function(){
               'taskUserId': 'id'
             }
           })
+          .join({
+            table: 'shop'
+            , join: 'left'
+            , on: {
+              'taskShopId': 'id'
+            }
+          })
+          .where(data)
           .countSelect()
           .then(function(res) {
             return self.success(res);
@@ -99,6 +120,101 @@ module.exports = Controller("Admin/BaseController", function(){
           })
       }
     },
-    
+
+    taskDetailAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+        var id = self.get('id');
+        var task = TaskModel();
+
+        return task
+          .getOne(id)
+          .then(function(res) {
+            self.assign('task', res);
+            return self.display();
+          })
+      }
+
+      if (self.isPost()) {
+
+      }
+    },
+
+    doTaskListAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+
+      }
+
+      if (self.isPost()) {
+        var taskId = self.post('taskId');
+
+        return D('do_task')
+          .join({
+            'table': 'do_task_detail'
+            , 'join': 'left'
+            , 'on': {
+              'id': 'doTaskDetailDoTaskId'
+            }
+          })
+          .join({
+            'table': 'do_task_extend'
+            , 'join': 'left'
+            , 'on': {
+              'id': 'doTaskExtendDoTaskId'
+            }
+          })
+          .where({doTaskTaskId: taskId})
+          .select()
+          .then(function(res) {
+            return self.success(res);
+          })
+          .catch(function(err) {
+            return self.error(err);
+          })
+      }
+    },
+
+    doTaskDetailAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+        self.display();
+      }
+
+      if (self.isPost()) {
+        var id = self.post('id');
+
+        return D('do_task')
+          .join({
+            'table': 'do_task_detail'
+            , 'join': 'left'
+            , 'on': {
+              'id': 'doTaskDetailDoTaskId'
+            }
+          })
+          .join({
+            'table': 'do_task_extend'
+            , 'join': 'left'
+            , 'on': {
+              'id': 'doTaskExtendDoTaskId'
+            }
+          })
+          .where({'yi_do_task.id': id})
+          .find()
+          .then(function(res) {
+            return self.success(res);
+          })
+          .catch(function(err) {
+            console.error(err.stack);
+            return self.error(err);
+          })
+      }
+    },
   };
 });

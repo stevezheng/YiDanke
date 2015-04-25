@@ -458,6 +458,34 @@
       }
     };
 
+    $scope.pass = function(d) {
+      if (d.taskStatus == '2') {
+        $http.post('/admin/task/pass', {id: d.taobaoTaskId || d.tmallTaskId || d.jdTaskId})
+          .success(function(res) {
+            if (res.errno == 0) {
+              alert(res.data);
+              d.taskStatus = 3;
+            }
+          })
+      } else {
+        alert('该任务已审核过');
+      }
+    };
+
+    $scope.unpass = function(d) {
+      if (d.taskStatus == '2') {
+        $http.post('/admin/task/unpass', {id: d.taobaoTaskId || d.tmallTaskId || d.jdTaskId})
+          .success(function(res) {
+            if (res.errno == 0) {
+              alert(res.data);
+              d.taskStatus = -1;
+            }
+          })
+      } else {
+        alert('该任务已审核过');
+      }
+    };
+
     $scope.cancelTask = function(task) {
       var r = confirm('是否要撤销该任务?');
       if (r) {
