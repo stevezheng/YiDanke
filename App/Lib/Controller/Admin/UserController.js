@@ -133,5 +133,37 @@ module.exports = Controller("Admin/BaseController", function(){
         }
       }
     },
+    
+    memberAction: function(oldVipExprie) {
+      var self = this;
+      self.assign('title', '');
+    
+      if (self.isGet()) {}
+      
+      if (self.isPost()) {
+        var id = self.post('id')
+          , oldVipExprie = self.post('oldVipExprie');
+
+        var exprie;
+        var _vipExprie = oldVipExprie;
+        var vipExprie = moment().diff(_vipExprie, 'days');
+        if (vipExprie < 0) {
+          //尚未到期
+          exprie = _vipExprie;
+        } else {
+          //已经到期
+          exprie = moment();
+        }
+
+        var newExprie = moment(exprie).add(3, 'M').format('YYYY-MM-DD HH:mm:ss');
+
+        return D('user')
+          .where({id: id})
+          .update({vipExprie: newExprie, status: 2})
+          .then(function(res) {
+            return self.success('增加3个月会员成功');
+          })
+      }
+    },
   };
 });

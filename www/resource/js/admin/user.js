@@ -1,15 +1,36 @@
 (function() {
+  var statusMap = {
+    status: {
+      0: '禁用'
+      , 1: '游客'
+      , 2: '会员'
+    }
+  };
+
   var Module = angular.module('YiAppAdmin.User', ['angularFileUpload']);
 
   Module.controller('buyerCtrl', function($scope, $http, $upload) {
-    $scope.addMoney = function(user) {
-      var r = prompt('增加多少押金?');
+    $scope.statusMap = statusMap;
+    $scope.member = function(user) {
+      var r = confirm('确定要给该用户增加3个月会员?');
       if (r) {
-        $http.post('/admin/user/money', {id: user.id, type: 'add', money: r})
+        $http.post('/admin/user/member', {id: user.id, oldVipExprie: user.vipExprie})
           .success(function(res) {
             if (res.errno == 0) {
+              var exprie;
+              var _vipExprie = user.vipExprie;
+              var vipExprie = moment().diff(_vipExprie, 'days');
+              if (vipExprie < 0) {
+                //尚未到期
+                exprie = _vipExprie;
+              } else {
+                //已经到期
+                exprie = moment();
+              }
+
+              var newExprie = moment(exprie).add(3, 'M').format('YYYY-MM-DD');
               alert(res.data);
-              user.money += parseFloat(r);
+              user.vipExprie = newExprie;
             }
           })
       }
@@ -79,6 +100,31 @@
   });
 
   Module.controller('sellerCtrl', function($scope, $http, $upload) {
+    $scope.member = function(user) {
+      var r = confirm('确定要给该用户增加3个月会员?');
+      if (r) {
+        $http.post('/admin/user/member', {id: user.id, oldVipExprie: user.vipExprie})
+          .success(function(res) {
+            if (res.errno == 0) {
+              var exprie;
+              var _vipExprie = user.vipExprie;
+              var vipExprie = moment().diff(_vipExprie, 'days');
+              if (vipExprie < 0) {
+                //尚未到期
+                exprie = _vipExprie;
+              } else {
+                //已经到期
+                exprie = moment();
+              }
+
+              var newExprie = moment(exprie).add(3, 'M').format('YYYY-MM-DD');
+              alert(res.data);
+              user.vipExprie = newExprie;
+            }
+          })
+      }
+    };
+
     $scope.addMoney = function(user) {
       var r = prompt('增加多少押金?');
       if (r) {
@@ -154,5 +200,6 @@
     }
 
     getUsers();
+    $scope.statusMap = statusMap;
   })
 })();

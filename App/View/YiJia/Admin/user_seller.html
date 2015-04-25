@@ -14,7 +14,7 @@
                             <tr>
                                 <th>id</th>
                                 <th>账号</th>
-                                <th>名字</th>
+                                <th>等级</th>
                                 <th>电话</th>
                                 <th>QQ</th>
                                 <th>所在地</th>
@@ -27,7 +27,12 @@
                             <tr ng-repeat="user in users">
                                 <td>{{user.id}}</td>
                                 <td>{{user.username}}</td>
-                                <td>{{user.realName}}</td>
+                                <td>
+                                    <p>
+                                        {{statusMap.status[user.status]}}
+                                    </p>
+                                    <p>{{user.vipExprie | date: 'yyyy-MM-dd'}}</p>
+                                </td>
                                 <td>{{user.phone}}</td>
                                 <td>{{user.qq}}</td>
                                 <td>{{user.province}}{{user.city}}{{user.area}}</td>
@@ -35,10 +40,17 @@
                                 <td>{{user.money}}</td>
                                 <td>{{user.pv}}</td>
                                 <td>
-                                    <button class="btn btn-success" ng-click="addMoney(user)">增加押金</button>
-                                    <button class="btn btn-success" ng-click="addCoin(user)">增加金币</button>
-                                    <button class="btn btn-success" ng-click="editPassword(user)">修改密码</button>
-                                    <button class="btn btn-success" ng-click="editTradePassword(user)">修改支付密码</button>
+                                    <p>
+                                        <button class="btn btn-success btn-xs" ng-click="addMoney(user)">增加押金</button>
+                                        <button class="btn btn-success btn-xs" ng-click="addCoin(user)">增加金币</button>
+                                    </p>
+                                    <p>
+                                        <button class="btn btn-success btn-xs" ng-click="editPassword(user)">修改密码</button>
+                                        <button class="btn btn-success btn-xs" ng-click="editTradePassword(user)">修改支付密码</button>
+                                    </p>
+                                    <p>
+                                        <button class="btn btn-xs btn-success" ng-click="member(user)">升级会员</button>
+                                    </p>
                                 </td>
                             </tr>
                         </table>
