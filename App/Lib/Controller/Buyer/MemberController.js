@@ -44,6 +44,7 @@ module.exports = Controller('Buyer/BaseController', function() {
 
         var user = UserModel();
         var coin = map[time];
+        var newExprie;
 
         return user
           .getUser(self.cUser.id)
@@ -62,13 +63,13 @@ module.exports = Controller('Buyer/BaseController', function() {
                 exprie = moment();
               }
 
-              var newExprie = moment(exprie).add(parseInt(time), 'M').format('YYYY-MM-DD HH:mm:ss');
+              newExprie = moment(exprie).add(parseInt(time), 'M').format('YYYY-MM-DD HH:mm:ss');
 
               return user.updateMember(self.cUser.id, coin, newExprie)
             }
           })
           .then(function() {
-            return Log.coin(
+            var p1 = Log.coin(
               -1
               , coin
               , (self.cUser.coin - coin)
@@ -78,6 +79,19 @@ module.exports = Controller('Buyer/BaseController', function() {
               , self.ip()
               , '充值会员扣除金币' + coin + '金币'
             );
+
+            var p2 = Log.member(
+              1
+              , time
+              , ''
+              , self.cUser.id
+              , self.cUser.username
+              , 0
+              , self.ip()
+              , 'VIP会员开通会员' + time + '个月,有效期至' + newExprie
+            );
+
+            return Promise.all([p1, p2]);
           })
           .then(function() {
             return self.success('升级成功');
