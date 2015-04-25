@@ -300,6 +300,18 @@ module.exports = Controller("Seller/BaseController", function () {
                     return user
                       .addPV(self.cUser.id, payPV)
                   })
+                  .then(function() {
+                    return Log.coin(
+                      -1
+                      , coin
+                      , (self.cUser.coin + coin)
+                      , self.cUser.id
+                      , self.cUser.username
+                      , 1
+                      , self.ip()
+                      , '充值流量:' + payPV + '个,花费' + coin + '金币'
+                    );
+                  })
                   .then(function(res) {
                     return self.success('支付成功');
                   })
@@ -319,6 +331,18 @@ module.exports = Controller("Seller/BaseController", function () {
                   .then(function() {
                     return user
                       .addPV(self.cUser.id, payPV)
+                  })
+                  .then(function() {
+                    return Log.money(
+                      -1
+                      , coin
+                      , (self.cUser.money + coin)
+                      , self.cUser.id
+                      , self.cUser.username
+                      , 1
+                      , self.ip()
+                      , '充值流量:' + payPV + '个,花费' + coin + '元'
+                    );
                   })
                   .then(function(res) {
                     return self.success('支付成功');
