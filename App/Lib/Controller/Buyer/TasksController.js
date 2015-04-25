@@ -1,6 +1,7 @@
 var moment = require('moment');
 var DoTask = thinkRequire('DoTaskModel');
 var UserModel = thinkRequire('UserModel');
+var Log= thinkRequire('LogService');
 module.exports = Controller("Buyer/BaseController", function(){
   "use strict";
   return {
@@ -141,7 +142,7 @@ module.exports = Controller("Buyer/BaseController", function(){
         var taskId = self.post('taskId');
         var terminal = self.post('terminal');
         var user = UserModel();
-        var _dotask;
+        var _dotask, _task;
         //修改确认退款状态
         return D('do_task_extend')
           .where({doTaskExtendDoTaskId: doTaskId})
@@ -183,7 +184,57 @@ module.exports = Controller("Buyer/BaseController", function(){
           })
           .then(function() {
             return user
-              .addMoney(self.cUser.id, _dotask.doTaskFee + _dotask.doTaskExtendFee)
+              .addCoin(self.cUser.id, _dotask.doTaskFee + _dotask.doTaskExtendFee)
+          })
+          .then(function() {
+            var p1 = Log.coin(
+              1
+              , 1
+              , (self.cUser.coin + 1)
+              , self.cUser.id
+              , self.cUser.username
+              , 0
+              , self.ip()
+              , '完成任务['+doTaskId+']返还押金1金币'
+            );
+
+            var p2 = Log.coin(
+              1
+              , _dotask.doTaskFee + _dotask.doTaskExtendFee
+              , (self.cUser.coin + _dotask.doTaskFee + _dotask.doTaskExtendFee)
+              , self.cUser.id
+              , self.cUser.username
+              , 0
+              , self.ip()
+              , '完成任务['+doTaskId+']获得佣金' + _dotask.doTaskFee + _dotask.doTaskExtendFee  + '金币'
+            );
+
+            return Promise.all([p1, p2])
+          })
+          .then(function() {
+            return D('task')
+              .where({id: taskId})
+              .find()
+              .then(function(res) {
+                _task = res;
+                var userId = res.taskUserId;
+
+                return D('user')
+                  .where({id: userId})
+                  .find()
+              })
+              .then(function(res) {
+                return Log.money(
+                  1
+                  , _task.totalMoney * 0.05 + _task.taskPromise
+                  , (res.money+ _task.totalMoney * 0.05 + _task.taskPromise)
+                  , res.id
+                  , self.cUser.username
+                  , 1
+                  , self.ip()
+                  , '完成任务['+doTaskId+']返还押金' + _task.totalMoney * 0.05 + _task.taskPromise  + '元'
+                );
+              })
           })
           .then(function() {
             return self.success('确认退款成功');
