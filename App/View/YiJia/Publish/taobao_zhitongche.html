@@ -865,25 +865,28 @@
                 </div>
                 <div class="border-bottom"></div>
                 <div class="col-lg-12">
-                    <div class="radio" ng-click="transport = 'baoyou'">
+                    <div class="radio" ng-click="transportType = 'pingtai'">
                         <label>
-                            <input type="radio" name="optionsRadios">
+                            <input type="radio" name="optionsRadios1" checked>
                             平台快递 <span class="small">平台快递发货，平台收取 <span class="error">5</span>元作为服务费用</span>
                         </label>
                     </div>
-                    <div class="radio" ng-click="transport = 'zixuan'">
+                    <div class="radio" ng-click="transportType = 'zixuan'">
                         <label>
-                            <input type="radio" name="optionsRadios">
+                            <input type="radio" name="optionsRadios1">
                             自选快递 <span class="small">商家自选快递发货，平台收取 <span class="error">1.5</span>元作为服务费用</span>
                         </label>
                     </div>
                     <h4>快递信息</h4>
-                    <p>快递重量 <input type="text" ng-model="item.height"/>kg</p>
-                    <p>快递体积 <input type="text" ng-model="item.volume"/>立方米</p>
-                    <p>长宽高 <input type="text" ng-model="item.chang"/>米
-                        <input type="text" ng-model="item.kuan"/>米
-                        <input type="text" ng-model="item.gao"/>米</p>
+                    <p>快递重量 <input type="text" ng-model="item.weight" style="width: 50px"/> kg</p>
+                    <p>快递体积 <input type="text" ng-model="item.volume" style="width: 50px"/> 立方米</p>
+                    <p><span>长宽高</span>
+                        &nbsp;&nbsp;
+                        <input type="text" ng-model="item.length" style="width: 50px"/> 米
+                        <input type="text" ng-model="item.width" style="width: 50px"/> 米
+                        <input type="text" ng-model="item.height" style="width: 50px"/> 米</p>
                 </div>
+
                     <div class="col-lg-12">
                         <button class="btn btn-warning" ng-click="confirmItem()">确认提交信息</button>
                     </div>
@@ -907,7 +910,7 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
-                            <button class="btn btn-warning" ng-click="confirmTransport(transport)">确认提交信息</button>
+                            <button class="btn btn-warning" ng-click="confirmTransport(transport, transportType)">确认提交信息</button>
                         </div>
                     </div>
                     <div class="border-bottom"></div>

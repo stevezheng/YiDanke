@@ -63,7 +63,7 @@
       totalCount: 0 //最终刷单数
       , totalMoney: 0 //最终商品1、商品2、商品3的总价格
 
-      //, transport: 0 //快递费
+      , transport: 5 //快递费
 
       , promise: 0 //退款保证金
       , totalPromise: 0 //总退款保证金
@@ -186,6 +186,16 @@
 
         $scope.cost.allCoin =($scope.cost.totalMoney * 1.05 + $scope.cost.promise) * $scope.cost.totalCount;
         $scope.cost.allMoney = ($scope.cost.totalFee * 1 + $scope.cost.transport * $scope.cost.totalCount) + $scope.cost.payback * 1 + $scope.cost.speed * 1 + ($scope.cost.isExtendFee?$scope.cost.extendFee * $scope.cost.totalCount:0) + ($scope.cost.isInterval?$scope.cost.interval:0) * 1 + ($scope.cost.cycleTime * 1) * ($scope.cost.totalCount * 1) + ($scope.cost.isGoodComment?$scope.cost.goodCommentFee * 1: 0) + $scope.cost.phone * 1;
+        //这里计算的是是否部分的内容
+        $scope.cost.paybak = $scope.cost.isPayback?$scope.cost.payback:0;
+        $scope.cost.extendFee = $scope.cost.isExtendFee?$scope.cost.extendFee:0;
+        $scope.cost.interval= $scope.cost.isInterval?$scope.cost.interval:0;
+        $scope.cost.goodCommentFee = $scope.cost.isGoodComment?$scope.cost.goodCommentFee:0;
+
+        $scope.cost.isPaybak = $scope.cost.isPayback?1:0;
+        $scope.cost.isExtendFee = $scope.cost.isExtendFee?1:0;
+        $scope.cost.isInterval= $scope.cost.isInterval?1:0;
+        $scope.cost.isGoodCommentFee = $scope.cost.isGoodComment?1:0;
         //if (!$scope.taskId) {
           $http.post('/publish/taobao/zhitongche', {
             user: $scope.user
@@ -196,6 +206,7 @@
             , extendItem1: $scope.extendItem1
             , extendItem2: $scope.extendItem2
             , transport: $scope.transport
+            , transportType: $scope.transportType
             , zhitongche: $scope.zhitongche
           }).success(function(res) {
             if (res.errno == 0) {
@@ -1068,15 +1079,17 @@
 
     $scope.transport = 'baoyou';
 
-    $scope.confirmTransport = function(transport) {
+    $scope.confirmTransport = function(transport, transportType) {
       $scope.transportFlag = true;
       if (transport == 'baoyou') {
-        $scope.cost.transport = 5;
       } else if (transport == 'bubaoyou') {
-        $scope.cost.transport = 5;
         $scope.cost.promise = 10;
-      } else if (transport == 'zixuan') {
-        $scope.cost.transport = 2;
+      }
+
+      if (transportType == 'pingtai') {
+        $scope.cost.transport = 5;
+      } else if (transportType == 'zixuan') {
+        $scope.cost.transport = 1.5;
       }
     };
     //step2 end
