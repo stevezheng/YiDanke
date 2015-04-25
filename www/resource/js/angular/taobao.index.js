@@ -184,6 +184,12 @@
         $scope.cost.extendFee = $scope.cost.isExtendFee?$scope.cost.extendFee:0;
         $scope.cost.interval= $scope.cost.isInterval?$scope.cost.interval:0;
         $scope.cost.goodCommentFee = $scope.cost.isGoodComment?$scope.cost.goodCommentFee:0;
+
+        $scope.cost.isPaybak = $scope.cost.isPayback?1:0;
+        $scope.cost.isExtendFee = $scope.cost.isExtendFee?1:0;
+        $scope.cost.isInterval= $scope.cost.isInterval?1:0;
+        $scope.cost.isGoodCommentFee = $scope.cost.isGoodComment?1:0;
+
         //if (!$scope.taskId) {
           $http.post('/publish/taobao', {
             user: $scope.user
