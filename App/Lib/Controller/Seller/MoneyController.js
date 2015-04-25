@@ -368,5 +368,26 @@ module.exports = Controller("Seller/BaseController", function () {
         }
       }
     },
+
+    logcoinAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+
+      }
+
+      if (self.isPost()) {
+        var page = self.post('page');
+
+        return D('log_coin')
+          .order('id desc')
+          .page(page, 20)
+          .countSelect()
+          .then(function(res) {
+            return self.success(res);
+          })
+      }
+    },
   };
 });

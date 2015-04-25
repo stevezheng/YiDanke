@@ -232,12 +232,12 @@
                             </a>
                         </li>
                         <li class="">
-                            <a href="#pay" data-toggle="tab">
+                            <a href="#pv" data-toggle="tab">
                                 流量记录
                             </a>
                         </li>
                         <li class="">
-                            <a href="#user" data-toggle="tab">
+                            <a href="#member" data-toggle="tab">
                                 会员记录
                             </a>
                         </li>
@@ -245,20 +245,68 @@
                 </header>
                 <div class="panel-body">
                     <div class="tab-content tasi-tab">
-                        <div class="tab-pane active">
-                            <div class="alert alert-warning">暂无数据</div>
+                        <div class="tab-pane active" id="withdraw" ng-controller="sellerLogWithdrawCtrl">
+                            <div class="alert alert-warning" ng-if="data.length == 0">暂无数据</div>
+                            <table class="table" ng-if="data.length != 0">
+                                <thead>
+                                <tr>
+                                    <th>金额</th>
+                                    <th>申请时间</th>
+                                    <th>状态</th>
+                                    <th>备注</th>
+                                </tr>
+                                </thead>
+                                <tr ng-repeat="d in data">
+                                    <td>{{d.id}}</td>
+                                    <td>{{d.username}}</td>
+                                    <td>{{statusMap.status[d.accountStatus]}}</td>
+                                    <td>{{statusMap.platform[d.accountPlatform]}}</td>
+                                </tr>
+                            </table>
+                            <div class="text-center">
+                                <ul class="pagination">
+                                    <li ng-if="page != 1"><a ng-click="changePage(page-1)" href="javascript:;;;">«</a></li>
+                                    <li ng-repeat="t in totalPage"><a href="javascript:;;;" ng-click="changePage(t)">{{t}}</a></li>
+                                    <li ng-if="page != total"><a ng-click="changePage(page+1)" href="javascript:;;;">»</a></li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="tab-pane" id="coin">
-                            <div class="alert alert-warning">暂无数据</div>
+                        <div class="tab-pane" id="coin" ng-controller="sellerLogCoinCtrl">
+                            <div class="alert alert-warning" ng-if="data.length == 0">暂无数据</div>
+                            <table class="table" ng-if="data.length != 0">
+                                <thead>
+                                <tr>
+                                    <th>时间</th>
+                                    <th>收入</th>
+                                    <th>支出</th>
+                                    <th>结余</th>
+                                    <th>备注</th>
+                                </tr>
+                                </thead>
+                                <tr ng-repeat="d in data" ng-if="d.logCoin != 0">
+                                    <td>{{d.logCoinCreateTime | date: 'yyyy-MM-dd HH:mm'}}</td>
+                                    <td><span class="error" ng-if="d.logCoinType == 1">{{d.logCoin}}</span></td>
+                                    <td><span class="error" ng-if="d.logCoinType == -1">{{d.logCoin}}</span></td>
+                                    <td><span class="error">{{d.logCoinBalance}}</span></td>
+                                    <td>{{d.logCoinComment}}</td>
+                                </tr>
+                            </table>
+                            <div class="text-center">
+                                <ul class="pagination">
+                                    <li ng-if="page != 1"><a ng-click="changePage(page-1)" href="javascript:;;;">«</a></li>
+                                    <li ng-repeat="t in totalPage"><a href="javascript:;;;" ng-click="changePage(t)">{{t}}</a></li>
+                                    <li ng-if="page != total"><a ng-click="changePage(page+1)" href="javascript:;;;">»</a></li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="tab-pane " id="money">
-                            <div class="alert alert-warning">暂无数据</div>
+                        <div class="tab-pane " id="money" ng-controller="sellerLogMoneyCtrl">
+                            <div class="alert alert-warning" ng-if="data.length == 0">暂无数据</div>
                         </div>
-                        <div class="tab-pane " id="pay">
-                            <div class="alert alert-warning">暂无数据</div>
+                        <div class="tab-pane " id="pv" ng-controller="sellerLogPVCtrl">
+                            <div class="alert alert-warning" ng-if="data.length == 0">暂无数据</div>
                         </div>
-                        <div class="tab-pane " id="user">
-                            <div class="alert alert-warning">暂无数据</div>
+                        <div class="tab-pane " id="member" ng-controller="sellerLogMemberCtrl">
+                            <div class="alert alert-warning" ng-if="data.length == 0">暂无数据</div>
                         </div>
                     </div>
                 </div>
