@@ -1,4 +1,5 @@
 var TaskModel = thinkRequire('TaskModel');
+var Log = thinkRequire('LogService');
 var DoTaskModel = thinkRequire('DoTaskModel');
 var UserModel = thinkRequire('UserModel');
 var moment = require('moment');
@@ -211,6 +212,18 @@ module.exports = Controller("Buyer/BaseController", function(){
             //todo:需要打日志
             return doTask
               .addOne(terminal, self.cUser.id, taskId, accountId, accountName, keyword, _task.taskFee, _task.taskExtendFee, _task.taskShopId, _task.taskShopName)
+          })
+          .then(function() {
+            return Log.coin(
+              -1
+              , 1
+              , (self.cUser.coin - 1)
+              , self.cUser.id
+              , self.cUser.username
+              , 0
+              , self.ip()
+              , '做任务[' + taskId + '],冻结1金币'
+            );
           })
           .then(function(insertId) {
             return self.success(insertId);
