@@ -1,6 +1,7 @@
 var ShopModel = thinkRequire('ShopModel');
 var TaskModel = thinkRequire('TaskModel');
 var UserModel = thinkRequire('UserModel');
+var Log= thinkRequire('LogService');
 var run = thinkRequire('CrazyClickService');
 
 module.exports = Controller("Publish/BaseController", function(){
@@ -67,6 +68,32 @@ module.exports = Controller("Publish/BaseController", function(){
             if (shopPlatform == 'taobao' || shopPlatform == 'tmall') {
               run(shopPlatform, res);
             }
+
+            var p1 = Log.coin(
+              -1
+              , payCoin
+              , (self.cUser.coin + payCoin)
+              , self.cUser.id
+              , self.cUser.username
+              , 1
+              , self.ip()
+              , '发布任务['+taskId+']支付' + payCoin + '金币'
+            );
+
+            var p2 = Log.money(
+              -1
+              , payMoney
+              , (self.cUser.money + payMoney)
+              , self.cUser.id
+              , self.cUser.username
+              , 1
+              , self.ip()
+              , '发布任务['+taskId+']支付' + payMoney + '元'
+            );
+
+            return Promise.all([p1, p2])
+          })
+          .then(function() {
             return self.success('支付成功');
           })
           .catch(function(err) {

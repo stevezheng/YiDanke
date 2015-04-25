@@ -593,7 +593,7 @@
               totalCount: res.taskTotalCount //最终刷单数
               , totalMoney: res.taskTotalMoney //最终商品1、商品2、商品3的总价格
 
-              //, transport: 0 //快递费
+              , transport: 5 //快递费
 
               , promise: res.taskPromise //退款保证金
               , totalPromise: res.taskTotalPromise //总退款保证金
