@@ -304,7 +304,7 @@ module.exports = Controller("Seller/BaseController", function () {
                     return Log.coin(
                       -1
                       , coin
-                      , (self.cUser.coin + coin)
+                      , (self.cUser.coin - coin)
                       , self.cUser.id
                       , self.cUser.username
                       , 1
@@ -336,7 +336,7 @@ module.exports = Controller("Seller/BaseController", function () {
                     return Log.money(
                       -1
                       , coin
-                      , (self.cUser.money + coin)
+                      , (self.cUser.money - coin)
                       , self.cUser.id
                       , self.cUser.username
                       , 1

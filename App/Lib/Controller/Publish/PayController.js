@@ -72,7 +72,7 @@ module.exports = Controller("Publish/BaseController", function(){
             var p1 = Log.coin(
               -1
               , payCoin
-              , (self.cUser.coin + payCoin)
+              , (self.cUser.coin - payCoin)
               , self.cUser.id
               , self.cUser.username
               , 1
@@ -83,7 +83,7 @@ module.exports = Controller("Publish/BaseController", function(){
             var p2 = Log.money(
               -1
               , payMoney
-              , (self.cUser.money + payMoney)
+              , (self.cUser.money - payMoney)
               , self.cUser.id
               , self.cUser.username
               , 1
