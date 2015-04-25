@@ -39,9 +39,13 @@
             $scope.showTask = task;
 
             $scope.actionTask = function(task) {
-              if ($scope.showAccount.accountPlatform != $scope.platform || !$scope.showAccount) {
-                alert('请选择买号');
-                return false;
+              if ($scope.showAccount.accountPlatform == 'taobao') {
+                if ($scope.platform != 'taobao' && $scope.platform != 'tmall') {
+                  if ($scope.showAccount.accountPlatform != $scope.platform || !$scope.showAccount) {
+                    alert('请选择买号');
+                    return false;
+                  }
+                }
               }
 
               var taskId = task.id;
