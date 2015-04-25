@@ -34,7 +34,8 @@ module.exports = Controller("Publish/BaseController", function(){
           , tmall = self.post('tmall')
           , extendItem1 = self.post('extendItem1')
           , extendItem2 = self.post('extendItem2')
-          , transport = self.post('transport');
+          , transport = self.post('transport')
+          , transportType = self.post('transportType');
 
         //todo:这里需要重新计算一下费用
         var task = TaskModel();
@@ -48,7 +49,11 @@ module.exports = Controller("Publish/BaseController", function(){
           , taskPV: cost.pv
           , taskPlatform: 'tmall'
           , taskType: 'dingdan'
+          , taskWeight: item.weight
+          , taskVolume: item.volume
           , taskHeight: item.height
+          , taskLength: item.length
+          , taskWidth: item.width
           , taskName: item.name
           , taskUrl: item.url
           , taskMoney: item.money
@@ -84,6 +89,7 @@ module.exports = Controller("Publish/BaseController", function(){
           , taskGoodCommentFee: cost.goodCommentFee
           , taskGoodComment: cost.goodComment
           , taskTransport: transport
+          , taskTransportType: transportType
           , taskTips: item.tips
           , taskPosition: item.position
           , taskTag1: item.tag1
@@ -127,8 +133,8 @@ module.exports = Controller("Publish/BaseController", function(){
           .then(function() {
             var _taskTaobao = {
               taobaoTaskId: taskId
-              , taobaoImage: taobao.imagefile
               , taobaoKeywordsCount: taobao.keywordsCount
+              , taobaoImage: taobao.imagefile
               , taobaoKey1: taobao.key1
               , taobaoKeyCount1: taobao.key1Count
               , taobaoKey1Extend1: taobao.key1extend1
@@ -171,8 +177,8 @@ module.exports = Controller("Publish/BaseController", function(){
           .then(function() {
             var _taskTmall = {
               tmallTaskId: taskId
-              , tmallImage: tmall.imagefile
               , tmallKeywordsCount: tmall.keywordsCount
+              , tmallImage: tmall.imagefile
               , tmallKey1: tmall.key1
               , tmallKeyCount1: tmall.key1Count
               , tmallKey1Extend1: tmall.key1extend1
@@ -214,9 +220,10 @@ module.exports = Controller("Publish/BaseController", function(){
           })
           .then(function() {
             self.success(taskId);
-          });
+          })
       }
     },
+
 
     zhitongcheAction: function() {
       var self = this;
@@ -248,7 +255,8 @@ module.exports = Controller("Publish/BaseController", function(){
           , zhitongche = self.post('zhitongche')
           , extendItem1 = self.post('extendItem1')
           , extendItem2 = self.post('extendItem2')
-          , transport = self.post('transport');
+          , transport = self.post('transport')
+          , transportType = self.post('transportType');
 
         //todo:这里需要重新计算一下费用
         var task = TaskModel();
@@ -261,8 +269,12 @@ module.exports = Controller("Publish/BaseController", function(){
           , taskShopId: user.shopId
           , taskPV: cost.pv
           , taskPlatform: 'tmall'
-          , taskType: 'zhitongche'
+          , taskType: 'dingdan'
+          , taskWeight: item.weight
+          , taskVolume: item.volume
           , taskHeight: item.height
+          , taskLength: item.length
+          , taskWidth: item.width
           , taskName: item.name
           , taskUrl: item.url
           , taskMoney: item.money
@@ -298,11 +310,13 @@ module.exports = Controller("Publish/BaseController", function(){
           , taskGoodCommentFee: cost.goodCommentFee
           , taskGoodComment: cost.goodComment
           , taskTransport: transport
+          , taskTransportType: transportType
           , taskTips: item.tips
           , taskPosition: item.position
           , taskTag1: item.tag1
           , taskTag2: item.tag2
         };
+
 
         var taskExtend = D('task_extend');
         var taskTaobao = D('task_taobao');

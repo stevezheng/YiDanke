@@ -71,519 +71,519 @@
             </section>
             <!--发布任务第二步开始-->
             <div ng-show="step == 2">
-            <section class="panel">
-                <header class="panel-heading">
-                    1.填写商品信息
-                </header>
-                <div class="panel-body">
-                    <div class="form-horizontal">
-                        <div class="form-body">
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">商品名称</label>
+                <section class="panel">
+                    <header class="panel-heading">
+                        1.填写商品信息
+                    </header>
+                    <div class="panel-body">
+                        <div class="form-horizontal">
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">商品名称</label>
 
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" ng-model="item.name">
-                                    <p class="help-block error" ng-hide="item.name"><i class="icon-exclamation-sign"></i>商品名称不能为空</p>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" ng-model="item.name">
+                                        <p class="help-block error" ng-hide="item.name"><i class="icon-exclamation-sign"></i>商品名称不能为空</p>
+                                    </div>
+                                    <label class="col-md-1 control-label"><span
+                                            class="error">必填</span></label>
                                 </div>
-                                <label class="col-md-1 control-label"><span
-                                        class="error">必填</span></label>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">商品链接</label>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">商品链接</label>
 
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" ng-model="item.url">
-                                    <p class="help-block error" ng-hide="item.url && item.urlFlag"><i class="icon-exclamation-sign"></i>商品链接不正确</p>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" ng-model="item.url">
+                                        <p class="help-block error" ng-hide="item.url && item.urlFlag"><i class="icon-exclamation-sign"></i>商品链接不正确</p>
+                                    </div>
+                                    <label class="col-md-1 control-label"><span
+                                            class="error">必填</span></label>
                                 </div>
-                                <label class="col-md-1 control-label"><span
-                                        class="error">必填</span></label>
-                            </div>
-                            <!--直通车 开始-->
-                            <div class="border-bottom"></div>
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">直通车创意商品名</label>
+                                <!--直通车 开始-->
+                                <div class="border-bottom"></div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">直通车创意商品名</label>
 
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" ng-model="zhitongche.name">
-                                    <p class="help-block error" ng-hide="zhitongche.name"><i class="icon-exclamation-sign"></i>商品名称不能为空</p>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" ng-model="zhitongche.name">
+                                        <p class="help-block error" ng-hide="zhitongche.name"><i class="icon-exclamation-sign"></i>商品名称不能为空</p>
+                                    </div>
+                                    <label class="col-md-1 control-label"><span
+                                            class="error">必填</span></label>
                                 </div>
-                                <label class="col-md-1 control-label"><span
-                                        class="error">必填</span></label>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">掌柜热卖区显示的商品价格</label>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">掌柜热卖区显示的商品价格</label>
 
-                                <div class="col-md-2">
-                                    <input type="text" class="form-control" ng-model="zhitongche.money"
-                                           placeholder="元"/>
-                                    <p class="help-block error" ng-hide="zhitongche.money"><i class="icon-exclamation-sign"></i>商品金额不正确</p>
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control" ng-model="zhitongche.money"
+                                               placeholder="元"/>
+                                        <p class="help-block error" ng-hide="zhitongche.money"><i class="icon-exclamation-sign"></i>商品金额不正确</p>
+                                    </div>
+                                    <label class="col-md-1 control-label"><span
+                                            class="error">必填</span></label>
                                 </div>
-                                <label class="col-md-1 control-label"><span
-                                        class="error">必填</span></label>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-12 control-label">请上传直通车商品创意图：<span class="error">必选</span>至少需要上传一组图片 </label>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-2">
-                                    第一组:<button class="btn btn-info" ng-file-select ng-model="zhitongche.image1">上传第一组图</button>
+                                <div class="form-group">
+                                    <label class="col-md-12 control-label">请上传直通车商品创意图：<span class="error">必选</span>至少需要上传一组图片 </label>
                                 </div>
-                                <div class="col-md-1">
-                                    <a ng-href="{{zhitongche.imagefile1}}" target="_blank" ng-show="zhitongche.imagefile1">[查看图片]</a>
+                                <div class="form-group">
+                                    <div class="col-md-2">
+                                        第一组:<button class="btn btn-info" ng-file-select ng-model="zhitongche.image1">上传第一组图</button>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <a ng-href="{{zhitongche.imagefile1}}" target="_blank" ng-show="zhitongche.imagefile1">[查看图片]</a>
+                                    </div>
+                                    <div class="col-md-2">
+                                        第二组:<button class="btn btn-info" ng-file-select ng-model="zhitongche.image2">上传第二组图</button>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <a ng-href="{{zhitongche.imagefile2}}" target="_blank" ng-show="zhitongche.imagefile2">[查看图片]</a>
+                                    </div>
                                 </div>
-                                <div class="col-md-2">
-                                    第二组:<button class="btn btn-info" ng-file-select ng-model="zhitongche.image2">上传第二组图</button>
-                                </div>
-                                <div class="col-md-1">
-                                    <a ng-href="{{zhitongche.imagefile2}}" target="_blank" ng-show="zhitongche.imagefile2">[查看图片]</a>
-                                </div>
-                            </div>
-                            <div class="border-bottom"></div>
-                            <!--直通车 结束-->
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">规格</label>
+                                <div class="border-bottom"></div>
+                                <!--直通车 结束-->
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">规格</label>
 
-                                <div class="col-md-2">
-                                    <input type="text" class="form-control" ng-model="item.tag1"
-                                           placeholder="如：颜色"/>
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control" ng-model="item.tag1"
+                                               placeholder="如：颜色"/>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control" ng-model="item.tag2"
+                                               placeholder="如：尺码"/>
+                                    </div>
+                                    <label class="col-md-1 control-label"><span
+                                            class="">非必填</span></label>
                                 </div>
-                                <div class="col-md-2">
-                                    <input type="text" class="form-control" ng-model="item.tag2"
-                                           placeholder="如：尺码"/>
-                                </div>
-                                <label class="col-md-1 control-label"><span
-                                        class="">非必填</span></label>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">单品售价</label>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">单品售价</label>
 
-                                <div class="col-md-2">
-                                    <input type="text" class="form-control" ng-model="item.money"
-                                           placeholder="元"/>
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control" ng-model="item.money"
+                                               placeholder="元"/>
+                                    </div>
+                                    <label class="col-md-1 control-label"><span
+                                            class="error">必填</span></label>
                                 </div>
-                                <label class="col-md-1 control-label"><span
-                                        class="error">必填</span></label>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">每单拍</label>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">每单拍</label>
 
-                                <div class="col-md-2">
-                                    <input type="text" class="form-control" ng-model="item.count"
-                                           placeholder="件"/>
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control" ng-model="item.count"
+                                               placeholder="件"/>
+                                    </div>
+                                    <label class="col-md-1 control-label"><span
+                                            class="error">必填</span></label>
+                                    <label class="col-md-3 control-label">下单总金额
+                                        <span class="error">{{item.money * item.count}}</span>元</label>
+                                    <div class="col-md-2">
+                                        <p class="help-block error" ng-hide="(item.money * item.count) > 0"><i class="icon-exclamation-sign"></i>商品金额不正确</p>
+                                    </div>
                                 </div>
-                                <label class="col-md-1 control-label"><span
-                                        class="error">必填</span></label>
-                                <label class="col-md-3 control-label">下单总金额
-                                    <span class="error">{{item.money * item.count}}</span>元</label>
-                                <div class="col-md-2">
-                                    <p class="help-block error" ng-hide="(item.money * item.count) > 0"><i class="icon-exclamation-sign"></i>商品金额不正确</p>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">搜索页面展示价格</label>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">搜索页面展示价格</label>
 
-                                <div class="col-md-2">
-                                    <input type="text" class="form-control" ng-model="item.searchMoney"
-                                           placeholder="元"/>
-                                </div>
-                                <label class="col-md-6 control-label"><span
-                                        class="small">非必填，如该商品有满减、促销、多规格等情况，请填写此金额</span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="alert alert-success">
-                        如何找到您的商品：请添加几个订单来源方式，任务发布时系统将会随机安排买手通过不同的方式模拟真实购物流程
-                    </div>
-                    <div class="alert alert-info">
-                        <input type="checkbox" ng-model="taobao.searchBox"/>使用“淘宝搜索框”查找商品
-                    </div>
-                    <div class="form form-horizontal"
-                         ng-show="taobao.searchBox">
-                        <div class="form-body">
-                            <div class="form-group">
-                                <label class="col-md-5 control-label">请上传 <span
-                                        class="error">“淘宝商品主图”</span>，以便于买手快速找到任务商品</label>
-
-                                <div class="col-md-4">
-                                    <button class="btn btn-info" ng-file-select ng-model="taobao.image">上传淘宝商品主图</button>
-                                </div>
-                                <div class="col-md-1">
-                                    <a ng-href="{{taobao.imagefile}}" target="_blank" ng-show="taobao.imagefile">[查看图片]</a>
-                                </div>
-                                <div class="col-md-2">
-                                    <p class="help-block error" ng-hide="taobao.imagefile"><i class="icon-exclamation-sign"></i>淘宝商品主图不正确</p>
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control" ng-model="item.searchMoney"
+                                               placeholder="元"/>
+                                    </div>
+                                    <label class="col-md-6 control-label"><span
+                                            class="small">非必填，如该商品有满减、促销、多规格等情况，请填写此金额</span>
+                                    </label>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-body">
-                            <strong>关键词来源1:</strong>
+                        <div class="alert alert-success">
+                            如何找到您的商品：请添加几个订单来源方式，任务发布时系统将会随机安排买手通过不同的方式模拟真实购物流程
+                        </div>
+                        <div class="alert alert-info">
+                            <input type="checkbox" ng-model="taobao.searchBox"/>使用“淘宝搜索框”查找商品
+                        </div>
+                        <div class="form form-horizontal"
+                             ng-show="taobao.searchBox">
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <label class="col-md-5 control-label">请上传 <span
+                                            class="error">“淘宝商品主图”</span>，以便于买手快速找到任务商品</label>
 
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">让买手在 <span
-                                        class="error">taobao.com</span>搜索关键字进入“搜索列表”</label>
-                                <input type="text" ng-model="taobao.key1"
-                                       class="col-md-4 control-label"/>
-                                <label class="col-md-1 control-label"><span
-                                        class="error">必填</span></label>
-                                <div class="col-md-2">
-                                    <p class="help-block error" ng-hide="taobao.key1 && taobao.key1.length < 10"><i class="icon-exclamation-sign"></i>商品关键字不能为空且输入中文不能超过10个字</p>
+                                    <div class="col-md-4">
+                                        <button class="btn btn-info" ng-file-select ng-model="taobao.image">上传淘宝商品主图</button>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <a ng-href="{{taobao.imagefile}}" target="_blank" ng-show="taobao.imagefile">[查看图片]</a>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p class="help-block error" ng-hide="taobao.imagefile"><i class="icon-exclamation-sign"></i>淘宝商品主图不正确</p>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
-                                <input type="text" ng-model="taobao.key1extend1"
-                                       class="col-md-1 control-label"/>
-                                <input type="text" ng-model="taobao.key1extend2"
-                                       class="col-md-1 control-label"/>
-                                <input type="text" ng-model="taobao.key1extend3"
-                                       class="col-md-1 control-label"/>
-                                <input type="text" ng-model="taobao.key1extend4"
-                                       class="col-md-1 control-label"/>
-                                <label class="col-md-2 control-label"><span
-                                        class="small">最多四个分类 非必填</span></label>
-                            </div>
-                            <div class="border-bottom"></div>
-                        </div>
-                        <div class="form-body"
-                             ng-show="taobao.keywordsCount > 1">
-                            <strong>关键词来源2: <span class="pull-right"
-                                                  ng-click="subTaobaoKeywordCount()">删除</span></strong>
+                            <div class="form-body">
+                                <strong>关键词来源1:</strong>
 
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">让买手在 <span
-                                        class="error">taobao.com</span>搜索关键字进入“搜索列表”</label>
-                                <input type="text" ng-model="taobao.key2"
-                                       class="col-md-4 control-label"/>
-                                <label class="col-md-1 control-label"><span
-                                        class="error">必填</span></label>
-                                <div class="col-md-2">
-                                    <p class="help-block error" ng-hide="taobao.key2 && taobao.key2.length < 10"><i class="icon-exclamation-sign"></i>商品关键字不能为空且输入中文不能超过10个字</p>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">让买手在 <span
+                                            class="error">taobao.com</span>搜索关键字进入“搜索列表”</label>
+                                    <input type="text" ng-model="taobao.key1"
+                                           class="col-md-4 control-label"/>
+                                    <label class="col-md-1 control-label"><span
+                                            class="error">必填</span></label>
+                                    <div class="col-md-2">
+                                        <p class="help-block error" ng-hide="taobao.key1 && taobao.key1.length < 10"><i class="icon-exclamation-sign"></i>商品关键字不能为空且输入中文不能超过10个字</p>
+                                    </div>
                                 </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
+                                    <input type="text" ng-model="taobao.key1extend1"
+                                           class="col-md-1 control-label"/>
+                                    <input type="text" ng-model="taobao.key1extend2"
+                                           class="col-md-1 control-label"/>
+                                    <input type="text" ng-model="taobao.key1extend3"
+                                           class="col-md-1 control-label"/>
+                                    <input type="text" ng-model="taobao.key1extend4"
+                                           class="col-md-1 control-label"/>
+                                    <label class="col-md-2 control-label"><span
+                                            class="small">最多四个分类 非必填</span></label>
+                                </div>
+                                <div class="border-bottom"></div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
-                                <input type="text" ng-model="taobao.key2extend1"
-                                       class="col-md-1 control-label"/>
-                                <input type="text" ng-model="taobao.key2extend2"
-                                       class="col-md-1 control-label"/>
-                                <input type="text" ng-model="taobao.key2extend3"
-                                       class="col-md-1 control-label"/>
-                                <input type="text" ng-model="taobao.key2extend4"
-                                       class="col-md-1 control-label"/>
-                                <label class="col-md-2 control-label"><span
-                                        class="small">最多四个分类 非必填</span></label>
-                            </div>
-                            <div class="border-bottom"></div>
-                        </div>
-                        <div class="form-body"
-                             ng-show="taobao.keywordsCount > 2">
-                            <strong>关键词来源3: <span class="pull-right"
-                                                  ng-click="subTaobaoKeywordCount()">删除</span></strong>
+                            <div class="form-body"
+                                 ng-show="taobao.keywordsCount > 1">
+                                <strong>关键词来源2: <span class="pull-right"
+                                                      ng-click="subTaobaoKeywordCount()">删除</span></strong>
 
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">让买手在 <span
-                                        class="error">taobao.com</span>搜索关键字进入“搜索列表”</label>
-                                <input type="text" ng-model="taobao.key3"
-                                       class="col-md-4 control-label"/>
-                                <label class="col-md-1 control-label"><span
-                                        class="error">必填</span></label>
-                                <div class="col-md-2">
-                                    <p class="help-block error" ng-hide="taobao.key3 && taobao.key3.length < 10"><i class="icon-exclamation-sign"></i>商品关键字不能为空且输入中文不能超过10个字</p>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">让买手在 <span
+                                            class="error">taobao.com</span>搜索关键字进入“搜索列表”</label>
+                                    <input type="text" ng-model="taobao.key2"
+                                           class="col-md-4 control-label"/>
+                                    <label class="col-md-1 control-label"><span
+                                            class="error">必填</span></label>
+                                    <div class="col-md-2">
+                                        <p class="help-block error" ng-hide="taobao.key2 && taobao.key2.length < 10"><i class="icon-exclamation-sign"></i>商品关键字不能为空且输入中文不能超过10个字</p>
+                                    </div>
                                 </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
+                                    <input type="text" ng-model="taobao.key2extend1"
+                                           class="col-md-1 control-label"/>
+                                    <input type="text" ng-model="taobao.key2extend2"
+                                           class="col-md-1 control-label"/>
+                                    <input type="text" ng-model="taobao.key2extend3"
+                                           class="col-md-1 control-label"/>
+                                    <input type="text" ng-model="taobao.key2extend4"
+                                           class="col-md-1 control-label"/>
+                                    <label class="col-md-2 control-label"><span
+                                            class="small">最多四个分类 非必填</span></label>
+                                </div>
+                                <div class="border-bottom"></div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
-                                <input type="text" ng-model="taobao.key3extend1"
-                                       class="col-md-1 control-label"/>
-                                <input type="text" ng-model="taobao.key3extend2"
-                                       class="col-md-1 control-label"/>
-                                <input type="text" ng-model="taobao.key3extend3"
-                                       class="col-md-1 control-label"/>
-                                <input type="text" ng-model="taobao.key3extend4"
-                                       class="col-md-1 control-label"/>
-                                <label class="col-md-2 control-label"><span
-                                        class="small">最多四个分类 非必填</span></label>
-                            </div>
-                            <div class="border-bottom"></div>
-                        </div>
-                        <div class="form-body"
-                             ng-show="taobao.keywordsCount > 3">
-                            <strong>关键词来源4: <span class="pull-right"
-                                                  ng-click="subTaobaoKeywordCount()">删除</span></strong>
+                            <div class="form-body"
+                                 ng-show="taobao.keywordsCount > 2">
+                                <strong>关键词来源3: <span class="pull-right"
+                                                      ng-click="subTaobaoKeywordCount()">删除</span></strong>
 
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">让买手在 <span
-                                        class="error">taobao.com</span>搜索关键字进入“搜索列表”</label>
-                                <input type="text" ng-model="taobao.key4"
-                                       class="col-md-4 control-label"/>
-                                <label class="col-md-1 control-label"><span
-                                        class="error">必填</span></label>
-                                <div class="col-md-2">
-                                    <p class="help-block error" ng-hide="taobao.key4 && taobao.key4.length < 10"><i class="icon-exclamation-sign"></i>商品关键字不能为空且输入中文不能超过10个字</p>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">让买手在 <span
+                                            class="error">taobao.com</span>搜索关键字进入“搜索列表”</label>
+                                    <input type="text" ng-model="taobao.key3"
+                                           class="col-md-4 control-label"/>
+                                    <label class="col-md-1 control-label"><span
+                                            class="error">必填</span></label>
+                                    <div class="col-md-2">
+                                        <p class="help-block error" ng-hide="taobao.key3 && taobao.key3.length < 10"><i class="icon-exclamation-sign"></i>商品关键字不能为空且输入中文不能超过10个字</p>
+                                    </div>
                                 </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
+                                    <input type="text" ng-model="taobao.key3extend1"
+                                           class="col-md-1 control-label"/>
+                                    <input type="text" ng-model="taobao.key3extend2"
+                                           class="col-md-1 control-label"/>
+                                    <input type="text" ng-model="taobao.key3extend3"
+                                           class="col-md-1 control-label"/>
+                                    <input type="text" ng-model="taobao.key3extend4"
+                                           class="col-md-1 control-label"/>
+                                    <label class="col-md-2 control-label"><span
+                                            class="small">最多四个分类 非必填</span></label>
+                                </div>
+                                <div class="border-bottom"></div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
-                                <input type="text" ng-model="taobao.key4extend1"
-                                       class="col-md-1 control-label"/>
-                                <input type="text" ng-model="taobao.key4extend2"
-                                       class="col-md-1 control-label"/>
-                                <input type="text" ng-model="taobao.key4extend3"
-                                       class="col-md-1 control-label"/>
-                                <input type="text" ng-model="taobao.key4extend4"
-                                       class="col-md-1 control-label"/>
-                                <label class="col-md-2 control-label"><span
-                                        class="small">最多四个分类 非必填</span></label>
-                            </div>
-                            <div class="border-bottom"></div>
-                        </div>
-                        <div class="form-body"
-                             ng-show="taobao.keywordsCount > 4">
-                            <strong>关键词来源5: <span class="pull-right"
-                                                  ng-click="subTaobaoKeywordCount()">删除</span></strong>
+                            <div class="form-body"
+                                 ng-show="taobao.keywordsCount > 3">
+                                <strong>关键词来源4: <span class="pull-right"
+                                                      ng-click="subTaobaoKeywordCount()">删除</span></strong>
 
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">让买手在 <span
-                                        class="error">taobao.com</span>搜索关键字进入“搜索列表”</label>
-                                <input type="text" ng-model="taobao.key5"
-                                       class="col-md-4 control-label"/>
-                                <label class="col-md-1 control-label"><span
-                                        class="error">必填</span></label>
-                                <div class="col-md-2">
-                                    <p class="help-block error" ng-hide="taobao.key5 && taobao.key5.length < 10"><i class="icon-exclamation-sign"></i>商品关键字不能为空且输入中文不能超过10个字</p>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">让买手在 <span
+                                            class="error">taobao.com</span>搜索关键字进入“搜索列表”</label>
+                                    <input type="text" ng-model="taobao.key4"
+                                           class="col-md-4 control-label"/>
+                                    <label class="col-md-1 control-label"><span
+                                            class="error">必填</span></label>
+                                    <div class="col-md-2">
+                                        <p class="help-block error" ng-hide="taobao.key4 && taobao.key4.length < 10"><i class="icon-exclamation-sign"></i>商品关键字不能为空且输入中文不能超过10个字</p>
+                                    </div>
                                 </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
+                                    <input type="text" ng-model="taobao.key4extend1"
+                                           class="col-md-1 control-label"/>
+                                    <input type="text" ng-model="taobao.key4extend2"
+                                           class="col-md-1 control-label"/>
+                                    <input type="text" ng-model="taobao.key4extend3"
+                                           class="col-md-1 control-label"/>
+                                    <input type="text" ng-model="taobao.key4extend4"
+                                           class="col-md-1 control-label"/>
+                                    <label class="col-md-2 control-label"><span
+                                            class="small">最多四个分类 非必填</span></label>
+                                </div>
+                                <div class="border-bottom"></div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
-                                <input type="text" ng-model="taobao.key5extend1"
-                                       class="col-md-1 control-label"/>
-                                <input type="text" ng-model="taobao.key5extend2"
-                                       class="col-md-1 control-label"/>
-                                <input type="text" ng-model="taobao.key5extend3"
-                                       class="col-md-1 control-label"/>
-                                <input type="text" ng-model="taobao.key5extend4"
-                                       class="col-md-1 control-label"/>
-                                <label class="col-md-2 control-label"><span
-                                        class="small">最多四个分类 非必填</span></label>
-                            </div>
-                            <div class="border-bottom"></div>
-                        </div>
-                        <div class="form-body"
-                             ng-hide="taobao.keywordsCount == 5">
-                            <p><a href="javascript:;;;"
-                                  ng-click="addTaobaoKeywordCount()">+
-                                可多添加1个淘宝搜索关键字方案</a>（最多可添加4个方案）<span
-                                    class="pull-right">可提高任务安全保障</span></p>
-                        </div>
-                    </div>
-                    <div class="alert alert-info">
-                        <input type="checkbox" ng-model="tmall.searchBox"/>使用“天猫搜索框”查找商品
-                    </div>
-                    <div class="form form-horizontal"
-                         ng-show="tmall.searchBox">
-                        <div class="form-body">
-                            <div class="form-group">
-                                <label class="col-md-5 control-label">请上传 <span
-                                        class="error">“天猫商品主图”</span>，以便于买手快速找到任务商品</label>
+                            <div class="form-body"
+                                 ng-show="taobao.keywordsCount > 4">
+                                <strong>关键词来源5: <span class="pull-right"
+                                                      ng-click="subTaobaoKeywordCount()">删除</span></strong>
 
-                                <div class="col-md-4">
-                                    <button class="btn btn-info" ng-file-select ng-model="tmall.image">上传天猫商品主图</button>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">让买手在 <span
+                                            class="error">taobao.com</span>搜索关键字进入“搜索列表”</label>
+                                    <input type="text" ng-model="taobao.key5"
+                                           class="col-md-4 control-label"/>
+                                    <label class="col-md-1 control-label"><span
+                                            class="error">必填</span></label>
+                                    <div class="col-md-2">
+                                        <p class="help-block error" ng-hide="taobao.key5 && taobao.key5.length < 10"><i class="icon-exclamation-sign"></i>商品关键字不能为空且输入中文不能超过10个字</p>
+                                    </div>
                                 </div>
-                                <div class="col-md-1">
-                                    <a ng-href="{{tmall.imagefile}}" target="_blank" ng-show="tmall.imagefile">[查看图片]</a>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
+                                    <input type="text" ng-model="taobao.key5extend1"
+                                           class="col-md-1 control-label"/>
+                                    <input type="text" ng-model="taobao.key5extend2"
+                                           class="col-md-1 control-label"/>
+                                    <input type="text" ng-model="taobao.key5extend3"
+                                           class="col-md-1 control-label"/>
+                                    <input type="text" ng-model="taobao.key5extend4"
+                                           class="col-md-1 control-label"/>
+                                    <label class="col-md-2 control-label"><span
+                                            class="small">最多四个分类 非必填</span></label>
                                 </div>
-                                <div class="col-md-2">
-                                    <p class="help-block error" ng-hide="tmall.imagefile"><i class="icon-exclamation-sign"></i>天猫主图不正确</p>
-                                </div>
+                                <div class="border-bottom"></div>
+                            </div>
+                            <div class="form-body"
+                                 ng-hide="taobao.keywordsCount == 5">
+                                <p><a href="javascript:;;;"
+                                      ng-click="addTaobaoKeywordCount()">+
+                                    可多添加1个淘宝搜索关键字方案</a>（最多可添加4个方案）<span
+                                        class="pull-right">可提高任务安全保障</span></p>
                             </div>
                         </div>
-                        <div class="form-body">
-                            <strong>关键词来源1:</strong>
+                        <div class="alert alert-info">
+                            <input type="checkbox" ng-model="tmall.searchBox"/>使用“天猫搜索框”查找商品
+                        </div>
+                        <div class="form form-horizontal"
+                             ng-show="tmall.searchBox">
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <label class="col-md-5 control-label">请上传 <span
+                                            class="error">“天猫商品主图”</span>，以便于买手快速找到任务商品</label>
 
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">让买手在 <span
-                                        class="error">tmall.com</span>搜索关键字进入“搜索列表”</label>
-                                <input type="text" ng-model="tmall.key1"
-                                       class="col-md-4 control-label"/>
-                                <label class="col-md-1 control-label"><span
-                                        class="error">必填</span></label>
-                                <div class="col-md-2">
-                                    <p class="help-block error" ng-hide="tmall.key1 && tmall.key1.length < 10"><i class="icon-exclamation-sign"></i>商品关键字不能为空且输入中文不能超过10个字</p>
+                                    <div class="col-md-4">
+                                        <button class="btn btn-info" ng-file-select ng-model="tmall.image">上传天猫商品主图</button>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <a ng-href="{{tmall.imagefile}}" target="_blank" ng-show="tmall.imagefile">[查看图片]</a>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p class="help-block error" ng-hide="tmall.imagefile"><i class="icon-exclamation-sign"></i>天猫主图不正确</p>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
-                                <input type="text" ng-model="tmall.key1extend1"
-                                       class="col-md-1 control-label"/>
-                                <input type="text" ng-model="tmall.key1extend2"
-                                       class="col-md-1 control-label"/>
-                                <input type="text" ng-model="tmall.key1extend3"
-                                       class="col-md-1 control-label"/>
-                                <input type="text" ng-model="tmall.key1extend4"
-                                       class="col-md-1 control-label"/>
-                                <label class="col-md-2 control-label"><span
-                                        class="small">最多四个分类 非必填</span></label>
-                            </div>
-                            <div class="border-bottom"></div>
-                        </div>
-                        <div class="form-body"
-                             ng-show="tmall.keywordsCount > 1">
-                            <strong>关键词来源2: <span class="pull-right"
-                                                  ng-click="subTmallKeywordCount()">删除</span></strong>
+                            <div class="form-body">
+                                <strong>关键词来源1:</strong>
 
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">让买手在 <span
-                                        class="error">tmall.com</span>搜索关键字进入“搜索列表”</label>
-                                <input type="text" ng-model="tmall.key2"
-                                       class="col-md-4 control-label"/>
-                                <label class="col-md-1 control-label"><span
-                                        class="error">必填</span></label>
-                                <div class="col-md-2">
-                                    <p class="help-block error" ng-hide="tmall.key2 && tmall.key2.length < 10"><i class="icon-exclamation-sign"></i>商品关键字不能为空且输入中文不能超过10个字</p>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">让买手在 <span
+                                            class="error">tmall.com</span>搜索关键字进入“搜索列表”</label>
+                                    <input type="text" ng-model="tmall.key1"
+                                           class="col-md-4 control-label"/>
+                                    <label class="col-md-1 control-label"><span
+                                            class="error">必填</span></label>
+                                    <div class="col-md-2">
+                                        <p class="help-block error" ng-hide="tmall.key1 && tmall.key1.length < 10"><i class="icon-exclamation-sign"></i>商品关键字不能为空且输入中文不能超过10个字</p>
+                                    </div>
                                 </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
+                                    <input type="text" ng-model="tmall.key1extend1"
+                                           class="col-md-1 control-label"/>
+                                    <input type="text" ng-model="tmall.key1extend2"
+                                           class="col-md-1 control-label"/>
+                                    <input type="text" ng-model="tmall.key1extend3"
+                                           class="col-md-1 control-label"/>
+                                    <input type="text" ng-model="tmall.key1extend4"
+                                           class="col-md-1 control-label"/>
+                                    <label class="col-md-2 control-label"><span
+                                            class="small">最多四个分类 非必填</span></label>
+                                </div>
+                                <div class="border-bottom"></div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
-                                <input type="text" ng-model="tmall.key2extend1"
-                                       class="col-md-1 control-label"/>
-                                <input type="text" ng-model="tmall.key2extend2"
-                                       class="col-md-1 control-label"/>
-                                <input type="text" ng-model="tmall.key2extend3"
-                                       class="col-md-1 control-label"/>
-                                <input type="text" ng-model="tmall.key2extend4"
-                                       class="col-md-1 control-label"/>
-                                <label class="col-md-2 control-label"><span
-                                        class="small">最多四个分类 非必填</span></label>
-                            </div>
-                            <div class="border-bottom"></div>
-                        </div>
-                        <div class="form-body"
-                             ng-show="tmall.keywordsCount > 2">
-                            <strong>关键词来源3: <span class="pull-right"
-                                                  ng-click="subTmallKeywordCount()">删除</span></strong>
+                            <div class="form-body"
+                                 ng-show="tmall.keywordsCount > 1">
+                                <strong>关键词来源2: <span class="pull-right"
+                                                      ng-click="subTmallKeywordCount()">删除</span></strong>
 
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">让买手在 <span
-                                        class="error">tmall.com</span>搜索关键字进入“搜索列表”</label>
-                                <input type="text" ng-model="tmall.key3"
-                                       class="col-md-4 control-label"/>
-                                <label class="col-md-1 control-label"><span
-                                        class="error">必填</span></label>
-                                <div class="col-md-2">
-                                    <p class="help-block error" ng-hide="tmall.key3 && tmall.key3.length < 10"><i class="icon-exclamation-sign"></i>商品关键字不能为空且输入中文不能超过10个字</p>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">让买手在 <span
+                                            class="error">tmall.com</span>搜索关键字进入“搜索列表”</label>
+                                    <input type="text" ng-model="tmall.key2"
+                                           class="col-md-4 control-label"/>
+                                    <label class="col-md-1 control-label"><span
+                                            class="error">必填</span></label>
+                                    <div class="col-md-2">
+                                        <p class="help-block error" ng-hide="tmall.key2 && tmall.key2.length < 10"><i class="icon-exclamation-sign"></i>商品关键字不能为空且输入中文不能超过10个字</p>
+                                    </div>
                                 </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
+                                    <input type="text" ng-model="tmall.key2extend1"
+                                           class="col-md-1 control-label"/>
+                                    <input type="text" ng-model="tmall.key2extend2"
+                                           class="col-md-1 control-label"/>
+                                    <input type="text" ng-model="tmall.key2extend3"
+                                           class="col-md-1 control-label"/>
+                                    <input type="text" ng-model="tmall.key2extend4"
+                                           class="col-md-1 control-label"/>
+                                    <label class="col-md-2 control-label"><span
+                                            class="small">最多四个分类 非必填</span></label>
+                                </div>
+                                <div class="border-bottom"></div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
-                                <input type="text" ng-model="tmall.key3extend1"
-                                       class="col-md-1 control-label"/>
-                                <input type="text" ng-model="tmall.key3extend2"
-                                       class="col-md-1 control-label"/>
-                                <input type="text" ng-model="tmall.key3extend3"
-                                       class="col-md-1 control-label"/>
-                                <input type="text" ng-model="tmall.key3extend4"
-                                       class="col-md-1 control-label"/>
-                                <label class="col-md-2 control-label"><span
-                                        class="small">最多四个分类 非必填</span></label>
-                            </div>
-                            <div class="border-bottom"></div>
-                        </div>
-                        <div class="form-body"
-                             ng-show="tmall.keywordsCount > 3">
-                            <strong>关键词来源4: <span class="pull-right"
-                                                  ng-click="subTmallKeywordCount()">删除</span></strong>
+                            <div class="form-body"
+                                 ng-show="tmall.keywordsCount > 2">
+                                <strong>关键词来源3: <span class="pull-right"
+                                                      ng-click="subTmallKeywordCount()">删除</span></strong>
 
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">让买手在 <span
-                                        class="error">tmall.com</span>搜索关键字进入“搜索列表”</label>
-                                <input type="text" ng-model="tmall.key4"
-                                       class="col-md-4 control-label"/>
-                                <label class="col-md-1 control-label"><span
-                                        class="error">必填</span></label>
-                                <div class="col-md-2">
-                                    <p class="help-block error" ng-hide="tmall.key4 && tmall.key4.length < 10"><i class="icon-exclamation-sign"></i>商品关键字不能为空且输入中文不能超过10个字</p>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">让买手在 <span
+                                            class="error">tmall.com</span>搜索关键字进入“搜索列表”</label>
+                                    <input type="text" ng-model="tmall.key3"
+                                           class="col-md-4 control-label"/>
+                                    <label class="col-md-1 control-label"><span
+                                            class="error">必填</span></label>
+                                    <div class="col-md-2">
+                                        <p class="help-block error" ng-hide="tmall.key3 && tmall.key3.length < 10"><i class="icon-exclamation-sign"></i>商品关键字不能为空且输入中文不能超过10个字</p>
+                                    </div>
                                 </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
+                                    <input type="text" ng-model="tmall.key3extend1"
+                                           class="col-md-1 control-label"/>
+                                    <input type="text" ng-model="tmall.key3extend2"
+                                           class="col-md-1 control-label"/>
+                                    <input type="text" ng-model="tmall.key3extend3"
+                                           class="col-md-1 control-label"/>
+                                    <input type="text" ng-model="tmall.key3extend4"
+                                           class="col-md-1 control-label"/>
+                                    <label class="col-md-2 control-label"><span
+                                            class="small">最多四个分类 非必填</span></label>
+                                </div>
+                                <div class="border-bottom"></div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
-                                <input type="text" ng-model="tmall.key4extend1"
-                                       class="col-md-1 control-label"/>
-                                <input type="text" ng-model="tmall.key4extend2"
-                                       class="col-md-1 control-label"/>
-                                <input type="text" ng-model="tmall.key4extend3"
-                                       class="col-md-1 control-label"/>
-                                <input type="text" ng-model="tmall.key4extend4"
-                                       class="col-md-1 control-label"/>
-                                <label class="col-md-2 control-label"><span
-                                        class="small">最多四个分类 非必填</span></label>
-                            </div>
-                            <div class="border-bottom"></div>
-                        </div>
-                        <div class="form-body"
-                             ng-show="tmall.keywordsCount > 4">
-                            <strong>关键词来源5: <span class="pull-right"
-                                                  ng-click="subTmallKeywordCount()">删除</span></strong>
+                            <div class="form-body"
+                                 ng-show="tmall.keywordsCount > 3">
+                                <strong>关键词来源4: <span class="pull-right"
+                                                      ng-click="subTmallKeywordCount()">删除</span></strong>
 
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">让买手在 <span
-                                        class="error">tmall.com</span>搜索关键字进入“搜索列表”</label>
-                                <input type="text" ng-model="tmall.key5"
-                                       class="col-md-4 control-label"/>
-                                <label class="col-md-1 control-label"><span
-                                        class="error">必填</span></label>
-                                <div class="col-md-2">
-                                    <p class="help-block error" ng-hide="tmall.key5 && tmall.key5.length < 10"><i class="icon-exclamation-sign"></i>商品关键字不能为空且输入中文不能超过10个字</p>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">让买手在 <span
+                                            class="error">tmall.com</span>搜索关键字进入“搜索列表”</label>
+                                    <input type="text" ng-model="tmall.key4"
+                                           class="col-md-4 control-label"/>
+                                    <label class="col-md-1 control-label"><span
+                                            class="error">必填</span></label>
+                                    <div class="col-md-2">
+                                        <p class="help-block error" ng-hide="tmall.key4 && tmall.key4.length < 10"><i class="icon-exclamation-sign"></i>商品关键字不能为空且输入中文不能超过10个字</p>
+                                    </div>
                                 </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
+                                    <input type="text" ng-model="tmall.key4extend1"
+                                           class="col-md-1 control-label"/>
+                                    <input type="text" ng-model="tmall.key4extend2"
+                                           class="col-md-1 control-label"/>
+                                    <input type="text" ng-model="tmall.key4extend3"
+                                           class="col-md-1 control-label"/>
+                                    <input type="text" ng-model="tmall.key4extend4"
+                                           class="col-md-1 control-label"/>
+                                    <label class="col-md-2 control-label"><span
+                                            class="small">最多四个分类 非必填</span></label>
+                                </div>
+                                <div class="border-bottom"></div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
-                                <input type="text" ng-model="tmall.key5extend1"
-                                       class="col-md-1 control-label"/>
-                                <input type="text" ng-model="tmall.key5extend2"
-                                       class="col-md-1 control-label"/>
-                                <input type="text" ng-model="tmall.key5extend3"
-                                       class="col-md-1 control-label"/>
-                                <input type="text" ng-model="tmall.key5extend4"
-                                       class="col-md-1 control-label"/>
-                                <label class="col-md-2 control-label"><span
-                                        class="small">最多四个分类 非必填</span></label>
+                            <div class="form-body"
+                                 ng-show="tmall.keywordsCount > 4">
+                                <strong>关键词来源5: <span class="pull-right"
+                                                      ng-click="subTmallKeywordCount()">删除</span></strong>
+
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">让买手在 <span
+                                            class="error">tmall.com</span>搜索关键字进入“搜索列表”</label>
+                                    <input type="text" ng-model="tmall.key5"
+                                           class="col-md-4 control-label"/>
+                                    <label class="col-md-1 control-label"><span
+                                            class="error">必填</span></label>
+                                    <div class="col-md-2">
+                                        <p class="help-block error" ng-hide="tmall.key5 && tmall.key5.length < 10"><i class="icon-exclamation-sign"></i>商品关键字不能为空且输入中文不能超过10个字</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">在当前列表中，告诉买手通过筛选分类找到商品</label>
+                                    <input type="text" ng-model="tmall.key5extend1"
+                                           class="col-md-1 control-label"/>
+                                    <input type="text" ng-model="tmall.key5extend2"
+                                           class="col-md-1 control-label"/>
+                                    <input type="text" ng-model="tmall.key5extend3"
+                                           class="col-md-1 control-label"/>
+                                    <input type="text" ng-model="tmall.key5extend4"
+                                           class="col-md-1 control-label"/>
+                                    <label class="col-md-2 control-label"><span
+                                            class="small">最多四个分类 非必填</span></label>
+                                </div>
+                                <div class="border-bottom"></div>
                             </div>
-                            <div class="border-bottom"></div>
+                            <div class="form-body"
+                                 ng-hide="tmall.keywordsCount == 5">
+                                <p><a href="javascript:;;;"
+                                      ng-click="addTmallKeywordCount()">+
+                                    可多添加1个天猫搜索关键字方案</a>（最多可添加4个方案）<span
+                                        class="pull-right">可提高任务安全保障</span></p>
+                            </div>
                         </div>
-                        <div class="form-body"
-                             ng-hide="tmall.keywordsCount == 5">
-                            <p><a href="javascript:;;;"
-                                  ng-click="addTmallKeywordCount()">+
-                                可多添加1个天猫搜索关键字方案</a>（最多可添加4个方案）<span
-                                    class="pull-right">可提高任务安全保障</span></p>
-                        </div>
-                    </div>
-                    <div class="border-bottom"></div>
-                    <div class="form-horizontal">
-                        <div class="alert">缩小搜索范围</div>
-                        <div class="col-lg-12">
+                        <div class="border-bottom"></div>
+                        <div class="form-horizontal">
+                            <div class="alert">缩小搜索范围</div>
+                            <div class="col-lg-12">
                             <span class="small">
                             让买手用列表筛选中 <span class="error">“价格筛选”</span>、 <span
                                     class="error">“商品所在地”</span>缩小范围 非必填，买手可通过筛选价格或所在地更方便的找到您的商品
                             </span>
-                        </div>
-                        <div class="form-body">
-                            <div class="form-group">
-                                <label class="col-md-1 control-label">价格</label>
+                            </div>
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <label class="col-md-1 control-label">价格</label>
 
-                                <div class="col-md-1">
-                                    <input type="text" class="form-control" ng-model="item.priceStart"
-                                           placeholder="最低"/>
-                                </div>
-                                <div class="col-md-1">
-                                    <input type="text" class="form-control" ng-model="item.priceEnd"
-                                           placeholder="最高"/>
-                                </div>
-                                <label class="col-md-1 control-label">
-                                    所在地</label>
+                                    <div class="col-md-1">
+                                        <input type="text" class="form-control" ng-model="item.priceStart"
+                                               placeholder="最低"/>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="text" class="form-control" ng-model="item.priceEnd"
+                                               placeholder="最高"/>
+                                    </div>
+                                    <label class="col-md-1 control-label">
+                                        所在地</label>
 
-                                <div class="col-md-3">
+                                    <div class="col-md-3">
                                     <span class="ie7_areaHack_area">
                                                                        <div class="sel-loc-box" style="border: 1px solid #f0f0f0">
                                                                            <div class="fake-select sel-loc">
@@ -681,247 +681,250 @@
                                                                                </div>
                                                                            </div>
                                                                        </div></span>
+                                    </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="border-bottom"></div>
+                        <div class="form-horizontal">
+                            <div class="alert alert-warning">选择发布多个商品，只收取一个商品的服务费，且买手会用一笔订单同时购买你发布的所有商品，即发布一次任务可提升多个信誉</div>
+                            <div class="form-body" style="margin-top: -30px" ng-show="extendCount > 1">
+                                <div class="alert alert-info">商品2<span class="pull-right" ng-click="subExtendCount()">删除</span></div>
+                                <div class="form-group">
+                                    <label class="col-lg-1 control-label">
+                                        商品名称
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" ng-model="extendItem1.name"/>
+                                        <p class="help-block error" ng-hide="extendItem1.name"><i class="icon-exclamation-sign"></i>商品名称不正确</p>
+                                    </div>
+                                    <label class="col-lg-1 control-label"><span class="error">必填</span></label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-1 control-label">
+                                        商品链接
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" ng-model="extendItem1.url"/>
+                                        <p class="help-block error" ng-hide="extendItem1.url && extendItem1.urlFlag"><i class="icon-exclamation-sign"></i>商品链接不正确</p>
+                                    </div>
+                                    <label class="col-lg-1 control-label"><span class="error">必填</span></label>
+                                </div>
+                                <div class="border-bottom"></div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">规格</label>
+
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control"
+                                               placeholder="如：颜色"/>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control"
+                                               placeholder="如：尺码"/>
+                                    </div>
+                                    <label class="col-md-1 control-label"><span
+                                            class="">非必填</span></label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">单品售价</label>
+
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control" ng-model="extendItem1.money"
+                                               placeholder="元"/>
+                                    </div>
+                                    <label class="col-md-1 control-label"><span
+                                            class="error">必填</span></label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">每单拍</label>
+
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control" ng-model="extendItem1.count"
+                                               placeholder="件"/>
+                                    </div>
+                                    <label class="col-md-1 control-label"><span
+                                            class="error">必填</span></label>
+                                    <label class="col-md-3 control-label">下单总金额
+                                        <span class="error">{{extendItem1.money * extendItem1.count | number: 2}}</span>元</label>
+                                    <div class="col-md-2">
+                                        <p class="help-block error" ng-hide="(extendItem1.money * extendItem1.count) > 0"><i class="icon-exclamation-sign"></i>商品金额不正确</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">搜索页面展示价格</label>
+
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control"
+                                               placeholder="元"/>
+                                    </div>
+                                    <label class="col-md-6 control-label"><span
+                                            class="small">非必填，如该商品有满减、促销、多规格等情况，请填写此金额</span>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">上传商品主图</label>
+                                    <div class="col-md-2">
+                                        <button class="btn btn-info" ng-file-select ng-model="extendItem1.image">上传商品主图</button>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <a ng-href="{{extendItem1.imagefile}}" target="_blank" ng-show="extendItem1.imagefile">[查看图片]</a>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p class="help-block error" ng-hide="extendItem1.imagefile"><i class="icon-exclamation-sign"></i>商品2主图不正确</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-body" style="margin-top: -30px" ng-show="extendCount > 2">
+                                <div class="alert alert-info">商品3 <span class="pull-right" ng-click="subExtendCount()">删除</span></div>
+                                <div class="form-group">
+                                    <label class="col-lg-1 control-label">
+                                        商品名称
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" ng-model="extendItem2.name"/>
+                                        <p class="help-block error" ng-hide="extendItem2.name"><i class="icon-exclamation-sign"></i>商品名称不正确</p>
+                                    </div>
+                                    <label class="col-lg-1 control-label"><span class="error">必填</span></label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-1 control-label">
+                                        商品链接
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" ng-model="extendItem2.url"/>
+                                        <p class="help-block error" ng-hide="extendItem2.url && extendItem2.urlFlag"><i class="icon-exclamation-sign"></i>商品链接不正确</p>
+                                    </div>
+                                    <label class="col-lg-1 control-label"><span class="error">必填</span></label>
+                                </div>
+                                <div class="border-bottom"></div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">规格</label>
+
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control"
+                                               placeholder="如：颜色"/>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control"
+                                               placeholder="如：尺码"/>
+                                    </div>
+                                    <label class="col-md-1 control-label"><span
+                                            class="">非必填</span></label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">单品售价</label>
+
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control" ng-model="extendItem2.money"
+                                               placeholder="元"/>
+                                    </div>
+                                    <label class="col-md-1 control-label"><span
+                                            class="error">必填</span></label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">每单拍</label>
+
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control" ng-model="extendItem2.count"
+                                               placeholder="件"/>
+                                    </div>
+                                    <label class="col-md-1 control-label"><span
+                                            class="error">必填</span></label>
+                                    <label class="col-md-3 control-label">下单总金额
+                                        <span class="error">{{extendItem2.money * extendItem2.count | number: 2}}</span>元</label>
+                                    <div class="col-md-2">
+                                        <p class="help-block error" ng-hide="(extendItem2.money * extendItem2.count) > 0"><i class="icon-exclamation-sign"></i>商品金额不正确</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">搜索页面展示价格</label>
+
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control"
+                                               placeholder="元"/>
+                                    </div>
+                                    <label class="col-md-6 control-label"><span
+                                            class="small">非必填，如该商品有满减、促销、多规格等情况，请填写此金额</span>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">上传商品主图</label>
+                                    <div class="col-md-2">
+                                        <button class="btn btn-info" ng-file-select ng-model="extendItem2.image">上传商品主图</button>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <a ng-href="{{extendItem2.imagefile}}" target="_blank" ng-show="extendItem2.imagefile">[查看图片]</a>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p class="help-block error" ng-hide="extendItem2.imagefile"><i class="icon-exclamation-sign"></i>商品3主图不正确</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p ng-show="extendCount < 3"><a href="" ng-click="addExtendCount()">+支付2元可多添加1个商品</a><span class="small">（最多可添加2个商品）</span></p>
                         </div>
                     </div>
                     <div class="border-bottom"></div>
-                    <div class="form-horizontal">
-                        <div class="alert alert-warning">选择发布多个商品，只收取一个商品的服务费，且买手会用一笔订单同时购买你发布的所有商品，即发布一次任务可提升多个信誉</div>
-                        <div class="form-body" style="margin-top: -30px" ng-show="extendCount > 1">
-                            <div class="alert alert-info">商品2<span class="pull-right" ng-click="subExtendCount()">删除</span></div>
-                            <div class="form-group">
-                                <label class="col-lg-1 control-label">
-                                    商品名称
-                                </label>
-                                <div class="col-lg-6">
-                                    <input type="text" class="form-control" ng-model="extendItem1.name"/>
-                                    <p class="help-block error" ng-hide="extendItem1.name"><i class="icon-exclamation-sign"></i>商品名称不正确</p>
-                                </div>
-                                <label class="col-lg-1 control-label"><span class="error">必填</span></label>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-lg-1 control-label">
-                                    商品链接
-                                </label>
-                                <div class="col-lg-6">
-                                    <input type="text" class="form-control" ng-model="extendItem1.url"/>
-                                    <p class="help-block error" ng-hide="extendItem1.url && extendItem1.urlFlag"><i class="icon-exclamation-sign"></i>商品链接不正确</p>
-                                </div>
-                                <label class="col-lg-1 control-label"><span class="error">必填</span></label>
-                            </div>
-                            <div class="border-bottom"></div>
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">规格</label>
-
-                                <div class="col-md-2">
-                                    <input type="text" class="form-control"
-                                           placeholder="如：颜色"/>
-                                </div>
-                                <div class="col-md-2">
-                                    <input type="text" class="form-control"
-                                           placeholder="如：尺码"/>
-                                </div>
-                                <label class="col-md-1 control-label"><span
-                                        class="">非必填</span></label>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">单品售价</label>
-
-                                <div class="col-md-2">
-                                    <input type="text" class="form-control" ng-model="extendItem1.money"
-                                           placeholder="元"/>
-                                </div>
-                                <label class="col-md-1 control-label"><span
-                                        class="error">必填</span></label>
-                            </div>
-                            <div class="form-group">
-                            <label class="col-md-2 control-label">每单拍</label>
-
-                            <div class="col-md-2">
-                                <input type="text" class="form-control" ng-model="extendItem1.count"
-                                       placeholder="件"/>
-                            </div>
-                            <label class="col-md-1 control-label"><span
-                                    class="error">必填</span></label>
-                            <label class="col-md-3 control-label">下单总金额
-                                <span class="error">{{extendItem1.money * extendItem1.count | number: 2}}</span>元</label>
-                            <div class="col-md-2">
-                                <p class="help-block error" ng-hide="(extendItem1.money * extendItem1.count) > 0"><i class="icon-exclamation-sign"></i>商品金额不正确</p>
-                            </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">搜索页面展示价格</label>
-
-                                <div class="col-md-2">
-                                    <input type="text" class="form-control"
-                                           placeholder="元"/>
-                                </div>
-                                <label class="col-md-6 control-label"><span
-                                        class="small">非必填，如该商品有满减、促销、多规格等情况，请填写此金额</span>
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">上传商品主图</label>
-                                <div class="col-md-2">
-                                    <button class="btn btn-info" ng-file-select ng-model="extendItem1.image">上传商品主图</button>
-                                </div>
-                                <div class="col-md-1">
-                                    <a ng-href="{{extendItem1.imagefile}}" target="_blank" ng-show="extendItem1.imagefile">[查看图片]</a>
-                                </div>
-                                <div class="col-md-2">
-                                    <p class="help-block error" ng-hide="extendItem1.imagefile"><i class="icon-exclamation-sign"></i>商品2主图不正确</p>
-                                </div>
-                            </div>
+                    <div class="col-lg-12">
+                        <div class="radio" ng-click="transportType = 'pingtai'">
+                            <label>
+                                <input type="radio" name="optionsRadios1" checked>
+                                平台快递 <span class="small">平台快递发货，平台收取 <span class="error">5</span>元作为服务费用</span>
+                            </label>
                         </div>
-                        <div class="form-body" style="margin-top: -30px" ng-show="extendCount > 2">
-                            <div class="alert alert-info">商品3 <span class="pull-right" ng-click="subExtendCount()">删除</span></div>
-                            <div class="form-group">
-                                <label class="col-lg-1 control-label">
-                                    商品名称
-                                </label>
-                                <div class="col-lg-6">
-                                    <input type="text" class="form-control" ng-model="extendItem2.name"/>
-                                    <p class="help-block error" ng-hide="extendItem2.name"><i class="icon-exclamation-sign"></i>商品名称不正确</p>
-                                </div>
-                                <label class="col-lg-1 control-label"><span class="error">必填</span></label>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-lg-1 control-label">
-                                    商品链接
-                                </label>
-                                <div class="col-lg-6">
-                                    <input type="text" class="form-control" ng-model="extendItem2.url"/>
-                                    <p class="help-block error" ng-hide="extendItem2.url && extendItem2.urlFlag"><i class="icon-exclamation-sign"></i>商品链接不正确</p>
-                                </div>
-                                <label class="col-lg-1 control-label"><span class="error">必填</span></label>
-                            </div>
-                            <div class="border-bottom"></div>
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">规格</label>
-
-                                <div class="col-md-2">
-                                    <input type="text" class="form-control"
-                                           placeholder="如：颜色"/>
-                                </div>
-                                <div class="col-md-2">
-                                    <input type="text" class="form-control"
-                                           placeholder="如：尺码"/>
-                                </div>
-                                <label class="col-md-1 control-label"><span
-                                        class="">非必填</span></label>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">单品售价</label>
-
-                                <div class="col-md-2">
-                                    <input type="text" class="form-control" ng-model="extendItem2.money"
-                                           placeholder="元"/>
-                                </div>
-                                <label class="col-md-1 control-label"><span
-                                        class="error">必填</span></label>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">每单拍</label>
-
-                                <div class="col-md-2">
-                                    <input type="text" class="form-control" ng-model="extendItem2.count"
-                                           placeholder="件"/>
-                                </div>
-                                <label class="col-md-1 control-label"><span
-                                        class="error">必填</span></label>
-                                <label class="col-md-3 control-label">下单总金额
-                                    <span class="error">{{extendItem2.money * extendItem2.count | number: 2}}</span>元</label>
-                                <div class="col-md-2">
-                                    <p class="help-block error" ng-hide="(extendItem2.money * extendItem2.count) > 0"><i class="icon-exclamation-sign"></i>商品金额不正确</p>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">搜索页面展示价格</label>
-
-                                <div class="col-md-2">
-                                    <input type="text" class="form-control"
-                                           placeholder="元"/>
-                                </div>
-                                <label class="col-md-6 control-label"><span
-                                        class="small">非必填，如该商品有满减、促销、多规格等情况，请填写此金额</span>
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">上传商品主图</label>
-                                <div class="col-md-2">
-                                    <button class="btn btn-info" ng-file-select ng-model="extendItem2.image">上传商品主图</button>
-                                </div>
-                                <div class="col-md-1">
-                                    <a ng-href="{{extendItem2.imagefile}}" target="_blank" ng-show="extendItem2.imagefile">[查看图片]</a>
-                                </div>
-                                <div class="col-md-2">
-                                    <p class="help-block error" ng-hide="extendItem2.imagefile"><i class="icon-exclamation-sign"></i>商品3主图不正确</p>
-                                </div>
-                            </div>
+                        <div class="radio" ng-click="transportType = 'zixuan'">
+                            <label>
+                                <input type="radio" name="optionsRadios1">
+                                自选快递 <span class="small">商家自选快递发货，平台收取 <span class="error">1.5</span>元作为服务费用</span>
+                            </label>
                         </div>
-                        <p ng-show="extendCount < 3"><a href="" ng-click="addExtendCount()">+支付2元可多添加1个商品</a><span class="small">（最多可添加2个商品）</span></p>
+                        <h4>快递信息</h4>
+                        <p>快递重量 <input type="text" ng-model="item.weight" style="width: 50px"/> kg</p>
+                        <p>快递体积 <input type="text" ng-model="item.volume" style="width: 50px"/> 立方米</p>
+                        <p><span>长宽高</span>
+                            &nbsp;&nbsp;
+                            <input type="text" ng-model="item.length" style="width: 50px"/> 米
+                            <input type="text" ng-model="item.width" style="width: 50px"/> 米
+                            <input type="text" ng-model="item.height" style="width: 50px"/> 米</p>
                     </div>
-                </div>
-                <div class="border-bottom"></div>
-                <div class="col-lg-12">
-                    <div class="radio" ng-click="transport = 'baoyou'">
-                        <label>
-                            <input type="radio" name="optionsRadios">
-                            平台快递 <span class="small">平台快递发货，平台收取 <span class="error">5</span>元作为服务费用</span>
-                        </label>
-                    </div>
-                    <div class="radio" ng-click="transport = 'zixuan'">
-                        <label>
-                            <input type="radio" name="optionsRadios">
-                            自选快递 <span class="small">商家自选快递发货，平台收取 <span class="error">1.5</span>元作为服务费用</span>
-                        </label>
-                    </div>
-                    <h4>快递信息</h4>
-                    <p>快递重量 <input type="text" ng-model="item.height"/>kg</p>
-                    <p>快递体积 <input type="text" ng-model="item.volume"/>立方米</p>
-                    <p>长宽高 <input type="text" ng-model="item.chang"/>米
-                        <input type="text" ng-model="item.kuan"/>米
-                        <input type="text" ng-model="item.gao"/>米</p>
-                </div>
+
                     <div class="col-lg-12">
                         <button class="btn btn-warning" ng-click="confirmItem()">确认提交信息</button>
                     </div>
-            </section>
-            <section class="panel">
-                <header class="panel-heading">
-                    2.设置商品收取运费的方式 <span class="error small">必选</span>
-                </header>
-                <div class="panel-body" ng-show="itemFlag">
-                    <div class="radio" ng-click="transport = 'baoyou'">
-                        <label>
-                            <input type="radio" name="optionsRadios" checked>
-                            商品本身包邮 <span class="small">买手按照商品实际金额下单</span>
-                        </label>
-                    </div>
-                    <div class="radio" ng-click="transport = 'bubaoyou'">
-                        <label>
-                            <input type="radio" name="optionsRadios">
-                            商品不包邮 <span class="small">无需买手联系客服。商家每单额外支出 <span class="error">10</span>元作为运费押金，任务完成后运费押金将全部退还给商家</span>
-                        </label>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <button class="btn btn-warning" ng-click="confirmTransport(transport)">确认提交信息</button>
+                </section>
+                <section class="panel">
+                    <header class="panel-heading">
+                        2.设置商品收取运费的方式 <span class="error small">必选</span>
+                    </header>
+                    <div class="panel-body" ng-show="itemFlag">
+                        <div class="radio" ng-click="transport = 'baoyou'">
+                            <label>
+                                <input type="radio" name="optionsRadios" checked>
+                                商品本身包邮 <span class="small">买手按照商品实际金额下单</span>
+                            </label>
+                        </div>
+                        <div class="radio" ng-click="transport = 'bubaoyou'">
+                            <label>
+                                <input type="radio" name="optionsRadios">
+                                商品不包邮 <span class="small">无需买手联系客服。商家每单额外支出 <span class="error">10</span>元作为运费押金，任务完成后运费押金将全部退还给商家</span>
+                            </label>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <button class="btn btn-warning" ng-click="confirmTransport(transport, transportType)">确认提交信息</button>
+                            </div>
+                        </div>
+                        <div class="border-bottom"></div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <span class="error">为了经营安全，请商家在店铺详情页，旺旺自动快捷回复语等关于店铺发货默认快递的说明中</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="border-bottom"></div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <span class="error">为了经营安全，请商家在店铺详情页，旺旺自动快捷回复语等关于店铺发货默认快递的说明中</span>
-                        </div>
-                    </div>
+                </section>
+                <div class="row" style="text-align: center">
+                    <a class="btn btn-info" href="/seller/publish">上一步</a>
+                    <button ng-class="transportFlag?'btn btn-info': 'btn btn-default'" ng-click="nextStep(3)">下一步</button>
                 </div>
-            </section>
-            <div class="row" style="text-align: center">
-                <a class="btn btn-info" href="/seller/publish">上一步</a>
-                <button ng-class="transportFlag?'btn btn-info': 'btn btn-default'" ng-click="nextStep(3)">下一步</button>
-            </div>
             </div>
             <!--发布任务第二步结束-->
 
@@ -929,7 +932,7 @@
             <div ng-if="step==3">
                 <section class="panel">
                     <header class="panel-heading">
-                        第三步：选择刷单数量<span class="pull-right">已选择: <span class="error">天猫|<%= shopName %>|直通车</span></span>
+                        第三步：选择刷单数量<span class="pull-right">已选择: <span class="error">淘宝|<%= shopName %>|直通车</span></span>
                     </header>
                     <div class="panel-body">
                         <strong>1.请选择刷单数量</strong>
@@ -960,7 +963,7 @@
                                     <input type="radio" ng-model="item.totalCount" value="0"> 自定义
                                 </label>
                                 <!--<label class="checkbox-inline">-->
-                                    <input type="text" ng-model="item.freeTotalCount"> 单 <span class="small">(1-500单)</span>
+                                <input type="text" ng-model="item.freeTotalCount"> 单 <span class="small">(1-500单)</span>
                                 <!--</label>-->
                             </div>
                             <div class="col-lg-12" style="margin: 20px 0 0 15px;">
@@ -971,13 +974,13 @@
                         <strong>2.请设置订单分布 <span class="small">注：电脑端、手机端/Pad端订单总数需要为 <span class="error" ng-bind="item.totalCount > 0?item.totalCount:item.freeTotalCount"></span> 单，同时为了保证刷单安全，手机订单的数量至少要占据订单总数的50%</span></strong>
                         <div class="row">
                             <div class="col-lg-12" style="margin-top: 10px">
-                                    电脑端 <input type="text" ng-model="item.pcCount"> 单
-                                    &nbsp;
-                                    &nbsp;
-                                    &nbsp;
-                                    &nbsp;
-                                    &nbsp;
-                                    手机|Pad客户端 <input type="text" ng-model="item.phoneCount"> 单 (手机订单，每单多加0.5金币)
+                                电脑端 <input type="text" ng-model="item.pcCount"> 单
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                手机|Pad客户端 <input type="text" ng-model="item.phoneCount"> 单 (手机订单，每单多加0.5金币)
                             </div>
                         </div>
                         <div class="border-bottom"></div>
@@ -1101,7 +1104,7 @@
             <div ng-if="step==4">
                 <section class="panel">
                     <header class="panel-heading">
-                        第四步：选择增值服务 <span class="pull-right">已选择: <span class="error">天猫|<%= shopName %>|直通车|{{item.totalCount}}单套餐</span></span>
+                        第四步：选择增值服务 <span class="pull-right">已选择: <span class="error">淘宝|<%= shopName %>|直通车|{{item.totalCount}}单套餐</span></span>
                     </header>
                     <div class="panel-body">
                         <!--快速返款给买手 开始-->
@@ -1357,7 +1360,7 @@
                             </span>
                         </div>
                     </div>
-                    </section>
+                </section>
                 <section class="panel">
                     <header class="panel-heading">
                         选择支付方式
@@ -1382,7 +1385,7 @@
                     <button class="btn btn-warning" ng-click="pay()">付款并发布任务</button>
                     <a href="#myModal" style="display: none;" id="pay" data-toggle="modal">打开模态pay</a>
                 </div>
-                </div>
+            </div>
             <!--发布任务第五步结束-->
             <!-- Modal -->
             <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
