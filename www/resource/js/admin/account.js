@@ -14,7 +14,7 @@
         .success(function(res) {
           if (res.errno == 0) {
             alert(res.data);
-            d.shopStatus = 1;
+            d.accountStatus = 1;
           } else {
             alert(res.errmsg);
           }
@@ -26,7 +26,7 @@
         .success(function(res) {
           if (res.errno == 0) {
             alert(res.data);
-            d.shopStatus = -1;
+            d.accountStatus = -1;
           } else {
             alert(res.errmsg);
           }
