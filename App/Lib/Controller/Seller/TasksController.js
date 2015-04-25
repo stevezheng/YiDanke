@@ -233,7 +233,7 @@ module.exports = Controller("Seller/BaseController", function(){
             return Log.coin(
               -1
               , totalTaskFee
-              , (self.cUser.coin + totalTaskFee)
+              , (self.cUser.coin - totalTaskFee)
               , self.cUser.id
               , self.cUser.username
               , 1
