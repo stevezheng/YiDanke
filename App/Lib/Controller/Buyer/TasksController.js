@@ -226,13 +226,13 @@ module.exports = Controller("Buyer/BaseController", function(){
               .then(function(res) {
                 return Log.money(
                   1
-                  , _task.totalMoney * 0.05 + _task.taskPromise
-                  , (res.money+ _task.totalMoney * 0.05 + _task.taskPromise)
+                  , _task.taskTotalMoney * 0.05 + _task.taskPromise
+                  , (res.money + _task.taskTotalMoney * 0.05 + _task.taskPromise)
                   , res.id
                   , res.username
                   , 1
                   , self.ip()
-                  , '完成任务['+doTaskId+']返还押金' + _task.totalMoney * 0.05 + _task.taskPromise  + '元'
+                  , '完成任务['+doTaskId+']返还押金' + _task.taskTotalMoney * 0.05 + _task.taskPromise  + '元'
                 );
               })
           })
