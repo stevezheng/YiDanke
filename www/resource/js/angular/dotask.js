@@ -82,10 +82,11 @@
       $scope.nextFlag = true;
       $scope.nextStep2Flag = true;
       $scope.nextStep3Flag = true;
-      $scope.nextStep4Flag = true;
+      //$scope.nextStep4Flag = true;
       $scope.nextStep5Flag = true;
       $scope.nextStep6Flag = true;
     }, 20000);
+
 
     $scope.itemUrl = '';
 
@@ -108,10 +109,14 @@
         $scope.nextFlag = true;
         $scope.nextStep2Flag = true;
         $scope.nextStep3Flag = true;
-        $scope.nextStep4Flag = true;
         $scope.nextStep5Flag = true;
         $scope.nextStep6Flag = true;
       }, 20000);
+
+      $timeout(function() {
+        $scope.nextStep4Flag = true;
+      }, 300000);
+
       if (step == 4) {
         if (!$scope.item.url1) {
           alert('请填写宝贝页地址1');
