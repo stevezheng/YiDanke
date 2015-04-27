@@ -11,6 +11,16 @@
                     <div class="panel-body">
                         <table class="table" ng-repeat="doTask in doTasks">
                             <tr>
+                                <td colspan="4">
+                                    <div class="label label-info" ng-if="doTask.taskTransportType == 'zixuan'">
+                                        自选快递
+                                    </div>
+                                    <div class="label label-success" ng-if="doTask.taskTransportType == 'pingtai'">
+                                        平台快递
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td>账号：{{doTask.username}}</td>
                                 <td>淘宝：{{doTask.doTaskAccountName}}</td>
                                 <td>任务编号：{{doTask.doTaskDetailDoTaskId}}</td>
@@ -34,8 +44,8 @@
                             </tr>
                             <tr>
                                 <td colspan="4">
-                                    <button class="btn btn-warning" ng-click="addExpress(doTask)">添加快递</button>
-                                    <button class="btn btn-warning" ng-click="editExpress(doTask)">编辑快递</button>
+                                    <button class="btn btn-warning" ng-click="addExpress(doTask)" ng-show="doTask.doTaskStatus == 2">添加快递</button>
+                                    <button class="btn btn-warning" ng-click="editExpress(doTask)" ng-show="doTask.doTaskStatus >= 2">编辑快递</button>
                                     <!--<button class="btn btn-warning" ng-click="cancel(doTask)">撤销任务单</button>-->
                                 </td>
                             </tr>
