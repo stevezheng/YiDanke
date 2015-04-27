@@ -836,7 +836,7 @@
                         </label>
                     </div>
                     <h4>快递信息</h4>
-                    <p>快递重量 <input type="text" ng-model="item.weight" style="width: 50px"/> kg</p>
+                    <p>快递重量 <input type="text" ng-model="item.weight" style="width: 50px"/> kg <span class="error">必填</span></p>
                     <p>快递体积 <input type="text" ng-model="item.volume" style="width: 50px"/> 立方米</p>
                     <p><span>长宽高</span>
                         &nbsp;&nbsp;
@@ -880,7 +880,8 @@
             </section>
             <div class="row" style="text-align: center">
                 <a class="btn btn-info" href="/seller/publish">上一步</a>
-                <button ng-class="transportFlag?'btn btn-info': 'btn btn-default'" ng-click="nextStep(3)">下一步</button>
+                <button class="btn btn-info" ng-if="transportFlag" ng-click="nextStep(3)">下一步</button>
+                <button class="btn btn-default" ng-hide="transportFlag">下一步</button>
             </div>
             </div>
             <!--发布任务第二步结束-->
@@ -1140,7 +1141,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <label class="checkbox-inline">
-                                    <input type="radio" ng-model="cost.selectPV" value="{{cost.totalCount * 5}}"> {{cost.totalCount * 5}}访客
+                                    <input type="radio" ng-model="cost.selectPV" value="{{cost.totalCount * 5}}" checked> {{cost.totalCount * 5}}访客
                                 </label>
                                 <label class="checkbox-inline">
                                     <input type="radio" ng-model="cost.selectPV" value="{{cost.totalCount * 10}}"> {{cost.totalCount * 10}}访客
@@ -1161,7 +1162,7 @@
                                     <input type="radio" ng-model="cost.selectPV" value="0"> 自定义
                                 </label>
                                 <input type="text" ng-model="cost.freePV"> 访客 <span class="small">(不能低于{{cost.totalCount * 5}}访客)</span>
-                                <p class="help-block error" ng-hide="cost.pv > cost.totalCount * 5"><i class="icon-exclamation-sign"></i>不能低于{{cost.totalCount * 5}}访客</p>
+                                <p class="help-block error" ng-hide="cost.pv >= cost.totalCount * 5"><i class="icon-exclamation-sign"></i>不能低于{{cost.totalCount * 5}}访客</p>
                             </div>
                             <div class="col-lg-12" style="border: 1px solid #50c8ea; padding: 15px; margin-top: 15px">
                                 <p ng-if="taobao.key1">淘宝关键词1:  <span class="error">{{taobao.key1}}</span>刷{{taobao.key1Count}}单，将会匹配{{cost.pv / cost.totalCount * taobao.key1Count | number: 0}}</p>

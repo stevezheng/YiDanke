@@ -288,7 +288,7 @@
                                                 </a>
                                                 发布时间：{{task.taskCreateTime | date: 'yyyy-MM-dd HH:mm'}}
                                             </span>
-                                                <span class="pull-right"><a href="javascript:;;;" ng-click="upTaskFee(task)">加赏</a> | <a href="javascript:;;;" ng-click="cancelTask(task)">撤销</a></span>
+                                                <span ng-if="task.taskStatus == 3 || task.taskStatus == 2" class="pull-right"><a href="javascript:;;;" ng-click="upTaskFee(task)">加赏</a> | <a href="javascript:;;;" ng-click="cancelTask(task)">撤销</a></span>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -333,7 +333,7 @@
                     <h4 class="modal-title">加赏任务</h4>
                 </div>
                 <div class="modal-body">
-                    <p>请问您要加赏多少金币？</p>
+                    <p>请问您此任务每单加赏多少金币？</p>
                     <input ng-model="upTaskFeeCoin" type="text" placeholder="金币" autocomplete="off" class="form-control placeholder-no-fix">
 
                 </div>

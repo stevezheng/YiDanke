@@ -100,7 +100,7 @@ module.exports = Model(function() {
           table: 'do_task_detail'
           , join: 'left'
           , on: {
-            'id': 'doTaskDetailTaskId'
+            'id': 'doTaskDetailDoTaskId'
           }
         })
         .join({
@@ -264,7 +264,7 @@ module.exports = Model(function() {
             'id': 'doTaskExtendDoTaskId'
           }
         })
-        .where({'yi_task.taskUserId': userId, 'yi_task.taskTransport': 'zixuan', 'yi_do_task.doTaskStatus': 1})
+        .where({'yi_task.taskUserId': userId, 'yi_task.taskTransportType': 'zixuan', 'yi_do_task.doTaskStatus': 1})
         .select()
     },
 

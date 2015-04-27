@@ -7,12 +7,6 @@ module.exports = Model(function() {
           required: '请先登录'
         }
       },
-      'shopPlatform': {
-        valid: ['required']
-        , msg: {
-          required: '平台不能为空'
-        }
-      },
       'shopName': {
         valid: ['required']
         , msg: {
@@ -111,7 +105,7 @@ module.exports = Model(function() {
         }, true);
     },
 
-    editOne: function(shopUserId, id, shopName, shopUrl, shopProvince, shopCity, shopArea, shopAddress, shopExpressNumber, shopPlatform) {
+    editOne: function(shopUserId, id, shopName, shopUrl, shopProvince, shopCity, shopArea, shopAddress, shopExpressNumber) {
       var self = this;
 
       return self
@@ -127,7 +121,6 @@ module.exports = Model(function() {
           , 'shopArea': shopArea
           , 'shopAddress': shopAddress
           , 'shopExpressNumber': shopExpressNumber
-          , 'shopPlatform': shopPlatform
           , 'shopStatus': 0
         });
     },

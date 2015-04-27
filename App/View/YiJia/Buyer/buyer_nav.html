@@ -18,12 +18,12 @@
     <div class="nav notify-row pull-right " style="margin-left: 0;">
         <a class="btn btn-info" href="/index/logout">退出</a>
     </div>
-    <div class="nav notify-row pull-right">
+    <div class="nav notify-row">
         <ul class="nav top-menu">
             <li><a href="#">买手: <%= cUser.username %></a></li>
-            <li><a href="#">本金: <span class="error"><%= cUser.money %></span>&nbsp;元</a></li>
+            <!--<li><a href="#">本金: <span class="error"><%= cUser.money %></span>&nbsp;元</a></li>-->
             <li><a href="#">金币: <span class="error"><%= cUser.coin %></span>&nbsp;枚</a></li>
-            <li><a href="/buyer/money" style="color: #58c9f3">[充值]</a></li>
+            <!--<li><a href="/buyer/money" style="color: #58c9f3">[充值]</a></li>-->
             <li><a href="#">经验: <span class="error"><%= cUser.exp %></span>&nbsp;点</a></li>
             <% if (cUser.status == 2) { %>
             <li><a href="#">会员到期时间: <%= formatDate(cUser.vipExprie) %></a></li>

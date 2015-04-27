@@ -1,4 +1,4 @@
-create table if not exists `yi_do_task_detail` (
+create table if not exists `yi_do_task_extend` (
     `id` int(11) unsigned not null auto_increment,
     `doTaskExtendDoTaskId` int(11) not null comment '任务单id',
     `doTaskExtendTaskId` int(11) not null comment '任务id',

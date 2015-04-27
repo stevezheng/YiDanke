@@ -20,9 +20,9 @@
             <li><a href="#">商家: <%= cUser.username %></a></li>
             <li><a href="#">押金: <span class="error"><%= cUser.money %></span>&nbsp;元</a></li>
             <li><a href="#">流量: <span class="error"><%= cUser.pv %></span>&nbsp;IP</a></li>
-            <li><a href="/seller/money" style="color: #58c9f3">[充值]</a></li>
+            <!--<li><a href="/seller/money" style="color: #58c9f3">[充值]</a></li>-->
             <li><a href="#">金币: <span class="error"><%= cUser.coin %></span>&nbsp;枚</a></li>
-            <li><a href="/seller/money" style="color: #58c9f3">[充值]</a></li>
+            <!--<li><a href="/seller/money" style="color: #58c9f3">[充值]</a></li>-->
             <!--<li><a href="#">经验: <span class="error"><%= cUser.exp %></span>&nbsp;点</a></li>-->
             <% if (cUser.status == 2) { %>
             <li><a href="#">会员到期时间: <%= formatDate(cUser.vipExprie) %></a></li>

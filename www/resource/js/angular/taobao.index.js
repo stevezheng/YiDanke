@@ -50,6 +50,7 @@
     $scope.step = 2; //默认值为:2
 
     $scope.taskId = null;
+    $scope.transportType = 'pingtai';
 
      //任务花费明细
     $scope.cost = {
@@ -132,6 +133,7 @@
           totalCount = $scope.item.totalCount;
         }
         totalCount = parseInt(totalCount);
+        $scope.cost.pv = totalCount * 5;
         $scope.cost.totalCount = totalCount;
         $scope.cost.goodCommentFee = totalCount;
 
@@ -170,15 +172,15 @@
       }
 
       if (step == 5) {
-        if ($scope.cost.pv > $scope.user.pv) {
+        if (parseInt($scope.cost.pv) > parseInt($scope.user.pv)) {
           alert('流量不足，请先充值流量');
           document.getElementById('pv').click();
           window.open('/seller/money');
           return false;
         }
 
-        $scope.cost.allCoin =($scope.cost.totalMoney * 1.05 + $scope.cost.promise) * $scope.cost.totalCount;
-        $scope.cost.allMoney = ($scope.cost.totalFee * 1 + $scope.cost.transport * $scope.cost.totalCount) + $scope.cost.payback * 1 + $scope.cost.speed * 1 + ($scope.cost.isExtendFee?$scope.cost.extendFee * $scope.cost.totalCount:0) + ($scope.cost.isInterval?$scope.cost.interval:0) * 1 + ($scope.cost.cycleTime * 1) * ($scope.cost.totalCount * 1) + ($scope.cost.isGoodComment?$scope.cost.goodCommentFee * 1: 0) + $scope.cost.phone * 1;
+        $scope.cost.allMoney =($scope.cost.totalMoney * 1.05 + $scope.cost.promise) * $scope.cost.totalCount;
+        $scope.cost.allCoin = ($scope.cost.totalFee * 1 + $scope.cost.transport * $scope.cost.totalCount) + $scope.cost.payback * 1 + $scope.cost.speed * 1 + ($scope.cost.isExtendFee?$scope.cost.extendFee * $scope.cost.totalCount:0) + ($scope.cost.isInterval?$scope.cost.interval:0) * 1 + ($scope.cost.cycleTime * 1) * ($scope.cost.totalCount * 1) + ($scope.cost.isGoodComment?$scope.cost.goodCommentFee * 1: 0) + $scope.cost.phone * 1;
         //这里计算的是是否部分的内容
         $scope.cost.paybak = $scope.cost.isPayback?$scope.cost.payback:0;
         $scope.cost.extendFee = $scope.cost.isExtendFee?$scope.cost.extendFee:0;
@@ -618,7 +620,7 @@
 
               , selectPV: 60 //选择流量
               , freePV: 0 //自定义流量
-              , pv: 60 //实际使用流量
+              , pv: res.taskPV //实际使用流量
 
               , cycleTime: res.taskCycleTime //延长买家购物周期与费用(周期和费用一样)
               , totalCycle: res.taskTotalCycle //延长买家购物周期总共费用 totalCycle = cycleTime * totalCount
@@ -858,6 +860,11 @@
           }
         }
 
+        if (!$scope.item.weight) {
+          alert('请检查快递重量是否正确');
+          return false;
+        }
+
         if ($scope.taobao.keywordsCount > 4) {
           if (!$scope.taobao.key5 || $scope.taobao.key5.length > 10) {
             alert('淘宝商品关键字5，不能为空且输入中文不能超过10个字');
@@ -1040,16 +1047,20 @@
     $scope.confirmTransport = function(transport, transportType) {
       $scope.transportFlag = true;
       if (transport == 'baoyou') {
+        $scope.transport = 'baoyou';
       } else if (transport == 'bubaoyou') {
         $scope.cost.promise = 10;
+        $scope.transport = 'bubaoyou';
       }
 
       if (transportType == 'pingtai') {
+        $scope.transportType = 'pingtai';
         $scope.cost.transport = 5;
       } else if (transportType == 'zixuan') {
+        $scope.transportType = 'zixuan';
         $scope.cost.transport = 1.5;
       }
-    };
+    }
     //step2 end
 
     //step3 start

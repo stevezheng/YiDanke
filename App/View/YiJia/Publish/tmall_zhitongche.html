@@ -878,7 +878,7 @@
                             </label>
                         </div>
                         <h4>快递信息</h4>
-                        <p>快递重量 <input type="text" ng-model="item.weight" style="width: 50px"/> kg</p>
+                        <p>快递重量 <input type="text" ng-model="item.weight" style="width: 50px"/> kg <span class="error">必填</span></p>
                         <p>快递体积 <input type="text" ng-model="item.volume" style="width: 50px"/> 立方米</p>
                         <p><span>长宽高</span>
                             &nbsp;&nbsp;
@@ -923,7 +923,8 @@
                 </section>
                 <div class="row" style="text-align: center">
                     <a class="btn btn-info" href="/seller/publish">上一步</a>
-                    <button ng-class="transportFlag?'btn btn-info': 'btn btn-default'" ng-click="nextStep(3)">下一步</button>
+                    <button class="btn btn-info" ng-if="transportFlag" ng-click="nextStep(3)">下一步</button>
+                    <button class="btn btn-default" ng-hide="transportFlag">下一步</button>
                 </div>
             </div>
             <!--发布任务第二步结束-->

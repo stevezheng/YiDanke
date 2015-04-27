@@ -329,17 +329,17 @@
           //todo:好坑爹的命名方式
           $scope.taobaoZixuans = _.where(res.data, {
             doTaskStatus: 1,
-            taskTransport: 'zixuan',
+            taskTransportType: 'zixuan',
             taskPlatform: 'taobao'
           });
           $scope.tmallZixuans = _.where(res.data, {
             doTaskStatus: 1,
-            taskTransport: 'zixuan',
+            taskTransportType: 'zixuan',
             taskPlatform: 'tmall'
           });
           $scope.jdZixuans = _.where(res.data, {
             doTaskStatus: 1,
-            taskTransport: 'zixuan',
+            taskTransportType: 'zixuan',
             taskPlatform: 'jd'
           });
 
@@ -591,30 +591,36 @@
     };
 
     $scope.pass = function(d) {
-      if (d.taskStatus == '2') {
-        $http.post('/admin/task/pass', {id: d.taobaoTaskId || d.tmallTaskId || d.jdTaskId})
-          .success(function(res) {
-            if (res.errno == 0) {
-              alert(res.data);
-              d.taskStatus = 3;
-            }
-          })
-      } else {
-        alert('该任务已审核过');
+      var r = confirm('是否通过该任务?');
+      if (r) {
+        if (d.taskStatus == '2') {
+          $http.post('/admin/task/pass', {id: d.taobaoTaskId || d.tmallTaskId || d.jdTaskId})
+            .success(function (res) {
+              if (res.errno == 0) {
+                alert(res.data);
+                d.taskStatus = 3;
+              }
+            })
+        } else {
+          alert('该任务已审核过');
+        }
       }
     };
 
     $scope.unpass = function(d) {
-      if (d.taskStatus == '2') {
-        $http.post('/admin/task/unpass', {id: d.taobaoTaskId || d.tmallTaskId || d.jdTaskId})
-          .success(function(res) {
-            if (res.errno == 0) {
-              alert(res.data);
-              d.taskStatus = -1;
-            }
-          })
-      } else {
-        alert('该任务已审核过');
+      var r = confirm('是否拒绝该任务?');
+      if (r) {
+        if (d.taskStatus == '2') {
+          $http.post('/admin/task/unpass', {id: d.taobaoTaskId || d.tmallTaskId || d.jdTaskId})
+            .success(function (res) {
+              if (res.errno == 0) {
+                alert(res.data);
+                d.taskStatus = -1;
+              }
+            })
+        } else {
+          alert('该任务已审核过');
+        }
       }
     };
 

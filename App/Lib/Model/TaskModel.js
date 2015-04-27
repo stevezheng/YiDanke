@@ -53,7 +53,9 @@ module.exports = Model(function() {
           , join: 'left'
           , on: {'id': 'extendTaskId'}
         })
-        .where({taskUserId: taskUserId, 'yi_task.id': taskId})
+        .where({'yi_task.id': taskId})
+        //todo:给后台单独的权限
+        //.where({taskUserId: taskUserId, 'yi_task.id': taskId})
         .find()
     },
 

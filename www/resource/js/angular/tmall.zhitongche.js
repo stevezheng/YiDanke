@@ -39,6 +39,7 @@
   var TmallZhitongcheModule = angular.module('YiApp.TmallZhitongche', ['angularFileUpload']);
 
   TmallZhitongcheModule.controller('tmallZhitongcheCtrl', ['$scope', '$http', '$upload', function($scope, $http, $upload) {
+    $scope.transportType = 'pingtai';
     $scope.upload = function(file) {
       return $upload.upload({
         url: '/home/index/upload',
@@ -177,15 +178,15 @@
       }
 
       if (step == 5) {
-        if ($scope.cost.pv > $scope.user.pv) {
+        if (parseInt($scope.cost.pv) > parseInt($scope.user.pv)) {
           alert('流量不足，请先充值流量');
           document.getElementById('pv').click();
           window.open('/seller/money');
           return false;
         }
 
-        $scope.cost.allCoin =($scope.cost.totalMoney * 1.05 + $scope.cost.promise) * $scope.cost.totalCount;
-        $scope.cost.allMoney = ($scope.cost.totalFee * 1 + $scope.cost.transport * $scope.cost.totalCount) + $scope.cost.payback * 1 + $scope.cost.speed * 1 + ($scope.cost.isExtendFee?$scope.cost.extendFee * $scope.cost.totalCount:0) + ($scope.cost.isInterval?$scope.cost.interval:0) * 1 + ($scope.cost.cycleTime * 1) * ($scope.cost.totalCount * 1) + ($scope.cost.isGoodComment?$scope.cost.goodCommentFee * 1: 0) + $scope.cost.phone * 1;
+        $scope.cost.allMoney =($scope.cost.totalMoney * 1.05 + $scope.cost.promise) * $scope.cost.totalCount;
+        $scope.cost.allCoin = ($scope.cost.totalFee * 1 + $scope.cost.transport * $scope.cost.totalCount) + $scope.cost.payback * 1 + $scope.cost.speed * 1 + ($scope.cost.isExtendFee?$scope.cost.extendFee * $scope.cost.totalCount:0) + ($scope.cost.isInterval?$scope.cost.interval:0) * 1 + ($scope.cost.cycleTime * 1) * ($scope.cost.totalCount * 1) + ($scope.cost.isGoodComment?$scope.cost.goodCommentFee * 1: 0) + $scope.cost.phone * 1;
         //这里计算的是是否部分的内容
         $scope.cost.paybak = $scope.cost.isPayback?$scope.cost.payback:0;
         $scope.cost.extendFee = $scope.cost.isExtendFee?$scope.cost.extendFee:0;
@@ -855,6 +856,11 @@
         return false;
       }
 
+      if (!$scope.item.weight) {
+        alert('请检查快递重量是否正确');
+        return false;
+      }
+
       if (!$scope.zhitongche.money || !($scope.zhitongche.money * 1)) {
         alert('请检查掌柜热卖区显示的商品价格是否正确');
         return false;
@@ -1081,13 +1087,17 @@
     $scope.confirmTransport = function(transport, transportType) {
       $scope.transportFlag = true;
       if (transport == 'baoyou') {
+        $scope.transport = 'baoyou';
       } else if (transport == 'bubaoyou') {
         $scope.cost.promise = 10;
+        $scope.transport = 'bubaoyou';
       }
 
       if (transportType == 'pingtai') {
+        $scope.transportType = 'pingtai';
         $scope.cost.transport = 5;
       } else if (transportType == 'zixuan') {
+        $scope.transportType = 'zixuan';
         $scope.cost.transport = 1.5;
       }
     };

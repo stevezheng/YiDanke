@@ -47,8 +47,8 @@
                                     </div>
                                     <div class="col-lg-6">
                                             <span>
-                                                任务编号： {{done.taobaoTaskId || jdTaskId}}
-                                                <a target="_blank" href="/admin/task/taskDetail?id={{done.taobaoTaskId || jdTaskId}}">
+                                                任务编号： {{done.taobaoTaskId || done.jdTaskId}}
+                                                <a target="_blank" href="/admin/task/taskDetail?id={{done.taobaoTaskId || done.jdTaskId}}">
                                                     [详情]
                                                 </a>
                                                 发布时间：{{done.taskCreateTime | date: 'yyyy-MM-dd HH:mm'}}
@@ -74,7 +74,7 @@
                                     </div>
                                     <div class="col-lg-3">
                                         <span>任务状态：{{statusMap.task[done.taskStatus]}}</span>
-                                        <a href="/admin/task/taskDetail?id={{done.taobaoTaskId || jdTaskId}}" target="_blank" class="pull-right btn btn-warning">查看详情</a>
+                                        <a href="/admin/task/taskDetail?id={{done.taobaoTaskId || done.jdTaskId}}" target="_blank" class="pull-right btn btn-warning">查看详情</a>
                                     </div>
                                 </div>
                                 <div class="row">

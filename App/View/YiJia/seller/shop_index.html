@@ -69,7 +69,7 @@
                                     </th>
                                     <th><%= shop.shopUrl %></th>
                                     <th><%= statusMap[shop.shopStatus] %></th>
-                                    <% if (shop.shopStatus == 0) { %>
+                                    <% if (shop.shopStatus != 1) { %>
                                     <th><a href="#modal-shop" data-toggle="modal" data-data="<%= shop.id %>" class="btn-edit">编辑</a></th>
                                     <% } else { %>
                                     <th>[暂无]</th>
@@ -120,7 +120,7 @@
                             </th>
                             <th><%= shop.shopUrl %></th>
                             <th><%= statusMap[shop.shopStatus] %></th>
-                            <% if (shop.shopStatus == 0) { %>
+                            <% if (shop.shopStatus != 1) { %>
                             <th><a href="#modal-shop" data-toggle="modal" data-data="<%= shop.id %>" class="btn-edit">编辑</a></th>
                             <% } else { %>
                             <th>[暂无]</th>
@@ -171,7 +171,7 @@
                             </th>
                             <th><%= shop.shopUrl %></th>
                             <th><%= statusMap[shop.shopStatus] %></th>
-                            <% if (shop.shopStatus == 0) { %>
+                            <% if (shop.shopStatus != 1) { %>
                             <th><a href="#modal-shop" data-toggle="modal" data-data="<%= shop.id %>" class="btn-edit">编辑</a></th>
                             <% } else { %>
                             <th>[暂无]</th>
@@ -312,7 +312,7 @@
                     <p style="font-size: 12px;">(店铺绑定后无法修改)</p>
                 </div>
                 <div class="form-group">
-                    <label for="shop-name" class="control-label col-lg-3">网点号</label>
+                    <label for="shop-name" class="control-label col-lg-3">韵达网点号</label>
                     <div class="col-lg-4">
                         <input type="text" class="form-control valid" id="express-number" name="express-number"/>
                     </div>
@@ -477,7 +477,7 @@
         $('.btn-edit').click(function() {
             //让Modal状态为更新
             $('#btn-confirm').attr('data-data', 'edit');
-            $('.modal-title').text('更新账号');
+            $('.modal-title').text('更新店铺');
 
             var id = $(this).attr('data-data');
             currentId = id;

@@ -1,4 +1,7 @@
 function coin(type, value, balance, userId, username, userType, ip, commnet) {
+  try {
+    value = value.toFixed(2);
+  } catch (ex) {}
   return D('log_coin')
     .add({
       logCoinType: type
@@ -13,6 +16,9 @@ function coin(type, value, balance, userId, username, userType, ip, commnet) {
 }
 
 function money(type, value, balance, userId, username, userType, ip, commnet) {
+  try {
+    value = value.toFixed(2);
+  } catch (ex) {}
   return D('log_money')
     .add({
       logMoneyType: type
@@ -27,6 +33,9 @@ function money(type, value, balance, userId, username, userType, ip, commnet) {
 }
 
 function withdraw(type, status, value, balance, userId, username, userType, ip, commnet) {
+  try {
+    value = value.toFixed(2);
+  } catch (ex) {}
   return D('log_withdraw')
     .add({
       logWithdrawType: type
@@ -42,6 +51,9 @@ function withdraw(type, status, value, balance, userId, username, userType, ip, 
 }
 
 function member(type, value, balance, userId, username, userType, ip, commnet) {
+  try {
+    value = value.toFixed(2);
+  } catch (ex) {}
   return D('log_member')
     .add({
       logMemberType: type
@@ -56,6 +68,9 @@ function member(type, value, balance, userId, username, userType, ip, commnet) {
 }
 
 function pv(type, value, balance, userId, username, userType, ip, commnet) {
+  try {
+    value = value.toFixed(2);
+  } catch (ex) {}
   return D('log_pv')
     .add({
       logPVType: type
