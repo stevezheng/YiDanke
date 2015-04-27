@@ -170,7 +170,7 @@ module.exports = Controller("Admin/BaseController", function(){
         //todo: 这里的逻辑需要白天清醒的时候写下
         data.doTaskExtendDoTaskId = self.post('doTaskExtendDoTaskId');
 
-        self.success('撤销成功');
+        self.success('撤销失败');
       }
     },
   };

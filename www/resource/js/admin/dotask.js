@@ -60,7 +60,7 @@
         })
     };
 
-    $scope.editExpress = function(doTask) {
+    $scope.cancelExpress = function(doTask) {
       var data = {};
       data.doTaskExtendDoTaskId = doTask.doTaskDetailDoTaskId;
       $http.post('/admin/dotask/cancelExpress', data)
