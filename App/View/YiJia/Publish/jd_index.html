@@ -640,6 +640,28 @@
                     </div>
                 </div>
                 <div class="border-bottom"></div>
+                <div class="col-lg-12">
+                    <div class="radio" ng-click="transportType = 'pingtai'">
+                        <label>
+                            <input type="radio" name="optionsRadios1" checked>
+                            平台快递 <span class="small">平台快递发货，平台收取 <span class="error">5</span>元作为服务费用</span>
+                        </label>
+                    </div>
+                    <div class="radio" ng-click="transportType = 'zixuan'">
+                        <label>
+                            <input type="radio" name="optionsRadios1">
+                            自选快递 <span class="small">商家自选快递发货，平台收取 <span class="error">1.5</span>元作为服务费用</span>
+                        </label>
+                    </div>
+                    <h4>快递信息</h4>
+                    <p>快递重量 <input type="text" ng-model="item.weight" style="width: 50px"/> kg <span class="error">必填</span></p>
+                    <p>快递体积 <input type="text" ng-model="item.volume" style="width: 50px"/> 立方米</p>
+                    <p><span>长宽高</span>
+                        &nbsp;&nbsp;
+                        <input type="text" ng-model="item.length" style="width: 50px"/> 米
+                        <input type="text" ng-model="item.width" style="width: 50px"/> 米
+                        <input type="text" ng-model="item.height" style="width: 50px"/> 米</p>
+                </div>
                     <div class="col-lg-12">
                         <button class="btn btn-warning" ng-click="confirmItem()">确认提交信息</button>
                     </div>
@@ -659,12 +681,6 @@
                         <label>
                             <input type="radio" name="optionsRadios">
                             商品不包邮 <span class="small">无需买手联系客服。商家每单额外支出 <span class="error">10</span>元作为运费押金，任务完成后运费押金将全部退还给商家</span>
-                        </label>
-                    </div>
-                    <div class="radio" ng-click="transport = 'zixuan'">
-                        <label>
-                            <input type="radio" name="optionsRadios">
-                            自选快递 <span class="small">商家自选快递发货，平台收取 <span class="error">2</span>元作为服务费用</span>
                         </label>
                     </div>
                     <div class="row">
