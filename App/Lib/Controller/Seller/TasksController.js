@@ -361,12 +361,13 @@ module.exports = Controller("Seller/BaseController", function(){
               'id': 'doTaskExtendDoTaskId'
             }
           })
-          .where({doTaskTaskId: taskId})
+          .where({'yi_do_task.doTaskTaskId': taskId})
           .select()
           .then(function(res) {
             return self.success(res);
           })
           .catch(function(err) {
+            console.error(err.stack);
             return self.error(err);
           })
       }
