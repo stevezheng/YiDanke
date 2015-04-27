@@ -8,6 +8,9 @@ module.exports = Controller(function(){
     },
     __before: function () {
       var self = this;
+      if (self.http.action == 'getTask') {
+        return true;
+      }
       return this.session("cUser").then(function (cUser) {
         //用户信息为空
         if (isEmpty(cUser)) {
