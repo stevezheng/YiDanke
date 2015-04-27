@@ -10,10 +10,17 @@ module.exports = Controller('Publish/BaseController', function() {
       if (self.isGet()) {}
 
       if (self.isPost()) {
-        var taskId = self.post('taskId');
+        var taskId = self.post('taskId') || self.post('id');
+
+        var id;
+
+        if (self.cUser) {
+          id = self.cUser.id;
+        }
+        //todo:临时方案
 
         return task
-          .getOwnOne(self.cUser.id, taskId)
+          .getOwnOne(id, taskId)
           .then(function(res) {
             return self.success(res);
           })
