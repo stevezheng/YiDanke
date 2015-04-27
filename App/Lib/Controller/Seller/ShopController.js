@@ -113,7 +113,7 @@ module.exports = Controller("Seller/BaseController", function(){
         var shop = ShopModel();
 
         shop
-          .editOne(self.cUser.id, id, shopName, shopUrl, shopProvince , shopCity, shopArea, shopPlatform)
+          .editOne(self.cUser.id, id, shopName, shopUrl, shopProvince , shopCity, shopArea, shopAddress, shopExpressNumber)
           .then(function(res) {
             return self.success('编辑店铺成功');
           })
