@@ -96,7 +96,7 @@ var run = function(shopPlatform, task) {
 
   if (task.taobaoKey1) {
     data.kwd = task.taobaoKey1;
-    data.times = task.taobaoKeyCount1;
+    data.times = parseInt(task.taobaoKeyCount1);
     data.path1 = 100;
     data.path3 = 0;
 
@@ -107,7 +107,7 @@ var run = function(shopPlatform, task) {
 
   if (task.taobaoKey2) {
     data.kwd = task.taobaoKey2;
-    data.times = task.taobaoKeyCount2;
+    data.times = parseInt(task.taobaoKeyCount2);
     data.path1 = 100;
     data.path3 = 0;
 
@@ -118,7 +118,7 @@ var run = function(shopPlatform, task) {
 
   if (task.taobaoKey3) {
     data.kwd = task.taobaoKey3;
-    data.times = task.taobaoKeyCount3;
+    data.times = parseInt(task.taobaoKeyCount3);
     data.path1 = 100;
     data.path3 = 0;
 
@@ -129,7 +129,7 @@ var run = function(shopPlatform, task) {
 
   if (task.taobaoKey4) {
     data.kwd = task.taobaoKey4;
-    data.times = task.taobaoKeyCount4;
+    data.times = parseInt(task.taobaoKeyCount4);
     data.path1 = 100;
     data.path3 = 0;
 
@@ -140,7 +140,7 @@ var run = function(shopPlatform, task) {
 
   if (task.taobaoKey5) {
     data.kwd = task.taobaoKey5;
-    data.times = task.taobaoKeyCount5;
+    data.times = parseInt(task.taobaoKeyCount5);
     data.path1 = 100;
     data.path3 = 0;
 
@@ -151,7 +151,7 @@ var run = function(shopPlatform, task) {
 
   if (task.tmallKey1) {
     data.kwd = task.tmallKey1;
-    data.times = task.tmallKeyCount1;
+    data.times = parseInt(task.tmallKeyCount1);
     data.path1 = 100;
     data.path3 = 0;
 
@@ -162,7 +162,7 @@ var run = function(shopPlatform, task) {
 
   if (task.tmallKey2) {
     data.kwd = task.tmallKey2;
-    data.times = task.tmallKeyCount2;
+    data.times = parseInt(task.tmallKeyCount2);
     data.path1 = 100;
     data.path3 = 0;
 
@@ -173,7 +173,7 @@ var run = function(shopPlatform, task) {
 
   if (task.tmallKey3) {
     data.kwd = task.tmallKey3;
-    data.times = task.tmallKeyCount3;
+    data.times = parseInt(task.tmallKeyCount3);
     data.path1 = 100;
     data.path3 = 0;
 
@@ -184,7 +184,7 @@ var run = function(shopPlatform, task) {
 
   if (task.tmallKey4) {
     data.kwd = task.tmallKey4;
-    data.times = task.tmallKeyCount4;
+    data.times = parseInt(task.tmallKeyCount4);
     data.path1 = 100;
     data.path3 = 0;
 
@@ -195,7 +195,7 @@ var run = function(shopPlatform, task) {
 
   if (task.tmallKey5) {
     data.kwd = task.tmallKey5;
-    data.times = task.tmallKeyCount5;
+    data.times = parseInt(task.tmallKeyCount5);
     data.path1 = 100;
     data.path3 = 0;
 
