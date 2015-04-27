@@ -336,6 +336,7 @@ module.exports = Controller("Buyer/BaseController", function(){
           , data.doTaskDetailTalkImage = self.post('talkImagefile')
           , data.doTaskDetailOrderImage = self.post('orderImagefile')
           , data.doTaskDetailOrderId = self.post('orderId')
+          , data.doTaskDetailOrderTime = self.post('orderTime')
           , data.doTaskDetailOrderMoney = self.post('orderMoney');
 
         return D('do_task_detail')

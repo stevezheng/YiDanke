@@ -58,6 +58,7 @@
         , orderImagefile: $scope.order.imagefile
         , orderId: $scope.order.orderId
         , orderMoney: $scope.order.orderMoney
+        , orderTime: $scope.order.orderTime
       })
         .success(function(res) {
           if (res.errno == 0) {
@@ -256,6 +257,7 @@
         , orderImagefile: $scope.order.imagefile
         , orderId: $scope.order.orderId
         , orderMoney: $scope.order.orderMoney
+        , orderTime: $scope.order.orderTime
       })
         .success(function(res) {
           if (res.errno == 0) {
