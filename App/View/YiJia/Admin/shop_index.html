@@ -33,6 +33,7 @@
                                 <th>绑定平台</th>
                                 <th>店铺链接</th>
                                 <th>店铺名称</th>
+                                <th>发货电话</th>
                                 <th>仓库地址</th>
                                 <th>创建时间</th>
                                 <th>操作</th>
@@ -45,6 +46,7 @@
                                 <td>{{statusMap.platform[d.shopPlatform]}}</td>
                                 <td>{{d.shopUrl}}</td>
                                 <td>{{d.shopName}}</td>
+                                <td>{{d.shopExpressPhone}}</td>
                                 <td>
                                     <p>
                                         {{d.shopProvince}}{{d.shopCity}}{{d.shopArea}}
@@ -201,6 +203,13 @@
                         <label for="shop-name" class="control-label col-lg-3">详细地址</label>
                         <div class="col-lg-6">
                             <input type="text" class="form-control valid" id="shop-address" name="shop-address" ng-model="cShop.shopAddress"/>
+                        </div>
+                        <p style="font-size: 12px;">(店铺绑定后无法修改)</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="shop-name" class="control-label col-lg-3">发货电话</label>
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control valid" id="express-phone" name="express-phone" ng-model="cShop.shopExpressPhone"/>
                         </div>
                         <p style="font-size: 12px;">(店铺绑定后无法修改)</p>
                     </div>

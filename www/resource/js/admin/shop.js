@@ -48,6 +48,7 @@
         , shopArea: cShop.shopArea
         , shopAddress: cShop.shopAddress
         , shopExpressNumber: cShop.shopExpressNumber
+        , shopExpressPhone: cShop.shopExpressPhone
       }).success(function(res) {
         if (res.errno == 0) {
           $('#btn-cancel').click();

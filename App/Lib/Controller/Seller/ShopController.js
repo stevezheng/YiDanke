@@ -68,13 +68,14 @@ module.exports = Controller("Seller/BaseController", function(){
           , shopCity = self.post('shopCity')
           , shopArea = self.post('shopArea')
           , shopExpressNumber = self.post('shopExpressNumber')
+          , shopExpressPhone = self.post('shopExpressPhone')
           , shopAddress = self.post('shopAddress')
           , shopPlatform = self.post('shopPlatform');
 
         var shop = ShopModel();
 
         shop
-          .addOne(self.cUser.id, shopName, shopUrl, shopProvince , shopCity, shopArea, shopAddress, shopExpressNumber, shopPlatform)
+          .addOne(self.cUser.id, shopName, shopUrl, shopProvince , shopCity, shopArea, shopAddress, shopExpressNumber, shopExpressPhone, shopPlatform)
           .then(function(res) {
             console.log(res);
             if (res.type == 'exist') {
@@ -106,6 +107,7 @@ module.exports = Controller("Seller/BaseController", function(){
           , shopCity = self.post('shopCity')
           , shopArea = self.post('shopArea')
           , shopExpressNumber = self.post('shopExpressNumber')
+          , shopExpressPhone = self.post('shopExpressPhone')
           , shopAddress = self.post('shopAddress')
           , shopPlatform = self.post('shopPlatform')
           , id = self.post('id');
@@ -113,7 +115,7 @@ module.exports = Controller("Seller/BaseController", function(){
         var shop = ShopModel();
 
         shop
-          .editOne(self.cUser.id, id, shopName, shopUrl, shopProvince , shopCity, shopArea, shopAddress, shopExpressNumber)
+          .editOne(self.cUser.id, id, shopName, shopUrl, shopProvince , shopCity, shopArea, shopAddress, shopExpressPhone, shopExpressNumber)
           .then(function(res) {
             return self.success('编辑店铺成功');
           })
