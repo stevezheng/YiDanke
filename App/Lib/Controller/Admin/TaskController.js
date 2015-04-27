@@ -1,4 +1,5 @@
 var moment = require('moment');
+var Log= thinkRequire('LogService');
 var _ = require('underscore');
 var TaskModel = thinkRequire('TaskModel');
 module.exports = Controller("Admin/BaseController", function(){
@@ -108,15 +109,60 @@ module.exports = Controller("Admin/BaseController", function(){
 
       if (self.isPost()) {
         var id = self.post('id');
+        var allCoin, allMoney, taskUserId;
 
         return D('task')
           .where({id: id})
-          .update({taskStatus: -1})
+          .find()
           .then(function(res) {
-            return self.success('拒绝通过成功');
+            allCoin = res.taskAllCoin;
+            allMoney = res.taskAllMoney;
+            taskUserId = res.taskUserId;
+            return D('user')
+              .where({id: taskUserId})
+              .find()
           })
-          .catch(function() {
-            return self.error(500, '拒绝通过失败')
+          .then(function(res) {
+            self.cUser = res;
+            return D('user')
+              .where({id: taskUserId})
+              .updateField({money: ['exp', 'money+' + allMoney], coin: ['exp', 'coin+' + allCoin]})
+          })
+          .then(function() {
+            var p1 = Log.coin(
+              1
+              , allCoin
+              , (self.cUser.coin + allCoin)
+              , self.cUser.id
+              , self.cUser.username
+              , 1
+              , self.ip()
+              , '拒绝任务['+id+']返还' + allCoin + '金币'
+            );
+
+            var p2 = Log.money(
+              1
+              , allMoney
+              , (self.cUser.money + allMoney)
+              , self.cUser.id
+              , self.cUser.username
+              , 1
+              , self.ip()
+              , '拒绝任务['+id+']返还' + allMoney+ '元'
+            );
+
+            return Promise.all([p1, p2]);
+          })
+          .then(function() {
+            return D('task')
+              .where({id: id})
+              .update({taskStatus: -1})
+              .then(function(res) {
+                return self.success('拒绝通过成功');
+              })
+              .catch(function() {
+                return self.error(500, '拒绝通过失败')
+              })
           })
       }
     },
