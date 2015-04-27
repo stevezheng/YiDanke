@@ -91,6 +91,7 @@ module.exports = Controller("Buyer/BaseController", function(){
 
     kuaiqianrecieveAction: function () {
       var self = this;
+      console.log(self.http);
       self.assign('title', '');
       function kq_ck_null(kq_va, kq_na) {
         if (kq_va == '') {
@@ -123,6 +124,7 @@ module.exports = Controller("Buyer/BaseController", function(){
       var ext1 = self.get('ext1');
       var moneyId = self.get('ext2').split(',')[0];
       var dealId = self.get('dealId');
+      var res;
 
       var ok = Kuaiqian.ok(kq_check_all_para, signMsg);
 
@@ -144,7 +146,8 @@ module.exports = Controller("Buyer/BaseController", function(){
             money
               .where({id: moneyId})
               .find()
-              .then(function (res) {
+              .then(function (res1) {
+                res = res1;
                 if (res.moneyStatus == 0) {
                   var moneyUserId = res.moneyUserId;
                   var moneyValue = res.moneyValue;
@@ -152,8 +155,9 @@ module.exports = Controller("Buyer/BaseController", function(){
 
                   return D('user')
                     .where({id: moneyUserId})
-                    .then(function(res) {
-                      self.cUser = res;
+                    .find()
+                    .then(function(_res) {
+                      var cUser = _res;
 
                       var user = UserModel();
 
@@ -168,9 +172,9 @@ module.exports = Controller("Buyer/BaseController", function(){
                             return Log.coin(
                               1
                               , moneyValue
-                              , (self.cUser.coin + moneyValue)
-                              , self.cUser.id
-                              , self.cUser.username
+                              , (cUser.coin + moneyValue)
+                              , cUser.id
+                              , cUser.username
                               , 0
                               , self.ip()
                               , '通过快钱充值' + moneyValue + '金币'
@@ -195,9 +199,9 @@ module.exports = Controller("Buyer/BaseController", function(){
                             return Log.money(
                               1
                               , moneyValue
-                              , (self.cUser.money + moneyValue)
-                              , self.cUser.id
-                              , self.cUser.username
+                              , (cUser.money + moneyValue)
+                              , cUser.id
+                              , cUser.username
                               , 0
                               , self.ip()
                               , '通过快钱充值' + moneyValue + '元'
@@ -213,6 +217,9 @@ module.exports = Controller("Buyer/BaseController", function(){
                             console.error(err);
                           })
                       }
+                    })
+                    .catch(function(err) {
+                      console.error(err.stack);
                     })
                 } else {
                   var r = '<result>0</result> <redirecturl>http://www.yijia90.com/home/money/error</redirecturl>'

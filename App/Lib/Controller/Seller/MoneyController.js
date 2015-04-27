@@ -93,6 +93,7 @@ module.exports = Controller("Seller/BaseController", function () {
     kuaiqianrecieveAction: function () {
       var self = this;
       self.assign('title', '');
+      console.log(self.http);
       function kq_ck_null(kq_va, kq_na) {
         if (kq_va == '') {
           return kq_va = '';
@@ -124,6 +125,7 @@ module.exports = Controller("Seller/BaseController", function () {
       var ext1 = self.get('ext1');
       var moneyId = self.get('ext2').split(',')[0];
       var dealId = self.get('dealId');
+      var res;
 
       var ok = Kuaiqian.ok(kq_check_all_para, signMsg);
 
@@ -145,81 +147,89 @@ module.exports = Controller("Seller/BaseController", function () {
             money
               .where({id: moneyId})
               .find()
-              .then(function (res) {
+              .then(function (res1) {
+                res = res1;
                 if (res.moneyStatus == 0) {
                   var moneyUserId = res.moneyUserId;
                   var moneyValue = res.moneyValue;
                   var moneyType = res.moneyType;
-
                   return D('user')
                     .where({id: moneyUserId})
-                    .then(function(res) {
-                      self.cUser = res;
+                    .find()
+                    .then(function (_res) {
+                      var cUser = _res;
 
-                  var user = UserModel();
+                      var user = UserModel();
 
-                  if (moneyType == 0) {
-                    user
-                      .addCoin(moneyUserId, moneyValue)
-                      .then(function () {
-                        return money
-                          .pass(res.id, res.moneyUserId, dealId)
-                      })
-                      .then(function() {
-                        return Log.coin(
-                          1
-                          , moneyValue
-                          , (self.cUser.coin + moneyValue)
-                          , self.cUser.id
-                          , self.cUser.username
-                          , 1
-                          , self.ip()
-                          , '通过快钱充值' + moneyValue + '金币'
-                        )
-                      })
-                      .then(function () {
-                        //var r = '<result>1</result> <redirecturl>http://baidu.com</redirecturl>';
-                        var r = '<result>1</result> <redirecturl>http://www.yijia90.com/'+ext1+'</redirecturl>';
-                        return self.echo(r);
-                      })
-                      .catch(function(err) {
-                        console.error(err);
-                      })
-                  } else if (moneyType == 1) {
-                    user
-                      .addMoney(moneyUserId, moneyValue)
-                      .then(function () {
-                        return money
-                          .pass(res.id, res.moneyUserId, dealId)
-                      })
-                      .then(function() {
-                        return Log.money(
-                          1
-                          , moneyValue
-                          , (self.cUser.money + moneyValue)
-                          , self.cUser.id
-                          , self.cUser.username
-                          , 1
-                          , self.ip()
-                          , '通过快钱充值' + moneyValue + '元'
-                        )
-                      })
-                      .then(function () {
-                        //var r = '<result>1</result> <redirecturl>http://baidu.com</redirecturl>';
-                        var r = '<result>1</result> <redirecturl>http://www.yijia90.com/'+ext1+'</redirecturl>';
-                        console.log(r);
-                        return self.echo(r);
-                      })
-                      .catch(function(err) {
-                        console.error(err);
-                      })
-                  }
+                      if (moneyType == '0') {
+                        console.log(res);
+                        user
+                          .addCoin(moneyUserId, moneyValue)
+                          .then(function () {
+                            return money
+                              .pass(res.id, res.moneyUserId, dealId)
+                          })
+                          .then(function () {
+                            console.log(cUser);
+                            return Log.coin(
+                              1
+                              , moneyValue
+                              , (cUser.coin + moneyValue)
+                              , cUser.id
+                              , cUser.username
+                              , 1
+                              , self.ip()
+                              , '通过快钱充值' + moneyValue + '金币'
+                            )
+                          })
+                          .then(function () {
+                            //var r = '<result>1</result> <redirecturl>http://baidu.com</redirecturl>';
+                            var r = '<result>1</result> <redirecturl>http://www.yijia90.com/' + ext1 + '</redirecturl>';
+                            return self.echo(r);
+                          })
+                          .catch(function (err) {
+                            console.error(err);
+                          })
+                      } else if (moneyType == '1') {
+                        console.log(res);
+                        user
+                          .addMoney(moneyUserId, moneyValue)
+                          .then(function () {
+                            return money
+                              .pass(res.id, res.moneyUserId, dealId)
+                          })
+                          .then(function () {
+                            console.log(cUser);
+                            return Log.money(
+                              1
+                              , moneyValue
+                              , (cUser.money + moneyValue)
+                              , cUser.id
+                              , cUser.username
+                              , 1
+                              , self.ip()
+                              , '通过快钱充值' + moneyValue + '元'
+                            )
+                          })
+                          .then(function () {
+                            //var r = '<result>1</result> <redirecturl>http://baidu.com</redirecturl>';
+                            var r = '<result>1</result> <redirecturl>http://www.yijia90.com/' + ext1 + '</redirecturl>';
+                            console.log(r);
+                            return self.echo(r);
+                          })
+                          .catch(function (err) {
+                            console.error(err);
+                          })
+                      }
+                    })
+                    .catch(function (err) {
+                      console.error(err.stack);
                     })
                 } else {
                   var r = '<result>0</result> <redirecturl>http://www.yijia90.com/home/money/error</redirecturl>'
                   return self.end(r);
                 }
-              });
+              })
           default:
             var r = '<result>0</result> <redirecturl>http://www.yijia90.com/home/money/error</redirecturl>'
             return self.end(r);
@@ -264,19 +274,20 @@ module.exports = Controller("Seller/BaseController", function () {
           })
       }
     },
-    
-    pvAction: function() {
+
+    pvAction: function () {
       var self = this;
       self.assign('title', '');
-    
-      if (self.isGet()) {}
-      
+
+      if (self.isGet()) {
+      }
+
       if (self.isPost()) {
         var payMethod = self.post('payMethod')
           , coin = self.post('payPV');
         var coinMap = {
           '100': 400
-          , '1000':5000
+          , '1000': 5000
           , '2000': 11428
           , '5000': 33333
           , '10000': 80000
@@ -290,17 +301,17 @@ module.exports = Controller("Seller/BaseController", function () {
 
           user
             .getUser(self.cUser.id)
-            .then(function(res) {
+            .then(function (res) {
               if (coin > res.coin) {
                 return self.error(500, '金币不足');
               } else {
                 return user
                   .subCoin(self.cUser.id, coin)
-                  .then(function() {
+                  .then(function () {
                     return user
                       .addPV(self.cUser.id, payPV)
                   })
-                  .then(function() {
+                  .then(function () {
                     var p1 = Log.coin(
                       -1
                       , coin
@@ -325,7 +336,7 @@ module.exports = Controller("Seller/BaseController", function () {
 
                     return Promise.all([p1, p2]);
                   })
-                  .then(function(res) {
+                  .then(function (res) {
                     return self.success('支付成功');
                   })
               }
@@ -335,17 +346,17 @@ module.exports = Controller("Seller/BaseController", function () {
 
           user
             .getUser(self.cUser.id)
-            .then(function(res) {
+            .then(function (res) {
               if (coin > res.money) {
                 return self.error(500, '押金不足');
               } else {
                 return user
                   .subMoney(self.cUser.id, coin)
-                  .then(function() {
+                  .then(function () {
                     return user
                       .addPV(self.cUser.id, payPV)
                   })
-                  .then(function() {
+                  .then(function () {
                     var p1 = Log.money(
                       -1
                       , coin
@@ -370,7 +381,7 @@ module.exports = Controller("Seller/BaseController", function () {
 
                     return Promise.all([p1, p2]);
                   })
-                  .then(function(res) {
+                  .then(function (res) {
                     return self.success('支付成功');
                   })
               }
@@ -382,7 +393,7 @@ module.exports = Controller("Seller/BaseController", function () {
       }
     },
 
-    logcoinAction: function() {
+    logcoinAction: function () {
       var self = this;
       self.assign('title', '');
 
@@ -398,13 +409,13 @@ module.exports = Controller("Seller/BaseController", function () {
           .page(page, 20)
           .where({logCoinUserId: self.cUser.id})
           .countSelect()
-          .then(function(res) {
+          .then(function (res) {
             return self.success(res);
           })
       }
     },
 
-    logmoneyAction: function() {
+    logmoneyAction: function () {
       var self = this;
       self.assign('title', '');
 
@@ -420,13 +431,13 @@ module.exports = Controller("Seller/BaseController", function () {
           .where({logMoneyUserId: self.cUser.id})
           .page(page, 20)
           .countSelect()
-          .then(function(res) {
+          .then(function (res) {
             return self.success(res);
           })
       }
     },
 
-    logpvAction: function() {
+    logpvAction: function () {
       var self = this;
       self.assign('title', '');
 
@@ -442,13 +453,13 @@ module.exports = Controller("Seller/BaseController", function () {
           .where({logPVUserId: self.cUser.id})
           .page(page, 20)
           .countSelect()
-          .then(function(res) {
+          .then(function (res) {
             return self.success(res);
           })
       }
     },
 
-    logmemberAction: function() {
+    logmemberAction: function () {
       var self = this;
       self.assign('title', '');
 
@@ -464,12 +475,12 @@ module.exports = Controller("Seller/BaseController", function () {
           .where({logMemberUserId: self.cUser.id})
           .page(page, 20)
           .countSelect()
-          .then(function(res) {
+          .then(function (res) {
             return self.success(res);
           })
       }
     },
-    logwithdrawAction: function() {
+    logwithdrawAction: function () {
       var self = this;
       self.assign('title', '');
 
@@ -485,7 +496,7 @@ module.exports = Controller("Seller/BaseController", function () {
           .where({logWithdrawUserId: self.cUser.id})
           .page(page, 20)
           .countSelect()
-          .then(function(res) {
+          .then(function (res) {
             return self.success(res);
           })
       }

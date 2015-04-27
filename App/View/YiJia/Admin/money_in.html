@@ -42,7 +42,7 @@
                             <tr ng-repeat="d in data">
                                 <td>{{d.id}}</td>
                                 <td>{{d.username}}</td>
-                                <td>{{d.moneyValue}}</td>
+                                <td>{{d.moneyValue | number: 2}}</td>
                                 <td>{{statusMap.type[d.moneyType]}}</td>
                                 <td>{{statusMap.status[d.moneyStatus]}}</td>
                                 <td>{{statusMap.platform[d.moneyPlatform]}}</td>
