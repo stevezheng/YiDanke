@@ -36,10 +36,10 @@ module.exports = Controller("Buyer/BaseController", function(){
               if (res.taskType == 'dingdan') {
                 self.display();
               } else if (res.taskType == 'zhitongche') {
-                self.display('Buyer:Dotask:zhitongche');
+                self.display('Buyer:dotask:zhitongche');
               }
             } else if (res.taskPlatform == 'jd') {
-              self.display('Buyer:Dotask:jd');
+              self.display('Buyer:dotask:jd');
             }
           });
       }
@@ -155,31 +155,31 @@ module.exports = Controller("Buyer/BaseController", function(){
                 keywords.push(res.tmallKey5);
               }
             }
-            if (res.tmallKey1 != '') {
-              for (var i = 0; i < res.tmallKeyCount1; i++) {
-                keywords.push(res.tmallKey1);
+            if (res.jdKey1 != '') {
+              for (var i = 0; i < res.jdKeyCount1; i++) {
+                keywords.push(res.jdKey1);
               }
             }
-            if (res.tmallKey2 != '') {
-              for (var i = 0; i < res.tmallKeyCount2; i++) {
-                keywords.push(res.tmallKey2);
+            if (res.jdKey2 != '') {
+              for (var i = 0; i < res.jdKeyCount2; i++) {
+                keywords.push(res.jdKey2);
               }
             }
-            if (res.tmallKey3 != '') {
-              for (var i = 0; i < res.tmallKeyCount3; i++) {
-                keywords.push(res.tmallKey3);
-              }
-            }
-
-            if (res.tmallKey4 != '') {
-              for (var i = 0; i < res.tmallKeyCount4; i++) {
-                keywords.push(res.tmallKey4);
+            if (res.jdKey3 != '') {
+              for (var i = 0; i < res.jdKeyCount3; i++) {
+                keywords.push(res.jdKey3);
               }
             }
 
-            if (res.tmallKey5 != '') {
-              for (var i = 0; i < res.tmallKeyCount5; i++) {
-                keywords.push(res.tmallKey5);
+            if (res.jdKey4 != '') {
+              for (var i = 0; i < res.jdKeyCount4; i++) {
+                keywords.push(res.jdKey4);
+              }
+            }
+
+            if (res.jdKey5 != '') {
+              for (var i = 0; i < res.jdKeyCount5; i++) {
+                keywords.push(res.jdKey5);
               }
             }
 
