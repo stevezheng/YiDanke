@@ -689,7 +689,7 @@
             $scope.taobao = {
               searchBox: true
               , imagefile: res.taobaoImage
-              , keywordsCount: res.taobaoKeywords
+              , keywordsCount: res.taobaoKeywordsCount
               , key1: res.taobaoKey1
               , key1Count: res.taobaoKeyCount1
               , key1extend1: ''
@@ -724,7 +724,7 @@
 
             $scope.tmall = {
               searchBox: false
-              , keywordsCount: 1
+              , keywordsCount: res.tmallKeywordsCount
               , key1: res.tmallKey1
               , key1Count: res.tmallKeyCount1
               , key1extend1: ''
