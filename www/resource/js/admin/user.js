@@ -60,9 +60,15 @@
     };
 
     $scope.addCoin = function(user) {
+      var type;
       var r = prompt('修改多少金币?');
       if (r) {
-        $http.post('/admin/user/coin', {id: user.id, type: 'add', coin: r})
+        if (r > 0) {
+          type = 'add';
+        } else {
+          type = 'sub';
+        }
+        $http.post('/admin/user/coin', {id: user.id, user: user, type: type, coin: Math.abs(r)})
           .success(function(res) {
             if (res.errno == 0) {
               alert(res.data);
@@ -73,9 +79,15 @@
     };
 
     $scope.addMoney= function(user) {
+      var type;
       var r = prompt('修改多少押金?');
       if (r) {
-        $http.post('/admin/user/money', {id: user.id, type: 'add', money: r})
+        if (r > 0) {
+          type = 'add';
+        } else {
+          type = 'sub';
+        }
+        $http.post('/admin/user/money', {id: user.id, user: user, type: type, money: Math.abs(r)})
           .success(function(res) {
             if (res.errno == 0) {
               alert(res.data);
@@ -163,7 +175,7 @@
     $scope.member = function(user) {
       var r = confirm('确定要给该用户增加3个月会员?');
       if (r) {
-        $http.post('/admin/user/member', {id: user.id, oldVipExprie: user.vipExprie})
+        $http.post('/admin/user/member', {id: user.id, username: user.username, oldVipExprie: user.vipExprie})
           .success(function(res) {
             if (res.errno == 0) {
               var exprie;
@@ -185,27 +197,39 @@
       }
     };
 
-    $scope.addMoney = function(user) {
-      var r = prompt('修改多少押金?');
+    $scope.addCoin = function(user) {
+      var type;
+      var r = prompt('修改多少金币?');
       if (r) {
-        $http.post('/admin/user/money', {id: user.id, type: 'add', money: r})
+        if (r > 0) {
+          type = 'add';
+        } else {
+          type = 'sub';
+        }
+        $http.post('/admin/user/coin', {id: user.id, user: user, type: type, coin: Math.abs(r)})
           .success(function(res) {
             if (res.errno == 0) {
               alert(res.data);
-              user.money += parseFloat(r);
+              user.coin += parseFloat(r);
             }
           })
       }
     };
 
-    $scope.addCoin = function(user) {
-      var r = prompt('修改多少金币?');
+    $scope.addMoney= function(user) {
+      var type;
+      var r = prompt('修改多少押金?');
       if (r) {
-        $http.post('/admin/user/coin', {id: user.id, type: 'add', coin: r})
+        if (r > 0) {
+          type = 'add';
+        } else {
+          type = 'sub';
+        }
+        $http.post('/admin/user/money', {id: user.id, user: user, type: type, money: Math.abs(r)})
           .success(function(res) {
             if (res.errno == 0) {
               alert(res.data);
-              user.coin += parseFloat(r);
+              user.money += parseFloat(r);
             }
           })
       }

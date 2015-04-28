@@ -73,10 +73,23 @@ module.exports = Controller("Admin/BaseController", function(){
       if (self.isPost()) {
         var id = self.post('id')
           , type = self.post('type')
+          , cUser = self.post('user')
           , money = self.post('money');
         if (type == 'add') {
           return user
             .addMoney(id, money)
+            .then(function() {
+              return Log.money(
+                1
+                , money
+                , (cUser.money + money)
+                , cUser.id
+                , cUser.username
+                , 0
+                , self.ip()
+                , '通过管理员充值' + money + '元'
+              )
+            })
             .then(function(res) {
               return self.success('操作成功');
             })
@@ -85,6 +98,18 @@ module.exports = Controller("Admin/BaseController", function(){
         if (type == 'sub') {
           return user
             .subMoney(id, money)
+            .then(function() {
+              return Log.money(
+                -1
+                , money
+                , (cUser.money - money)
+                , cUser.id
+                , cUser.username
+                , 0
+                , self.ip()
+                , '通过管理员扣款' + money + '元'
+              )
+            })
             .then(function(res) {
               return self.success('操作成功');
             })
@@ -101,10 +126,23 @@ module.exports = Controller("Admin/BaseController", function(){
       if (self.isPost()) {
         var id = self.post('id')
           , type = self.post('type')
+          , cUser = self.post('user')
           , coin = self.post('coin');
         if (type == 'add') {
           return user
             .addCoin(id, coin)
+            .then(function() {
+              return Log.coin(
+                1
+                , coin
+                , (cUser.coin + coin)
+                , cUser.id
+                , cUser.username
+                , 0
+                , self.ip()
+                , '通过管理员充值' + coin + '金币'
+              )
+            })
             .then(function(res) {
               return self.success('操作成功');
             })
@@ -113,6 +151,18 @@ module.exports = Controller("Admin/BaseController", function(){
         if (type == 'sub') {
           return user
             .subCoin(id, coin)
+            .then(function() {
+              return Log.coin(
+                -1
+                , coin
+                , (cUser.coin - coin)
+                , cUser.id
+                , cUser.username
+                , 0
+                , self.ip()
+                , '通过管理员扣款' + coin + '金币'
+              )
+            })
             .then(function(res) {
               return self.success('操作成功');
             })
