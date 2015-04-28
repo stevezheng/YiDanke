@@ -66,6 +66,8 @@
                                             <%= shop.shopArea %>
                                         </p>
                                         <p><%= shop.shopAddress %></p>
+                                        <p><%= shop.shopExpressNumber%></p>
+                                        <p><%= shop.shopExpressPhone%></p>
                                     </th>
                                     <th><%= shop.shopUrl %></th>
                                     <th><%= statusMap[shop.shopStatus] %></th>
@@ -117,6 +119,8 @@
                                 <p>
                                     <%= shop.shopAddress %>
                                 </p>
+                                <p><%= shop.shopExpressNumber%></p>
+                                <p><%= shop.shopExpressPhone%></p>
                             </th>
                             <th><%= shop.shopUrl %></th>
                             <th><%= statusMap[shop.shopStatus] %></th>
@@ -168,6 +172,8 @@
                                 <p>
                                     <%= shop.shopAddress %>
                                 </p>
+                                <p><%= shop.shopExpressNumber%></p>
+                                <p><%= shop.shopExpressPhone%></p>
                             </th>
                             <th><%= shop.shopUrl %></th>
                             <th><%= statusMap[shop.shopStatus] %></th>
@@ -308,6 +314,13 @@
                     <label for="shop-name" class="control-label col-lg-3">详细地址</label>
                     <div class="col-lg-6">
                         <input type="text" class="form-control valid" id="shop-address" name="shop-address"/>
+                    </div>
+                    <p style="font-size: 12px;">(店铺绑定后无法修改)</p>
+                </div>
+                <div class="form-group">
+                    <label for="shop-name" class="control-label col-lg-3">发货电话</label>
+                    <div class="col-lg-4">
+                        <input type="text" class="form-control valid" id="express-phone" name="express-phone"/>
                     </div>
                     <p style="font-size: 12px;">(店铺绑定后无法修改)</p>
                 </div>
@@ -524,6 +537,16 @@
                     $('#position-error').hide();
                 }
 
+                if (!$('#express-number').val()) {
+                    alert('请填写快递网点号')
+                    return false;
+                }
+
+                if (!$('#express-phone').val()) {
+                    alert('请填写发货电话')
+                    return false;
+                }
+
                 var args = {
                     shopName: $('#shop-name').val()
                     , shopUrl: $('#shop-url').val()
@@ -532,6 +555,7 @@
                     , shopArea: $('#area').val()
                     , shopPlatform: $('#select-platform .btn-info').attr('data-data')
                     , shopExpressNumber: $('#express-number').val()
+                    , shopExpressPhone: $('#express-phone').val()
                     , shopAddress: $('#shop-address').val()
                 };
 
