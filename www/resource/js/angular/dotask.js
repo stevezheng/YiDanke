@@ -240,10 +240,6 @@
   DoTaskModule.controller('doTaskJdCtrl', function($scope, $http, $upload, $timeout) {
     $scope.nextFlag = false;
 
-    $timeout(function() {
-      $scope.nextFlag = true;
-    }, 20000);
-
     $scope.actionOrder = function() {
       $http.post('/buyer/dotask/order', {
         taskId: $scope.doTask.doTaskTaskId
