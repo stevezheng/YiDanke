@@ -46,6 +46,21 @@
 
   DoTaskModule.controller('doTaskCtrl', function($scope, $http, $upload, $timeout) {
     $scope.actionOrder = function() {
+      if ($scope.order.orderId == '') {
+        alert('请填写订单');
+        return false;
+      }
+
+      if ($scope.order.orderMoney == '') {
+        alert('请填写实付金额');
+        return false;
+      }
+
+      if ($scope.order.orderTime== '') {
+        alert('请填写下单时间');
+        return false;
+      }
+
       $http.post('/buyer/dotask/order', {
         taskId: $scope.doTask.doTaskTaskId
         , doTaskId: $scope.doTaskId
@@ -241,6 +256,20 @@
     $scope.nextFlag = false;
 
     $scope.actionOrder = function() {
+      if ($scope.order.orderId == '') {
+        alert('请填写订单');
+        return false;
+      }
+
+      if ($scope.order.orderMoney == '') {
+        alert('请填写实付金额');
+        return false;
+      }
+
+      if ($scope.order.orderTime== '') {
+        alert('请填写下单时间');
+        return false;
+      }
       $http.post('/buyer/dotask/order', {
         taskId: $scope.doTask.doTaskTaskId
         , doTaskId: $scope.doTaskId
@@ -358,12 +387,10 @@
     });
 
     $scope.checkJdUrl = function(itemUrl) {
-      //todo: bug 京东不是靠id识别的
-      var id = getQueryStringByUrl(itemUrl, 'id');
-      var _id = getQueryStringByUrl($scope.doTask.taskUrl, 'id');
-      if (id == _id) {
+      if (itemUrl == $scope.doTask.taskUrl) {
         alert('商品链接正确(请勿关闭此商品页面)');
         $scope.checkUrlFlag = true;
+        $scope.nextFlag = true;
       } else {
         alert('链接地址错误');
         return false;
