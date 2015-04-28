@@ -1,6 +1,7 @@
 var moment = require('moment');
 var _ = require('underscore');
 var UserModel = thinkRequire('UserModel');
+var Log = thinkRequire('LogService');
 var user = UserModel();
 module.exports = Controller("Admin/BaseController", function(){
   "use strict";
@@ -157,6 +158,7 @@ module.exports = Controller("Admin/BaseController", function(){
       
       if (self.isPost()) {
         var id = self.post('id')
+          , username = self.post('username')
           , oldVipExprie = self.post('oldVipExprie');
 
         var exprie;
@@ -175,6 +177,18 @@ module.exports = Controller("Admin/BaseController", function(){
         return D('user')
           .where({id: id})
           .update({vipExprie: newExprie, status: 2})
+          .then(function() {
+            return Log.member(
+              1
+              , 0
+              , ''
+              , id
+              , username
+              , 0
+              , self.ip()
+              , '管理员开通VIP会员3个月,有效期至' + newExprie
+            );
+          })
           .then(function(res) {
             return self.success('增加3个月会员成功');
           })

@@ -37,7 +37,7 @@
     $scope.member = function(user) {
       var r = confirm('确定要给该用户增加3个月会员?');
       if (r) {
-        $http.post('/admin/user/member', {id: user.id, oldVipExprie: user.vipExprie})
+        $http.post('/admin/user/member', {id: user.id, username: user.username, oldVipExprie: user.vipExprie})
           .success(function(res) {
             if (res.errno == 0) {
               var exprie;
