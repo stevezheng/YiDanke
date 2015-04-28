@@ -429,4 +429,25 @@
         })
     }
   });
+
+  BuyerModule.controller('buyerWithdrawCtrl', function ($scope, $http) {
+    function getData() {
+      $http.post('/buyer/withdraw')
+        .success(function(res) {
+          $scope.data = res.data;
+          for (var i = 0; i < res.data.length; i++) {
+            var obj = res.data[i];
+            if (obj.bankType == 1) {
+              $scope.tenpay = obj;
+            } else if (obj.bankType == 2) {
+              $scope.alipay = obj;
+            } else if (obj.bankType == 3) {
+              $scope.bank = obj;
+            }
+          }
+        })
+    }
+
+    getData();
+  })
 })();

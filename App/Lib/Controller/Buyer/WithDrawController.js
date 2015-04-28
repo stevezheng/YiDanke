@@ -13,7 +13,14 @@ module.exports = Controller("Buyer/BaseController", function(){
         self.display();
       }
 
-      if (self.isPost()) {}
+      if (self.isPost()) {
+        return D('bank')
+          .where({bankUserId: self.cUser.id})
+          .select()
+          .then(function(res) {
+            return self.success(res);
+          })
+      }
     },
   };
 });

@@ -1,5 +1,5 @@
 <% include ../common_header.html %>
-<section id="container">
+<section id="container" ng-controller="buyerWithdrawCtrl">
     <% include ./buyer_nav.html %>
     <!--main content start-->
     <section id="main-content">
@@ -35,19 +35,28 @@
                                         <div class="col-lg-2">
                                             <div class="box-money active" id="box-tenpay">
                                                 <div class="title-money">财付通</div>
-                                                <div class="content-money">未绑定</div>
+                                                <div ng-if="!tenpay" class="content-money">未绑定</div>
+                                                <div ng-if="tenpay.bankStatus == 0" class="content-money">待审核</div>
+                                                <div ng-if="tenpay.bankStatus == 1" class="content-money">已绑定</div>
+                                                <div ng-if="tenpay.bankStatus == -1" class="content-money">未通过</div>
                                             </div>
                                         </div>
                                         <div class="col-lg-2">
                                             <div class="box-money" id="box-alipay">
                                                 <div class="title-money">支付宝</div>
-                                                <div class="content-money">未绑定</div>
+                                                <div ng-if="!alipay" class="content-money">未绑定</div>
+                                                <div ng-if="alipay.bankStatus == 0" class="content-money">待审核</div>
+                                                <div ng-if="alipay.bankStatus == 1" class="content-money">已绑定</div>
+                                                <div ng-if="alipay.bankStatus == -1" class="content-money">未通过</div>
                                             </div>
                                         </div>
                                         <div class="col-lg-2">
                                             <div class="box-money" id="box-bank">
                                                 <div class="title-money">银行卡</div>
-                                                <div class="content-money">未绑定</div>
+                                                <div ng-if="!bank" class="content-money">未绑定</div>
+                                                <div ng-if="bank.bankStatus == 0" class="content-money">待审核</div>
+                                                <div ng-if="bank.bankStatus == 1" class="content-money">已绑定</div>
+                                                <div ng-if="bank.bankStatus == -1" class="content-money">未通过</div>
                                             </div>
                                         </div>
                                     </div>
