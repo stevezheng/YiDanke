@@ -114,6 +114,19 @@
       getData();
     };
 
+    $scope.statusMap = {
+      status: {
+        '-1': '已拒绝'
+        , 0: '处理中'
+        , 1: '已通过'
+      },
+      type: {
+        0: '金币'
+        , 1: '押金'
+        , 2: '垫付本金'
+      }
+    };
+
     function getData() {
       $http.post('/buyer/money/logwithdraw', {page: $scope.page})
         .success(function(res) {

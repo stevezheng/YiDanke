@@ -369,9 +369,9 @@ module.exports = Controller("Buyer/BaseController", function(){
       if (self.isPost()) {
         var page = self.post('page');
 
-        return D('log_withdraw')
+        return D('withdraw')
           .order('id desc')
-          .where({logWithdrawUserId: self.cUser.id})
+          .where({withdrawUserId: self.cUser.id})
           .page(page, 20)
           .countSelect()
           .then(function(res) {

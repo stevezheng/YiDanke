@@ -116,16 +116,18 @@
                                 <thead>
                                 <tr>
                                     <th>金额</th>
-                                    <th>申请时间</th>
+                                    <th>类型</th>
                                     <th>状态</th>
+                                    <th>申请时间</th>
                                     <th>备注</th>
                                 </tr>
                                 </thead>
                                 <tr ng-repeat="d in data">
-                                    <td>{{d.id}}</td>
-                                    <td>{{d.username}}</td>
-                                    <td>{{statusMap.status[d.accountStatus]}}</td>
-                                    <td>{{statusMap.platform[d.accountPlatform]}}</td>
+                                    <td>{{d.withdrawValue}}元/金币</td>
+                                    <td>{{statusMap.type[d.withdrawType]}}</td>
+                                    <td>{{statusMap.status[d.withdrawStatus]}}</td>
+                                    <td>{{d.withdrawCreateTime | date: 'yyyy-MM-dd HH:mm'}}</td>
+                                    <td>{{d.withdrawComment}}</td>
                                 </tr>
                             </table>
                             <div class="text-center" ng-if="data.length != 0">
