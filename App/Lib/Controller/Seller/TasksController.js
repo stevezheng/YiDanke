@@ -268,6 +268,14 @@ module.exports = Controller("Seller/BaseController", function(){
             var totalUndoCount = res.taskTotalCount - res.taskPhoneDoingCount - res.taskPhoneDoneCount - res.taskPcDoingCount - res.taskPcDoneCount;
             paybackMoney = totalUndoCount * (res.taskPromise + res.taskTotalMoney);
             paybackCoin = totalUndoCount * (res.taskFee + res.taskExtendFee);
+            paybackCoin += (res.taskPhoneCount - res.taskPhoneDoneCount - res.taskPhoneDoingCount) * 0.5; //手机端增值费
+            paybackCoin += totalUndoCount * res.taskTotalMoney * 0.006; //平台返款增值费
+            paybackCoin += totalUndoCount; //好评增值费
+            if (res.taskTransportType == 'zixuan') {
+              paybackCoin += totalUndoCount * 1.5; //自选快递增值费
+            } else {
+              paybackCoin += totalUndoCount * 5; //平台快递增值费
+            }
 
             return task
               .cancelTask(self.cUser.id, taskId)
