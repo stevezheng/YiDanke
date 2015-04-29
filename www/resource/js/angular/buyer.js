@@ -1,5 +1,5 @@
 (function() {
-  var BuyerModule = angular.module('YiApp.Buyer', []);
+  var BuyerModule = angular.module('YiApp.Buyer', ['angularFileUpload']);
   
   BuyerModule.controller('buyerLogCoinCtrl', function ($scope, $http) {
     $scope.data = [];
@@ -430,7 +430,14 @@
     }
   });
 
-  BuyerModule.controller('buyerWithdrawCtrl', function ($scope, $http) {
+  BuyerModule.controller('buyerWithdrawCtrl', ['$scope', '$http', '$upload', function ($scope, $http, $upload) {
+    $scope.upload = function(file) {
+      return $upload.upload({
+        url: '/home/index/upload',
+        file: file
+      })
+    };
+
     function getData() {
       $http.post('/buyer/withdraw')
         .success(function(res) {
@@ -449,5 +456,123 @@
     }
 
     getData();
-  })
+
+    $scope.$watch('bank.image', function () {
+      if (!$scope.bank) {
+        return false;
+      }
+      $scope
+        .upload($scope.bank.image)
+        .success(function(data, status, headers, config) {
+          $scope.bank.bankImage = data.filename;
+        })
+    });
+    $scope.$watch('tenpay.image', function () {
+      if (!$scope.tenpay) {
+        return false;
+      }
+      $scope
+        .upload($scope.tenpay.image)
+        .success(function(data, status, headers, config) {
+          $scope.tenpay.bankImage = data.filename;
+        })
+    });
+
+    $scope.$watch('alipay.image', function () {
+      if (!$scope.alipay) {
+        return false;
+      }
+      $scope
+        .upload($scope.alipay.image)
+        .success(function(data, status, headers, config) {
+          $scope.alipay.bankImage = data.filename;
+        })
+    });
+
+    $scope.submitTenpay = function() {
+      if (!$scope.tenpay) {
+        alert('请填写账号资料');
+        return false;
+      }
+      if (!$scope.tenpay.bankRealName) {
+        alert('请填写姓名');
+        return false;
+      }
+
+      if (!$scope.tenpay.bankAccount) {
+        alert('请填写财付通账号');
+        return false;
+      }
+
+      if (!$scope.tenpay.bankImage) {
+        alert('请上传账号截图');
+        return false;
+      }
+
+      $http.post('/buyer/withdraw/tenpay', $scope.tenpay)
+        .success(function(res) {
+          alert(res.data);
+          location.reload();
+        })
+    };
+
+    $scope.submitAlipay = function() {
+      if (!$scope.alipay) {
+        alert('请填写账号资料');
+        return false;
+      }
+      if (!$scope.alipay.bankRealName) {
+        alert('请填写姓名');
+        return false;
+      }
+
+      if (!$scope.alipay.bankAccount) {
+        alert('请填写支付宝账号');
+        return false;
+      }
+
+      if (!$scope.alipay.bankImage) {
+        alert('请上传账号截图');
+        return false;
+      }
+
+      $http.post('/buyer/withdraw/alipay', $scope.alipay)
+        .success(function(res) {
+          alert(res.data);
+          location.reload();
+        })
+    };
+
+    $scope.submitBank = function() {
+      if (!$scope.bank) {
+        alert('请填写账号资料');
+        return false;
+      }
+      if (!$scope.bank.bankName) {
+        alert('请填写银行名');
+        return false;
+      }
+
+      if (!$scope.bank.bankRealName) {
+        alert('请填写开户名');
+        return false;
+      }
+
+      if (!$scope.bank.bankAccount) {
+        alert('请填写银行账号');
+        return false;
+      }
+
+      if (!$scope.bank.bankImage) {
+        alert('请上传账号截图');
+        return false;
+      }
+
+      $http.post('/buyer/withdraw/bank', $scope.bank)
+        .success(function(res) {
+          alert(res.data);
+          location.reload();
+        })
+    };
+  }])
 })();

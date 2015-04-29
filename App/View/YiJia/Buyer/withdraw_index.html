@@ -35,7 +35,7 @@
                                         <div class="col-lg-2">
                                             <div class="box-money active" id="box-tenpay">
                                                 <div class="title-money">财付通</div>
-                                                <div ng-if="!tenpay" class="content-money">未绑定</div>
+                                                <div ng-if="!tenpay.bankStatus && tenpay.bankStatus != 0" class="content-money">未绑定</div>
                                                 <div ng-if="tenpay.bankStatus == 0" class="content-money">待审核</div>
                                                 <div ng-if="tenpay.bankStatus == 1" class="content-money">已绑定</div>
                                                 <div ng-if="tenpay.bankStatus == -1" class="content-money">未通过</div>
@@ -44,7 +44,7 @@
                                         <div class="col-lg-2">
                                             <div class="box-money" id="box-alipay">
                                                 <div class="title-money">支付宝</div>
-                                                <div ng-if="!alipay" class="content-money">未绑定</div>
+                                                <div ng-if="!alipay.bankStatus && alipay.bankStatus != 0" class="content-money">未绑定</div>
                                                 <div ng-if="alipay.bankStatus == 0" class="content-money">待审核</div>
                                                 <div ng-if="alipay.bankStatus == 1" class="content-money">已绑定</div>
                                                 <div ng-if="alipay.bankStatus == -1" class="content-money">未通过</div>
@@ -53,7 +53,7 @@
                                         <div class="col-lg-2">
                                             <div class="box-money" id="box-bank">
                                                 <div class="title-money">银行卡</div>
-                                                <div ng-if="!bank" class="content-money">未绑定</div>
+                                                <div ng-if="!bank.bankStatus && bank.bankStatus != 0" class="content-money">未绑定</div>
                                                 <div ng-if="bank.bankStatus == 0" class="content-money">待审核</div>
                                                 <div ng-if="bank.bankStatus == 1" class="content-money">已绑定</div>
                                                 <div ng-if="bank.bankStatus == -1" class="content-money">未通过</div>
@@ -64,7 +64,7 @@
                                         <div class="form-group">
                                             <label class="control-label col-lg-2">姓名</label>
                                             <div class="col-lg-3">
-                                                <input type="text" id="tenpay-name" class="form-control"/>
+                                                <input type="text" id="tenpay-name" class="form-control" ng-model="tenpay.bankRealName"/>
                                             </div>
                                             <div class="col-lg-3">
                                                 财付通姓名一般为真实姓名，请务必准确填写，否则将无法给你退款
@@ -73,12 +73,22 @@
                                         <div class="form-group">
                                             <label class="control-label col-lg-2">财付通账号</label>
                                             <div class="col-lg-3">
-                                                <input type="text" id="tenpay-account" class="form-control"/>
+                                                <input type="text" id="tenpay-account" class="form-control" ng-model="tenpay.bankAccount"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-2">账号截图</label>
+                                            <div class="col-lg-3">
+                                                <button class="btn btn-info" ng-file-select ng-model="tenpay.image">上传账号截图</button>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <a ng-href="{{tenpay.bankImage}}" target="_blank" ng-show="tenpay.bankImage">[查看图片]</a>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-lg-3 col-lg-offset-2">
-                                                <button class="btn btn-info">确定</button>
+                                                <button ng-if="!tenpay.bankStatus && tenpay.bankStatus != 0" class="btn btn-info" ng-click="submitTenpay()">确定</button>
+                                                <button ng-if="tenpay.bankStatus >= 0" class="btn btn-default">确定</button>
                                             </div>
                                         </div>
                                     </div>
@@ -86,7 +96,7 @@
                                         <div class="form-group">
                                             <label class="control-label col-lg-2">姓名</label>
                                             <div class="col-lg-3">
-                                                <input type="text" id="alipay-name" class="form-control"/>
+                                                <input type="text" id="alipay-name" class="form-control" ng-model="alipay.bankRealName"/>
                                             </div>
                                             <div class="col-lg-3">
                                                 支付宝姓名一般为真实姓名，请务必准确填写，否则将无法给你退款
@@ -95,20 +105,30 @@
                                         <div class="form-group">
                                             <label class="control-label col-lg-2">支付宝账号</label>
                                             <div class="col-lg-3">
-                                                <input type="text" id="alipay-account" class="form-control"/>
+                                                <input type="text" id="alipay-account" class="form-control" ng-model="alipay.bankAccount"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-2">账号截图</label>
+                                            <div class="col-lg-3">
+                                                <button class="btn btn-info" ng-file-select ng-model="alipay.image">上传账号截图</button>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <a ng-href="{{alipay.bankImage}}" target="_blank" ng-show="alipay.bankImage">[查看图片]</a>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-lg-3 col-lg-offset-2">
-                                                <button class="btn btn-info">确定</button>
+                                                <button ng-if="!alipay.bankStatus && alipay.bankStatus != 0" class="btn btn-info" ng-click="submitAlipay()">确定</button>
+                                                <button ng-if="alipay.bankStatus >= 0" class="btn btn-default">确定</button>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-horizontal" id="form-bank" style="display: none;">
                                         <div class="form-group">
-                                            <label class="control-label col-lg-2">姓名</label>
+                                            <label class="control-label col-lg-2">开户名</label>
                                             <div class="col-lg-3">
-                                                <input type="text" id="bank-username" class="form-control"/>
+                                                <input type="text" id="bank-username" class="form-control" ng-model="bank.bankRealName"/>
                                             </div>
                                             <div class="col-lg-3">
                                                 银行姓名一般为真实姓名，请务必准确填写，否则将无法给你退款
@@ -117,18 +137,28 @@
                                         <div class="form-group">
                                             <label class="control-label col-lg-2">银行名称</label>
                                             <div class="col-lg-3">
-                                                <input type="text" id="bank-name" class="form-control"/>
+                                                <input type="text" id="bank-name" class="form-control" ng-model="bank.bankName"/>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-lg-2">银行账号</label>
                                             <div class="col-lg-3">
-                                                <input type="text" id="bank-account" class="form-control"/>
+                                                <input type="text" id="bank-account" class="form-control" ng-model="bank.bankAccount"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-2">账号截图</label>
+                                            <div class="col-lg-3">
+                                                <button class="btn btn-info" ng-file-select ng-model="bank.image">上传账号截图</button>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <a ng-href="{{bank.bankImage}}" target="_blank" ng-show="bank.bankImage">[查看图片]</a>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-lg-3 col-lg-offset-2">
-                                                <button class="btn btn-info">确定</button>
+                                                <button ng-if="!bank.bankStatus && bank.bankStatus != 0" class="btn btn-info" ng-click="submitBank()">确定</button>
+                                                <button ng-if="bank.bankStatus >= 0" class="btn btn-default">确定</button>
                                             </div>
                                         </div>
                                     </div>
