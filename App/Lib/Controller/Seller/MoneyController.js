@@ -480,7 +480,7 @@ module.exports = Controller("Seller/BaseController", function () {
           })
       }
     },
-    logwithdrawAction: function () {
+    logwithdrawAction: function() {
       var self = this;
       self.assign('title', '');
 
@@ -491,15 +491,16 @@ module.exports = Controller("Seller/BaseController", function () {
       if (self.isPost()) {
         var page = self.post('page');
 
-        return D('log_withdraw')
+        return D('withdraw')
           .order('id desc')
-          .where({logWithdrawUserId: self.cUser.id})
+          .where({withdrawUserId: self.cUser.id})
           .page(page, 20)
           .countSelect()
-          .then(function (res) {
+          .then(function(res) {
             return self.success(res);
           })
       }
     },
+
   };
 });

@@ -114,6 +114,19 @@
       getData();
     };
 
+    $scope.statusMap = {
+      status: {
+        '-1': '已拒绝'
+        , 0: '处理中'
+        , 1: '已通过'
+      },
+      type: {
+        0: '金币'
+        , 1: '押金'
+        , 2: '垫付本金'
+      }
+    };
+
     function getData() {
       $http.post('/seller/money/logwithdraw', {page: $scope.page})
         .success(function(res) {
@@ -1044,4 +1057,212 @@
     getTaskDetail();
     getDoTaskDetail();
   });
+
+  SellerModule.controller('sellerWithdrawCtrl', ['$scope', '$http', '$upload', function ($scope, $http, $upload) {
+    $scope.upload = function(file) {
+      return $upload.upload({
+        url: '/home/index/upload',
+        file: file
+      })
+    };
+
+    $scope.submitWithDrawCoin = function() {
+
+      if (!$scope.withdrawCoinType) {
+        alert('请选择提现账号');
+        return false;
+      }
+      if (!$scope.withdrawCoinPassword) {
+        alert('请输入支付密码');
+        return false;
+      }
+
+      if (!$scope.withdrawCoin) {
+        alert('请输入提现金额');
+        return false;
+      }
+
+      $http.post('/seller/withdraw/withdrawCoin', {
+        tradePassword: $scope.withdrawCoinPassword
+        , coin: $scope.withdrawCoin
+        , bankType: $scope.withdrawCoinType
+      })
+        .success(function(res) {
+          if (res.errno == 0) {
+            alert(res.data);
+            location.reload();
+          } else {
+            alert(res.errmsg);
+          }
+        })
+    };
+
+    $scope.submitWithDrawMoney = function() {
+
+      if (!$scope.withdrawMoneyType) {
+        alert('请选择提现账号');
+        return false;
+      }
+      if (!$scope.withdrawMoneyPassword) {
+        alert('请输入支付密码');
+        return false;
+      }
+
+      if (!$scope.withdrawMoney) {
+        alert('请输入提现金额');
+        return false;
+      }
+
+      $http.post('/seller/withdraw/withdrawMoney', {
+        tradePassword: $scope.withdrawMoneyPassword
+        , money: $scope.withdrawMoney
+        , bankType: $scope.withdrawMoneyType
+      })
+        .success(function(res) {
+          if (res.errno == 0) {
+            alert(res.data);
+            location.reload();
+          } else {
+            alert(res.errmsg);
+          }
+        })
+    }
+
+    function getData() {
+      $http.post('/seller/withdraw')
+        .success(function(res) {
+          $scope.data = res.data;
+          for (var i = 0; i < res.data.length; i++) {
+            var obj = res.data[i];
+            if (obj.bankType == 1) {
+              $scope.tenpay = obj;
+            } else if (obj.bankType == 2) {
+              $scope.alipay = obj;
+            } else if (obj.bankType == 3) {
+              $scope.bank = obj;
+            }
+          }
+        })
+    }
+
+    getData();
+
+    $scope.$watch('bank.image', function () {
+      if (!$scope.bank) {
+        return false;
+      }
+      $scope
+        .upload($scope.bank.image)
+        .success(function(data, status, headers, config) {
+          $scope.bank.bankImage = data.filename;
+        })
+    });
+    $scope.$watch('tenpay.image', function () {
+      if (!$scope.tenpay) {
+        return false;
+      }
+      $scope
+        .upload($scope.tenpay.image)
+        .success(function(data, status, headers, config) {
+          $scope.tenpay.bankImage = data.filename;
+        })
+    });
+
+    $scope.$watch('alipay.image', function () {
+      if (!$scope.alipay) {
+        return false;
+      }
+      $scope
+        .upload($scope.alipay.image)
+        .success(function(data, status, headers, config) {
+          $scope.alipay.bankImage = data.filename;
+        })
+    });
+
+    $scope.submitTenpay = function() {
+      if (!$scope.tenpay) {
+        alert('请填写账号资料');
+        return false;
+      }
+      if (!$scope.tenpay.bankRealName) {
+        alert('请填写姓名');
+        return false;
+      }
+
+      if (!$scope.tenpay.bankAccount) {
+        alert('请填写财付通账号');
+        return false;
+      }
+
+      if (!$scope.tenpay.bankImage) {
+        alert('请上传账号截图');
+        return false;
+      }
+
+      $http.post('/seller/withdraw/tenpay', $scope.tenpay)
+        .success(function(res) {
+          alert(res.data);
+          location.reload();
+        })
+    };
+
+    $scope.submitAlipay = function() {
+      if (!$scope.alipay) {
+        alert('请填写账号资料');
+        return false;
+      }
+      if (!$scope.alipay.bankRealName) {
+        alert('请填写姓名');
+        return false;
+      }
+
+      if (!$scope.alipay.bankAccount) {
+        alert('请填写支付宝账号');
+        return false;
+      }
+
+      if (!$scope.alipay.bankImage) {
+        alert('请上传账号截图');
+        return false;
+      }
+
+      $http.post('/seller/withdraw/alipay', $scope.alipay)
+        .success(function(res) {
+          alert(res.data);
+          location.reload();
+        })
+    };
+
+    $scope.submitBank = function() {
+      if (!$scope.bank) {
+        alert('请填写账号资料');
+        return false;
+      }
+      if (!$scope.bank.bankName) {
+        alert('请填写银行名');
+        return false;
+      }
+
+      if (!$scope.bank.bankRealName) {
+        alert('请填写开户名');
+        return false;
+      }
+
+      if (!$scope.bank.bankAccount) {
+        alert('请填写银行账号');
+        return false;
+      }
+
+      if (!$scope.bank.bankImage) {
+        alert('请上传账号截图');
+        return false;
+      }
+
+      $http.post('/seller/withdraw/bank', $scope.bank)
+        .success(function(res) {
+          alert(res.data);
+          location.reload();
+        })
+    };
+  }])
 })();
