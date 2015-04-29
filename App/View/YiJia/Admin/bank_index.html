@@ -21,6 +21,7 @@
                                 <th>绑定名称</th>
                                 <th>截图信息</th>
                                 <th>创建时间</th>
+                                <th>操作</th>
                             </tr>
                             </thead>
                             <tr ng-repeat="d in data">
@@ -28,12 +29,21 @@
                                 <td>{{statusMap.userType[d.type]}}</td>
                                 <td>{{d.username}}</td>
                                 <td>{{statusMap.status[d.bankStatus]}}</td>
-                                <td>{{statusMap.bankType[d.bankType]}}</td>
+                                <td>{{statusMap.type[d.bankType]}}</td>
                                 <td>{{d.bankAccount}}</td>
                                 <td>{{d.bankRealName}}</td>
                                 <td><a href="{{d.bankImage}}" target="_blank"><img
-                                        ng-src="{{d.bankImage}}" alt=""/></a></td>
+                                        ng-src="{{d.bankImage}}" alt="" width="50px"/></a></td>
                                 <td>{{d.bankCreateTime | date: 'yyyy-MM-dd HH:mm'}}</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button data-toggle="dropdown" class="btn btn-success dropdown-toggle btn-xs" type="button">操作<span class="caret"></span></button>
+                                        <ul role="menu" class="dropdown-menu">
+                                            <li><a ng-click="pass(d)">通过</a></li>
+                                            <li><a ng-click="unpass(d)">拒绝</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
                             </tr>
                         </table>
                         <div class="text-center">

@@ -30,5 +30,48 @@ module.exports = Controller("Admin/BaseController", function(){
           })
       }
     },
+    passAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+
+      }
+
+      if (self.isPost()) {
+        var id = self.post('id');
+        return D('bank')
+          .where({id: id})
+          .update({bankStatus: 1})
+          .then(function() {
+            return self.success('通过审核成功');
+          })
+          .catch(function(err) {
+            return self.error(500, '通过审核失败', err);
+          })
+      }
+    },
+
+    unpassAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+
+      }
+
+      if (self.isPost()) {
+        var id = self.post('id');
+        return D('bank')
+          .where({id: id})
+          .update({bankStatus: -1})
+          .then(function() {
+            return self.success('拒绝通过成功');
+          })
+          .catch(function(err) {
+            return self.error(500, '拒绝通过失败', err);
+          })
+      }
+    }
   };
 });
