@@ -1,4 +1,5 @@
 var moment = require('moment');
+var OutputService = thinkRequire('OutputService');
 module.exports = Controller("Admin/BaseController", function(){
   "use strict";
   return {
@@ -171,6 +172,56 @@ module.exports = Controller("Admin/BaseController", function(){
         data.doTaskExtendDoTaskId = self.post('doTaskExtendDoTaskId');
 
         self.success('撤销失败');
+      }
+    },
+
+    printExpressAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+
+      }
+
+      if (self.isPost()) {
+        return D('do_task')
+          .join({
+            table: 'task'
+            , join: 'left'
+            , on: {
+              'doTaskTaskId': 'id'
+            }
+          })
+          .join({
+            table: 'do_task_detail'
+            , join: 'left'
+            , on: {
+              'id': 'doTaskDetailDoTaskId'
+            }
+          })
+          .join({
+            table: 'shop'
+            , join: 'left'
+            , on: {
+              'doTaskShopId': 'id'
+            }
+          })
+          .join({
+            table: 'account'
+            , join: 'left'
+            , on: {
+              'doTaskAccountId': 'id'
+            }
+          })
+          .select()
+          .then(function(res) {
+            OutputService.express(res, function(now) {
+              return self.success(now);
+            });
+          })
+          .catch(function(err) {
+            console.error(err.stack);
+          })
       }
     },
   };
