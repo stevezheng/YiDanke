@@ -1,4 +1,5 @@
 var moment = require('moment');
+var Log = thinkRequire('LogService');
 var OutputService = thinkRequire('OutputService');
 module.exports = Controller("Admin/BaseController", function(){
   "use strict";
@@ -154,6 +155,76 @@ module.exports = Controller("Admin/BaseController", function(){
             console.log(err.stack);
             return self.error(err);
           })
+      }
+    },
+
+    cancelAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+
+      }
+
+      if (self.isPost()) {
+        var doTaskExtendDoTaskId = self.post('doTaskExtendDoTaskId');
+        var doTask;
+        return D('do_task')
+          .where({id: doTaskExtendDoTaskId})
+          .find()
+          .then(function(res) {
+            doTask = res;
+
+            if (doTask.doTaskStatus == -1) {
+              return self.error(500, '请勿重复撤销任务单');
+            } else {
+              return D('do_task')
+                .where({id: doTaskExtendDoTaskId})
+                .update({doTaskStatus: -1})
+            }
+          })
+          .then(function() {
+            if (doTask.doTaskTerminal == 'phone') {
+              return D('task')
+                .where({id: doTask.doTaskTaskId})
+                .updateDec('taskPhoneDoingCount')
+            } else if (doTask.doTaskTerminal == 'pc') {
+              return D('task')
+                .where({id: doTask.doTaskTaskId})
+                .updateDec('taskPcDoingCount')
+            }
+            return D('task')
+              .where({id: doTask.doTaskTaskId})
+              .update({'taskStatus': 2})
+          })
+          .then(function() {
+            return D('user')
+              .where({id: doTask.doTaskUserId})
+              .updateInc('coin')
+          })
+          .then(function() {
+            return D('user')
+              .where({id: doTask.doTaskUserId})
+              .find()
+          })
+          .then(function(res) {
+            return Log.coin(
+              1
+              , 1
+              , res.coin
+              , res.id
+              , res.username
+              , 1
+              , self.ip()
+              , '管理员撤销任务单:' + doTaskExtendDoTaskId + '返回1金币');
+          })
+          .then(function() {
+            return self.success('撤销成功');
+          })
+          .catch(function(err) {
+            console.error(err.stack);
+            return self.success('撤销失败');
+          });
       }
     },
 

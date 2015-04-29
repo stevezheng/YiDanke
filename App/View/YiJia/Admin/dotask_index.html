@@ -10,7 +10,7 @@
                         <button class="btn btn-info pull-right" ng-click="printExpress()">打印快递</button>
                     </header>
                     <div class="panel-body">
-                        <table class="table" ng-repeat="doTask in doTasks">
+                        <table class="table" ng-repeat="doTask in doTasks" style="margin-bottom: 70px">
                             <tr>
                                 <td colspan="4">
                                     <div class="label label-info" ng-if="doTask.taskTransportType == 'zixuan'">
@@ -18,6 +18,18 @@
                                     </div>
                                     <div class="label label-success" ng-if="doTask.taskTransportType == 'pingtai'">
                                         平台快递
+                                    </div>
+                                    <div class="btn-group pull-right">
+                                        <button data-toggle="dropdown" class="btn btn-success dropdown-toggle btn-xs" type="button">操作<span class="caret"></span></button>
+                                        <ul role="menu" class="dropdown-menu">
+                                            <li ng-show="doTask.doTaskStatus == 1">
+                                                <a ng-click="addExpress(doTask)">添加快递</a>
+                                            </li>
+                                            <li ng-show="doTask.doTaskStatus >= 1">
+                                                <a ng-click="editExpress(doTask)">编辑快递</a>
+                                            </li>
+                                            <li><a ng-click="cancel(doTask)">撤销任务单</a></li>
+                                        </ul>
                                     </div>
                                 </td>
                             </tr>
@@ -40,16 +52,21 @@
                             <tr>
                                 <td>快递名称： <input type="text" ng-model="doTask.doTaskExtendExpressName"/></td>
                                 <td>快递单号： <input ng-model="doTask.doTaskExtendExpressId" type="text"/></td>
-                                <td>淘宝订单号：{{doTask.doTaskDetailOrderId}}</td>
+                                <td>
+                                    <p>
+                                        淘宝订单号：{{doTask.doTaskDetailOrderId}}
+                                    </p>
+                                    <p>创建时间：{{doTask.doTaskDetailCreateTime | date: 'yyyy-MM-dd HH:mm:ss'}}</p>
+                                </td>
                                 <td>任务状态：{{statusMap[doTask.doTaskStatus]}}</td>
                             </tr>
-                            <tr>
-                                <td colspan="4">
-                                    <button class="btn btn-warning" ng-click="addExpress(doTask)" ng-show="doTask.doTaskStatus == 1">添加快递</button>
-                                    <button class="btn btn-warning" ng-click="editExpress(doTask)" ng-show="doTask.doTaskStatus >= 1">编辑快递</button>
-                                    <!--<button class="btn btn-warning" ng-click="cancel(doTask)">撤销任务单</button>-->
-                                </td>
-                            </tr>
+                            <!--<tr>-->
+                                <!--<td colspan="4">-->
+                                    <!--<button class="btn btn-warning" ng-click="addExpress(doTask)" ng-show="doTask.doTaskStatus == 1">添加快递</button>-->
+                                    <!--<button class="btn btn-warning" ng-click="editExpress(doTask)" ng-show="doTask.doTaskStatus >= 1">编辑快递</button>-->
+                                    <!--&lt;!&ndash;<button class="btn btn-warning" ng-click="cancel(doTask)">撤销任务单</button>&ndash;&gt;-->
+                                <!--</td>-->
+                            <!--</tr>-->
                         </table>
                         <div class="text-center">
                             <ul class="pagination">

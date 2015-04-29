@@ -60,6 +60,24 @@
         })
     };
 
+    $scope.cancel = function(doTask) {
+      var r = confirm('请确认是否要撤销任务单');
+
+      if (r) {
+        var data = {};
+        data.doTaskExtendDoTaskId = doTask.doTaskDetailDoTaskId;
+        $http.post('/admin/dotask/cancel', data)
+          .success(function(res) {
+            if (res.errno == 0) {
+              alert(res.data);
+              doTask.doTaskStatus = -1;
+            } else {
+              alert(res.errmsg);
+            }
+          })
+      }
+    };
+
     $scope.cancelExpress = function(doTask) {
       var data = {};
       data.doTaskExtendDoTaskId = doTask.doTaskDetailDoTaskId;
