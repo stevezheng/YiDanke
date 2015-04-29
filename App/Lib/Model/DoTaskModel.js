@@ -158,6 +158,50 @@ module.exports = Model(function() {
         .select()
     },
 
+    getWithdrawByBuyer: function(userId) {
+      var self = this;
+
+      return self
+        .order('yi_do_task.id desc')
+        .join({
+          table: 'task'
+          , join: 'left'
+          , on: {
+            'doTaskTaskId': 'id'
+          }
+        })
+        .join({
+          table: 'task_taobao'
+          , join: 'left'
+          , on: {
+            'doTaskTaskId': 'taobaoTaskId'
+          }
+        })
+        .join({
+          table: 'task_tmall'
+          , join: 'left'
+          , on: {
+            'doTaskTaskId': 'tmallTaskId'
+          }
+        })
+        .join({
+          table: 'task_jd'
+          , join: 'left'
+          , on: {
+            'doTaskTaskId': 'jdTaskId'
+          }
+        })
+        .join({
+          table: 'do_task_detail'
+          , join: 'left'
+          , on: {
+            'id': 'doTaskDetailDoTaskId'
+          }
+        })
+        .where({'yi_do_task.doTaskUserId': userId, 'yi_do_task.doTaskStatus': 6})
+        .select()
+    },
+
     getOwnOneAllInfo: function(userId, id) {
       var self = this;
 

@@ -1,4 +1,5 @@
 var UserModel = thinkRequire('UserModel');
+var DoTaskModel = thinkRequire('DoTaskModel');
 var WithdrawModel = thinkRequire('WithdrawModel');
 var Log = thinkRequire('LogService');
 module.exports = Controller("Buyer/BaseController", function(){
@@ -95,6 +96,25 @@ module.exports = Controller("Buyer/BaseController", function(){
           .then(function() {
             return self.success('提交成功，请耐心等待审核');
           });
+      }
+    },
+
+    dotasksAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+
+      }
+
+      if (self.isPost()) {
+        var dotask = DoTaskModel();
+
+        return dotask
+          .getWithdrawByBuyer(self.cUser.id)
+          .then(function(res) {
+            return self.success(res);
+          })
       }
     },
 

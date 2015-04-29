@@ -618,5 +618,16 @@
           location.reload();
         })
     };
+
+    function getWithdrawData() {
+      $http.post('/buyer/withdraw/dotasks')
+        .success(function(res) {
+          if (res.errno == 0) {
+            $scope.dotasks = res.data;
+          }
+        })
+    }
+
+    getWithdrawData();
   }])
 })();

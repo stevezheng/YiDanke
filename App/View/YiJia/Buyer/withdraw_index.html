@@ -328,6 +328,47 @@
                                 </div>
                             </div>
                             <div class="tab-pane " id="money">
+                                <!--<p>您共有: <span class="error">4</span>笔任务将由一家网退款，共计: <span class="error">222.3</span>元</p>-->
+                                <!--<p>当前已返还本金： <span class="error">35</span>元/ <span class="error">1</span>笔 (可提现) | 待返还本金： <span class="error">187.3</span>元/ <span class="error">3</span>笔</p>-->
+                                <!--<div class="border-bottom"></div>-->
+                                <!--<p>可提现本金： <span class="error">35</span>元</p>-->
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th><input type="checkbox"/>&nbsp;&nbsp;全选</th>
+                                        <th>商品信息</th>
+                                        <th>商家/买号</th>
+                                        <th>退款金额</th>
+                                        <th>本金返还时间</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="dotask in dotasks">
+                                        <td><input type="checkbox"/> {{dotask.id}}</td>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col-lg-2">
+                                                    <img ng-src="{{dotask.taobaoImage || dotask.tmallImage || dotask.jdImage}}" alt="" width="50px"/>
+                                                </div>
+                                                <div class="col-lg-10">
+                                                    <p>{{dotask.taskName}}</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <p>{{dotask.taskShopName}}</p>
+                                            <p>{{dotask.doTaskAccountName}}</p>
+                                        </td>
+                                        <td><span class="error">{{dotask.doTaskDetailOrderMoney}}元</span></td>
+                                        <td>
+                                            <p>任务编号: {{dotask.doTaskDetailDoTaskId}}</p>
+                                            <p>
+                                                {{dotask.doTaskExtendConfirmTime}}
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
