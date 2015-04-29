@@ -1,7 +1,6 @@
-/**
- * controller
- * @return 
- */
+var UserModel = thinkRequire('UserModel');
+var WithdrawModel = thinkRequire('WithdrawModel');
+var Log = thinkRequire('LogService');
 module.exports = Controller("Buyer/BaseController", function(){
   "use strict";
   return {
@@ -96,6 +95,66 @@ module.exports = Controller("Buyer/BaseController", function(){
           .then(function() {
             return self.success('提交成功，请耐心等待审核');
           });
+      }
+    },
+
+    withdrawCoinAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+
+      }
+
+      if (self.isPost()) {
+        var tradePassword = self.post('tradePassword')
+          , bankId = self.post('bankId')
+          , coin = self.post('coin');
+
+        var withdraw = WithdrawModel();
+        var user = UserModel();
+
+        coin = Math.abs(coin);
+
+        return D('user')
+          .where({id: self.cUser.id, tradePassword: md5(tradePassword)})
+          .find()
+          .then(function(res) {
+            if (!isEmpty(res)) {
+              if (res.coin < coin) {
+                return self.error(500, '余额不足!');
+              } else {
+                return user
+                  .subCoin(self.cUser.id, coin)
+              }
+            } else {
+              return self.error(500, '支付密码错误');
+            }
+          })
+          .then(function() {
+            return withdraw
+              .addOne(self.cUser.id, bankId, 0, coin, '', '')
+          })
+          .then(function() {
+            return Log
+              .coin(
+              -1
+              , coin
+              , (self.cUser.coin - coin)
+              , self.cUser.id
+              , self.cUser.username
+              , 1
+              , self.ip()
+              , '申请提现金币冻结' + coin + '金币'
+            )
+          })
+          .then(function() {
+            return user
+              .reloadCurrentUser(self)
+          })
+          .then(function() {
+            return self.success('申请提现成功，请耐心等待工作人员为您处理申请');
+          })
       }
     },
   };

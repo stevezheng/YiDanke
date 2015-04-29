@@ -438,6 +438,37 @@
       })
     };
 
+    $scope.submitWithDrawCoin = function() {
+
+      if (!$scope.withdrawCoinType) {
+        alert('请选择提现账号');
+        return false;
+      }
+      if (!$scope.withdrawCoinPassword) {
+        alert('请输入支付密码');
+        return false;
+      }
+
+      if (!$scope.withdrawCoin) {
+        alert('请输入提现金额');
+        return false;
+      }
+
+      $http.post('/buyer/withdraw/withdrawCoin', {
+          tradePassword: $scope.withdrawCoinPassword
+          , coin: $scope.withdrawCoin
+          , bankType: $scope.withdrawCoinType
+        })
+        .success(function(res) {
+          if (res.errno == 0) {
+            alert(res.data);
+            location.reload();
+          } else {
+            alert(res.errmsg);
+          }
+        })
+    };
+
     function getData() {
       $http.post('/buyer/withdraw')
         .success(function(res) {
