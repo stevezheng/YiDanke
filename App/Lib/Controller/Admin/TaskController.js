@@ -124,6 +124,7 @@ module.exports = Controller("Admin/BaseController", function(){
           })
           .then(function(res) {
             self.cUser = res;
+            allMoney = Math.abs(allMoney);
             return D('user')
               .where({id: taskUserId})
               .updateField({money: ['exp', 'money+' + allMoney], coin: ['exp', 'coin+' + allCoin]})

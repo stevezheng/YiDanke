@@ -329,6 +329,7 @@ module.exports = Model(function() {
      */
     addMoney: function(id, value) {
       var self = this;
+      value = Math.abs(value);
 
       return self
         .where({id: id})
@@ -343,6 +344,7 @@ module.exports = Model(function() {
      */
     subMoney: function(id, value) {
       var self = this;
+      value = Math.abs(value);
 
       return self
         .where({id: id})
@@ -357,6 +359,7 @@ module.exports = Model(function() {
      */
     addCoin: function(id, value) {
       var self = this;
+      value = Math.abs(value);
 
       return self
         .where({id: id})
@@ -371,6 +374,7 @@ module.exports = Model(function() {
      */
     subCoin: function(id, value) {
       var self = this;
+      value = Math.abs(value);
 
       return self
         .where({id: id})
@@ -385,6 +389,7 @@ module.exports = Model(function() {
      */
     addPV: function(id, payPV) {
       var self = this;
+      payPV = Math.abs(payPV);
       //var pv = pvMap[payPV];
 
       return self
@@ -400,6 +405,7 @@ module.exports = Model(function() {
      */
     subPV: function(id, pv) {
       var self = this;
+      pv = Math.abs(pv);
 
       return self
         .where({id: id})
