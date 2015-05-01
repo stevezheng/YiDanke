@@ -59,5 +59,6 @@ create table if not exists `yi_task` (
     `taskTag2` varchar(12) not null default '' comment '规格2',
     `taskComment` varchar(512) not null default '' comment '备注信息',
     `taskCreateTime` timestamp not null default current_timestamp,
+    `taskLastTime` timestamp null,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

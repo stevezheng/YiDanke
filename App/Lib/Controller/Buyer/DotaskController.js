@@ -55,7 +55,7 @@ module.exports = Controller("Buyer/BaseController", function(){
         var _task, keyword;
 
         //判断任务是否可接
-        task
+        return task
           .getOne(taskId)
           .then(function(res) {
             _task = res;
@@ -202,6 +202,10 @@ module.exports = Controller("Buyer/BaseController", function(){
             }
           })
           .then(function() {
+            return task
+              .doTask(taskId)
+          })
+          .then(function() {
             //冻结押金
             //todo:需要打日志
             return D('user')
@@ -225,8 +229,8 @@ module.exports = Controller("Buyer/BaseController", function(){
               , '做任务[' + taskId + '],冻结1金币'
             );
           })
-          .then(function(insertId) {
-            return self.success(insertId);
+          .then(function() {
+            return self.success(taskId);
           })
           .catch(function(err) {
             console.error(err.stack);

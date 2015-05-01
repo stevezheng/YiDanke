@@ -1,3 +1,4 @@
+var moment = require('moment');
 module.exports = Model(function() {
   return {
     /**
@@ -22,6 +23,14 @@ module.exports = Model(function() {
       return self
         .where({taskUserId: taskUserId, taskStatus: 3})
         .sum('taskPhoneDoingCount')
+    },
+
+    doTask: function(taskId) {
+      var self = this;
+
+      return self
+        .where({id: taskId})
+        .update({'taskLastTime': moment().format('YYYY-MM-DD HH:mm:ss')})
     },
 
     /**

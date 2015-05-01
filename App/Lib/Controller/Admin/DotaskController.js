@@ -37,7 +37,10 @@ module.exports = Controller("Admin/BaseController", function(){
           .queryPage(page, 10, data)
           .then(function(res) {
             return self.success(res);
-          });
+          })
+          .catch(function(err) {
+            console.error(err.stack);
+          })
       }
     },
 

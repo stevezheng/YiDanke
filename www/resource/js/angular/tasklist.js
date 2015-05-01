@@ -125,6 +125,15 @@
 
       for (var i = 0; i < $scope.tasks.length; i++) {
         var obj = $scope.tasks[i];
+
+        if (obj.taskIsInterval == 1) {
+          var newTime = moment(obj.taskLastTime || new Date()).add(obj.taskIntervalTime, 'm').unix()
+
+          if (newTime > moment().unix()) {
+            $scope.tasks.splice(i, 1);
+          }
+        }
+
         if (obj.taskPlatform == 'taobao') {
           if (obj.taskPcCount > 0) {
             taobaoCount++;
@@ -209,7 +218,6 @@
     }
 
     getTasks();
-
   });
 
   PublishModule.controller('sellerTaskListCtrl', function($scope, $http) {

@@ -40,8 +40,10 @@
       } else if (type == 'doing') {
         data = $scope.filter.doing;
         page = $scope.page.doing;
-        //不规范，临时方案
-        data.doTaskStatus = ['exp', '> 1 and doTaskStatus < 5'];
+        data.doTaskStatus = {
+          '>': 1
+          , '<': 5
+        };
       } else if (type == 'done') {
         data = $scope.filter.done;
         page = $scope.page.done;
