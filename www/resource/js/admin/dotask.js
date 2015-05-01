@@ -2,31 +2,102 @@
   var DoTaskModule = angular.module('YiAppAdmin.DoTask', ['angularFileUpload']);
 
   DoTaskModule.controller('doTaskCtrl', function($scope, $http, $upload) {
-    $scope.page = 1;
-
-    $scope.changePage = function(page) {
-      $scope.page = page;
-      getDoTasks();
+    $scope.page = {
+      do: 1
+      , doing: 1
+      , done: 1
+      , cancel: 1
+      , all: 1
     };
 
-    function getDoTasks() {
-      $http.post('/admin/dotask', {page: $scope.page})
-        .success(function(res) {
-          if (res.errno == 0) {
-            $scope.doTasks = res.data.data;
-            $scope.total = res.data.total;
-            $scope.count = res.data.count;
-            $scope.num = res.data.num;
+    $scope.changePage = function(page, type) {
+      $scope.page[type] = page;
+      query(type);
+    };
 
-            $scope.totalPage = [];
+    $scope.data = {};
+    $scope.total = {};
+    $scope.count = {};
+    $scope.num = {};
+    $scope.totalPage = {};
+
+    $scope.filter = {
+      do: {}
+      , doing: {}
+      , done: {}
+      , cancel: {}
+      , all: {}
+    };
+
+    $scope.query = query;
+
+    function query(type) {
+      var data, page;
+      if (type == 'do') {
+        data = $scope.filter.do;
+        page = $scope.page.do;
+      } else if (type == 'doing') {
+        data = $scope.filter.doing;
+        page = $scope.page.doing;
+      } else if (type == 'done') {
+        data = $scope.filter.done;
+        page = $scope.page.done;
+      } else if (type == 'cancel') {
+        data = $scope.filter.cancel;
+        page = $scope.page.cancel;
+      } else if (type == 'all') {
+        data = $scope.filter.all;
+        page = $scope.page.all;
+      }
+
+      var data = _.pick(data, function(value, key, object) {
+        if (value != '') {
+          return true;
+        }
+      });
+
+      $http.post('/admin/dotask', {page: page, data: data})
+        .success(function(res) {
+          if (type == 'do') {
+            $scope.data.do = res.data.data;
+            $scope.total.do  = res.data.total;
+            $scope.count.do = res.data.count;
+            $scope.num.do = res.data.num;
+            $scope.totalPage.do = [];
             for (var i = 0; i < res.data.total; i++) {
-              $scope.totalPage.push(i+1);
+              $scope.totalPage.do.push(i+1);
             }
+          } else if (type == 'doing') {
+            $scope.data.doing = res.data.data;
+            $scope.total.doing  = res.data.total;
+            $scope.count.doing = res.data.count;
+            $scope.num.doing = res.data.num;
+            $scope.totalPage.doing = [];
+            for (var i = 0; i < res.data.total; i++) {
+              $scope.totalPage.doing.push(i+1);
+            }
+          } else if (type == 'done') {
+          } else if (type == 'cancel') {
+          } else if (type == 'all') {
+            $scope.data.all = res.data.data;
+            $scope.total.all  = res.data.total;
+            $scope.count.all = res.data.count;
+            $scope.num.all = res.data.num;
+            $scope.totalPage.all = [];
+            for (var i = 0; i < res.data.total; i++) {
+              $scope.totalPage.all.push(i+1);
+            }
+            
+            console.log($scope.data.all);
           }
         })
     }
 
-    getDoTasks();
+    query('do');
+    query('doing');
+    query('done');
+    query('cancel');
+    query('all');
 
     $scope.addExpress = function(doTask) {
       var data = {};
@@ -65,6 +136,10 @@
 
       if (r) {
         var data = {};
+        if (!doTask.doTaskDetailDoTaskId) {
+          alert('撤销失败');
+          return false;
+        }
         data.doTaskExtendDoTaskId = doTask.doTaskDetailDoTaskId;
         $http.post('/admin/dotask/cancel', data)
           .success(function(res) {
@@ -111,6 +186,11 @@
       , '4': '待退款'
       , '5': '待确认退款'
       , '6': '已完成'
+      , platform: {
+        'taobao': '淘宝'
+        , 'tmall': '天猫'
+        , 'jd': '京东'
+      }
     }
   })
 })();

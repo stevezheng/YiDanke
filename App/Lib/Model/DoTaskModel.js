@@ -463,6 +463,74 @@ module.exports = Model(function() {
         })
         .where({'yi_do_task.doTaskUserId': userId, 'yi_do_task.doTaskStatus': 5})
         .select()
+    },
+
+
+
+    queryPage: function(page, num, args) {
+      var self = this;
+
+      return self
+        .page(page, Number(num))
+        .order('yi_do_task.id desc')
+        .join({
+          table: 'task'
+          , join: 'left'
+          , on: {
+            'doTaskTaskId': 'id'
+          }
+        })
+        .join({
+          table: 'task_taobao'
+          , join: 'left'
+          , on: {
+            'doTaskTaskId': 'taobaoTaskId'
+          }
+        })
+        .join({
+          table: 'task_tmall'
+          , join: 'left'
+          , on: {
+            'doTaskTaskId': 'tmallTaskId'
+          }
+        })
+        .join({
+          table: 'task_jd'
+          , join: 'left'
+          , on: {
+            'doTaskTaskId': 'jdTaskId'
+          }
+        })
+        .join({
+          table: 'task_extend'
+          , join: 'left'
+          , on: {
+            'doTaskTaskId': 'extendTaskId'
+          }
+        })
+        .join({
+          table: 'do_task_detail'
+          , join: 'left'
+          , on: {
+            'id': 'doTaskDetailDoTaskId'
+          }
+        })
+        .join({
+          table: 'do_task_extend'
+          , join: 'left'
+          , on: {
+            'id': 'doTaskExtendDoTaskId'
+          }
+        })
+        .join({
+          table: 'user'
+          , join: 'left'
+          , on: {
+            'doTaskUserId': 'id'
+          }
+        })
+        .where(args)
+        .countSelect()
     }
   }
 });

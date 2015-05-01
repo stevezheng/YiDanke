@@ -1,6 +1,8 @@
 var moment = require('moment');
+var _ = require('underscore');
 var Log = thinkRequire('LogService');
 var OutputService = thinkRequire('OutputService');
+var DoTaskModel = thinkRequire('DoTaskModel');
 module.exports = Controller("Admin/BaseController", function(){
   "use strict";
   return {
@@ -13,68 +15,44 @@ module.exports = Controller("Admin/BaseController", function(){
       }
 
       if (self.isPost()) {
+        var page = self.post('page')
+          , data = self.post('data') || {};
+
+        data = _.mapObject(data, function(val, key) {
+          return ['like', '%' + val + '%'];
+        });
+
+        if (data.taskPlatform) {
+          data['yi_task.taskPlatform'] = data.taskPlatform;
+          delete data.taskPlatform;
+        }
+
+        var doTask = DoTaskModel();
+
+        return doTask
+          .queryPage(page, 10, data)
+          .then(function(res) {
+            return self.success(res);
+          });
+      }
+    },
+
+    doAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+
+      }
+
+      if (self.isPost()) {
+        var doTask = DoTaskModel();
         var page = self.post('page');
 
-        return D('do_task')
-          .page(page, 20)
-          .order('yi_do_task.id desc')
-          .join({
-            table: 'task'
-            , join: 'left'
-            , on: {
-              'doTaskTaskId': 'id'
-            }
+        return doTask
+          .queryPage(page, 20, {
+            doTaskStatus: 1
           })
-          .join({
-            table: 'task_taobao'
-            , join: 'left'
-            , on: {
-              'doTaskTaskId': 'taobaoTaskId'
-            }
-          })
-          .join({
-            table: 'task_tmall'
-            , join: 'left'
-            , on: {
-              'doTaskTaskId': 'tmallTaskId'
-            }
-          })
-          .join({
-            table: 'task_jd'
-            , join: 'left'
-            , on: {
-              'doTaskTaskId': 'jdTaskId'
-            }
-          })
-          .join({
-            table: 'task_extend'
-            , join: 'left'
-            , on: {
-              'doTaskTaskId': 'extendTaskId'
-            }
-          })
-          .join({
-            table: 'do_task_detail'
-            , join: 'left'
-            , on: {
-              'id': 'doTaskDetailDoTaskId'
-            }
-          })
-          .join({
-            table: 'do_task_extend'
-            , join: 'left'
-            , on: {
-              'id': 'doTaskExtendDoTaskId'
-            }
-          })
-          .join({
-            table: 'user'
-            , join: 'left'
-            , on: {
-              'doTaskUserId': 'id'
-            }
-          })
-          .countSelect()
           .then(function(res) {
             return self.success(res);
           })
