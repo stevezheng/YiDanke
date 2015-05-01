@@ -29,10 +29,500 @@
                 </header>
                 <div class="panel-body">
                     <div class="tab-content tasi-tab">
-                        <div id="do" class="tab-pane active">买手已完成</div>
-                        <div id="doing" class="tab-pane">进行中</div>
-                        <div id="done" class="tab-pane">任务单已完成</div>
-                        <div id="cancel" class="tab-pane">已取消</div>
+                        <div class="tab-pane active" id="do">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <p>
+                                        任务编号: <input type="text" ng-model="filter.do.doTaskDetailId" style="width: 50px;"/> &nbsp;
+                                        买手号: <input type="text" ng-model="filter.do.doTaskAccountName" style="width: 100px;"/> &nbsp;
+                                        平台: <select name="" ng-model="filter.do.taskPlatform">
+                                        <option value="">全部</option>
+                                        <option value="taobao">淘宝</option>
+                                        <option value="tmdo">天猫</option>
+                                        <option value="jd">京东</option>
+                                    </select> &nbsp;
+                                        淘宝订单号: <input type="text" ng-model="filter.do.doTaskDetailOrderId" style="width: 100px;"/> &nbsp;
+                                        <button class="btn btn-success btn-xs" ng-click="query('do')">查询</button>
+                                        <button class="btn btn-info pull-right" ng-click="printExpress()">打印快递 </button>
+                                    </p>
+                                </div>
+                            </div>
+                            <table class="table" ng-repeat="doTask in data.do"
+                                   style="margin-bottom: 70px">
+                                <tr>
+                                    <td colspan="4">
+                                        <div class="label label-info"
+                                             ng-if="doTask.taskTransportType == 'zixuan'">
+                                            自选快递
+                                        </div>
+                                        <div class="label label-success"
+                                             ng-if="doTask.taskTransportType == 'pingtai'">
+                                            平台快递
+                                        </div>
+                                        <div class="label label-warning">
+                                            {{statusMap.platform[doTask.taskPlatform]}}
+                                        </div>
+                                        <div class="btn-group pull-right">
+                                            <button data-toggle="dropdown"
+                                                    class="btn btn-success dropdown-toggle btn-xs"
+                                                    type="button">操作<span
+                                                    class="caret"></span>
+                                            </button>
+                                            <ul role="menu"
+                                                class="dropdown-menu">
+                                                <li ng-show="doTask.doTaskStatus == 1">
+                                                    <a ng-click="addExpress(doTask)">添加快递</a>
+                                                </li>
+                                                <li ng-show="doTask.doTaskStatus >= 1">
+                                                    <a ng-click="editExpress(doTask)">编辑快递</a>
+                                                </li>
+                                                <li>
+                                                    <a ng-click="cancel(doTask)">撤销任务单</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>账号：{{doTask.username}}</td>
+                                    <td>淘宝：{{doTask.doTaskAccountName}}</td>
+                                    <td>任务编号：{{doTask.doTaskDetailDoTaskId}}
+                                    </td>
+                                    <td>商家账号：{{doTask.taskUserName}}</td>
+                                </tr>
+                                <tr>
+                                    <td>店铺名称：{{doTask.taskShopName}}</td>
+                                    <td>产品名称：{{doTask.taskName}}</td>
+                                    <td>产品链接：{{doTask.taskUrl}}</td>
+                                    <td>产品单价：{{doTask.taskTotalMoney}}元</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">聊天记录截图：<a
+                                            href="{{doTask.doTaskDetailTalkImage}}"
+                                            target="_blank"><img
+                                            ng-src="{{doTask.doTaskDetailTalkImage}}"
+                                            alt="" width="50"/></a></td>
+                                    <td colspan="2">付款记录截图：<a
+                                            href="{{doTask.doTaskDetailOrderImage}}"
+                                            target="_blank"><img
+                                            ng-src="{{doTask.doTaskDetailOrderImage}}"
+                                            alt="" width="50"/></a></td>
+                                </tr>
+                                <tr>
+                                    <td>快递名称： <input type="text"
+                                                     ng-model="doTask.doTaskExtendExpressName"/>
+                                    </td>
+                                    <td>快递单号： <input
+                                            ng-model="doTask.doTaskExtendExpressId"
+                                            type="text"/></td>
+                                    <td>
+                                        <p>
+                                            淘宝订单号：{{doTask.doTaskDetailOrderId}}
+                                        </p>
+
+                                        <p>创建时间：{{doTask.doTaskDetailCreateTime | date: 'yyyy-MM-dd HH:mm:ss'}}</p>
+                                    </td>
+                                    <td>
+                                        任务状态：{{statusMap[doTask.doTaskStatus]}}
+                                    </td>
+                                </tr>
+                                <!--<tr>-->
+                                <!--<td colspan="4">-->
+                                <!--<button class="btn btn-warning" ng-click="addExpress(doTask)" ng-show="doTask.doTaskStatus == 1">添加快递</button>-->
+                                <!--<button class="btn btn-warning" ng-click="editExpress(doTask)" ng-show="doTask.doTaskStatus >= 1">编辑快递</button>-->
+                                <!--&lt;!&ndash;<button class="btn btn-warning" ng-click="cancel(doTask)">撤销任务单</button>&ndash;&gt;-->
+                                <!--</td>-->
+                                <!--</tr>-->
+                            </table>
+                            <div class="text-center">
+                                <ul class="pagination">
+                                    <li ng-if="page.do != 1"><a
+                                            ng-click="changePage(page.do-1, 'do')"
+                                            href="javascript:;;;">«</a></li>
+                                    <li ng-repeat="t in totalPage.do"><a
+                                            href="javascript:;;;"
+                                            ng-click="changePage(t, 'do')">{{t}}</a>
+                                    </li>
+                                    <li ng-if="page.do != total.do"><a
+                                            ng-click="changePage(page.do+1, 'do')"
+                                            href="javascript:;;;">»</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="doing">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <p>
+                                        任务编号: <input type="text" ng-model="filter.doing.doTaskDetailId" style="width: 50px;"/> &nbsp;
+                                        买手号: <input type="text" ng-model="filter.doing.doTaskAccountName" style="width: 100px;"/> &nbsp;
+                                        平台: <select name="" ng-model="filter.doing.taskPlatform">
+                                        <option value="">全部</option>
+                                        <option value="taobao">淘宝</option>
+                                        <option value="tmdoing">天猫</option>
+                                        <option value="jd">京东</option>
+                                    </select> &nbsp;
+                                        状态: <select name="" ng-model="filter.doing.doTaskStatus">
+                                        <option value="">全部</option>
+                                        <option value="-1">拒绝</option>
+                                        <option value="1">待添加发货单</option>
+                                        <option value="2">待发货</option>
+                                        <option value="3">待收货</option>
+                                        <option value="4">待退款</option>
+                                        <option value="5">待确认退款</option>
+                                        <option value="6">待买手确认退款</option>
+                                        <option value="8">买手申请提现</option>
+                                        <option value="9">买手提现成功</option>
+                                    </select> &nbsp;
+                                        淘宝订单号: <input type="text" ng-model="filter.doing.doTaskDetailOrderId" style="width: 100px;"/> &nbsp;
+                                        <button class="btn btn-success btn-xs" ng-click="query('doing')">查询</button>
+                                        <button class="btn btn-info pull-right" ng-click="printExpress()">打印快递 </button>
+                                    </p>
+                                </div>
+                            </div>
+                            <table class="table" ng-repeat="doTask in data.doing"
+                                   style="margin-bottom: 70px">
+                                <tr>
+                                    <td colspan="4">
+                                        <div class="label label-info"
+                                             ng-if="doTask.taskTransportType == 'zixuan'">
+                                            自选快递
+                                        </div>
+                                        <div class="label label-success"
+                                             ng-if="doTask.taskTransportType == 'pingtai'">
+                                            平台快递
+                                        </div>
+                                        <div class="label label-warning">
+                                            {{statusMap.platform[doTask.taskPlatform]}}
+                                        </div>
+                                        <div class="btn-group pull-right">
+                                            <button data-toggle="dropdown"
+                                                    class="btn btn-success dropdown-toggle btn-xs"
+                                                    type="button">操作<span
+                                                    class="caret"></span>
+                                            </button>
+                                            <ul role="menu"
+                                                class="dropdown-menu">
+                                                <li ng-show="doTask.doTaskStatus == 1">
+                                                    <a ng-click="addExpress(doTask)">添加快递</a>
+                                                </li>
+                                                <li ng-show="doTask.doTaskStatus >= 1">
+                                                    <a ng-click="editExpress(doTask)">编辑快递</a>
+                                                </li>
+                                                <li>
+                                                    <a ng-click="cancel(doTask)">撤销任务单</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>账号：{{doTask.username}}</td>
+                                    <td>淘宝：{{doTask.doTaskAccountName}}</td>
+                                    <td>任务编号：{{doTask.doTaskDetailDoTaskId}}
+                                    </td>
+                                    <td>商家账号：{{doTask.taskUserName}}</td>
+                                </tr>
+                                <tr>
+                                    <td>店铺名称：{{doTask.taskShopName}}</td>
+                                    <td>产品名称：{{doTask.taskName}}</td>
+                                    <td>产品链接：{{doTask.taskUrl}}</td>
+                                    <td>产品单价：{{doTask.taskTotalMoney}}元</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">聊天记录截图：<a
+                                            href="{{doTask.doTaskDetailTalkImage}}"
+                                            target="_blank"><img
+                                            ng-src="{{doTask.doTaskDetailTalkImage}}"
+                                            alt="" width="50"/></a></td>
+                                    <td colspan="2">付款记录截图：<a
+                                            href="{{doTask.doTaskDetailOrderImage}}"
+                                            target="_blank"><img
+                                            ng-src="{{doTask.doTaskDetailOrderImage}}"
+                                            alt="" width="50"/></a></td>
+                                </tr>
+                                <tr>
+                                    <td>快递名称： <input type="text"
+                                                     ng-model="doTask.doTaskExtendExpressName"/>
+                                    </td>
+                                    <td>快递单号： <input
+                                            ng-model="doTask.doTaskExtendExpressId"
+                                            type="text"/></td>
+                                    <td>
+                                        <p>
+                                            淘宝订单号：{{doTask.doTaskDetailOrderId}}
+                                        </p>
+
+                                        <p>创建时间：{{doTask.doTaskDetailCreateTime | date: 'yyyy-MM-dd HH:mm:ss'}}</p>
+                                    </td>
+                                    <td>
+                                        任务状态：{{statusMap[doTask.doTaskStatus]}}
+                                    </td>
+                                </tr>
+                                <!--<tr>-->
+                                <!--<td colspan="4">-->
+                                <!--<button class="btn btn-warning" ng-click="addExpress(doTask)" ng-show="doTask.doTaskStatus == 1">添加快递</button>-->
+                                <!--<button class="btn btn-warning" ng-click="editExpress(doTask)" ng-show="doTask.doTaskStatus >= 1">编辑快递</button>-->
+                                <!--&lt;!&ndash;<button class="btn btn-warning" ng-click="cancel(doTask)">撤销任务单</button>&ndash;&gt;-->
+                                <!--</td>-->
+                                <!--</tr>-->
+                            </table>
+                            <div class="text-center">
+                                <ul class="pagination">
+                                    <li ng-if="page.doing != 1"><a
+                                            ng-click="changePage(page.doing-1, 'doing')"
+                                            href="javascript:;;;">«</a></li>
+                                    <li ng-repeat="t in totalPage.doing"><a
+                                            href="javascript:;;;"
+                                            ng-click="changePage(t, 'doing')">{{t}}</a>
+                                    </li>
+                                    <li ng-if="page.doing != total.doing"><a
+                                            ng-click="changePage(page.doing+1, 'doing')"
+                                            href="javascript:;;;">»</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="done">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <p>
+                                        任务编号: <input type="text" ng-model="filter.done.doTaskDetailId" style="width: 50px;"/> &nbsp;
+                                        买手号: <input type="text" ng-model="filter.done.doTaskAccountName" style="width: 100px;"/> &nbsp;
+                                        平台: <select name="" ng-model="filter.done.taskPlatform">
+                                        <option value="">全部</option>
+                                        <option value="taobao">淘宝</option>
+                                        <option value="tmdone">天猫</option>
+                                        <option value="jd">京东</option>
+                                    </select> &nbsp;
+                                        淘宝订单号: <input type="text" ng-model="filter.done.doTaskDetailOrderId" style="width: 100px;"/> &nbsp;
+                                        <button class="btn btn-success btn-xs" ng-click="query('done')">查询</button>
+                                        <button class="btn btn-info pull-right" ng-click="printExpress()">打印快递 </button>
+                                    </p>
+                                </div>
+                            </div>
+                            <table class="table" ng-repeat="doTask in data.done"
+                                   style="margin-bottom: 70px">
+                                <tr>
+                                    <td colspan="4">
+                                        <div class="label label-info"
+                                             ng-if="doTask.taskTransportType == 'zixuan'">
+                                            自选快递
+                                        </div>
+                                        <div class="label label-success"
+                                             ng-if="doTask.taskTransportType == 'pingtai'">
+                                            平台快递
+                                        </div>
+                                        <div class="label label-warning">
+                                            {{statusMap.platform[doTask.taskPlatform]}}
+                                        </div>
+                                        <div class="btn-group pull-right">
+                                            <button data-toggle="dropdown"
+                                                    class="btn btn-success dropdown-toggle btn-xs"
+                                                    type="button">操作<span
+                                                    class="caret"></span>
+                                            </button>
+                                            <ul role="menu"
+                                                class="dropdown-menu">
+                                                <li ng-show="doTask.doTaskStatus == 1">
+                                                    <a ng-click="addExpress(doTask)">添加快递</a>
+                                                </li>
+                                                <li ng-show="doTask.doTaskStatus >= 1">
+                                                    <a ng-click="editExpress(doTask)">编辑快递</a>
+                                                </li>
+                                                <li>
+                                                    <a ng-click="cancel(doTask)">撤销任务单</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>账号：{{doTask.username}}</td>
+                                    <td>淘宝：{{doTask.doTaskAccountName}}</td>
+                                    <td>任务编号：{{doTask.doTaskDetailDoTaskId}}
+                                    </td>
+                                    <td>商家账号：{{doTask.taskUserName}}</td>
+                                </tr>
+                                <tr>
+                                    <td>店铺名称：{{doTask.taskShopName}}</td>
+                                    <td>产品名称：{{doTask.taskName}}</td>
+                                    <td>产品链接：{{doTask.taskUrl}}</td>
+                                    <td>产品单价：{{doTask.taskTotalMoney}}元</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">聊天记录截图：<a
+                                            href="{{doTask.doTaskDetailTalkImage}}"
+                                            target="_blank"><img
+                                            ng-src="{{doTask.doTaskDetailTalkImage}}"
+                                            alt="" width="50"/></a></td>
+                                    <td colspan="2">付款记录截图：<a
+                                            href="{{doTask.doTaskDetailOrderImage}}"
+                                            target="_blank"><img
+                                            ng-src="{{doTask.doTaskDetailOrderImage}}"
+                                            alt="" width="50"/></a></td>
+                                </tr>
+                                <tr>
+                                    <td>快递名称： <input type="text"
+                                                     ng-model="doTask.doTaskExtendExpressName"/>
+                                    </td>
+                                    <td>快递单号： <input
+                                            ng-model="doTask.doTaskExtendExpressId"
+                                            type="text"/></td>
+                                    <td>
+                                        <p>
+                                            淘宝订单号：{{doTask.doTaskDetailOrderId}}
+                                        </p>
+
+                                        <p>创建时间：{{doTask.doTaskDetailCreateTime
+                                            | date: 'yyyy-MM-dd HH:mm:ss'}}</p>
+                                    </td>
+                                    <td>
+                                        任务状态：{{statusMap[doTask.doTaskStatus]}}
+                                    </td>
+                                </tr>
+                                <!--<tr>-->
+                                <!--<td colspan="4">-->
+                                <!--<button class="btn btn-warning" ng-click="addExpress(doTask)" ng-show="doTask.doTaskStatus == 1">添加快递</button>-->
+                                <!--<button class="btn btn-warning" ng-click="editExpress(doTask)" ng-show="doTask.doTaskStatus >= 1">编辑快递</button>-->
+                                <!--&lt;!&ndash;<button class="btn btn-warning" ng-click="cancel(doTask)">撤销任务单</button>&ndash;&gt;-->
+                                <!--</td>-->
+                                <!--</tr>-->
+                            </table>
+                            <div class="text-center">
+                                <ul class="pagination">
+                                    <li ng-if="page.done != 1"><a
+                                            ng-click="changePage(page.done-1, 'done')"
+                                            href="javascript:;;;">«</a></li>
+                                    <li ng-repeat="t in totalPage.done"><a
+                                            href="javascript:;;;"
+                                            ng-click="changePage(t, 'done')">{{t}}</a>
+                                    </li>
+                                    <li ng-if="page.done != total.done"><a
+                                            ng-click="changePage(page.done+1, 'done')"
+                                            href="javascript:;;;">»</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="cancel">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <p>
+                                        任务编号: <input type="text" ng-model="filter.cancel.doTaskDetailId" style="width: 50px;"/> &nbsp;
+                                        买手号: <input type="text" ng-model="filter.cancel.doTaskAccountName" style="width: 100px;"/> &nbsp;
+                                        平台: <select name="" ng-model="filter.cancel.taskPlatform">
+                                        <option value="">全部</option>
+                                        <option value="taobao">淘宝</option>
+                                        <option value="tmcancel">天猫</option>
+                                        <option value="jd">京东</option>
+                                    </select> &nbsp;
+                                        淘宝订单号: <input type="text" ng-model="filter.cancel.doTaskDetailOrderId" style="width: 100px;"/> &nbsp;
+                                        <button class="btn btn-success btn-xs" ng-click="query('cancel')">查询</button>
+                                        <button class="btn btn-info pull-right" ng-click="printExpress()">打印快递 </button>
+                                    </p>
+                                </div>
+                            </div>
+                            <table class="table" ng-repeat="doTask in data.cancel"
+                                   style="margin-bottom: 70px">
+                                <tr>
+                                    <td colspan="4">
+                                        <div class="label label-info"
+                                             ng-if="doTask.taskTransportType == 'zixuan'">
+                                            自选快递
+                                        </div>
+                                        <div class="label label-success"
+                                             ng-if="doTask.taskTransportType == 'pingtai'">
+                                            平台快递
+                                        </div>
+                                        <div class="label label-warning">
+                                            {{statusMap.platform[doTask.taskPlatform]}}
+                                        </div>
+                                        <div class="btn-group pull-right">
+                                            <button data-toggle="dropdown"
+                                                    class="btn btn-success dropdown-toggle btn-xs"
+                                                    type="button">操作<span
+                                                    class="caret"></span>
+                                            </button>
+                                            <ul role="menu"
+                                                class="dropdown-menu">
+                                                <li ng-show="doTask.doTaskStatus == 1">
+                                                    <a ng-click="addExpress(doTask)">添加快递</a>
+                                                </li>
+                                                <li ng-show="doTask.doTaskStatus >= 1">
+                                                    <a ng-click="editExpress(doTask)">编辑快递</a>
+                                                </li>
+                                                <li>
+                                                    <a ng-click="cancel(doTask)">撤销任务单</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>账号：{{doTask.username}}</td>
+                                    <td>淘宝：{{doTask.doTaskAccountName}}</td>
+                                    <td>任务编号：{{doTask.doTaskDetailDoTaskId}}
+                                    </td>
+                                    <td>商家账号：{{doTask.taskUserName}}</td>
+                                </tr>
+                                <tr>
+                                    <td>店铺名称：{{doTask.taskShopName}}</td>
+                                    <td>产品名称：{{doTask.taskName}}</td>
+                                    <td>产品链接：{{doTask.taskUrl}}</td>
+                                    <td>产品单价：{{doTask.taskTotalMoney}}元</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">聊天记录截图：<a
+                                            href="{{doTask.doTaskDetailTalkImage}}"
+                                            target="_blank"><img
+                                            ng-src="{{doTask.doTaskDetailTalkImage}}"
+                                            alt="" width="50"/></a></td>
+                                    <td colspan="2">付款记录截图：<a
+                                            href="{{doTask.doTaskDetailOrderImage}}"
+                                            target="_blank"><img
+                                            ng-src="{{doTask.doTaskDetailOrderImage}}"
+                                            alt="" width="50"/></a></td>
+                                </tr>
+                                <tr>
+                                    <td>快递名称： <input type="text"
+                                                     ng-model="doTask.doTaskExtendExpressName"/>
+                                    </td>
+                                    <td>快递单号： <input
+                                            ng-model="doTask.doTaskExtendExpressId"
+                                            type="text"/></td>
+                                    <td>
+                                        <p>
+                                            淘宝订单号：{{doTask.doTaskDetailOrderId}}
+                                        </p>
+
+                                        <p>创建时间：{{doTask.doTaskDetailCreateTime
+                                            | date: 'yyyy-MM-dd HH:mm:ss'}}</p>
+                                    </td>
+                                    <td>
+                                        任务状态：{{statusMap[doTask.doTaskStatus]}}
+                                    </td>
+                                </tr>
+                                <!--<tr>-->
+                                <!--<td colspan="4">-->
+                                <!--<button class="btn btn-warning" ng-click="addExpress(doTask)" ng-show="doTask.doTaskStatus == 1">添加快递</button>-->
+                                <!--<button class="btn btn-warning" ng-click="editExpress(doTask)" ng-show="doTask.doTaskStatus >= 1">编辑快递</button>-->
+                                <!--&lt;!&ndash;<button class="btn btn-warning" ng-click="cancel(doTask)">撤销任务单</button>&ndash;&gt;-->
+                                <!--</td>-->
+                                <!--</tr>-->
+                            </table>
+                            <div class="text-center">
+                                <ul class="pagination">
+                                    <li ng-if="page.cancel != 1"><a
+                                            ng-click="changePage(page.cancel-1, 'cancel')"
+                                            href="javascript:;;;">«</a></li>
+                                    <li ng-repeat="t in totalPage.cancel"><a
+                                            href="javascript:;;;"
+                                            ng-click="changePage(t, 'cancel')">{{t}}</a>
+                                    </li>
+                                    <li ng-if="page.cancel != total.cancel"><a
+                                            ng-click="changePage(page.cancel+1, 'cancel')"
+                                            href="javascript:;;;">»</a></li>
+                                </ul>
+                            </div>
+                        </div>
                         <div class="tab-pane" id="all">
                             <div class="row">
                                 <div class="col-lg-12">
@@ -49,10 +539,10 @@
                                         <option value="">全部</option>
                                         <option value="-1">拒绝</option>
                                         <option value="1">待添加发货单</option>
-                                        <option value="2">待商家发货</option>
-                                        <option value="3">待买手收货</option>
-                                        <option value="4">待买手收货</option>
-                                        <option value="5">待商家退款</option>
+                                        <option value="2">待发货</option>
+                                        <option value="3">待收货</option>
+                                        <option value="4">待退款</option>
+                                        <option value="5">待确认退款</option>
                                         <option value="6">待买手确认退款</option>
                                         <option value="8">买手申请提现</option>
                                         <option value="9">买手提现成功</option>

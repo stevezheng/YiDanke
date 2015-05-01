@@ -35,22 +35,27 @@
       var data, page;
       if (type == 'do') {
         data = $scope.filter.do;
+        data.doTaskStatus = 1;
         page = $scope.page.do;
       } else if (type == 'doing') {
         data = $scope.filter.doing;
         page = $scope.page.doing;
+        //不规范，临时方案
+        data.doTaskStatus = ['exp', '> 1 and doTaskStatus < 5'];
       } else if (type == 'done') {
         data = $scope.filter.done;
         page = $scope.page.done;
+        data.doTaskStatus = ['<=', 6];
       } else if (type == 'cancel') {
         data = $scope.filter.cancel;
         page = $scope.page.cancel;
+        data.doTaskStatus = -1;
       } else if (type == 'all') {
         data = $scope.filter.all;
         page = $scope.page.all;
       }
 
-      var data = _.pick(data, function(value, key, object) {
+      data = _.pick(data, function(value, key, object) {
         if (value != '') {
           return true;
         }
@@ -154,16 +159,25 @@
     };
 
     $scope.cancelExpress = function(doTask) {
-      var data = {};
-      data.doTaskExtendDoTaskId = doTask.doTaskDetailDoTaskId;
-      $http.post('/admin/dotask/cancelExpress', data)
-        .success(function(res) {
-          if (res.errno == 0) {
-            alert(res.data);
-          } else {
-            alert(res.errmsg);
-          }
-        })
+      var r = confirm('请确认是否要撤销任务单');
+
+      if (r) {
+        var data = {};
+        if (!doTask.doTaskDetailDoTaskId) {
+          alert('撤销失败');
+          return false;
+        }
+        data.doTaskExtendDoTaskId = doTask.doTaskDetailDoTaskId;
+        $http.post('/admin/dotask/cancel', data)
+          .success(function(res) {
+            if (res.errno == 0) {
+              alert(res.data);
+              doTask.doTaskStatus = -1;
+            } else {
+              alert(res.errmsg);
+            }
+          })
+      }
     };
 
     $scope.printExpress = function() {

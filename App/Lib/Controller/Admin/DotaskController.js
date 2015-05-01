@@ -19,7 +19,11 @@ module.exports = Controller("Admin/BaseController", function(){
           , data = self.post('data') || {};
 
         data = _.mapObject(data, function(val, key) {
-          return ['like', '%' + val + '%'];
+          if (key == 'doTaskStatus') {
+            return val
+          } else {
+            return ['like', '%' + val + '%'];
+          }
         });
 
         if (data.taskPlatform) {
