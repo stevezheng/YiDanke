@@ -29,7 +29,21 @@
       , all: {}
     };
 
-    $scope.query = query;
+    $scope.query = function(type) {
+      if (type == 'do') {
+        $scope.page.do = 1;
+      } else if (type == 'doing') {
+        $scope.page.doing = 1;
+      } else if (type == 'done') {
+        $scope.page.done = 1;
+      } else if (type == 'cancel') {
+        $scope.page.cancel = 1;
+      } else if (type == 'all') {
+        $scope.page.all = 1;
+      }
+
+      query(type);
+    };
 
     function query(type) {
       var data, page;
@@ -84,7 +98,25 @@
               $scope.totalPage.doing.push(i+1);
             }
           } else if (type == 'done') {
+            $scope.data.done = res.data.data;
+            $scope.total.done  = res.data.total;
+            $scope.count.done = res.data.count;
+            $scope.num.done = res.data.num;
+            $scope.totalPage.done = [];
+            for (var i = 0; i < res.data.total; i++) {
+              $scope.totalPage.done.push(i+1);
+            }
+
           } else if (type == 'cancel') {
+            $scope.data.cancel = res.data.data;
+            $scope.total.cancel  = res.data.total;
+            $scope.count.cancel = res.data.count;
+            $scope.num.cancel = res.data.num;
+            $scope.totalPage.cancel = [];
+            for (var i = 0; i < res.data.total; i++) {
+              $scope.totalPage.cancel.push(i+1);
+            }
+
           } else if (type == 'all') {
             $scope.data.all = res.data.data;
             $scope.total.all  = res.data.total;
@@ -95,7 +127,6 @@
               $scope.totalPage.all.push(i+1);
             }
             
-            console.log($scope.data.all);
           }
         })
     }
