@@ -32,12 +32,6 @@ module.exports = Model(function() {
           required: '城市不能为空'
         }
       },
-      'shopArea': {
-        valid: ['required']
-        , msg: {
-          required: '地区不能为空'
-        }
-      }
     },
 
     all: function(shopUserId) {

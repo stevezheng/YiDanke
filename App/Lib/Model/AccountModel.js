@@ -44,12 +44,6 @@ module.exports = Model(function() {
           required: '城市不能为空'
         }
       },
-      'accountArea': {
-        valid: ['required']
-        , msg: {
-          required: '地区不能为空'
-        }
-      }
     },
 
     all: function(accountUserId) {
