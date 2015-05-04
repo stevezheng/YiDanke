@@ -314,6 +314,20 @@
         .success(function (res) {
           $scope.doTasks = res.data;
 
+          $scope.doings = _.filter(res.data, function(item) {
+            return (item.doTaskStatus < 6 && item.doTaskStatus > 0);
+          });
+          
+          console.log($scope.doings);
+
+          $scope.dones = _.filter(res.data, function(item) {
+            return (item.doTaskStatus == 6) ;
+          });
+
+          $scope.cancels = _.filter(res.data, function(item) {
+            return (item.doTaskStatus == -1);
+          });
+
           $scope.taobaoShouhuos = _.where(res.data, {
             doTaskStatus: 3,
             taskPlatform: 'taobao'
@@ -352,11 +366,13 @@
     $scope.statusMap = {
       dotask: {
         '-1': '已撤销'
-        , 0: '创建中'
-        , 1: '未付款'
-        , 2: '待审核'
-        , 3: '进行中'
-        , 4: '已完成'
+        , '0': '待完成'
+        , '1': '待添加订单号'
+        , '2': '待发货'
+        , '3': '待收货'
+        , '4': '待退款'
+        , '5': '待确认退款'
+        , '6': '已完成'
       }
     };
 

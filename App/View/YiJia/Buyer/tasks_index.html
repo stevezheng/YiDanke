@@ -92,7 +92,7 @@
                     </div>
                 </div>
             </section>
-            <section class="panel" style="display: none;">
+            <section class="panel">
                 <header class="panel-heading">
                     任务进展
                 </header>
@@ -124,12 +124,136 @@
                     <div class="panel-body">
                         <div class="tab-content tasi-tab">
                             <div class="tab-pane active" id="doing">
+                                <article class="media box" ng-repeat="doing in doings">
+                                    <a class="pull-left thumb p-thumb">
+                                        <img ng-src="{{doing.taobaoImage || doing.tmallImage || doing.jdImage}}">
+                                    </a>
+
+                                    <div class="media-body">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <span class=" p-head">{{doing.taskShopName}}</span>
+                                            </div>
+                                            <div class="col-lg-6">
+                                            <span>
+                                                任务编号： {{doing.doTaskDetailDoTaskId}}
+                                                <!--<a href="/buyer/tasks/doTaskDetail?id={{doing.doTaskDetailDoTaskId}}">-->
+                                                    <!--[详情]-->
+                                                <!--</a>-->
+                                                接手时间：{{doing.doTaskCreateTime | date: 'yyyy-MM-dd HH:mm'}}
+                                            </span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <span class="label label-primary" style="padding: 2px">平台返款</span>
+                                                {{doing.taskName}}
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <span>任务状态：{{statusMap.dotask[doing.doTaskStatus]}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
                             </div>
                             <div class="tab-pane" id="done">
+                                <article class="media box" ng-repeat="done in dones">
+                                    <a class="pull-left thumb p-thumb">
+                                        <img ng-src="{{done.taobaoImage || done.tmallImage || done.jdImage}}">
+                                    </a>
+
+                                    <div class="media-body">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <span class=" p-head">{{done.taskShopName}}</span>
+                                            </div>
+                                            <div class="col-lg-6">
+                                            <span>
+                                                任务编号： {{done.doTaskDetailDoTaskId}}
+                                                <!--<a href="/buyer/tasks/doTaskDetail?id={{done.doTaskDetailDoTaskId}}">-->
+                                                    <!--[详情]-->
+                                                <!--</a>-->
+                                                接手时间：{{done.doTaskCreateTime | date: 'yyyy-MM-dd HH:mm'}}
+                                            </span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <span class="label label-primary" style="padding: 2px">平台返款</span>
+                                                {{done.taskName}}
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <span>任务状态：{{statusMap.dotask[done.doTaskStatus]}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
                             </div>
                             <div class="tab-pane " id="cancel">
+                                <article class="media box" ng-repeat="cancel in cancels">
+                                    <a class="pull-left thumb p-thumb">
+                                        <img ng-src="{{cancel.taobaoImage || cancel.tmallImage || cancel.jdImage}}">
+                                    </a>
+
+                                    <div class="media-body">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <span class=" p-head">{{cancel.taskShopName}}</span>
+                                            </div>
+                                            <div class="col-lg-6">
+                                            <span>
+                                                任务编号： {{cancel.doTaskDetailDoTaskId}}
+                                                <!--<a href="/buyer/tasks/doTaskDetail?id={{cancel.doTaskDetailDoTaskId}}">-->
+                                                    <!--[详情]-->
+                                                <!--</a>-->
+                                                接手时间：{{cancel.doTaskCreateTime | date: 'yyyy-MM-dd HH:mm'}}
+                                            </span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <span class="label label-primary" style="padding: 2px">平台返款</span>
+                                                {{cancel.taskName}}
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <span>任务状态：{{statusMap.dotask[cancel.doTaskStatus]}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
                             </div>
                             <div class="tab-pane " id="all">
+                                <article class="media box" ng-repeat="doTask in doTasks">
+                                    <a class="pull-left thumb p-thumb">
+                                        <img ng-src="{{doTask.taobaoImage || doTask.tmallImage || doTask.jdImage}}">
+                                    </a>
+
+                                    <div class="media-body">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <span class=" p-head">{{doTask.taskShopName}}</span>
+                                            </div>
+                                            <div class="col-lg-6">
+                                            <span>
+                                                任务编号： {{doTask.doTaskDetailDoTaskId}}
+                                                <!--<a href="/buyer/tasks/doTaskDetail?id={{doTask.doTaskDetailDoTaskId}}">-->
+                                                    <!--[详情]-->
+                                                <!--</a>-->
+                                                接手时间：{{doTask.doTaskCreateTime | date: 'yyyy-MM-dd HH:mm'}}
+                                            </span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <span class="label label-primary" style="padding: 2px">平台返款</span>
+                                                {{doTask.taskName}}
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <span>任务状态：{{statusMap.dotask[doTask.doTaskStatus]}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
                             </div>
                         </div>
                     </div>
