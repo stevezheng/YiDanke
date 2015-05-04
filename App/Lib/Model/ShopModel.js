@@ -121,7 +121,7 @@ module.exports = Model(function() {
         });
     },
 
-    adminEditShop: function(id, shopName, shopUrl, shopProvince, shopCity, shopArea, shopAddress, shopExpressNumber) {
+    adminEditShop: function(id, shopName, shopUrl, shopProvince, shopCity, shopArea, shopAddress, shopExpressPhone, shopExpressNumber) {
       var self = this;
 
       return self
@@ -135,6 +135,7 @@ module.exports = Model(function() {
           , 'shopCity': shopCity
           , 'shopArea': shopArea
           , 'shopAddress': shopAddress
+          , 'shopExpressPhone': shopExpressPhone
           , 'shopExpressNumber': shopExpressNumber
         });
     }

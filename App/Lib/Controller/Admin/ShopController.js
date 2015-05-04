@@ -65,10 +65,11 @@ module.exports = Controller("Admin/BaseController", function(){
         var shopCity= self.post('shopCity');
         var shopArea= self.post('shopArea');
         var shopAddress= self.post('shopAddress');
+        var shopExpressPhone = self.post('shopExpressPhone');
         var shopExpressNumber= self.post('shopExpressNumber');
 
         return shop
-          .adminEditShop(id, shopName, shopUrl, shopProvince, shopCity, shopArea, shopAddress, shopExpressNumber)
+          .adminEditShop(id, shopName, shopUrl, shopProvince, shopCity, shopArea, shopAddress, shopExpressPhone, shopExpressNumber)
           .then(function() {
             return self.success('修改成功');
           })
