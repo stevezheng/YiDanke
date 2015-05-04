@@ -49,10 +49,27 @@
                                 <td>{{d.moneyOrder}}</td>
                                 <td>{{d.moneyCreateTime | date: 'yyyy-MM-dd HH:mm'}}</td>
                                 <td>
-                                    <button class="btn btn-success" ng-click="pass(d)" ng-if="d.moneyStatus == 0">通过</button>
-                                    <button class="btn btn-danger" ng-click="unpass(d)" ng-if="d.moneyStatus == 0">拒绝</button>
-                                    <button class="btn btn-default" ng-if="d.moneyStatus != 0">通过</button>
-                                    <button class="btn btn-default" ng-if="d.moneyStatus != 0">拒绝</button>
+                                    <div class="btn-group pull-right">
+                                        <button data-toggle="dropdown"
+                                                class="btn btn-success dropdown-toggle btn-xs"
+                                                type="button">操作<span
+                                                class="caret"></span>
+                                        </button>
+                                        <ul role="menu" ng-show="d.moneyStatus == 0"
+                                            class="dropdown-menu">
+                                            <li>
+                                                <a ng-click="pass(d)">通过</a>
+                                            </li>
+                                            <li>
+                                            <a ng-click="unpass(d)">拒绝</a>
+                                            </li>
+                                        </ul>
+                                        <ul role="menu" ng-show="d.moneyStatus != 0" class="dropdown-menu">
+                                        <li>
+                                            <a >已审核</a>
+                                        </li>
+                                            </ul>
+                                    </div>
                                 </td>
                             </tr>
                         </table>
