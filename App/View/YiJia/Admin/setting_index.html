@@ -1,5 +1,5 @@
 <% include ./index_header.html %>
-<section id="container">
+<section id="container" ng-controller="settingCtrl">
     <% include ./index_nav.html %>
     <!--main content start-->
     <section id="main-content">
@@ -9,6 +9,15 @@
                         系统设置
                     </header>
                     <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <p>修改管理员密码</p>
+                                <p>旧密码: <input type="password" ng-model="user.oPassword"/></p>
+                                <p>新密码: <input type="password" ng-model="user.password"/></p>
+                                <p>确认密码: <input type="password" ng-model="user.rPassword"/></p>
+                                <p><button class="btn btn-info" ng-click="submit()">确认</button></p>
+                            </div>
+                        </div>
                     </div>
                 </section>
         </section>
