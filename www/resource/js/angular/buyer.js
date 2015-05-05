@@ -511,7 +511,7 @@
       $http.post('/buyer/withdraw/withdrawMoney', {
         tradePassword: $scope.withdrawMoneyPassword
         , money: $scope.checkroles.join(',')
-        , bankType: $scope.withdrawMoneyType
+        , bankId: $scope.withdrawMoneyType
       })
         .success(function(res) {
           if (res.errno == 0) {
@@ -542,7 +542,7 @@
       $http.post('/buyer/withdraw/withdrawCoin', {
           tradePassword: $scope.withdrawCoinPassword
           , coin: $scope.withdrawCoin
-          , bankType: $scope.withdrawCoinType
+          , bankId: $scope.withdrawCoinType
         })
         .success(function(res) {
           if (res.errno == 0) {

@@ -1,5 +1,5 @@
 <% include ./index_header.html %>
-<section id="container">
+<section id="container" ng-controller="moneyOutCtrl">
     <% include ./index_nav.html %>
     <!--main content start-->
     <section id="main-content">
@@ -13,16 +13,57 @@
                             <thead>
                             <tr>
                                 <th>id</th>
+                                <th>状态</th>
                                 <th>用户</th>
                                 <th>金额</th>
-                                <th>类型</th>
-                                <th>状态</th>
-                                <th>平台</th>
+                                <th>提现银行</th>
                                 <th>订单号</th>
+                                <th>备注</th>
                                 <th>创建时间</th>
                             </tr>
                             </thead>
                             <tbody>
+                            <tr ng-repeat="d in data">
+                                <td>{{d.id}}</td>
+                                <td>{{statusMap.status[d.withdrawStatus]}}</td>
+                                <td>{{d.username}}</td>
+                                <td>{{d.withdrawValue | number: 2}}</td>
+                                <td>
+                                    <p>
+                                        {{statusMap.bankType[d.bankType]}}
+                                    </p>
+                                    <p>提现账号名称:{{d.bankRealName}}</p>
+                                    <p>提现账号:{{d.bankAccount}}</p>
+                                    <p ng-if="d.bankName">提现银行名称:{{d.bankName}}</p>
+                                    <p ng-if="d.bankArea">提现银行地区:{{d.bankArea}}</p>
+                                </td>
+                                <td>{{d.withdrawDoTaskIds}}</td>
+                                <td>{{d.withdrawComment}}</td>
+                                <td>{{d.moneyCreateTime | date: 'yyyy-MM-dd HH:mm'}}</td>
+                                <td>
+                                    <div class="btn-group pull-right">
+                                        <button data-toggle="dropdown"
+                                                class="btn btn-success dropdown-toggle btn-xs"
+                                                type="button">操作<span
+                                                class="caret"></span>
+                                        </button>
+                                        <ul role="menu" ng-show="d.withdrawStatus == 0"
+                                            class="dropdown-menu">
+                                            <li>
+                                                <a ng-click="pass(d)">通过</a>
+                                            </li>
+                                            <!--<li>-->
+                                                <!--<a ng-click="unpass(d)">拒绝</a>-->
+                                            <!--</li>-->
+                                        </ul>
+                                        <ul role="menu" ng-show="d.withdrawStatus != 0" class="dropdown-menu">
+                                            <li>
+                                                <a >已审核</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr
                             </tbody>
                         </table>
                         <div class="text-center">

@@ -107,8 +107,24 @@
       getData();
     };
 
+    $scope.pass = function(d) {
+      var r = prompt('请输入提现备注，如转账流水号等信息');
+      if (r) {
+        $http.post('/admin/money/passOut', {id: d.id, withdrawComment: r})
+          .success(function(res) {
+            if (res.errno == 0) {
+              alert(res.data);
+              d.withdrawStatus = 1;
+              d.withdrawComment = r;
+            } else {
+              alert(res.errmsg);
+            }
+          })
+      }
+    };
+
     function getData() {
-      $http.post('/admin/user/out', {page: $scope.page})
+      $http.post('/admin/money/out', {page: $scope.page})
         .success(function(res) {
           if (res.errno == 0) {
             $scope.data = res.data.data;
@@ -125,5 +141,32 @@
     }
 
     getData();
+
+    $scope.statusMap = {
+      type: {
+        '0': '金币'
+        , '1': '押金'
+        , '2': '流量'
+      },
+
+      bankType: {
+        '0': '财付通'
+        , '1': '支付宝'
+        , '2': '银行'
+      },
+
+      status: {
+        '0': '待审核'
+        , '1': '通过'
+        , '-1': '拒绝'
+      },
+
+      platform: {
+        'alipay': '支付宝'
+        , 'kuaiqian': '快钱'
+        , 'tenpay': '财付通'
+        , 'bank': '银行'
+      }
+    };
   })
 })();

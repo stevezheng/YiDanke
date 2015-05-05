@@ -143,7 +143,6 @@ module.exports = Controller("Admin/BaseController", function(){
     },
 
     outAction: function() {
-      //todo: 这里要新建表
       var self = this;
       self.assign('title', '提现');
 
@@ -154,15 +153,65 @@ module.exports = Controller("Admin/BaseController", function(){
       if (self.isPost()) {
         var page = self.post('page');
 
-        return D('user')
-          .order('id desc')
+        return D('withdraw')
+          .field(['yi_withdraw.*', 'yi_user.username', 'yi_bank.bankType','yi_bank.bankName', 'yi_bank.bankRealName', 'yi_bank.bankAccount'])
+          .join({
+            table: 'user'
+            , join: 'left'
+            , on: {'withdrawUserId': 'id'}
+          })
+          .join({
+            table: 'bank'
+            , join: 'left'
+            , on: {'withdrawBankId': 'id'}
+          })
+          .order('yi_withdraw.id desc')
           .page(page, 20)
-          .where({type: 1})
           .countSelect()
           .then(function(res) {
             return self.success(res);
           })
+          .catch(function(err) {
+            console.error(err.stack);
+            return self.error(err);
+          })
       }
     },
+
+    passOutAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+
+      }
+
+      if (self.isPost()) {
+        var id = self.post('id');
+        var withdrawComment = self.post('withdrawComment');
+
+        return D('withdraw')
+          .where({id: id})
+          .find()
+          .then(function(withdraw) {
+            if (withdraw.withdrawStatus == 0) {
+              var data = {};
+            } else {
+              return self.error(500, '请勿重复审核');
+            }
+          })
+          .then(function() {
+            return D('withdraw')
+              .where({id: id})
+              .update({withdrawStatus: 1, withdrawComment: withdrawComment})
+          })
+          .then(function() {
+            return self.success('通过审核成功');
+          })
+          .catch(function(err) {
+            return self.error(500, '通过审核失败', err);
+          })
+      }
+    }
   };
 });
