@@ -335,7 +335,7 @@
                                 <table class="table">
                                     <thead>
                                     <tr>
-                                        <th><input type="checkbox"/>&nbsp;&nbsp;全选</th>
+                                        <th><input type="checkbox" ng-model="checkType" ng-click="check()"/>&nbsp;&nbsp;全选</th>
                                         <th>商品信息</th>
                                         <th>商家/买号</th>
                                         <th>退款金额</th>
@@ -344,7 +344,9 @@
                                     </thead>
                                     <tbody>
                                     <tr ng-repeat="dotask in dotasks">
-                                        <td><input type="checkbox"/> {{dotask.id}}</td>
+                                        <td>
+                                            <input type="checkbox" checklist-model="checkroles" checklist-value="dotask.id">
+                                            {{dotask.id}}</td>
                                         <td>
                                             <div class="row">
                                                 <div class="col-lg-2">
@@ -369,6 +371,56 @@
                                     </tr>
                                     </tbody>
                                 </table>
+
+                                <p>
+
+                                <div class="col-lg-2">
+                                    选择提现账号:
+                                </div>
+                                <div class="class-col-lg-6">
+                                    <select name="" id="" ng-hide="tenpay.bankStatus != 1 && alipay.bankStatus != 1 && bank.bankStatus != 1"
+                                            ng-model="withdrawMoneyType">
+                                        <option value="">选择提现账号</option>
+                                        <option ng-value="tenpay.id" ng-if="tenpay.bankStatus == 1">财付通</option>
+                                        <option ng-value="alipay.id" ng-if="alipay.bankStatus == 1">支付宝</option>
+                                        <option ng-value="bank.id" ng-if="bank.bankStatus == 1">银行</option>
+                                    </select>
+
+                                    <span ng-show="tenpay.bankStatus != 1 && alipay.bankStatus != 1 && bank.bankStatus != 1">
+                                        尚无审核成功的提现账号！
+                                        <a href="/buyer/withdraw" class="btn btn-info">查看提现账号</a>
+                                    </span>
+                                </div>
+                                </p>
+                                <p>
+
+                                    <% if (cUser.tradePassword) { %>
+
+                                <div class="col-lg-2">
+                                    请输入支付密码:
+                                </div>
+                                <div class="class-col-lg-6">
+                                    <input type="password"
+                                           ng-model="withdrawMoneyPassword"/>
+                                </div>
+                                <% } else { %>
+                                <div class="col-lg-2">
+                                    请输入支付密码:
+                                </div>
+                                <div class="class-col-lg-6">
+                                    尚未设置支付密码!
+                                    <a href="/buyer" class="btn btn-info">设置支付密码</a>
+                                </div>
+                                <% } %>
+                                </p>
+                                <p>
+
+                                <div class="col-lg-2">
+                                </div>
+                                <div class="class-col-lg-6">
+                                    <button class="btn btn-info" ng-click="submitWithDrawMoney()">确认</button>
+                                </div>
+                                </p>
                             </div>
                         </div>
                     </div>

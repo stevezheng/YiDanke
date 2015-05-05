@@ -36,9 +36,10 @@ module.exports = Controller("Buyer/BaseController", function(){
               if (obj.doTaskStatus == 6) {
                 tixian += obj.doTaskDetailOrderMoney || 0;
               }
-              dianfu += obj.doTaskDetailOrderMoney || 0;
-              console.log(dianfu);
-              console.log(tixian);
+
+              if (obj.doTaskStatus < 8) {
+                dianfu += obj.doTaskDetailOrderMoney || 0;
+              }
             }
             self.assign('doTasks', res);
             self.assign('doingCount', doingCount);

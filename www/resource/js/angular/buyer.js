@@ -1,5 +1,5 @@
 (function() {
-  var BuyerModule = angular.module('YiApp.Buyer', ['angularFileUpload']);
+  var BuyerModule = angular.module('YiApp.Buyer', ['angularFileUpload', 'checklist-model']);
   
   BuyerModule.controller('buyerLogCoinCtrl', function ($scope, $http) {
     $scope.data = [];
@@ -321,7 +321,7 @@
           console.log($scope.doings);
 
           $scope.dones = _.filter(res.data, function(item) {
-            return (item.doTaskStatus == 6) ;
+            return (item.doTaskStatus >= 6) ;
           });
 
           $scope.cancels = _.filter(res.data, function(item) {
@@ -373,6 +373,8 @@
         , '4': '待退款'
         , '5': '待确认退款'
         , '6': '已完成'
+        , '8': '已申请提现'
+        , '9': '已提现'
       }
     };
 
@@ -465,6 +467,60 @@
         url: '/home/index/upload',
         file: file
       })
+    };
+
+    $scope.checkroles = [];
+    $scope.checkType = false;
+    $scope.check = function() {
+      if ($scope.checkType == false) {
+        $scope.checkroles = $scope.dotasks.map(function(item) { return item.id; });
+      } else {
+        $scope.checkroles = [];
+      }
+    };
+    $scope.checkAll = function() {
+      //var roles = [];
+      //for (var i = 0; i < $scope.data.length; i++) {
+      //  var obj = $scope.data[i];
+      //  roles.push(obj.id);
+      //}
+      //$scope.checkroles = angular.copy(roles);
+      $scope.checkroles = $scope.dotasks.map(function(item) { return item.id; });
+    };
+
+    $scope.uncheckAll = function() {
+      $scope.checkroles = [];
+    };
+
+    $scope.submitWithDrawMoney = function() {
+
+      if (!$scope.withdrawMoneyType) {
+        alert('请选择提现账号');
+        return false;
+      }
+      if (!$scope.withdrawMoneyPassword) {
+        alert('请输入支付密码');
+        return false;
+      }
+
+      if ($scope.checkroles.length == 0) {
+        alert('请选择提现订单');
+        return false;
+      }
+
+      $http.post('/buyer/withdraw/withdrawMoney', {
+        tradePassword: $scope.withdrawMoneyPassword
+        , money: $scope.checkroles.join(',')
+        , bankType: $scope.withdrawMoneyType
+      })
+        .success(function(res) {
+          if (res.errno == 0) {
+            alert(res.data);
+            //location.reload();
+          } else {
+            alert(res.errmsg);
+          }
+        });
     };
 
     $scope.submitWithDrawCoin = function() {

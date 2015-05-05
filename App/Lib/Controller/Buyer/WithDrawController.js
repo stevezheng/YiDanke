@@ -177,5 +177,73 @@ module.exports = Controller("Buyer/BaseController", function(){
           })
       }
     },
+
+    withdrawMoneyAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+
+      }
+
+      if (self.isPost()) {
+        var tradePassword = self.post('tradePassword')
+          , bankId = self.post('bankId')
+          , money = self.post('money');
+
+        var withdraw = WithdrawModel();
+        var user = UserModel();
+        var sum = 0;
+
+        return D('user')
+          .where({id: self.cUser.id, tradePassword: md5(tradePassword)})
+          .find()
+          .then(function(res) {
+            if (!isEmpty(res)) {
+              return D('do_task_detail')
+                .where({doTaskDetailDoTaskId: ['IN', money]})
+                .sum('doTaskDetailOrderMoney')
+            } else {
+              return self.error(500, '支付密码错误');
+            }
+          })
+          .then(function(res) {
+            sum = res;
+          })
+          .then(function() {
+            return D('do_task')
+              .where({id: ['IN', money]})
+              .update({doTaskStatus: 8})
+          })
+          .then(function() {
+            return withdraw
+              .addOne(self.cUser.id, bankId, 1, sum, money, '')
+          })
+          .then(function() {
+            return Log
+              .money(
+              -1
+              , sum
+              , 0
+              , self.cUser.id
+              , self.cUser.username
+              , 0
+              , self.ip()
+              , '申请提现押金' + sum + '元'
+            )
+          })
+          .then(function() {
+            return user
+              .reloadCurrentUser(self)
+          })
+          .then(function() {
+            return self.success('申请提现成功，请耐心等待工作人员为您处理申请');
+          })
+          .catch(function(err) {
+            console.error(err.stack);
+            return self.error(500, '提现失败');
+          })
+      }
+    }
   };
 });
