@@ -473,7 +473,7 @@
     $scope.checkType = false;
     $scope.check = function() {
       if ($scope.checkType == false) {
-        $scope.checkroles = $scope.dotasks.map(function(item) { return item.id; });
+        $scope.checkroles = $scope.dotasks.map(function(item) { return item.doTaskDetailDoTaskId; });
       } else {
         $scope.checkroles = [];
       }
@@ -485,7 +485,7 @@
       //  roles.push(obj.id);
       //}
       //$scope.checkroles = angular.copy(roles);
-      $scope.checkroles = $scope.dotasks.map(function(item) { return item.id; });
+      $scope.checkroles = $scope.dotasks.map(function(item) { return item.doTaskDetailDoTaskId; });
     };
 
     $scope.uncheckAll = function() {
@@ -516,7 +516,7 @@
         .success(function(res) {
           if (res.errno == 0) {
             alert(res.data);
-            //location.reload();
+            location.reload();
           } else {
             alert(res.errmsg);
           }

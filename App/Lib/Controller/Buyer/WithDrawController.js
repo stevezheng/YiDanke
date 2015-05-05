@@ -212,7 +212,7 @@ module.exports = Controller("Buyer/BaseController", function(){
           })
           .then(function() {
             return D('do_task')
-              .where({id: ['IN', money]})
+              .where({id: ['IN', money], doTaskUserId: self.cUser.id})
               .update({doTaskStatus: 8})
           })
           .then(function() {
