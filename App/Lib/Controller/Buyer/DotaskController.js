@@ -86,7 +86,7 @@ module.exports = Controller("Buyer/BaseController", function(){
             }
 
             return doTask
-              .hasDoneShop(self.cUser.id, accountId, _task.taskShopName)
+              .hasDoneShop(self.cUser.id, accountId, _task.taskShopId)
           })
           .then(function(res) {
             if (!isEmpty(res)) {
@@ -289,7 +289,7 @@ module.exports = Controller("Buyer/BaseController", function(){
             }
 
             return doTask
-              .hasDoneShop(self.cUser.id, accountId, _task.taskShopName)
+              .hasDoneShop(self.cUser.id, accountId, _task.taskShopId)
           })
           .then(function(res) {
             if (!isEmpty(res)) {

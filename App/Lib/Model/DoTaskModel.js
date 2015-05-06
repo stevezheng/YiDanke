@@ -245,14 +245,14 @@ module.exports = Model(function() {
         .find()
     },
 
-    hasDoneShop: function(userId, accountId, shopName) {
+    hasDoneShop: function(userId, accountId, shopId) {
       var self = this;
 
       return self
         //通过淘宝号判断是否做过
         //.where({doTaskUserId: userId, doTaskAccountId: accountId, doTaskShopName: shopName})
         //通过平台号判断是否做过
-        .where({doTaskUserId: userId, doTaskShopName: shopName})
+        .where({doTaskUserId: userId, doTaskShopId: shopId})
         .find()
     },
 
