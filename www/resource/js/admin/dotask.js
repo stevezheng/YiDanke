@@ -169,16 +169,20 @@
         })
     };
 
+    $scope.doit = function(doTask) {
+      window.open('/admin/dotask/doit?id=' + doTask.id);
+    };
+
     $scope.cancel = function(doTask) {
       var r = confirm('请确认是否要撤销任务单');
 
       if (r) {
         var data = {};
-        if (!doTask.doTaskDetailDoTaskId) {
+        if (!doTask.id) {
           alert('撤销失败');
           return false;
         }
-        data.doTaskExtendDoTaskId = doTask.doTaskDetailDoTaskId;
+        data.id = doTask.id;
         $http.post('/admin/dotask/cancel', data)
           .success(function(res) {
             if (res.errno == 0) {
@@ -196,11 +200,11 @@
 
       if (r) {
         var data = {};
-        if (!doTask.doTaskDetailDoTaskId) {
+        if (!doTask.id) {
           alert('撤销失败');
           return false;
         }
-        data.doTaskExtendDoTaskId = doTask.doTaskDetailDoTaskId;
+        data.id = doTask.id;
         $http.post('/admin/dotask/cancel', data)
           .success(function(res) {
             if (res.errno == 0) {
@@ -233,6 +237,8 @@
       , '4': '待退款'
       , '5': '待确认退款'
       , '6': '已完成'
+      , '8': '已申请退款'
+      , '9': '申请退款已完成'
       , platform: {
         'taobao': '淘宝'
         , 'tmall': '天猫'

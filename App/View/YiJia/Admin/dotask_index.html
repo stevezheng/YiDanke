@@ -86,7 +86,7 @@
                                 <tr>
                                     <td>账号：{{doTask.username}}</td>
                                     <td>淘宝：{{doTask.doTaskAccountName}}</td>
-                                    <td>任务编号：{{doTask.doTaskDetailDoTaskId}}
+                                    <td>任务编号：{{doTask.id}}
                                     </td>
                                     <td>商家账号：{{doTask.taskUserName}}</td>
                                 </tr>
@@ -218,7 +218,7 @@
                                 <tr>
                                     <td>账号：{{doTask.username}}</td>
                                     <td>淘宝：{{doTask.doTaskAccountName}}</td>
-                                    <td>任务编号：{{doTask.doTaskDetailDoTaskId}}
+                                    <td>任务编号：{{doTask.id}}
                                     </td>
                                     <td>商家账号：{{doTask.taskUserName}}</td>
                                 </tr>
@@ -338,7 +338,7 @@
                                 <tr>
                                     <td>账号：{{doTask.username}}</td>
                                     <td>淘宝：{{doTask.doTaskAccountName}}</td>
-                                    <td>任务编号：{{doTask.doTaskDetailDoTaskId}}
+                                    <td>任务编号：{{doTask.id}}
                                     </td>
                                     <td>商家账号：{{doTask.taskUserName}}</td>
                                 </tr>
@@ -459,7 +459,7 @@
                                 <tr>
                                     <td>账号：{{doTask.username}}</td>
                                     <td>淘宝：{{doTask.doTaskAccountName}}</td>
-                                    <td>任务编号：{{doTask.doTaskDetailDoTaskId}}
+                                    <td>任务编号：{{doTask.id}}
                                     </td>
                                     <td>商家账号：{{doTask.taskUserName}}</td>
                                 </tr>
@@ -585,6 +585,9 @@
                                                 <li>
                                                     <a ng-click="cancel(doTask)">撤销任务单</a>
                                                 </li>
+                                                <li>
+                                                    <a ng-click="doit(doTask)">代做任务单</a>
+                                                </li>
                                             </ul>
                                         </div>
                                     </td>
@@ -592,7 +595,7 @@
                                 <tr>
                                     <td>账号：{{doTask.username}}</td>
                                     <td>淘宝：{{doTask.doTaskAccountName}}</td>
-                                    <td>任务编号：{{doTask.doTaskDetailDoTaskId}}
+                                    <td>任务编号：{{doTask.id}}
                                     </td>
                                     <td>商家账号：{{doTask.taskUserName}}</td>
                                 </tr>

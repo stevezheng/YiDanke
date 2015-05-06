@@ -152,10 +152,10 @@ module.exports = Controller("Admin/BaseController", function(){
       }
 
       if (self.isPost()) {
-        var doTaskExtendDoTaskId = self.post('doTaskExtendDoTaskId');
+        var id = self.post('id');
         var doTask;
         return D('do_task')
-          .where({id: doTaskExtendDoTaskId})
+          .where({id: id})
           .find()
           .then(function(res) {
             doTask = res;
@@ -164,7 +164,7 @@ module.exports = Controller("Admin/BaseController", function(){
               return self.error(500, '请勿重复撤销任务单');
             } else {
               return D('do_task')
-                .where({id: doTaskExtendDoTaskId})
+                .where({id: id})
                 .update({doTaskStatus: -1})
             }
           })
@@ -201,7 +201,7 @@ module.exports = Controller("Admin/BaseController", function(){
               , res.username
               , 1
               , self.ip()
-              , '管理员撤销任务单:' + doTaskExtendDoTaskId + '返回1金币');
+              , '管理员撤销任务单:' + id + '返回1金币');
           })
           .then(function() {
             return self.success('撤销成功');

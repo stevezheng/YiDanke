@@ -474,36 +474,51 @@ module.exports = Model(function() {
       var self = this;
 
       return self
+        .field(['yi_do_task.*'
+        ,'yi_user.username'
+        ,'yi_task.taskTransportType'
+        ,'yi_task.taskUserName'
+        ,'yi_task.taskShopName'
+        ,'yi_task.taskName'
+        ,'yi_task.taskUrl'
+        ,'yi_do_task_detail.doTaskDetailTalkImage'
+        ,'yi_do_task_detail.doTaskDetailOrderImage'
+        ,'yi_do_task_detail.doTaskDetailOrderId'
+        ,'yi_do_task_detail.doTaskDetailCreateTime'
+        ,'yi_do_task_extend.doTaskExtendExpressName'
+        ,'yi_do_task_extend.doTaskExtendExpressId'
+        ,'yi_task.taskTotalMoney'
+        ,'yi_task.taskPlatform'])
         .page(page, Number(num))
         .order('yi_do_task.id desc')
         .join({
           table: 'task'
           , join: 'left'
           , on: {
-            'doTaskTaskId': 'id'
+            'doTaskTaskId': 'yi_task.id'
           }
         })
-        .join({
-          table: 'task_taobao'
-          , join: 'left'
-          , on: {
-            'doTaskTaskId': 'taobaoTaskId'
-          }
-        })
-        .join({
-          table: 'task_tmall'
-          , join: 'left'
-          , on: {
-            'doTaskTaskId': 'tmallTaskId'
-          }
-        })
-        .join({
-          table: 'task_jd'
-          , join: 'left'
-          , on: {
-            'doTaskTaskId': 'jdTaskId'
-          }
-        })
+        //.join({
+        //  table: 'task_taobao'
+        //  , join: 'left'
+        //  , on: {
+        //    'doTaskTaskId': 'taobaoTaskId'
+        //  }
+        //})
+        //.join({
+        //  table: 'task_tmall'
+        //  , join: 'left'
+        //  , on: {
+        //    'doTaskTaskId': 'tmallTaskId'
+        //  }
+        //})
+        //.join({
+        //  table: 'task_jd'
+        //  , join: 'left'
+        //  , on: {
+        //    'doTaskTaskId': 'jdTaskId'
+        //  }
+        //})
         .join({
           table: 'task_extend'
           , join: 'left'
@@ -529,7 +544,7 @@ module.exports = Model(function() {
           table: 'user'
           , join: 'left'
           , on: {
-            'doTaskUserId': 'id'
+            'doTaskUserId': 'yi_user.id'
           }
         })
         .where(args)

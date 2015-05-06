@@ -22,6 +22,8 @@ module.exports = Controller("Admin/BaseController", function(){
         });
 
 
+        //todo 创建中的任务不显示
+
         if (data.id) {
           data['yi_task.id'] = data.id;
           delete data.id;
