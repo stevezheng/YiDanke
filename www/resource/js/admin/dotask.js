@@ -246,4 +246,74 @@
       }
     }
   })
+
+  DoTaskModule.controller('doitTaskCtrl', function($scope, $http, $upload) {
+    $scope.upload = function(file) {
+      return $upload.upload({
+        url: '/home/index/upload',
+        file: file
+      })
+    };
+
+    $scope.$watch('data.talkimage', function () {
+      if (!$scope.data.talkimage) {
+        return false;
+      }
+      $scope
+        .upload($scope.data.talkimage)
+        .success(function(data, status, headers, config) {
+          $scope.data.talkImagefile = data.filename;
+        })
+    });
+
+    $scope.$watch('data.orderimage', function () {
+      if (!$scope.data.orderimage) {
+        return false;
+      }
+      $scope
+        .upload($scope.data.orderimage)
+        .success(function(data, status, headers, config) {
+          $scope.data.orderImagefile = data.filename;
+        })
+    });
+
+    $scope.submit = function() {
+      if (!$scope.data.orderId) {
+        alert('请填写订单');
+        return false;
+      }
+
+      if (!$scope.data.orderMoney) {
+        alert('请填写实付金额');
+        return false;
+      }
+
+      if (!$scope.data.orderTime) {
+        alert('请填写下单时间');
+        return false;
+      }
+
+      $http.post('/admin/dotask/doit', {
+        taskId: $scope.data.doTaskTaskId
+        , doTaskId: $scope.data.doTaskId
+        , itemUrl: $scope.data.itemUrl
+        , itemUrl1: $scope.data.itemUrl1
+        , itemUrl2: $scope.data.itemUrl2
+        , itemUrl3: $scope.data.itemUrl3
+        , itemUrl4: $scope.data.itemUrl4
+        , talkImagefile: $scope.data.talkImagefile
+        , orderImagefile: $scope.data.orderImagefile
+        , orderId: $scope.data.orderId
+        , orderTime: $scope.data.orderTime
+      })
+        .success(function(res) {
+          if (res.errno == 0) {
+            alert(res.data);
+            window.close();
+          } else {
+            alert(res.errmsg);
+          }
+        });
+    }
+  })
 })();

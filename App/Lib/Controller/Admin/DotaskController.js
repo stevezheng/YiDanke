@@ -43,6 +43,55 @@ module.exports = Controller("Admin/BaseController", function(){
           })
       }
     },
+    
+    doitAction: function() {
+      var self = this;
+      self.assign('title', '');
+    
+      if (self.isGet()) {
+        var id = self.get('id');
+
+        return D('do_task')
+          .where({id: id})
+          .find()
+          .then(function(res) {
+            self.assign('doTaskId', id);
+            self.assign('doTaskTaskId', res.doTaskTaskId);
+            return self.display();
+          })
+      }
+
+      if (self.isPost()) {
+        var data = {};
+        data.doTaskDetailItemUrl = self.post('itemUrl')
+          , data.doTaskDetailDoTaskId = self.post('doTaskId')
+          , data.doTaskDetailTaskId = self.post('taskId')
+          , data.doTaskDetailItemUrl1 = self.post('itemUrl1')
+          , data.doTaskDetailItemUrl2 = self.post('itemUrl2')
+          , data.doTaskDetailItemUrl3 = self.post('itemUrl3')
+          , data.doTaskDetailItemUrl4 = self.post('itemUrl4')
+          , data.doTaskDetailTalkImage = self.post('talkImagefile')
+          , data.doTaskDetailOrderImage = self.post('orderImagefile')
+          , data.doTaskDetailOrderId = self.post('orderId')
+          , data.doTaskDetailOrderTime = self.post('orderTime')
+          , data.doTaskDetailOrderMoney = self.post('orderMoney');
+
+        return D('do_task_detail')
+          .thenAdd(data, {doTaskDetailDoTaskId: data.doTaskDetailDoTaskId}, true)
+          .then(function(res) {
+            if (res.type == 'exist') {
+              return self.success('该任务已经做过了');
+            } else {
+              return D('do_task')
+                .where({id: data.doTaskDetailDoTaskId})
+                .update({doTaskStatus: 1})
+            }
+          })
+          .then(function() {
+            return self.success('提交成功');
+          })
+      }
+    },
 
     doAction: function() {
       var self = this;

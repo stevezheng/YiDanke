@@ -1,0 +1,88 @@
+<% include ./index_header.html %>
+<section id="container" ng-controller="doitTaskCtrl" ng-init="data={doTaskId: <%= doTaskId %>, doTaskTaskId: <%= doTaskTaskId %>}">
+    <% include ./index_nav.html %>
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+            <section class="panel">
+                <header class="panel-heading">
+                    管理员代做任务
+                </header>
+                <div class="panel-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-lg-2 col-sm-2 control-label">商品链接</label>
+                            <div class="col-lg-6">
+                                <input type="text" class="form-control" ng-model="data.itemUrl">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 col-sm-2 control-label">店铺商品链接1</label>
+                            <div class="col-lg-6">
+                                <input type="text" class="form-control" ng-model="data.itemUrl1">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 col-sm-2 control-label">店铺商品链接2</label>
+                            <div class="col-lg-6">
+                                <input type="text" class="form-control" ng-model="data.itemUrl2">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 col-sm-2 control-label">店铺商品链接3</label>
+                            <div class="col-lg-6">
+                                <input type="text" class="form-control" ng-model="data.itemUrl3">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 col-sm-2 control-label">店铺商品链接4</label>
+                            <div class="col-lg-6">
+                                <input type="text" class="form-control" ng-model="data.itemUrl4">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 col-sm-2 control-label">聊天记录</label>
+                            <div class="col-lg-6">
+                                <button class="btn btn-info" ng-file-select ng-model="data.talkimage">选择聊天记录截图</button>
+                                <a ng-href="{{data.talkImagefile}}" target="_blank" ng-show="data.talkImagefile">[查看图片]</a>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 col-sm-2 control-label">订单记录</label>
+                            <div class="col-lg-6">
+                                <button class="btn btn-info" ng-file-select ng-model="data.orderimage">选择订单记录截图</button>
+                                <a ng-href="{{data.orderImagefile}}" target="_blank" ng-show="data.orderImagefile">[查看图片]</a>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 col-sm-2 control-label">订单编号</label>
+                            <div class="col-lg-6">
+                                <input type="text" class="form-control" ng-model="data.orderId">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 col-sm-2 control-label">下单时间</label>
+                            <div class="col-lg-6">
+                                <input type="text" class="form-control" ng-model="data.orderTime">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 col-sm-2 control-label">实付金额</label>
+                            <div class="col-lg-6">
+                                <input type="text" class="form-control" ng-model="data.orderMoney">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 col-sm-2 control-label"></label>
+                            <div class="col-lg-2">
+                                <button class="btn btn-info" ng-click="submit()">提交</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </section>
+    <!--main content end-->
+</section>
+<% include ./index_footer.html %>
