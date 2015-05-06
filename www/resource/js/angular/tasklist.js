@@ -126,7 +126,7 @@
       for (var i = 0; i < $scope.tasks.length; i++) {
         var obj = $scope.tasks[i];
 
-        if (obj.taskIsInterval == 1) {
+        if (obj.taskInterval > 0) {
           var newTime = moment(obj.taskLastTime || new Date()).add(obj.taskIntervalTime, 'm').unix()
 
           if (newTime > moment().unix()) {
