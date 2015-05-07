@@ -481,6 +481,8 @@ module.exports = Model(function() {
         ,'yi_task.taskShopName'
         ,'yi_task.taskName'
         ,'yi_task.taskUrl'
+          ,'yi_do_task_detail.doTaskDetailDoTaskId'
+          ,'yi_do_task_detail.doTaskDetailTaskId'
         ,'yi_do_task_detail.doTaskDetailTalkImage'
         ,'yi_do_task_detail.doTaskDetailOrderImage'
         ,'yi_do_task_detail.doTaskDetailOrderId'

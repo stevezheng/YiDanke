@@ -142,7 +142,7 @@
       data.doTaskExtendExpressName = doTask.doTaskExtendExpressName;
       data.doTaskExtendExpressId = doTask.doTaskExtendExpressId;
       data.doTaskExtendDoTaskId = doTask.doTaskDetailDoTaskId;
-      data.doTaskExtendTaskId = doTask.doTaskDetailTaskId;
+      data.doTaskExtendTaskId = doTask.id;
       $http.post('/admin/dotask/addExpress', data)
         .success(function(res) {
           if (res.errno == 0) {

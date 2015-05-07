@@ -229,7 +229,7 @@ module.exports = Controller("Admin/BaseController", function(){
             }
             return D('task')
               .where({id: doTask.doTaskTaskId})
-              .update({'taskStatus': 2})
+              .update({'taskStatus': 3})
           })
           .then(function() {
             return D('user')
@@ -318,6 +318,7 @@ module.exports = Controller("Admin/BaseController", function(){
               'doTaskAccountId': 'id'
             }
           })
+          .where({doTaskStatus: 2})
           .select()
           .then(function(res) {
             OutputService.express(res, function(now) {
