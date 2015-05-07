@@ -318,7 +318,7 @@ module.exports = Controller("Admin/BaseController", function(){
               'doTaskAccountId': 'id'
             }
           })
-          .where({doTaskStatus: 2})
+          .where({doTaskStatus: 1})
           .select()
           .then(function(res) {
             OutputService.express(res, function(now) {
