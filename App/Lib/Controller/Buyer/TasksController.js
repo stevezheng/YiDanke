@@ -15,6 +15,27 @@ module.exports = Controller("Buyer/BaseController", function(){
 
       if (self.isPost()) {}
     },
+    
+    dotaskdetailAction: function() {
+      var self = this;
+      self.assign('title', '');
+    
+      if (self.isGet()) {
+        return self.display();
+      }
+      
+      if (self.isPost()) {
+        var id = self.post('id');
+
+        var dotask = DoTask();
+
+        return dotask
+          .getOne(self.cUser.id, id)
+          .then(function(res) {
+            return self.success(res);
+          })
+      }
+    },
 
     doTasksAction: function() {
       var self = this;

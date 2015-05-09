@@ -202,6 +202,68 @@ module.exports = Model(function() {
         .select()
     },
 
+    getOne: function(userId, id) {
+      var self = this;
+      var where = {'yi_do_task.id': id};
+
+      if (userId) {
+        where.doTaskUserId = userId;
+      }
+
+      return self
+        .join({
+          table: 'task'
+          , join: 'left'
+          , on: {
+            'doTaskTaskId': 'id'
+          }
+        })
+        .join({
+          table: 'task_taobao'
+          , join: 'left'
+          , on: {
+            'doTaskTaskId': 'taobaoTaskId'
+          }
+        })
+        .join({
+          table: 'task_tmall'
+          , join: 'left'
+          , on: {
+            'doTaskTaskId': 'tmallTaskId'
+          }
+        })
+        .join({
+          table: 'task_jd'
+          , join: 'left'
+          , on: {
+            'doTaskTaskId': 'jdTaskId'
+          }
+        })
+        .join({
+          table: 'task_extend'
+          , join: 'left'
+          , on: {
+            'doTaskTaskId': 'extendTaskId'
+          }
+        })
+        .join({
+          table: 'do_task_detail'
+          , join: 'left'
+          , on: {
+            'id': 'doTaskDetailDoTaskId'
+          }
+        })
+        .join({
+          table: 'do_task_extend'
+          , join: 'left'
+          , on: {
+            'id': 'doTaskExtendDoTaskId'
+          }
+        })
+        .where(where)
+        .find()
+    },
+
     getOwnOneAllInfo: function(userId, id) {
       var self = this;
 

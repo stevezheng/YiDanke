@@ -101,7 +101,7 @@
                                     </thead>
                                     <tbody>
                                     <!--<tr ng-repeat="task in tasks" ng-if="task.taskPlatform == platform && task.taskType == type" ng-hide="(terminal=='pc' && (task.taskPcDoingCount + task.taskPcDoneCount) == task.taskPcCount) || (terminal=='phone' && (task.taskPhoneDoingCount + task.taskPhoneDoneCount) == task.taskPhoneCount) ">-->
-                                    <tr ng-repeat="task in tasks" ng-if="task.taskPlatform == platform && task.taskType == type">
+                                    <tr ng-repeat="task in tasks" ng-if="task.taskPlatform == platform && task.taskType == type && (terminal == 'pc'?task.taskPcCount:task.taskPhoneCount > 0)">
                                         <td><button class="btn btn-success">平台返款</button></td>
                                         <td>{{task.taskUserName}}</td>
                                         <td>{{task.taskCount}}件</td>

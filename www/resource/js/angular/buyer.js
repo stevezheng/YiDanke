@@ -1,6 +1,23 @@
 (function() {
   var BuyerModule = angular.module('YiApp.Buyer', ['angularFileUpload', 'checklist-model']);
-  
+
+  BuyerModule.controller('buyerDoTaskDetailCtrl', function($scope, $http) {
+    var id = getQueryString('id');
+    function query() {
+      $http.post('/buyer/tasks/dotaskdetail', {id: id})
+        .success(function(res) {
+          if (res.errno == 0) {
+            $scope.dotask = res.data;
+          }
+        })
+        .error(function(err) {
+
+        })
+    };
+
+    query();
+  });
+
   BuyerModule.controller('buyerLogCoinCtrl', function ($scope, $http) {
     $scope.data = [];
     $scope.changePage = function(page) {

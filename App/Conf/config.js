@@ -15,5 +15,4 @@ module.exports = {
   post_max_fields: 100, //最大表单数，默认为100
   post_max_fields_size: 2 * 1024 * 1024, //单个表单长度最大值，默认为2MB
   post_file_upload_path: APP_PATH + '/Runtime/Temp', //文件上传的临时目录
-
 };
