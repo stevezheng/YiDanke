@@ -2,6 +2,23 @@
   var DoTaskModule = angular.module('YiAppAdmin.DoTask', ['angularFileUpload']);
 
   DoTaskModule.controller('doTaskCtrl', function($scope, $http, $upload) {
+    $scope.tuikuan = function(doTask) {
+      var id = doTask.id;
+
+      $http.post('/admin/dotask/tuikuan', {id: id})
+        .success(function(res) {
+          if (res.errno == 0) {
+            alert(res.data);
+            doTask.doTaskStatus = 5;
+          } else {
+            alert(res.errmsg);
+          }
+        })
+        .error(function(err) {
+          alert(err.errmsg);
+        })
+    };
+
     $scope.page = {
       do: 1
       , doing: 1

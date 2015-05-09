@@ -1,3 +1,4 @@
+var moment = require('moment');
 module.exports = Model(function() {
   return {
     addOne: function(doTaskTerminal, doTaskUserId, doTaskTaskId, doTaskAccountId, doTaskAccountName, doTaskKeyword, doTaskFee, doTaskExtendFee, doTaskShopId, doTaskShopName) {
@@ -530,7 +531,26 @@ module.exports = Model(function() {
         .select()
     },
 
+    doTuikuan: function(id, userId) {
+      var self = this;
+      var where = {
+        id: id
+      };
 
+      if (userId) {
+        where.doTaskUserId = userId;
+
+      }
+
+      return D('do_task_extend')
+        .where({doTaskExtendDoTaskId: id})
+        .update({doTaskExtendPaybackTime: moment().format('YYYY-MM-DD HH:mm:ss')})
+        .then(function() {
+          return D('do_task')
+            .where(where)
+            .update({doTaskStatus: 5})
+        })
+    },
 
     queryPage: function(page, num, args) {
       var self = this;

@@ -594,6 +594,9 @@
                                                 <li>
                                                     <a ng-click="doit(doTask)">代做任务单</a>
                                                 </li>
+                                                <li>
+                                                    <a ng-if="doTask.doTaskStatus == 4" ng-click="tuikuan(doTask)">代商家退款</a>
+                                                </li>
                                             </ul>
                                         </div>
                                     </td>

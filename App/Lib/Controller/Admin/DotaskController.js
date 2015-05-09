@@ -330,5 +330,30 @@ module.exports = Controller("Admin/BaseController", function(){
           })
       }
     },
+
+    tuikuanAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+
+      }
+
+      if (self.isPost()) {
+        var id = self.post('id');
+
+        var dotask = DoTaskModel();
+
+        return dotask
+          .doTuikuan(id)
+          .then(function(res) {
+            return self.success('管理员协助退款成功');
+          })
+          .catch(function(err) {
+            console.error(err.stack);
+            return self.error('管理员协助退款失败');
+          })
+      }
+    },
   };
 });
