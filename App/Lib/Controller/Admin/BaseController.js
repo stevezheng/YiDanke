@@ -8,7 +8,7 @@ module.exports = Controller(function(){
     },
     __before: function () {
       var self = this;
-      if(this.http.action === 'login'){
+      if(this.http.action === 'login' || this.http.controller == 'schedule'){
         return;
       }
       return this.session("cAdmin").then(function (cAdmin) {

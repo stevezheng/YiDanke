@@ -9,6 +9,7 @@ create table if not exists `yi_do_task_extend` (
     `doTaskExtendExpressTime` timestamp null comment '快递发出时间',
     `doTaskExtendGoodComment` varchar(512) not null default '' comment '宝贝好评',
     `doTaskExtendGoodImage` varchar(512) not null default '' comment '收货截图',
+    `doTaskExtendGoodTime` timestamp null comment '收货好评时间',
     `doTaskExtendPaybackTime` timestamp null comment '返款时间',
     `doTaskExtendPaybackImage` varchar(512) not null default '' comment '返款截图',
     `doTaskExtendConfirmTime` timestamp null comment '确认返款时间',

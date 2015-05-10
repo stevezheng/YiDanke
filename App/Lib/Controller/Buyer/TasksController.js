@@ -115,7 +115,7 @@ module.exports = Controller("Buyer/BaseController", function(){
 
         return D('do_task_extend')
           .where({doTaskExtendDoTaskId: id})
-          .update({doTaskExtendGoodComment: doTaskExtendGoodComment})
+          .update({doTaskExtendGoodComment: doTaskExtendGoodComment, doTaskExtendGoodTime: moment().format('YYYY-MM-DD HH:mm:ss')})
           .then(function() {
             return D('do_task')
               .where({id: id})
