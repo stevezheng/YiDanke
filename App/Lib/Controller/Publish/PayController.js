@@ -67,6 +67,7 @@ module.exports = Controller("Publish/BaseController", function(){
             var shopPlatform = res.taskPlatform;
             if (shopPlatform == 'taobao' || shopPlatform == 'tmall') {
               run(shopPlatform, res, function(_res) {
+                _res = _res.data;
                 D('crazyclick_log')
                   .add({
                     userId: self.cUser.id

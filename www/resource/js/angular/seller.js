@@ -330,7 +330,7 @@
         url += '/zhitongche';
       }
 
-      url += '?shopId=' + shopId + '&taskId=' + task.taobaoTaskId || task.jdTaskId;
+      url += '?shopId=' + shopId + '&taskId=' + (task.taobaoTaskId || task.jdTaskId);
       location.href = url;
     };
 
