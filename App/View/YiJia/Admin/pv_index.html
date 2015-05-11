@@ -9,7 +9,45 @@
                     流量管理
                 </header>
                 <div class="panel-body">
-                    <div class="form-horizontal">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>用户名</th>
+                            <th>任务ID</th>
+                            <th>关键词</th>
+                            <th>商品ID</th>
+                            <th>店铺类型</th>
+                            <th>流量</th>
+                            <th>日期</th>
+                            <th>开始时间</th>
+                            <th>结束时间</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="d in data">
+                            <td>{{d.username}}</td>
+                            <td>{{d.rid=='0'?'流量申请失败':d.rid}}</td>
+                            <td>{{d.kwd}}</td>
+                            <td>{{d.nid}}</td>
+                            <td>{{d.shop_type=='b'?'天猫':'淘宝'}}</td>
+                            <td>{{d.times}}</td>
+                            <td>{{d.crazyClickLogCreateTime | date: 'yyyy-MM-dd'}}</td>
+                            <td>{{d.click_start}}</td>
+                            <td>{{d.click_end}}</td>
+                            <td><button class="btn btn-info btn-small" ng-if="d.rid!=0" ng-click="getclicks({id: d.rid, date: d.crazyClickLogCreateTime, pageNo: 1, pageSize: 100})">查看详情</button></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <a id="show-detail" href="#modal-detail" data-toggle="modal" style="display: none;">查看详情</a>
+                    <div class="text-center">
+                        <ul class="pagination">
+                            <li ng-if="page != 1"><a ng-click="changePage(page-1)" href="javascript:;;;">«</a></li>
+                            <li ng-repeat="t in totalPage"><a href="javascript:;;;" ng-click="changePage(t)">{{t}}</a></li>
+                            <li ng-if="page != total"><a ng-click="changePage(page+1)" href="javascript:;;;">»</a></li>
+                        </ul>
+                    </div>
+                    <div class="form-horizontal" style="display: none;">
                         <div class="form-group">
                             <label class="col-lg-2 col-sm-2 control-label">id</label>
 
@@ -45,7 +83,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-lg-offset-2 col-lg-10">
-                                <button class="btn btn-info" ng-click="query(args)">
+                                <button class="btn btn-info" ng-click="getclicks(args)">
                                     确认
                                 </button>
                             </div>
@@ -56,5 +94,38 @@
         </section>
     </section>
     <!--main content end-->
+    <!-- Modal -->
+    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog"
+         tabindex="-1" id="modal-detail" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">流量详情</h4>
+                </div>
+                <div class="modal-body">
+                    <p>执行状态: {{status=='success'?'成功':'失败'}}</p>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <td>任务ID</td>
+                            <td>执行次数</td>
+                            <td>是否找到关键词</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="click in clicks">
+                            <td>{{click.kid}}</td>
+                            <td>{{click.clicks}} 次</td>
+                            <td>{{click.is_detected=='1'?'已找到':'未找到'}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal -->
 </section>
 <% include ./index_footer.html %>

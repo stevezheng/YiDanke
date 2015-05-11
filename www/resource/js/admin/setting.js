@@ -2,7 +2,6 @@
   var Module = angular.module('YiAppAdmin.Setting', ['angularFileUpload']);
 
   Module.controller('settingCtrl', function($scope, $http, $upload) {
-    console.log('ok');
     $scope.user = {};
 
     $scope.submit = function() {
