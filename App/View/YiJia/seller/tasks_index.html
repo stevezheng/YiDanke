@@ -140,8 +140,8 @@
                                             </div>
                                             <div class="col-lg-6">
                                             <span>
-                                                任务编号： {{doing.taobaoTaskId || jdTaskId}}
-                                                <a href="/seller/tasks/taskDetail?id={{doing.taobaoTaskId || jdTaskId}}">
+                                                任务编号： {{doing.taobaoTaskId || doing.jdTaskId}}
+                                                <a href="/seller/tasks/taskDetail?id={{doing.taobaoTaskId || doing.jdTaskId}}">
                                                     [详情]
                                                 </a>
                                                 发布时间：{{doing.taskCreateTime | date: 'yyyy-MM-dd HH:mm'}}
@@ -187,8 +187,8 @@
                                             </div>
                                             <div class="col-lg-6">
                                             <span>
-                                                任务编号： {{done.taobaoTaskId || jdTaskId}}
-                                                <a href="/seller/tasks/taskDetail?id={{done.taobaoTaskId || jdTaskId}}">
+                                                任务编号： {{done.taobaoTaskId || done.jdTaskId}}
+                                                <a href="/seller/tasks/taskDetail?id={{done.taobaoTaskId || done.jdTaskId}}">
                                                     [详情]
                                                 </a>
                                                 发布时间：{{done.taskCreateTime | date: 'yyyy-MM-dd HH:mm'}}
@@ -234,8 +234,8 @@
                                             </div>
                                             <div class="col-lg-6">
                                             <span>
-                                                任务编号： {{cancel.taobaoTaskId || jdTaskId}}
-                                                <a href="/seller/tasks/taskDetail?id={{cancel.taobaoTaskId || jdTaskId}}">
+                                                任务编号： {{cancel.taobaoTaskId || done.jdTaskId}}
+                                                <a href="/seller/tasks/taskDetail?id={{cancel.taobaoTaskId || done.jdTaskId}}">
                                                     [详情]
                                                 </a>
                                                 发布时间：{{cancel.taskCreateTime | date: 'yyyy-MM-dd HH:mm'}}
@@ -282,8 +282,8 @@
                                             </div>
                                             <div class="col-lg-6">
                                             <span>
-                                                任务编号： {{task.taobaoTaskId || jdTaskId}}
-                                                <a href="/seller/tasks/taskDetail?id={{task.taobaoTaskId || jdTaskId}}">
+                                                任务编号： {{task.taobaoTaskId || task.jdTaskId}}
+                                                <a href="/seller/tasks/taskDetail?id={{task.taobaoTaskId || task.jdTaskId}}">
                                                     [详情]
                                                 </a>
                                                 发布时间：{{task.taskCreateTime | date: 'yyyy-MM-dd HH:mm'}}
