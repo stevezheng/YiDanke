@@ -2,7 +2,7 @@ var ShopModel = thinkRequire('ShopModel');
 var TaskModel = thinkRequire('TaskModel');
 var UserModel = thinkRequire('UserModel');
 var Log= thinkRequire('LogService');
-var run = thinkRequire('CrazyClickService');
+var run = thinkRequire('CrazyClickService').run;
 
 module.exports = Controller("Publish/BaseController", function(){
   "use strict";
@@ -66,7 +66,32 @@ module.exports = Controller("Publish/BaseController", function(){
           .then(function(res) {
             var shopPlatform = res.taskPlatform;
             if (shopPlatform == 'taobao' || shopPlatform == 'tmall') {
-              run(shopPlatform, res);
+              run(shopPlatform, res, function(_res) {
+                D('crazyclick_log')
+                  .add({
+                    userId: self.cUser.id
+                    , username: self.cUser.username
+                    , taskId: taskId
+                    , kwd: _res.kwd
+                    , nid: _res.nid
+                    , appkey: _res.appkey
+                    , platform: _res.platform
+                    , shop_type: _res.shop_type
+                    , times: _res.times
+                    , sleep_time: _res.sleep_time
+                    , click_start_input: _res.click_start_input
+                    , click_end_input: _res.click_end_input
+                    , status: _res.status
+                    , begin_time: _res.begin_time
+                    , end_time: _res.end_time
+                    , created_at: _res.created_at
+                    , updated_at: _res.updated_at
+                    , click_start: _res.click_start
+                    , click_end: _res.click_end
+                    , click_interval: _res.click_interval
+                    , rid: _res.id
+                  })
+              });
             }
 
             var p1 = Log.coin(

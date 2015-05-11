@@ -1,16 +1,58 @@
 <% include ./index_header.html %>
-<section id="container">
+<section id="container" ng-controller="pvCtrl">
     <% include ./index_nav.html %>
     <!--main content start-->
     <section id="main-content">
         <section class="wrapper">
-                <section class="panel">
-                    <header class="panel-heading">
-                        流量管理
-                    </header>
-                    <div class="panel-body">
+            <section class="panel">
+                <header class="panel-heading">
+                    流量管理
+                </header>
+                <div class="panel-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-lg-2 col-sm-2 control-label">id</label>
+
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" ng-model="args.id">
+
+                                <p class="help-block">系统给出的点击任务ID</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 col-sm-2 control-label">日期</label>
+
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" ng-model="args.date">
+                                <p class="help-block">日期（20140907）</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 col-sm-2 control-label">页数</label>
+
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" ng-model="args.pageNo">
+                                <p class="help-block">页数</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 col-sm-2 control-label">每页记录数</label>
+
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" ng-model="args.pageSize">
+                                <p class="help-block">每页记录数</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <button class="btn btn-info" ng-click="query(args)">
+                                    确认
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                </section>
+                </div>
+            </section>
         </section>
     </section>
     <!--main content end-->

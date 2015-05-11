@@ -45,6 +45,7 @@ CrazyClickService.prototype = {
 
     var params = php.array_merge(sysParams, data);
     params['sign'] = self._genSign(method, params);
+    console.log(params['sign']);
 
     var requestUrl = self.baseUrl + method;
 
@@ -80,7 +81,23 @@ var config = {
 
 var crazyClick = new CrazyClickService(config.appkey, config.appsecret, config.baseUrl);
 
-var run = function(shopPlatform, task) {
+var getClicks = function(id, date, pageNo, pageSize, cb) {
+  var data = {
+    id: id
+    , date: date
+    , page_no: pageNo
+    , pageSize: pageSize
+  };
+
+  crazyClick.request('statistics/getclicks', data, function(res) {
+    console.log(res);
+    if (cb) {
+      cb(res);
+    }
+  })
+};
+
+var run = function(shopPlatform, task, cb) {
   var id = getTaobaoId(task.taskUrl);
 
   var data = {
@@ -96,111 +113,142 @@ var run = function(shopPlatform, task) {
 
   if (task.taobaoKey1) {
     data.kwd = task.taobaoKey1;
-    data.times = parseInt(task.taobaoKeyCount1);
+    data.times = parseInt(task.taobaoKeyCount1 / task.taskTotalCount * task.taskPV);
     data.path1 = 100;
     data.path3 = 0;
 
     crazyClick.request('tbpc/add', data, function(res) {
       console.log(res);
+      if (cb) {
+        cb(res);
+      }
     })
   }
 
   if (task.taobaoKey2) {
     data.kwd = task.taobaoKey2;
-    data.times = parseInt(task.taobaoKeyCount2);
+    data.times = parseInt(task.taobaoKeyCount2 / task.taskTotalCount * task.taskPV);
     data.path1 = 100;
     data.path3 = 0;
 
     crazyClick.request('tbpc/add', data, function(res) {
       console.log(res);
+      if (cb) {
+        cb(res);
+      }
     })
   }
 
   if (task.taobaoKey3) {
     data.kwd = task.taobaoKey3;
-    data.times = parseInt(task.taobaoKeyCount3);
+    data.times = parseInt(task.taobaoKeyCount3 / task.taskTotalCount * task.taskPV);
     data.path1 = 100;
     data.path3 = 0;
 
     crazyClick.request('tbpc/add', data, function(res) {
       console.log(res);
+      if (cb) {
+        cb(res);
+      }
+
     })
   }
 
   if (task.taobaoKey4) {
     data.kwd = task.taobaoKey4;
-    data.times = parseInt(task.taobaoKeyCount4);
+    data.times = parseInt(task.taobaoKeyCount4 / task.taskTotalCount * task.taskPV);
     data.path1 = 100;
     data.path3 = 0;
 
     crazyClick.request('tbpc/add', data, function(res) {
       console.log(res);
+      if (cb) {
+        cb(res);
+      }
     })
   }
 
   if (task.taobaoKey5) {
     data.kwd = task.taobaoKey5;
-    data.times = parseInt(task.taobaoKeyCount5);
+    data.times = parseInt(task.taobaoKeyCount5 / task.taskTotalCount * task.taskPV);
     data.path1 = 100;
     data.path3 = 0;
 
     crazyClick.request('tbpc/add', data, function(res) {
       console.log(res);
+      if (cb) {
+        cb(res);
+      }
     })
   }
 
   if (task.tmallKey1) {
     data.kwd = task.tmallKey1;
-    data.times = parseInt(task.tmallKeyCount1);
-    data.path1 = 100;
-    data.path3 = 0;
+    data.times = parseInt(task.tmallKeyCount1 / task.taskTotalCount * task.taskPV);
+    data.path3 = 100;
+    data.path1 = 0;
 
     crazyClick.request('tbpc/add', data, function(res) {
       console.log(res);
+      if (cb) {
+        cb(res);
+      }
     })
   }
 
   if (task.tmallKey2) {
     data.kwd = task.tmallKey2;
-    data.times = parseInt(task.tmallKeyCount2);
-    data.path1 = 100;
-    data.path3 = 0;
+    data.times = parseInt(task.tmallKeyCount2 / task.taskTotalCount * task.taskPV);
+    data.path3 = 100;
+    data.path1 = 0;
 
     crazyClick.request('tbpc/add', data, function(res) {
       console.log(res);
+      if (cb) {
+        cb(res);
+      }
     })
   }
 
   if (task.tmallKey3) {
     data.kwd = task.tmallKey3;
-    data.times = parseInt(task.tmallKeyCount3);
-    data.path1 = 100;
-    data.path3 = 0;
+    data.times = parseInt(task.tmallKeyCount3 / task.taskTotalCount * task.taskPV);
+    data.path3 = 100;
+    data.path1 = 0;
 
     crazyClick.request('tbpc/add', data, function(res) {
       console.log(res);
+      if (cb) {
+        cb(res);
+      }
     })
   }
 
   if (task.tmallKey4) {
     data.kwd = task.tmallKey4;
-    data.times = parseInt(task.tmallKeyCount4);
-    data.path1 = 100;
-    data.path3 = 0;
+    data.times = parseInt(task.tmallKeyCount4 / task.taskTotalCount * task.taskPV);
+    data.path3 = 100;
+    data.path1 = 0;
 
     crazyClick.request('tbpc/add', data, function(res) {
       console.log(res);
+      if (cb) {
+        cb(res);
+      }
     })
   }
 
   if (task.tmallKey5) {
     data.kwd = task.tmallKey5;
-    data.times = parseInt(task.tmallKeyCount5);
-    data.path1 = 100;
-    data.path3 = 0;
+    data.times = parseInt(task.tmallKeyCount5 / task.taskTotalCount * task.taskPV);
+    data.path3 = 100;
+    data.path1 = 0;
 
     crazyClick.request('tbpc/add', data, function(res) {
       console.log(res);
+      if (cb) {
+        cb(res);
+      }
     })
   }
 };
@@ -258,5 +306,8 @@ var run = function(shopPlatform, task) {
 //});
 
 
-module.exports = run;
+module.exports = {
+  run: run
+  , getClicks: getClicks
+};
 

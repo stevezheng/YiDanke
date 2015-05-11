@@ -1,4 +1,5 @@
 var moment = require('moment');
+var getclicks = thinkRequire('CrazyClickService').getClicks;
 module.exports = Controller("Admin/BaseController", function(){
   "use strict";
   return {
@@ -11,6 +12,26 @@ module.exports = Controller("Admin/BaseController", function(){
       }
 
       if (self.isPost()) {
+      }
+    },
+
+    getclicksAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+
+      }
+
+      if (self.isPost()) {
+        var id = self.post('id')
+          , date = self.post('date')
+          , pageNo = self.post('pageNo')
+          , pageSize = self.post('pageSize');
+        
+        getclicks(id, date, pageNo, pageSize, function(res) {
+          return self.success(res);
+        })
       }
     },
   };
