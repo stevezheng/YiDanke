@@ -17,13 +17,18 @@ module.exports = Controller("Admin/BaseController", function(){
         var page = self.post('page')
           , data = self.post('data') || {};
 
-        var data = _.mapObject(data, function(val, key) {
-          return ['like', '%' + val + '%'];
+        data = _.mapObject(data, function(val, key) {
+          if (key == 'taskStatus') {
+            return val;
+          } else {
+            return ['like', '%' + val + '%'];
+          }
         });
 
+        if (!data['taskStatus']) {
+          data.taskStatus = ['!=', 0];
+        }
 
-        //todo 创建中的任务不显示
-        data.taskStatus = ['!=', 0];
 
         if (data.id) {
           data['yi_task.id'] = data.id;
