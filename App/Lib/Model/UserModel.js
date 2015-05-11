@@ -352,6 +352,35 @@ module.exports = Model(function() {
     },
 
     /**
+     * 增加流量
+     * @param id
+     * @param value
+     * @returns {type[]|*}
+     */
+    addPV: function(id, value) {
+      var self = this;
+      value = Math.abs(value);
+
+      return self
+        .where({id: id})
+        .updateField('pv', ['exp', 'pv+' + parseFloat(value)])
+    },
+
+    /**
+     * 减少流量
+     * @param id
+     * @param value
+     * @returns {type[]|*}
+     */
+    subPV: function(id, value) {
+      var self = this;
+      value = Math.abs(value);
+
+      return self
+        .where({id: id})
+        .updateField('pv', ['exp', 'pv-' + parseFloat(value)])
+    },
+    /**
      * 增加金币
      * @param id
      * @param value

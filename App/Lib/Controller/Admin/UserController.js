@@ -63,7 +63,60 @@ module.exports = Controller("Admin/BaseController", function(){
           })
       }
     },
-    
+    pvAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+      }
+
+      if (self.isPost()) {
+        var id = self.post('id')
+          , type = self.post('type')
+          , cUser = self.post('user')
+          , pv = self.post('pv');
+        if (type == 'add') {
+          return user
+            .addPV(id, pv)
+            .then(function () {
+              return Log.pv(
+                1
+                , pv
+                , (cUser.pv + pv)
+                , cUser.id
+                , cUser.username
+                , 0
+                , self.ip()
+                , '通过管理员增加' + pv + '流量'
+              )
+            })
+            .then(function (res) {
+              return self.success('操作成功');
+            })
+        }
+
+        if (type == 'sub') {
+          return user
+            .subPV(id, pv)
+            .then(function () {
+              return Log.pv(
+                -1
+                , pv
+                , (cUser.pv - pv)
+                , cUser.id
+                , cUser.username
+                , 0
+                , self.ip()
+                , '通过管理员扣除' + pv + '流量'
+              )
+            })
+            .then(function (res) {
+              return self.success('操作成功');
+            })
+        }
+      }
+    },
+
     moneyAction: function() {
       var self = this;
       self.assign('title', '');

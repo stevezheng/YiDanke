@@ -216,6 +216,25 @@
       }
     };
 
+    $scope.addPV = function(user) {
+      var type;
+      var r = prompt('修改多少流量?');
+      if (r) {
+        if (r > 0) {
+          type = 'add';
+        } else {
+          type = 'sub';
+        }
+        $http.post('/admin/user/pv', {id: user.id, user: user, type: type, pv: Math.abs(r)})
+          .success(function(res) {
+            if (res.errno == 0) {
+              alert(res.data);
+              user.pv += parseFloat(r);
+            }
+          })
+      }
+    };
+
     $scope.addMoney= function(user) {
       var type;
       var r = prompt('修改多少押金?');
