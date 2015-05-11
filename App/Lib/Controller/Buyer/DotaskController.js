@@ -90,7 +90,10 @@ module.exports = Controller("Buyer/BaseController", function(){
           })
           .then(function(res) {
             if (!isEmpty(res)) {
-              return self.error(500, '该账号已经做过该店任务了');
+              var time = moment(res.doTaskCreateTime).add(14, 'd');
+              if (time > moment()) {
+                return self.error(500, '该账号已经做过该店任务了');
+              }
             }
 
             return task
@@ -293,10 +296,15 @@ module.exports = Controller("Buyer/BaseController", function(){
           })
           .then(function(res) {
             if (!isEmpty(res)) {
-              return self.error(500, '该账号已经做过该店任务了');
+              var time = moment(res.doTaskCreateTime).add(14, 'd');
+              if (time > moment()) {
+                return self.error(500, '该账号已经做过该店任务了');
+              } else {
+                return self.success('该任务可接');
+              }
+            } else {
+              return self.success('该任务可接');
             }
-
-            return self.success('该任务可接');
           })
           .catch(function(err) {
             return self.error(500, err);

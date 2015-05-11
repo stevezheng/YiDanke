@@ -315,7 +315,7 @@ module.exports = Model(function() {
         //通过淘宝号判断是否做过
         //.where({doTaskUserId: userId, doTaskAccountId: accountId, doTaskShopName: shopName})
         //通过平台号判断是否做过
-        .where({doTaskUserId: userId, doTaskShopId: shopId})
+        .where({doTaskUserId: userId, doTaskShopId: shopId, doTaskStatus: ['!=', -1]})
         .find()
     },
 
