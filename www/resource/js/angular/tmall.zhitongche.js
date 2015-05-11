@@ -685,6 +685,11 @@
               , pcCount: res.taskPcCount //电脑端刷单数
               , phoneCount: res.taskPhoneCount //移动端刷单数
               , tips: res.taskTips //下单提示
+              , weight: res.taskWeight
+              , volume: res.taskVolume
+              , height: res.taskHeight
+              , length: res.taskLength
+              , width: res.taskWidth
             };
 
             $scope.extendItem1 = {
