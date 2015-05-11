@@ -35,6 +35,7 @@
 <script src="/resource/js/admin/shop.js"></script>
 <script src="/resource/js/admin/account.js"></script>
 <script src="/resource/js/admin/setting.js"></script>
+<script src="/resource/js/angular/seller.js"></script>
 
 <script>
 
@@ -53,7 +54,14 @@
         , 'YiAppAdmin.Shop'
         , 'YiAppAdmin.Account'
         , 'YiAppAdmin.Setting'
+        , 'YiApp.Seller'
     ]);
+
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]); return null;
+    }
 </script>
 </body>
 </html>

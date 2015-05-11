@@ -18,6 +18,11 @@ module.exports = Controller("Admin/BaseController", function(){
         var page = self.post('page')
           , data = self.post('data') || {};
 
+        if (data.id) {
+          data['yi_do_task.id'] = data.id;
+          delete data.id;
+        }
+
         data = _.mapObject(data, function(val, key) {
           if (key == 'doTaskStatus') {
             return val

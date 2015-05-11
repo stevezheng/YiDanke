@@ -8,7 +8,8 @@ module.exports = Controller(function(){
     },
     __before: function () {
       var self = this;
-      if(this.http.action === 'kuaiqianrecieve') {
+      //todo 后面两个需要删掉
+      if(this.http.action === 'kuaiqianrecieve' || this.http.action === 'doTaskList' || this.http.action === 'doTaskDetail') {
         return false;
       }
 
