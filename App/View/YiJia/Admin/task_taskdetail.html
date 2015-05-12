@@ -38,35 +38,35 @@
                                                 已完成: <span class="error">{{task.taskPhoneDoneCount}}</span> 单
                                             </p>
                                             <p>商品搜索关键词</p>
-                                            <p>淘宝搜索关键词：
+                                            淘宝搜索关键词：
                                                 <span ng-if="task.taobaoKey1">
                                                 {{task.taobaoKey1}}
                                                 流量:
-                                                {{task.taskPV / task.taobaoKeyCount1}}
+                                                {{task.taskPV / task.taskTotalCount * task.taobaoKeyCount1 | number: 0}}
                                                 <br/>
                                                 </span>
                                                 <span ng-if="task.taobaoKey2">
                                                 {{task.taobaoKey2}}
                                                 流量:
-                                                {{task.taskPV / task.taobaoKeyCount2}}
+                                                {{task.taskPV / task.taskTotalCount * task.taobaoKeyCount2 | number: 0}}
                                                 <br/>
                                                 </span>
                                                 <span ng-if="task.taobaoKey3">
                                                 {{task.taobaoKey3}}
                                                 流量:
-                                                {{task.taskPV / task.taobaoKeyCount3}}
+                                                {{task.taskPV / task.taskTotalCount * task.taobaoKeyCount3 | number: 0}}
                                                 <br/>
                                                 </span>
                                                 <span ng-if="task.taobaoKey4">
                                                 {{task.taobaoKey4}}
                                                 流量:
-                                                {{task.taskPV / task.taobaoKeyCount4}}
+                                                {{task.taskPV / task.taskTotalCount * task.taobaoKeyCount4 | number: 0}}
                                                 <br/>
                                                 </span>
                                                 <span ng-if="task.taobaoKey5">
                                                 {{task.taobaoKey5}}
                                                 流量:
-                                                {{task.taskPV / task.taobaoKeyCount5}}
+                                                {{task.taskPV / task.taskTotalCount * task.taobaoKeyCount5 | number: 0}}
                                                 <br/>
                                                 </span>
                                             </p>
@@ -74,31 +74,31 @@
                                                 <span ng-if="task.tmallKey1">
                                                 {{task.tmallKey1}}
                                                 流量:
-                                                {{task.taskPV / task.tmallKeyCount1}}
+                                                {{task.taskPV / task.taskTotalCount * task.tmallKeyCount1 | number: 0}}
                                                 <br/>
                                                 </span>
                                                 <span ng-if="task.tmallKey2">
                                                 {{task.tmallKey2}}
                                                 流量:
-                                                {{task.taskPV / task.tmallKeyCount2}}
+                                                {{task.taskPV / task.taskTotalCount * task.tmallKeyCount2 | number: 0}}
                                                 <br/>
                                                 </span>
                                                 <span ng-if="task.tmallKey3">
                                                 {{task.tmallKey3}}
                                                 流量:
-                                                {{task.taskPV / task.tmallKeyCount3}}
+                                                {{task.taskPV / task.taskTotalCount * task.tmallKeyCount3 | number: 0}}
                                                 <br/>
                                                 </span>
                                                 <span ng-if="task.tmallKey4">
                                                 {{task.tmallKey4}}
                                                 流量:
-                                                {{task.taskPV / task.tmallKeyCount4}}
+                                                {{task.taskPV / task.taskTotalCount * task.tmallKeyCount4 | number: 0}}
                                                 <br/>
                                                 </span>
                                                 <span ng-if="task.tmallKey5">
                                                 {{task.tmallKey5}}
                                                 流量:
-                                                {{task.taskPV / task.tmallKeyCount5}}
+                                                {{task.taskPV / task.taskTotalCount * task.tmallKeyCount5 | number: 0}}
                                                 <br/>
                                                 </span>
                                             </p>
@@ -121,10 +121,240 @@
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <p>
+                                            <p ng-if="task.taskStatus == 0">
                                                 <a href="javascript:;;;" ng-click="pass(task)">通过</a> | <a href="javascript:;;;" ng-click="unpass(task)">拒绝</a>
                                             </p>
+                                            <p ng-if="task.taskStatus != 0">
+                                                该任务已审核
+                                            </p>
                                             <p>平台返款冻结押金： <span class="error">{{task.taskTotalMoney}}</span>元</p>
+                                        </div>
+                                    </div>
+                                    <div class="alert alert-info">任务基本信息</div>
+                                    <div class="row">
+                                        <div class="col-lg-2">商家一家网账号</div>
+                                        <div class="col-lg-4">{{task.taskUserName}}</div>
+                                        <div class="col-lg-2">店铺名</div>
+                                        <div class="col-lg-4">{{task.taskShopName}}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2">任务总流量</div>
+                                        <div class="col-lg-4">{{task.taskPV}}</div>
+                                        <div class="col-lg-2">任务平台</div>
+                                        <div class="col-lg-4">{{task.taskPlatform}}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2">任务类型</div>
+                                        <div class="col-lg-4">{{task.taskType=='dingdan'?'普通订单':'直通车'}}</div>
+                                        <div class="col-lg-2">商品重量/体积</div>
+                                        <div class="col-lg-4">{{task.taskWeight}}kg/{{task.taskVolume}}m³</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2">商品长宽高</div>
+                                        <div class="col-lg-4">{{task.taskLength}}m/{{task.taskWidth}}m/{{task.taskHeight}}m</div>
+                                        <div class="col-lg-2">商品搜索价格</div>
+                                        <div class="col-lg-4">{{task.taskSearchMoney}}元</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2">商品名称</div>
+                                        <div class="col-lg-4">{{task.taskName}}</div>
+                                        <div class="col-lg-2">商品链接</div>
+                                        <div class="col-lg-4">{{task.taskUrl}}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2">每单押金</div>
+                                        <div class="col-lg-4">{{task.taskTotalMoney}}元</div>
+                                        <div class="col-lg-2">每单退款保证金</div>
+                                        <div class="col-lg-4">{{task.taskPromise}}元</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2">每单任务佣金</div>
+                                        <div class="col-lg-4">{{task.taskFee}}元</div>
+                                        <div class="col-lg-2">每单加赏佣金</div>
+                                        <div class="col-lg-4">{{task.taskExtendFee}}元</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2">快递费</div>
+                                        <div class="col-lg-4">{{task.taskTransportFee}}元</div>
+                                        <div class="col-lg-2">每单加赏佣金</div>
+                                        <div class="col-lg-4">{{task.taskExtendFee}}元</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2">下单提示</div>
+                                        <div class="col-lg-4">{{task.taskTips || '无'}}</div>
+                                        <div class="col-lg-2">地区</div>
+                                        <div class="col-lg-4">{{task.taskPosition}}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2">规格</div>
+                                        <div class="col-lg-4">{{task.taskTag1 || '无'}}/{{task.taskTag2 || '无'}}</div>
+                                    </div>
+                                    <div class="alert alert-info">任务淘宝信息</div>
+                                    <div class="row">
+                                        <div class="col-lg-2">商品图片</div>
+                                        <div class="col-lg-4">
+                                            <a href="{{task.taobaoImage}}" target="_blank">
+                                                <img ng-src="{{task.taobaoImage}}" width="50" alt=""/>
+                                            </a>
+                                        </div>
+                                        <div class="col-lg-2">关键词数</div>
+                                        <div class="col-lg-4">{{task.taobaoKeywordsCount}}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2">关键词1</div>
+                                        <div class="col-lg-4">{{task.taobaoKey1 || '无'}}</div>
+                                        <div class="col-lg-2">关键词1分类</div>
+                                        <div class="col-lg-4">
+                                            <p>{{task.taobaoKey1Extend1 || '无'}} | {{task.taobaoKey1Extend2 || '无'}}</p>
+                                            <p>{{task.taobaoKey1Extend3 || '无'}} | {{task.taobaoKey1Extend4 || '无'}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2">关键词2</div>
+                                        <div class="col-lg-4">{{task.taobaoKey2 || '无'}}</div>
+                                        <div class="col-lg-2">关键词2分类</div>
+                                        <div class="col-lg-4">
+                                            <p>{{task.taobaoKey2Extend1 || '无'}} | {{task.taobaoKey2Extend2 || '无'}}</p>
+                                            <p>{{task.taobaoKey2Extend3 || '无'}} | {{task.taobaoKey2Extend4 || '无'}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2">关键词3</div>
+                                        <div class="col-lg-4">{{task.taobaoKey3 || '无'}}</div>
+                                        <div class="col-lg-2">关键词3分类</div>
+                                        <div class="col-lg-4">
+                                            <p>{{task.taobaoKey3Extend1 || '无'}} | {{task.taobaoKey3Extend2 || '无'}}</p>
+                                            <p>{{task.taobaoKey3Extend3 || '无'}} | {{task.taobaoKey3Extend4 || '无'}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2">关键词4</div>
+                                        <div class="col-lg-4">{{task.taobaoKey4 || '无'}}</div>
+                                        <div class="col-lg-2">关键词4分类</div>
+                                        <div class="col-lg-4">
+                                            <p>{{task.taobaoKey4Extend1 || '无'}} | {{task.taobaoKey4Extend2 || '无'}}</p>
+                                            <p>{{task.taobaoKey4Extend3 || '无'}} | {{task.taobaoKey4Extend4 || '无'}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2">关键词5</div>
+                                        <div class="col-lg-4">{{task.taobaoKey5 || '无'}}</div>
+                                        <div class="col-lg-2">关键词5分类</div>
+                                        <div class="col-lg-4">
+                                            <p>{{task.taobaoKey5Extend1 || '无'}} | {{task.taobaoKey5Extend2 || '无'}}</p>
+                                            <p>{{task.taobaoKey5Extend3 || '无'}} | {{task.taobaoKey5Extend4 || '无'}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="alert alert-info">任务天猫信息</div>
+                                    <div class="row">
+                                        <div class="col-lg-2">商品图片</div>
+                                        <div class="col-lg-4">
+                                            <a href="{{task.tmallImage}}" target="_blank">
+                                                <img ng-src="{{task.tmallImage}}" width="50" alt=""/>
+                                            </a>
+                                        </div>
+                                        <div class="col-lg-2">关键词数</div>
+                                        <div class="col-lg-4">{{task.tmallKeywordsCount}}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2">关键词1</div>
+                                        <div class="col-lg-4">{{task.tmallKey1 || '无'}}</div>
+                                        <div class="col-lg-2">关键词1分类</div>
+                                        <div class="col-lg-4">
+                                            <p>{{task.tmallKey1Extend1 || '无'}} | {{task.tmallKey1Extend2 || '无'}}</p>
+                                            <p>{{task.tmallKey1Extend3 || '无'}} | {{task.tmallKey1Extend4 || '无'}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2">关键词2</div>
+                                        <div class="col-lg-4">{{task.tmallKey2 || '无'}}</div>
+                                        <div class="col-lg-2">关键词2分类</div>
+                                        <div class="col-lg-4">
+                                            <p>{{task.tmallKey2Extend1 || '无'}} | {{task.tmallKey2Extend2 || '无'}}</p>
+                                            <p>{{task.tmallKey2Extend3 || '无'}} | {{task.tmallKey2Extend4 || '无'}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2">关键词3</div>
+                                        <div class="col-lg-4">{{task.tmallKey3 || '无'}}</div>
+                                        <div class="col-lg-2">关键词3分类</div>
+                                        <div class="col-lg-4">
+                                            <p>{{task.tmallKey3Extend1 || '无'}} | {{task.tmallKey3Extend2 || '无'}}</p>
+                                            <p>{{task.tmallKey3Extend3 || '无'}} | {{task.tmallKey3Extend4 || '无'}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2">关键词4</div>
+                                        <div class="col-lg-4">{{task.tmallKey4 || '无'}}</div>
+                                        <div class="col-lg-2">关键词4分类</div>
+                                        <div class="col-lg-4">
+                                            <p>{{task.tmallKey4Extend1 || '无'}} | {{task.tmallKey4Extend2 || '无'}}</p>
+                                            <p>{{task.tmallKey4Extend3 || '无'}} | {{task.tmallKey4Extend4 || '无'}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2">关键词5</div>
+                                        <div class="col-lg-4">{{task.tmallKey5 || '无'}}</div>
+                                        <div class="col-lg-2">关键词5分类</div>
+                                        <div class="col-lg-4">
+                                            <p>{{task.tmallKey5Extend1 || '无'}} | {{task.tmallKey5Extend2 || '无'}}</p>
+                                            <p>{{task.tmallKey5Extend3 || '无'}} | {{task.tmallKey5Extend4 || '无'}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="alert alert-info">任务京东信息</div>
+                                    <div class="row">
+                                        <div class="col-lg-2">商品图片</div>
+                                        <div class="col-lg-4">
+                                            <a href="{{task.jdImage}}" target="_blank">
+                                                <img ng-src="{{task.jdImage}}" width="50" alt=""/>
+                                            </a>
+                                        </div>
+                                        <div class="col-lg-2">关键词数</div>
+                                        <div class="col-lg-4">{{task.jdKeywordsCount}}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2">关键词1</div>
+                                        <div class="col-lg-4">{{task.jdKey1 || '无'}}</div>
+                                        <div class="col-lg-2">关键词1分类</div>
+                                        <div class="col-lg-4">
+                                            <p>{{task.jdKey1Extend1 || '无'}} | {{task.jdKey1Extend2 || '无'}}</p>
+                                            <p>{{task.jdKey1Extend3 || '无'}} | {{task.jdKey1Extend4 || '无'}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2">关键词2</div>
+                                        <div class="col-lg-4">{{task.jdKey2 || '无'}}</div>
+                                        <div class="col-lg-2">关键词2分类</div>
+                                        <div class="col-lg-4">
+                                            <p>{{task.jdKey2Extend1 || '无'}} | {{task.jdKey2Extend2 || '无'}}</p>
+                                            <p>{{task.jdKey2Extend3 || '无'}} | {{task.jdKey2Extend4 || '无'}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2">关键词3</div>
+                                        <div class="col-lg-4">{{task.jdKey3 || '无'}}</div>
+                                        <div class="col-lg-2">关键词3分类</div>
+                                        <div class="col-lg-4">
+                                            <p>{{task.jdKey3Extend1 || '无'}} | {{task.jdKey3Extend2 || '无'}}</p>
+                                            <p>{{task.jdKey3Extend3 || '无'}} | {{task.jdKey3Extend4 || '无'}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2">关键词4</div>
+                                        <div class="col-lg-4">{{task.jdKey4 || '无'}}</div>
+                                        <div class="col-lg-2">关键词4分类</div>
+                                        <div class="col-lg-4">
+                                            <p>{{task.jdKey4Extend1 || '无'}} | {{task.jdKey4Extend2 || '无'}}</p>
+                                            <p>{{task.jdKey4Extend3 || '无'}} | {{task.jdKey4Extend4 || '无'}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2">关键词5</div>
+                                        <div class="col-lg-4">{{task.jdKey5 || '无'}}</div>
+                                        <div class="col-lg-2">关键词5分类</div>
+                                        <div class="col-lg-4">
+                                            <p>{{task.jdKey5Extend1 || '无'}} | {{task.jdKey5Extend2 || '无'}}</p>
+                                            <p>{{task.jdKey5Extend3 || '无'}} | {{task.jdKey5Extend4 || '无'}}</p>
                                         </div>
                                     </div>
                                 </div>

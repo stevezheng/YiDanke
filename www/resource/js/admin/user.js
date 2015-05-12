@@ -325,6 +325,10 @@
         , '3': '任务进行中'
         , '4': '任务已完成'
       }
+      , 'taskType': {
+        'dingdan': '订单'
+        , 'zhitongche': '直通车'
+      }
     };
 
     $scope.pass = function(d) {
