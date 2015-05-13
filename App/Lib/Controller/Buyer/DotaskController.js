@@ -52,7 +52,7 @@ module.exports = Controller("Buyer/BaseController", function(){
 
         var task = TaskModel();
         var doTask = DoTaskModel();
-        var _task, keyword;
+        var _task, keyword, doTaskId;
 
         //判断任务是否可接
         return task
@@ -220,7 +220,8 @@ module.exports = Controller("Buyer/BaseController", function(){
             return doTask
               .addOne(terminal, self.cUser.id, taskId, accountId, accountName, keyword, _task.taskFee, _task.taskExtendFee, _task.taskShopId, _task.taskShopName)
           })
-          .then(function() {
+          .then(function(insertId) {
+            doTaskId = insertId;
             return Log.coin(
               -1
               , 1
@@ -233,7 +234,7 @@ module.exports = Controller("Buyer/BaseController", function(){
             );
           })
           .then(function() {
-            return self.success(taskId);
+            return self.success(doTaskId);
           })
           .catch(function(err) {
             console.error(err.stack);
