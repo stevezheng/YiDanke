@@ -36,6 +36,11 @@ module.exports = Controller("Admin/BaseController", function(){
           delete data.taskPlatform;
         }
 
+        if (data.doTaskDetailOrderId) {
+          data['yi_do_task_detail.doTaskDetailOrderId'] = data.doTaskDetailOrderId;
+          delete data.doTaskDetailOrderId;
+        }
+
         var doTask = DoTaskModel();
 
         return doTask
