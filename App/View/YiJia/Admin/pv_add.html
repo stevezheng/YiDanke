@@ -1,0 +1,108 @@
+<% include ./index_header.html %>
+<section id="container" ng-controller="pvAddCtrl">
+    <% include ./index_nav.html %>
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+                <section class="panel">
+                    <header class="panel-heading">
+                        新增流量
+                    </header>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-2">
+                                关键词
+                            </div>
+                            <div class="col-lg-4">
+                                <input type="text" style="width: 300px" ng-model="pv.kwd" placeholder="搜索关键词"/>
+                            </div>
+                            <div class="col-lg-2">
+                                商品链接
+                            </div>
+                            <div class="col-lg-4">
+                                <input type="text" style="width: 300px" ng-model="pv.item_url" placeholder="商品链接"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-2">
+                                店铺类型
+                            </div>
+                            <div class="col-lg-4">
+                                <input type="text" style="width: 300px" ng-model="pv.shop_type" placeholder="店铺类型,b或者c"/>
+                            </div>
+                            <div class="col-lg-2">
+                                流量数
+                            </div>
+                            <div class="col-lg-4">
+                                <input type="text" style="width: 300px" ng-model="pv.times" placeholder="日点击次数"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-2">
+                                开始日期
+                            </div>
+                            <div class="col-lg-4">
+                                <input type="text" style="width: 300px" ng-model="pv.begin_time" placeholder="点击开始日期,如:2015-05-13"/>
+                            </div>
+                            <div class="col-lg-2">
+                                结束日期
+                            </div>
+                            <div class="col-lg-4">
+                                <input type="text" style="width: 300px" ng-model="pv.end_time" placeholder="点击结束日期,如:2015-05-13"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-2">
+                                开始时间
+                            </div>
+                            <div class="col-lg-4">
+                                <input type="text" style="width: 300px" ng-model="pv.click_start" placeholder="每天开始点击时间(整点),如:8"/>
+                            </div>
+                            <div class="col-lg-2">
+                                结束时间
+                            </div>
+                            <div class="col-lg-4">
+                                <input type="text" style="width: 300px" ng-model="pv.click_end" placeholder="每天点击停止时间(整点),如:23"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-2">
+                                流量入口1
+                            </div>
+                            <div class="col-lg-4">
+                                <input type="text" style="width: 300px" ng-model="pv.path1" placeholder="淘宝搜索路径占比, 3路径之和为100"/>
+                            </div>
+                            <div class="col-lg-2">
+                                流量入口2
+                            </div>
+                            <div class="col-lg-4">
+                                <input type="text" style="width: 300px" ng-model="pv.path2" placeholder="淘宝搜索天猫路径占比, c店填0"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-2">
+                                流量入口3
+                            </div>
+                            <div class="col-lg-4">
+                                <input type="text" style="width: 300px" ng-model="pv.path3" placeholder="天猫搜索路径占比, c店填0"/>
+                            </div>
+                            <div class="col-lg-2">
+                                停留时间(秒)
+                            </div>
+                            <div class="col-lg-4">
+                                <input type="text" style="width: 300px" ng-model="pv.sleep_time" placeholder="商品详情页停留时间(秒),如:120"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-4">
+                                <button class="btn btn-info" ng-click="submit(pv)">确认</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+        </section>
+    </section>
+    <!--main content end-->
+</section>
+<% include ./index_footer.html %>

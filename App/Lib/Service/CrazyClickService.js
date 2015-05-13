@@ -309,5 +309,6 @@ var run = function(shopPlatform, task, cb) {
 module.exports = {
   run: run
   , getClicks: getClicks
+  , crazyClick: crazyClick
 };
 
