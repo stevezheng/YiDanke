@@ -121,10 +121,10 @@
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <p ng-if="task.taskStatus == 0">
+                                            <p ng-if="task.taskStatus == 2">
                                                 <a href="javascript:;;;" ng-click="pass(task)">通过</a> | <a href="javascript:;;;" ng-click="unpass(task)">拒绝</a>
                                             </p>
-                                            <p ng-if="task.taskStatus != 0">
+                                            <p ng-if="task.taskStatus > 2">
                                                 该任务已审核
                                             </p>
                                             <p>平台返款冻结押金： <span class="error">{{task.taskTotalMoney}}</span>元</p>
