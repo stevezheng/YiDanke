@@ -51,4 +51,30 @@
 
   });
 
+  Module.controller('pvAddCtrl', function($scope, $http, $upload) {
+    function getQueryStringByUrl(name, url) {
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+      var r = url.match(reg);
+      if (r != null) return unescape(r[2]); return null;
+    }
+
+    $scope.pv = {};
+
+    $scope.submit = function(pv) {
+      pv.nid = getQueryStringByUrl('id', pv.item_url);
+      delete pv.item_url;
+      
+      console.log(pv);
+
+      $http.post('/admin/pv/add', pv)
+        .success(function(res) {
+          console.log(res);
+          if (res.errno == 0) {
+            alert(res.data);
+            location.reload();
+          }
+        })
+    }
+  })
+
 })();
