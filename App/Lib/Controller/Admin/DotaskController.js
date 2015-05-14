@@ -3,6 +3,7 @@ var _ = require('underscore');
 var Log = thinkRequire('LogService');
 var OutputService = thinkRequire('OutputService');
 var DoTaskModel = thinkRequire('DoTaskModel');
+var UserModel = thinkRequire('UserModel');
 module.exports = Controller("Admin/BaseController", function(){
   "use strict";
   return {
@@ -212,7 +213,9 @@ module.exports = Controller("Admin/BaseController", function(){
 
       if (self.isPost()) {
         var id = self.post('id');
+        var user = UserModel();
         var doTask;
+        var payback = {money: 0, coin: 0};
         return D('do_task')
           .where({id: id})
           .find()
@@ -262,6 +265,61 @@ module.exports = Controller("Admin/BaseController", function(){
               , self.ip()
               , '管理员撤销任务单:' + id + '返回1金币');
           })
+          // START 如果任务已经撤销了，需要给商家爱返还押金和金币
+          .then(function() {
+            return D('task')
+              .where({id: doTask.doTaskTaskId})
+              .find()
+          })
+          .then(function(res) {
+            if (res.taskStatus == -1) {
+              var totalUndoCount = 1;
+              payback.money = totalUndoCount * (res.taskPromise + res.taskTotalMoney * 1.05);
+              payback.coin = totalUndoCount * (res.taskFee + res.taskExtendFee + res.taskTransportFee);
+              if (doTask.doTaskTerminal == 'phone') {
+                payback.coin += 0.5; //手机端增值费
+              }
+              payback.coin += totalUndoCount / res.taskTotalCount * res.taskPayback; //平台返款增值费
+              if (res.taskGoodCommentFee) {
+                payback.coin += 1; //好评增值费
+              }
+              var p1 = user.addMoney(res.taskUserId, payback.money);
+              var p2 = user.addCoin(res.taskUserId, payback.coin);
+
+              return Promise.all([p1, p2])
+                .then(function() {
+                  return D('user')
+                    .where({id: res.taskUserId})
+                    .find()
+                })
+                .then(function(seller) {
+                  var p1 = Log.coin(
+                    1
+                    , payback.coin
+                    , (seller.coin + payback.coin)
+                    , seller.id
+                    , seller.username
+                    , 1
+                    , self.ip()
+                    , '撤销任务单['+doTask.id+']返还' + payback.coin + '金币'
+                  );
+
+                  var p2 = Log.money(
+                    1
+                    , payback.money
+                    , (seller.money + payback.money)
+                    , seller.id
+                    , seller.username
+                    , 1
+                    , self.ip()
+                    , '撤销任务单['+doTask.id+']返还' + payback.money + '元'
+                  );
+
+                  return Promise.all([p1, p2])
+                })
+            }
+          })
+          // END 如果任务已经撤销了，需要给商家爱返还押金和金币
           .then(function() {
             return self.success('撤销成功');
           })

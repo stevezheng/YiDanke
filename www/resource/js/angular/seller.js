@@ -695,8 +695,8 @@
               , totalCycle: res.taskTotalCycle //延长买家购物周期总共费用 totalCycle = cycleTime * totalCount
 
               , isGoodComment: false //是否优质好评
-              , goodCommentCount: 3 //好评个数
-              , goodCommentFee: 0 //好评费用
+              , goodCommentCount: res.taskGoodCommentCount //好评个数
+              , goodCommentFee: res.taskGoodCommentFee //好评费用
               , goodComment: [ //好评内容
                 '',
                 '',
