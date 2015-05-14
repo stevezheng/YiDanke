@@ -380,6 +380,7 @@
                                 <th>快递信息</th>
                                 <th>任务状态</th>
                                 <th>退款金额</th>
+                                <th>操作</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -402,6 +403,7 @@
                                 </td>
                                 <td>{{statusMap[dotask.doTaskStatus]}}</td>
                                 <td>{{dotask.doTaskDetailOrderMoney}}</td>
+                                <td><button class="btn btn-info" ng-click="cancelDoTask(dotask)">撤销任务单</button></td>
                             </tr>
                             <tr ng-if="dotasks.length == 0">
                                 <td colspan="6" style="text-align: center">暂无任务记录</td>
