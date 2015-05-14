@@ -50,6 +50,17 @@ module.exports = Controller("Home/BaseController", function () {
       }
     },
 
+    helpAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+        return self.display();
+      }
+
+      if (self.isPost()) {}
+    },
+
     regAction: function () {
       var self = this;
       self.assign('title', '用户注册');
