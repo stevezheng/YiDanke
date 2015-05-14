@@ -271,5 +271,62 @@ module.exports = Controller("Admin/BaseController", function(){
           })
       }
     },
+    
+    updateTaskAction: function() {
+      var self = this;
+      self.assign('title', '');
+    
+      if (self.isGet()) {}
+      
+      if (self.isPost()) {
+        var data = self.http.post;
+
+        var id = data.id;
+        delete data.id;
+
+        return D('task')
+          .where({id: id})
+          .update(data)
+          .then(function() {
+            return self.success('更新任务基本信息成功');
+          })
+      }
+    },
+
+    updateTaobaoAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {}
+
+      if (self.isPost()) {
+        var data = self.http.post;
+
+        return D('task_taobao')
+          .where({taobaoTaskId: data.taobaoTaskId})
+          .update(data)
+          .then(function() {
+            return self.success('更新任务淘宝信息成功');
+          })
+      }
+    },
+
+    updateTmallAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {}
+
+      if (self.isPost()) {
+        var data = self.http.post;
+
+        return D('task_tmall')
+          .where({tmallTaskId: data.tmallTaskId})
+          .update(data)
+          .then(function() {
+            return self.success('更新任务天猫信息成功');
+          })
+      }
+    },
   };
 });

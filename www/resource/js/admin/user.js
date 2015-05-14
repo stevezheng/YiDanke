@@ -313,11 +313,11 @@
 
       if (r) {
         var data = {};
-        if (!doTask.id) {
-          alert('撤销失败');
+        if (!doTask.doTaskDetailDoTaskId) {
+          alert('待完成任务，请移步至任务清单中进行撤销，谢谢合作');
           return false;
         }
-        data.id = doTask.id;
+        data.id = doTask.doTaskDetailDoTaskId;
         $http.post('/admin/dotask/cancel', data)
           .success(function(res) {
             if (res.errno == 0) {
@@ -330,6 +330,127 @@
       }
     };
 
+    $scope.updateTask = function(task) {
+      var r = confirm('请确认是否要修改任务基本信息');
+
+      if (r) {
+        $http.post('/admin/task/updateTask', {
+          id: taskId
+          , taskWeight: task.taskWeight
+          , taskVolume: task.taskVolume
+          , taskLong: task.taskLong
+          , taskWidth: task.taskWidth
+          , taskHeight: task.taskHeight
+          , taskName: task.taskName
+          , taskUrl: task.taskUrl
+          , taskTips: task.taskTips
+          , taskPosition: task.taskPosition
+          , taskTag1: task.taskTag1
+          , taskTag2: task.taskTag2
+        })
+          .success(function(res) {
+            if (res.errno === '0') {
+              alert(res.data);
+            } else {
+              alert(res.errmsg);
+            }
+          })
+      }
+    };
+
+    $scope.updateTaobao = function(task) {
+      var r = confirm('请确认是否要修改任务淘宝信息,请确定关键词数有修改');
+
+      if (r) {
+        $http.post('/admin/task/updateTaobao', {
+          taobaoTaskId: taskId
+          , taobaoKeywordsCount: task.taobaoKeywordsCount
+          , taobaoKey1: task.taobaoKey1
+          , taobaoKey1Extend1: task.taobaoKey1Extend1
+          , taobaoKey1Extend2: task.taobaoKey1Extend2
+          , taobaoKey1Extend3: task.taobaoKey1Extend3
+          , taobaoKey1Extend4: task.taobaoKey1Extend4
+
+          , taobaoKey2: task.taobaoKey2
+          , taobaoKey2Extend1: task.taobaoKey2Extend1
+          , taobaoKey2Extend2: task.taobaoKey2Extend2
+          , taobaoKey2Extend3: task.taobaoKey2Extend3
+          , taobaoKey2Extend4: task.taobaoKey2Extend4
+
+          , taobaoKey3: task.taobaoKey3
+          , taobaoKey3Extend1: task.taobaoKey3Extend1
+          , taobaoKey3Extend2: task.taobaoKey3Extend2
+          , taobaoKey3Extend3: task.taobaoKey3Extend3
+          , taobaoKey3Extend4: task.taobaoKey3Extend4
+
+          , taobaoKey4: task.taobaoKey4
+          , taobaoKey4Extend1: task.taobaoKey4Extend1
+          , taobaoKey4Extend2: task.taobaoKey4Extend2
+          , taobaoKey4Extend3: task.taobaoKey4Extend3
+          , taobaoKey4Extend4: task.taobaoKey4Extend4
+
+          , taobaoKey5: task.taobaoKey5
+          , taobaoKey5Extend1: task.taobaoKey5Extend1
+          , taobaoKey5Extend2: task.taobaoKey5Extend2
+          , taobaoKey5Extend3: task.taobaoKey5Extend3
+          , taobaoKey5Extend4: task.taobaoKey5Extend4
+        })
+          .success(function(res) {
+            if (res.errno === 0) {
+              alert(res.data);
+            } else {
+              alert(res.errmsg);
+            }
+          })
+      }
+    };
+
+    $scope.updateTmall = function(task) {
+      var r = confirm('请确认是否要修改任务天猫信息,请确定关键词数有修改');
+
+      if (r) {
+        $http.post('/admin/task/updateTmall', {
+          tmallTaskId: taskId
+          , tmallKeywordsCount: task.tmallKeywordsCount
+          , tmallKey1: task.tmallKey1
+          , tmallKey1Extend1: task.tmallKey1Extend1
+          , tmallKey1Extend2: task.tmallKey1Extend2
+          , tmallKey1Extend3: task.tmallKey1Extend3
+          , tmallKey1Extend4: task.tmallKey1Extend4
+
+          , tmallKey2: task.tmallKey2
+          , tmallKey2Extend1: task.tmallKey2Extend1
+          , tmallKey2Extend2: task.tmallKey2Extend2
+          , tmallKey2Extend3: task.tmallKey2Extend3
+          , tmallKey2Extend4: task.tmallKey2Extend4
+
+          , tmallKey3: task.tmallKey3
+          , tmallKey3Extend1: task.tmallKey3Extend1
+          , tmallKey3Extend2: task.tmallKey3Extend2
+          , tmallKey3Extend3: task.tmallKey3Extend3
+          , tmallKey3Extend4: task.tmallKey3Extend4
+
+          , tmallKey4: task.tmallKey4
+          , tmallKey4Extend1: task.tmallKey4Extend1
+          , tmallKey4Extend2: task.tmallKey4Extend2
+          , tmallKey4Extend3: task.tmallKey4Extend3
+          , tmallKey4Extend4: task.tmallKey4Extend4
+
+          , tmallKey5: task.tmallKey5
+          , tmallKey5Extend1: task.tmallKey5Extend1
+          , tmallKey5Extend2: task.tmallKey5Extend2
+          , tmallKey5Extend3: task.tmallKey5Extend3
+          , tmallKey5Extend4: task.tmallKey5Extend4
+        })
+          .success(function(res) {
+            if (res.errno === 0) {
+              alert(res.data);
+            } else {
+              alert(res.errmsg);
+            }
+          })
+      }
+    }
     $scope.statusMap = {
       '-1': '已撤销'
       , '0': '待完成任务'

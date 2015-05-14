@@ -1,4 +1,46 @@
-<% include ../common_header.html %>
+<!DOCTYPE html>
+<html lang="en" ng-app="YiAppAdmin">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Mosaddek">
+    <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <link rel="shortcut icon" href="/resource/img/favicon.png">
+
+    <title>一家网</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/resource/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/resource/css/bootstrap-reset.css" rel="stylesheet">
+    <!--external css-->
+    <link href="/resource/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="/resource/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="/resource/css/owl.carousel.css" type="text/css">
+    <!-- Custom styles for this template -->
+    <link href="/resource/css/style.css" rel="stylesheet">
+    <link href="/resource/css/style-responsive.css" rel="stylesheet" />
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/resource/js/html5shiv.js"></script>
+    <script src="/resource/js/respond.min.js"></script>
+    <![endif]-->
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?137cbbecf31943ced30db3b74b53ba6b";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+</head>
+
+<body>
+
 <section id="container" ng-controller="sellerTaskDetailCtrl">
     <% include ../Admin/index_nav.html %>
     <!--main content start-->
@@ -130,7 +172,10 @@
                                             <p>平台返款冻结押金： <span class="error">{{task.taskTotalMoney}}</span>元</p>
                                         </div>
                                     </div>
-                                    <div class="alert alert-info">任务基本信息</div>
+                                    <div class="alert alert-info">
+                                        任务基本信息
+                                        <button class="btn btn-info pull-right" ng-click="updateTask(task)">更新</button>
+                                    </div>
                                     <div class="row">
                                         <div class="col-lg-2">商家一家网账号</div>
                                         <div class="col-lg-4">{{task.taskUserName}}</div>
@@ -147,19 +192,42 @@
                                         <div class="col-lg-2">任务类型</div>
                                         <div class="col-lg-4">{{task.taskType=='dingdan'?'普通订单':'直通车'}}</div>
                                         <div class="col-lg-2">商品重量/体积</div>
-                                        <div class="col-lg-4">{{task.taskWeight}}kg/{{task.taskVolume}}m³</div>
+                                        <div class="col-lg-4">
+                                            <p>
+                                                <input type="text" ng-model="task.taskWeight" style="width: 50px;"/>kg/
+                                                <input type="text" ng-model="task.taskVolume" style="width: 50px;"/>m³
+                                            </p>
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-2">商品长宽高</div>
-                                        <div class="col-lg-4">{{task.taskLength}}m/{{task.taskWidth}}m/{{task.taskHeight}}m</div>
+                                        <div class="col-lg-4">
+                                            <p>
+                                                <input type="text" ng-model="task.taskLength" style="width: 50px;"/>m(长)
+                                                <input type="text" ng-model="task.taskWidth" style="width: 50px;"/>m(宽)
+                                                <input type="text" ng-model="task.taskHeight" style="width: 50px;"/>m(高)
+                                            </p>
+                                        </div>
                                         <div class="col-lg-2">商品搜索价格</div>
-                                        <div class="col-lg-4">{{task.taskSearchMoney}}元</div>
+                                        <div class="col-lg-4">
+                                            <p>
+                                                <input type="text" ng-model="task.taskSearchMoney" style="width: 50px;"/>元
+                                            </p>
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-2">商品名称</div>
-                                        <div class="col-lg-4">{{task.taskName}}</div>
+                                        <div class="col-lg-4">
+                                            <p>
+                                                <textarea style="overflow:auto;width: 100%" rows="2" ng-model="task.taskName"></textarea>
+                                            </p>
+                                        </div>
                                         <div class="col-lg-2">商品链接</div>
-                                        <div class="col-lg-4">{{task.taskUrl}}</div>
+                                        <div class="col-lg-4">
+                                            <p>
+                                                <textarea style="overflow:auto;width: 100%" rows="2" ng-model="task.taskUrl"></textarea>
+                                            </p>
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-2">每单押金</div>
@@ -181,15 +249,31 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-2">下单提示</div>
-                                        <div class="col-lg-4">{{task.taskTips || '无'}}</div>
+                                        <div class="col-lg-4">
+                                            <p>
+                                                <textarea style="overflow:auto;width: 100%" rows="2" ng-model="task.taskTips"></textarea>
+                                            </p>
+                                        </div>
                                         <div class="col-lg-2">地区</div>
-                                        <div class="col-lg-4">{{task.taskPosition}}</div>
+                                        <div class="col-lg-4">
+                                            <p>
+                                                <input type="text" ng-model="task.taskPosition" style="width: 100px;"/>
+                                            </p>
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-2">规格</div>
-                                        <div class="col-lg-4">{{task.taskTag1 || '无'}}/{{task.taskTag2 || '无'}}</div>
+                                        <div class="col-lg-4">
+                                            <p>
+                                                <input type="text" ng-model="task.taskTag1" style="width: 50px;"/>/
+                                                <input type="text" ng-model="task.taskTag2" style="width: 50px;"/>
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div class="alert alert-info">任务淘宝信息</div>
+                                    <div class="alert alert-info">
+                                        任务淘宝信息
+                                        <button class="btn btn-info pull-right" ng-click="updateTaobao(task)">更新</button>
+                                    </div>
                                     <div class="row">
                                         <div class="col-lg-2">商品图片</div>
                                         <div class="col-lg-4">
@@ -198,54 +282,98 @@
                                             </a>
                                         </div>
                                         <div class="col-lg-2">关键词数</div>
-                                        <div class="col-lg-4">{{task.taobaoKeywordsCount}}</div>
+                                        <div class="col-lg-4">
+                                            <input type="text" ng-model="task.taobaoKeywordsCount"/>
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-2">关键词1</div>
-                                        <div class="col-lg-4">{{task.taobaoKey1 || '无'}}</div>
+                                        <div class="col-lg-4">
+                                            <input type="text" ng-model="task.taobaoKey1"/>
+                                        </div>
                                         <div class="col-lg-2">关键词1分类</div>
                                         <div class="col-lg-4">
-                                            <p>{{task.taobaoKey1Extend1 || '无'}} | {{task.taobaoKey1Extend2 || '无'}}</p>
-                                            <p>{{task.taobaoKey1Extend3 || '无'}} | {{task.taobaoKey1Extend4 || '无'}}</p>
+                                            <p>
+                                                <input type="text" ng-model="task.taobaoKey1Extend1" style="width: 50px;"/>|
+                                                <input type="text" ng-model="task.taobaoKey1Extend2" style="width: 50px;"/>
+                                            </p>
+                                            <p>
+                                                <input type="text" ng-model="task.taobaoKey1Extend3" style="width: 50px;"/>|
+                                                <input type="text" ng-model="task.taobaoKey1Extend4" style="width: 50px;"/>
+                                            </p>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-2">关键词2</div>
-                                        <div class="col-lg-4">{{task.taobaoKey2 || '无'}}</div>
+                                        <div class="col-lg-4">
+                                            <input type="text" ng-model="task.taobaoKey2"/>
+                                        </div>
                                         <div class="col-lg-2">关键词2分类</div>
                                         <div class="col-lg-4">
-                                            <p>{{task.taobaoKey2Extend1 || '无'}} | {{task.taobaoKey2Extend2 || '无'}}</p>
-                                            <p>{{task.taobaoKey2Extend3 || '无'}} | {{task.taobaoKey2Extend4 || '无'}}</p>
+                                            <p>
+                                                <input type="text" ng-model="task.taobaoKey2Extend1" style="width: 50px;"/>|
+                                                <input type="text" ng-model="task.taobaoKey2Extend2" style="width: 50px;"/>
+                                            </p>
+                                            <p>
+                                                <input type="text" ng-model="task.taobaoKey2Extend3" style="width: 50px;"/>|
+                                                <input type="text" ng-model="task.taobaoKey2Extend4" style="width: 50px;"/>
+                                            </p>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-2">关键词3</div>
-                                        <div class="col-lg-4">{{task.taobaoKey3 || '无'}}</div>
+                                        <div class="col-lg-4">
+                                            <input type="text" ng-model="task.taobaoKey3"/>
+                                        </div>
                                         <div class="col-lg-2">关键词3分类</div>
                                         <div class="col-lg-4">
-                                            <p>{{task.taobaoKey3Extend1 || '无'}} | {{task.taobaoKey3Extend2 || '无'}}</p>
-                                            <p>{{task.taobaoKey3Extend3 || '无'}} | {{task.taobaoKey3Extend4 || '无'}}</p>
+                                            <p>
+                                                <input type="text" ng-model="task.taobaoKey3Extend1" style="width: 50px;"/>|
+                                                <input type="text" ng-model="task.taobaoKey3Extend2" style="width: 50px;"/>
+                                            </p>
+                                            <p>
+                                                <input type="text" ng-model="task.taobaoKey3Extend3" style="width: 50px;"/>|
+                                                <input type="text" ng-model="task.taobaoKey3Extend4" style="width: 50px;"/>
+                                            </p>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-2">关键词4</div>
-                                        <div class="col-lg-4">{{task.taobaoKey4 || '无'}}</div>
-                                        <div class="col-lg-2">关键词4分类</div>
                                         <div class="col-lg-4">
-                                            <p>{{task.taobaoKey4Extend1 || '无'}} | {{task.taobaoKey4Extend2 || '无'}}</p>
-                                            <p>{{task.taobaoKey4Extend3 || '无'}} | {{task.taobaoKey4Extend4 || '无'}}</p>
+                                            <input type="text" ng-model="task.taobaoKey4"/>
+                                        </div>
+                                        <div class="col-lg-2">关键词1分类</div>
+                                        <div class="col-lg-4">
+                                            <p>
+                                                <input type="text" ng-model="task.taobaoKey4Extend1" style="width: 50px;"/>|
+                                                <input type="text" ng-model="task.taobaoKey4Extend2" style="width: 50px;"/>
+                                            </p>
+                                            <p>
+                                                <input type="text" ng-model="task.taobaoKey4Extend3" style="width: 50px;"/>|
+                                                <input type="text" ng-model="task.taobaoKey4Extend4" style="width: 50px;"/>
+                                            </p>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-2">关键词5</div>
-                                        <div class="col-lg-4">{{task.taobaoKey5 || '无'}}</div>
-                                        <div class="col-lg-2">关键词5分类</div>
                                         <div class="col-lg-4">
-                                            <p>{{task.taobaoKey5Extend1 || '无'}} | {{task.taobaoKey5Extend2 || '无'}}</p>
-                                            <p>{{task.taobaoKey5Extend3 || '无'}} | {{task.taobaoKey5Extend4 || '无'}}</p>
+                                            <input type="text" ng-model="task.taobaoKey5"/>
+                                        </div>
+                                        <div class="col-lg-2">关键词1分类</div>
+                                        <div class="col-lg-4">
+                                            <p>
+                                                <input type="text" ng-model="task.taobaoKey5Extend1" style="width: 50px;"/>|
+                                                <input type="text" ng-model="task.taobaoKey5Extend2" style="width: 50px;"/>
+                                            </p>
+                                            <p>
+                                                <input type="text" ng-model="task.taobaoKey5Extend3" style="width: 50px;"/>|
+                                                <input type="text" ng-model="task.taobaoKey5Extend4" style="width: 50px;"/>
+                                            </p>
                                         </div>
                                     </div>
-                                    <div class="alert alert-info">任务天猫信息</div>
+                                    <div class="alert alert-info">任务天猫信息
+                                        <button class="btn btn-info pull-right" ng-click="updateTmall(task)">更新</button>
+                                    </div>
                                     <div class="row">
                                         <div class="col-lg-2">商品图片</div>
                                         <div class="col-lg-4">
@@ -254,107 +382,93 @@
                                             </a>
                                         </div>
                                         <div class="col-lg-2">关键词数</div>
-                                        <div class="col-lg-4">{{task.tmallKeywordsCount}}</div>
+                                        <div class="col-lg-4">
+                                            <input type="text" ng-model="task.tmallKeywordsCount"/>
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-2">关键词1</div>
-                                        <div class="col-lg-4">{{task.tmallKey1 || '无'}}</div>
+                                        <div class="col-lg-4">
+                                            <input type="text" ng-model="task.tmallKey1"/>
+                                        </div>
                                         <div class="col-lg-2">关键词1分类</div>
                                         <div class="col-lg-4">
-                                            <p>{{task.tmallKey1Extend1 || '无'}} | {{task.tmallKey1Extend2 || '无'}}</p>
-                                            <p>{{task.tmallKey1Extend3 || '无'}} | {{task.tmallKey1Extend4 || '无'}}</p>
+                                            <p>
+                                                <input type="text" ng-model="task.tmallKey1Extend1" style="width: 50px;"/>|
+                                                <input type="text" ng-model="task.tmallKey1Extend2" style="width: 50px;"/>
+                                            </p>
+                                            <p>
+                                                <input type="text" ng-model="task.tmallKey1Extend3" style="width: 50px;"/>|
+                                                <input type="text" ng-model="task.tmallKey1Extend4" style="width: 50px;"/>
+                                            </p>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-2">关键词2</div>
-                                        <div class="col-lg-4">{{task.tmallKey2 || '无'}}</div>
+                                        <div class="col-lg-4">
+                                            <input type="text" ng-model="task.tmallKey2"/>
+                                        </div>
                                         <div class="col-lg-2">关键词2分类</div>
                                         <div class="col-lg-4">
-                                            <p>{{task.tmallKey2Extend1 || '无'}} | {{task.tmallKey2Extend2 || '无'}}</p>
-                                            <p>{{task.tmallKey2Extend3 || '无'}} | {{task.tmallKey2Extend4 || '无'}}</p>
+                                            <p>
+                                                <input type="text" ng-model="task.tmallKey2Extend1" style="width: 50px;"/>|
+                                                <input type="text" ng-model="task.tmallKey2Extend2" style="width: 50px;"/>
+                                            </p>
+                                            <p>
+                                                <input type="text" ng-model="task.tmallKey2Extend3" style="width: 50px;"/>|
+                                                <input type="text" ng-model="task.tmallKey2Extend4" style="width: 50px;"/>
+                                            </p>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-2">关键词3</div>
-                                        <div class="col-lg-4">{{task.tmallKey3 || '无'}}</div>
+                                        <div class="col-lg-4">
+                                            <input type="text" ng-model="task.tmallKey3"/>
+                                        </div>
                                         <div class="col-lg-2">关键词3分类</div>
                                         <div class="col-lg-4">
-                                            <p>{{task.tmallKey3Extend1 || '无'}} | {{task.tmallKey3Extend2 || '无'}}</p>
-                                            <p>{{task.tmallKey3Extend3 || '无'}} | {{task.tmallKey3Extend4 || '无'}}</p>
+                                            <p>
+                                                <input type="text" ng-model="task.tmallKey3Extend1" style="width: 50px;"/>|
+                                                <input type="text" ng-model="task.tmallKey3Extend2" style="width: 50px;"/>
+                                            </p>
+                                            <p>
+                                                <input type="text" ng-model="task.tmallKey3Extend3" style="width: 50px;"/>|
+                                                <input type="text" ng-model="task.tmallKey3Extend4" style="width: 50px;"/>
+                                            </p>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-2">关键词4</div>
-                                        <div class="col-lg-4">{{task.tmallKey4 || '无'}}</div>
-                                        <div class="col-lg-2">关键词4分类</div>
                                         <div class="col-lg-4">
-                                            <p>{{task.tmallKey4Extend1 || '无'}} | {{task.tmallKey4Extend2 || '无'}}</p>
-                                            <p>{{task.tmallKey4Extend3 || '无'}} | {{task.tmallKey4Extend4 || '无'}}</p>
+                                            <input type="text" ng-model="task.tmallKey4"/>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-2">关键词5</div>
-                                        <div class="col-lg-4">{{task.tmallKey5 || '无'}}</div>
-                                        <div class="col-lg-2">关键词5分类</div>
-                                        <div class="col-lg-4">
-                                            <p>{{task.tmallKey5Extend1 || '无'}} | {{task.tmallKey5Extend2 || '无'}}</p>
-                                            <p>{{task.tmallKey5Extend3 || '无'}} | {{task.tmallKey5Extend4 || '无'}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="alert alert-info">任务京东信息</div>
-                                    <div class="row">
-                                        <div class="col-lg-2">商品图片</div>
-                                        <div class="col-lg-4">
-                                            <a href="{{task.jdImage}}" target="_blank">
-                                                <img ng-src="{{task.jdImage}}" width="50" alt=""/>
-                                            </a>
-                                        </div>
-                                        <div class="col-lg-2">关键词数</div>
-                                        <div class="col-lg-4">{{task.jdKeywordsCount}}</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-2">关键词1</div>
-                                        <div class="col-lg-4">{{task.jdKey1 || '无'}}</div>
                                         <div class="col-lg-2">关键词1分类</div>
                                         <div class="col-lg-4">
-                                            <p>{{task.jdKey1Extend1 || '无'}} | {{task.jdKey1Extend2 || '无'}}</p>
-                                            <p>{{task.jdKey1Extend3 || '无'}} | {{task.jdKey1Extend4 || '无'}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-2">关键词2</div>
-                                        <div class="col-lg-4">{{task.jdKey2 || '无'}}</div>
-                                        <div class="col-lg-2">关键词2分类</div>
-                                        <div class="col-lg-4">
-                                            <p>{{task.jdKey2Extend1 || '无'}} | {{task.jdKey2Extend2 || '无'}}</p>
-                                            <p>{{task.jdKey2Extend3 || '无'}} | {{task.jdKey2Extend4 || '无'}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-2">关键词3</div>
-                                        <div class="col-lg-4">{{task.jdKey3 || '无'}}</div>
-                                        <div class="col-lg-2">关键词3分类</div>
-                                        <div class="col-lg-4">
-                                            <p>{{task.jdKey3Extend1 || '无'}} | {{task.jdKey3Extend2 || '无'}}</p>
-                                            <p>{{task.jdKey3Extend3 || '无'}} | {{task.jdKey3Extend4 || '无'}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-2">关键词4</div>
-                                        <div class="col-lg-4">{{task.jdKey4 || '无'}}</div>
-                                        <div class="col-lg-2">关键词4分类</div>
-                                        <div class="col-lg-4">
-                                            <p>{{task.jdKey4Extend1 || '无'}} | {{task.jdKey4Extend2 || '无'}}</p>
-                                            <p>{{task.jdKey4Extend3 || '无'}} | {{task.jdKey4Extend4 || '无'}}</p>
+                                            <p>
+                                                <input type="text" ng-model="task.tmallKey4Extend1" style="width: 50px;"/>|
+                                                <input type="text" ng-model="task.tmallKey4Extend2" style="width: 50px;"/>
+                                            </p>
+                                            <p>
+                                                <input type="text" ng-model="task.tmallKey4Extend3" style="width: 50px;"/>|
+                                                <input type="text" ng-model="task.tmallKey4Extend4" style="width: 50px;"/>
+                                            </p>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-2">关键词5</div>
-                                        <div class="col-lg-4">{{task.jdKey5 || '无'}}</div>
-                                        <div class="col-lg-2">关键词5分类</div>
                                         <div class="col-lg-4">
-                                            <p>{{task.jdKey5Extend1 || '无'}} | {{task.jdKey5Extend2 || '无'}}</p>
-                                            <p>{{task.jdKey5Extend3 || '无'}} | {{task.jdKey5Extend4 || '无'}}</p>
+                                            <input type="text" ng-model="task.tmallKey5"/>
+                                        </div>
+                                        <div class="col-lg-2">关键词1分类</div>
+                                        <div class="col-lg-4">
+                                            <p>
+                                                <input type="text" ng-model="task.tmallKey5Extend1" style="width: 50px;"/>|
+                                                <input type="text" ng-model="task.tmallKey5Extend2" style="width: 50px;"/>
+                                            </p>
+                                            <p>
+                                                <input type="text" ng-model="task.tmallKey5Extend3" style="width: 50px;"/>|
+                                                <input type="text" ng-model="task.tmallKey5Extend4" style="width: 50px;"/>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -568,5 +682,72 @@
     <!-- modal -->
     <!--main content end-->
 </section>
-script:src
-<% include ../common_footer.html %>
+<!-- js placed at the end of the document so the pages load faster -->
+<!-- js placed at the end of the document so the pages load faster -->
+<script src="/resource/js/jquery.js"></script>
+<script src="/resource/js/jquery-1.8.3.min.js"></script>
+<script src="/resource/js/bootstrap.min.js"></script>
+<script class="include" type="text/javascript" src="/resource/js/jquery.dcjqaccordion.2.7.js"></script>
+<script src="/resource/js/jquery.scrollTo.min.js"></script>
+<script src="/resource/js/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="/resource/js/jquery.sparkline.js" type="text/javascript"></script>
+<script src="/resource/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
+<script src="/resource/js/owl.carousel.js" ></script>
+<script src="/resource/js/jquery.customSelect.min.js" ></script>
+<script src="/resource/js/respond.min.js" ></script>
+<script src="/resource/js/underscore-min.js" ></script>
+
+<script class="include" type="text/javascript" src="/resource/js/jquery.dcjqaccordion.2.7.js"></script>
+
+<!--common script for all pages-->
+<script src="/resource/js/common-scripts.js"></script>
+
+<!--script for this page-->
+<script src="/resource/js/sparkline-chart.js"></script>
+<script src="/resource/js/easy-pie-chart.js"></script>
+
+<script src="/resource/js/underscore-min.js"></script>
+<!--<script src="/resource/js/moment-with-locales.min.js"></script>-->
+<script src="/resource/js/moment.min.js"></script>
+<script src="/resource/js/zh-cn.js"></script>
+<script src="/resource/js/angular.min.js"></script>
+<script src="/resource/js/angular/angular-file-upload.min.js"></script>
+<script src="/resource/js/admin/dotask.js"></script>
+<script src="/resource/js/admin/user.js"></script>
+<script src="/resource/js/admin/money.js"></script>
+<script src="/resource/js/admin/task.js"></script>
+<script src="/resource/js/admin/bank.js"></script>
+<script src="/resource/js/admin/shop.js"></script>
+<script src="/resource/js/admin/account.js"></script>
+<script src="/resource/js/admin/setting.js"></script>
+<script src="/resource/js/admin/pv.js"></script>
+
+<script>
+
+    //custom select box
+
+    $(function(){
+        $('select.styled').customSelect();
+    });
+
+    angular.module('YiAppAdmin', ['angularFileUpload',
+        'YiAppAdmin.DoTask'
+        , 'YiAppAdmin.User'
+        , 'YiAppAdmin.Money'
+        , 'YiAppAdmin.Task'
+        , 'YiAppAdmin.Bank'
+        , 'YiAppAdmin.Shop'
+        , 'YiAppAdmin.Account'
+        , 'YiAppAdmin.Setting'
+        , 'YiAppAdmin.PV'
+    ]);
+
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]); return null;
+    }
+
+</script>
+</body>
+</html>

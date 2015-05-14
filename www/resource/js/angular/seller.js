@@ -583,28 +583,6 @@
 
   SellerModule.controller('sellerTaskDetailCtrl', function ($scope, $http) {
     var taskId = getQueryString('id');
-
-    $scope.cancelDoTask = function(doTask) {
-      var r = confirm('请确认是否要撤销任务单');
-
-      if (r) {
-        var data = {};
-        if (!doTask.doTaskDetailDoTaskId) {
-          alert('撤销失败');
-          return false;
-        }
-        data.id = doTask.doTaskDetailDoTaskId;
-        $http.post('/admin/dotask/cancel', data)
-          .success(function(res) {
-            if (res.errno == 0) {
-              alert(res.data);
-              doTask.doTaskStatus = -1;
-            } else {
-              alert(res.errmsg);
-            }
-          })
-      }
-    };
     $scope.statusMap = {
       '-1': '已撤销'
       , '0': '待完成任务'
