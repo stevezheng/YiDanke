@@ -348,6 +348,70 @@ module.exports = Controller("Admin/BaseController", function(){
       }
     },
 
+    printOrderAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+
+      }
+
+      if (self.isPost()) {
+        return D('do_task')
+          .join({
+            table: 'task'
+            , join: 'left'
+            , on: {
+              'doTaskTaskId': 'id'
+            }
+          })
+          .join({
+            table: 'do_task_detail'
+            , join: 'left'
+            , on: {
+              'id': 'doTaskDetailDoTaskId'
+            }
+          })
+          .join({
+            table: 'do_task_extend'
+            , join: 'left'
+            , on: {
+              'id': 'doTaskExtendDoTaskId'
+            }
+          })
+          .join({
+            table: 'shop'
+            , join: 'left'
+            , on: {
+              'doTaskShopId': 'id'
+            }
+          })
+          .join({
+            table: 'account'
+            , join: 'left'
+            , on: {
+              'doTaskAccountId': 'id'
+            }
+          })
+          .join({
+            table: 'user'
+            , join: 'left'
+            , on: {
+              'doTaskUserId': 'id'
+            }
+          })
+          .select()
+          .then(function(res) {
+            OutputService.order(res, function(now) {
+              return self.success(now);
+            });
+          })
+          .catch(function(err) {
+            console.error(err.stack);
+          })
+      }
+    },
+
     printExpressAction: function() {
       var self = this;
       self.assign('title', '');

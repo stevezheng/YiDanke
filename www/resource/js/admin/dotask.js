@@ -245,6 +245,17 @@
         })
     };
 
+    $scope.printOrder = function() {
+      $http.post('/admin/dotask/printOrder')
+        .success(function(res) {
+          if (res.errno == 0) {
+            window.open('/resource/excel/order-' + res.data + '.xlsx');
+          } else {
+            alert(res.errmsg);
+          }
+        })
+    };
+
     $scope.statusMap = {
       '-1': '已撤销'
       , '0': '待完成'

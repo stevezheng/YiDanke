@@ -3,6 +3,21 @@ var fs = require("fs");
 var exlPath = RESOURCE_PATH + '/resource/excel/';
 var moment = require('moment');
 
+var statusMap = {
+  doTaskStatus: {
+    '-1': '已撤销'
+    , '0': '待完成'
+    , '1': '待添加订单号'
+    , '2': '待发货'
+    , '3': '待收货'
+    , '4': '待退款'
+    , '5': '待确认退款'
+    , '6': '已完成'
+    , '8': '已申请提现'
+    , '9': '已提现'
+  }
+};
+
 var OutputService = function() {
 };
 
@@ -125,6 +140,37 @@ OutputService.express = function(doTaskData, cb) {
 
   ejsExcel.renderExcelCb(exlMultiBuf, multiData, function(exlMultiBuf2){
     fs.writeFileSync(exlPath + 'express-' + now + ".xlsx", exlMultiBuf2);
+    if (cb) {
+      cb(now);
+    }
+    //return self.success(id);
+  });
+};
+
+OutputService.order = function(doTaskData, cb) {
+  var multiData = [];
+  var exlMultiBuf = fs.readFileSync(exlPath + "order_base.xlsx");
+
+  var now = moment().format('YYYY-MM-DD_HH:mm:ss');
+
+  for (var i = 0; i < doTaskData.length; i++) {
+    var doTaskSingle = doTaskData[i];
+
+    var data = doTaskSingle;
+
+    try {
+      data.doTaskCreateTime = moment(data.doTaskCreateTime).format('YYYY-MM-DD HH:mm:ss');
+      data.doTaskStatus = statusMap.doTaskStatus[data.doTaskStatus];
+    } catch (ex) {
+      console.error(ex);
+    }
+
+    multiData.push(data);
+  }
+
+
+  ejsExcel.renderExcelCb(exlMultiBuf, multiData, function(exlMultiBuf2){
+    fs.writeFileSync(exlPath + 'order-' + now + ".xlsx", exlMultiBuf2);
     if (cb) {
       cb(now);
     }
