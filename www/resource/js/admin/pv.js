@@ -53,7 +53,6 @@
 
   Module.controller('pvAddCtrl', function($scope, $http, $upload) {
     function getQueryStringByUrl(name, url) {
-      url = url.split('?')[1];
       var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
       var r = url.match(reg);
       if (r != null) return unescape(r[2]); return null;

@@ -7,7 +7,6 @@
   }
 
   function getQueryStringByUrl(url, name) {
-    url = url.split('?')[1];
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
     var _url = url.split('?')[1];
     var r = _url.match(reg);

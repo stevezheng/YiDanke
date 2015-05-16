@@ -349,7 +349,7 @@
           , taskTag2: task.taskTag2
         })
           .success(function(res) {
-            if (res.errno === 0) {
+            if (res.errno === '0') {
               alert(res.data);
             } else {
               alert(res.errmsg);
