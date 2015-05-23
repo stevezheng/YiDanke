@@ -20,7 +20,7 @@
 
       $http.post('/admin/money/in', {page: $scope.page, data: filter})
         .success(function(res) {
-          if (res.errno == 0) {
+          if (res.errno === 0) {
             $scope.data = res.data.data;
             $scope.total = res.data.total;
             $scope.count = res.data.count;
@@ -31,7 +31,7 @@
               $scope.totalPage.push(i+1);
             }
           }
-        })
+        });
     };
 
     function getData() {
@@ -116,6 +116,22 @@
               alert(res.data);
               d.withdrawStatus = 1;
               d.withdrawComment = r;
+            } else {
+              alert(res.errmsg);
+            }
+          })
+      }
+    };
+
+    $scope.unpass = function(d) {
+      var r = prompt('请输入拒绝原因');
+      if (r) {
+        $http.post('/admin/money/unpassOut', {id: d.id, withdrawComment: r})
+          .success(function(res) {
+            if (res.errno == 0) {
+              alert(res.data);
+              d.withdrawStatus = -1;
+              d.withdrawComment = '拒绝原因:' + r;
             } else {
               alert(res.errmsg);
             }

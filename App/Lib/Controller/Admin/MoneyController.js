@@ -212,6 +212,42 @@ module.exports = Controller("Admin/BaseController", function(){
             return self.error(500, '通过审核失败', err);
           })
       }
+    },
+
+    unpassOutAction: function() {
+      var self = this;
+      self.assign('title', '');
+
+      if (self.isGet()) {
+
+      }
+
+      if (self.isPost()) {
+        var id = self.post('id');
+        var withdrawComment = self.post('withdrawComment');
+
+        return D('withdraw')
+          .where({id: id})
+          .find()
+          .then(function(withdraw) {
+            if (withdraw.withdrawStatus == 0) {
+              var data = {};
+            } else {
+              return self.error(500, '请勿重复审核');
+            }
+          })
+          .then(function() {
+            return D('withdraw')
+              .where({id: id})
+              .update({withdrawStatus: -1, withdrawComment: '拒绝原因:' + withdrawComment})
+          })
+          .then(function() {
+            return self.success('拒绝审核成功');
+          })
+          .catch(function(err) {
+            return self.error(500, '拒绝审核失败', err);
+          })
+      }
     }
   };
 });
